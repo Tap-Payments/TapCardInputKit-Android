@@ -18,6 +18,7 @@ import android.view.animation.Transformation
 import android.view.inputmethod.EditorInfo
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.annotation.ColorInt
 import androidx.annotation.IdRes
 import androidx.annotation.IntRange
@@ -683,6 +684,10 @@ class CardInputWidget @JvmOverloads constructor(
                     }
                 }
         )
+
+        cardBrandView.onScanClicked = {
+            Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show()
+        }
 
         cardNumberEditText.displayErrorCallback = {
             shouldShowErrorIcon = it

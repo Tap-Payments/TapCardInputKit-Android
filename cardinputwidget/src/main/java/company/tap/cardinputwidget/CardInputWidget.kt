@@ -885,7 +885,7 @@ class CardInputWidget @JvmOverloads constructor(
     override fun onWindowFocusChanged(hasWindowFocus: Boolean) {
         super.onWindowFocusChanged(hasWindowFocus)
         if (hasWindowFocus && CardBrand.Unknown == brand) {
-            cardBrandView.applyTint()
+            cardBrandView.applyTint(false)
         }
     }
 

@@ -128,7 +128,7 @@ enum class CardBrand(
     Unknown(
         "unknown",
         "Unknown",
-        R.drawable.ic_unknown,
+        R.drawable.btn_card_scanner_normal,
         cvcLength = setOf(3, 4)
     );
 

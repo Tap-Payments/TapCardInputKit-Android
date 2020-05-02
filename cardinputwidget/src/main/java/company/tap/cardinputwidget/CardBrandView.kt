@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.annotation.ColorInt
 import androidx.core.graphics.drawable.DrawableCompat
 import company.tap.cardinputwidget.databinding.CardBrandViewBinding
@@ -23,28 +24,39 @@ internal class CardBrandView @JvmOverloads constructor(
     internal var tintColorInt: Int = 0
 
     init {
-        isClickable = false
         isFocusable = false
+        setScanClickListener()
     }
 
     internal fun showBrandIcon(brand: CardBrand, shouldShowErrorIcon: Boolean) {
+        iconView.setOnClickListener(null)
         if (shouldShowErrorIcon) {
             iconView.setImageResource(brand.errorIcon)
         } else {
             iconView.setImageResource(brand.icon)
 
             if (brand == CardBrand.Unknown) {
-                applyTint()
+                applyTint(false)
+                setScanClickListener()
             }
+        }
+    }
+
+    private fun setScanClickListener() {
+        iconView.setOnClickListener {
+            Toast.makeText(iconView.context, "Clicked", Toast.LENGTH_SHORT).show()
         }
     }
 
     internal fun showCvcIcon(brand: CardBrand) {
         iconView.setImageResource(brand.cvcIcon)
-        applyTint()
+        iconView.setOnClickListener(null)
+        applyTint(true)
     }
 
-    internal fun applyTint() {
+    internal fun applyTint(apply: Boolean) {
+        if (!apply)
+            return
         val icon = iconView.drawable
         val compatIcon = DrawableCompat.wrap(icon)
         DrawableCompat.setTint(compatIcon.mutate(), tintColorInt)

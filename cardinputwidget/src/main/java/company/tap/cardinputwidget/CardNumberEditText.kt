@@ -42,6 +42,10 @@ class CardNumberEditText @JvmOverloads constructor(
     @JvmSynthetic
     internal var completionCallback: () -> Unit = {}
 
+    // invoked when an invalid card has been entered
+    @JvmSynthetic
+    internal var displayErrorCallback: (display: Boolean) -> Unit = {}
+
     val lengthMax: Int
         get() {
             return cardBrand.getMaxLengthWithSpacesForCardNumber(fieldText)
@@ -194,11 +198,14 @@ class CardNumberEditText @JvmOverloads constructor(
                     shouldShowError = !isCardNumberValid
                     if (!wasCardNumberValid && isCardNumberValid) {
                         completionCallback()
+                    } else {
+                        displayErrorCallback(true)
                     }
                 } else {
                     isCardNumberValid = CardUtils.isValidCardNumber(fieldText)
                     // Don't show errors if we aren't full-length.
                     shouldShowError = false
+                    displayErrorCallback(false)
                 }
             }
         })

@@ -77,12 +77,6 @@ class CardInputWidget @JvmOverloads constructor(
             cardValidCallback?.onInputChanged(invalidFields.isEmpty(), invalidFields)
         }
     }
-    private val inputChangeTextWatcher = object : TapTextWatcher() {
-        override fun afterTextChanged(s: Editable?) {
-            super.afterTextChanged(s)
-            shouldShowErrorIcon = false
-        }
-    }
 
     private val invalidFields: Set<CardValidCallback.Fields>
         get() {
@@ -690,6 +684,10 @@ class CardInputWidget @JvmOverloads constructor(
                 }
         )
 
+        cardNumberEditText.displayErrorCallback = {
+            shouldShowErrorIcon = it
+        }
+
         cardNumberEditText.completionCallback = {
             scrollRight()
             cardInputListener?.onCardComplete()
@@ -712,7 +710,7 @@ class CardInputWidget @JvmOverloads constructor(
             }
         }
 
-        allFields.forEach { it.addTextChangedListener(inputChangeTextWatcher) }
+//        allFields.forEach { it.addTextChangedListener(inputChangeTextWatcher) }
 
         cardNumberEditText.requestFocus()
     }

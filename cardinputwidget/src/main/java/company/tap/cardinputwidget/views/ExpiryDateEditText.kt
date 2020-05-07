@@ -1,4 +1,4 @@
-package company.tap.cardinputwidget
+package company.tap.cardinputwidget.views
 
 import android.content.Context
 import android.os.Build
@@ -7,6 +7,10 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.EditText
 import androidx.annotation.VisibleForTesting
+import company.tap.cardinputwidget.R
+import company.tap.cardinputwidget.TapTextWatcher
+import company.tap.cardinputwidget.utils.DateUtils
+import company.tap.tapuilibrary.TapTextInput
 import kotlin.math.min
 
 /**
@@ -16,7 +20,7 @@ class ExpiryDateEditText @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = androidx.appcompat.R.attr.editTextStyle
-) : TapEditText(context, attrs, defStyleAttr) {
+) : TapTextInput(context, attrs, defStyleAttr) {
 
     init {
         setErrorMessage(resources.getString(R.string.invalid_expiry_year))
@@ -150,7 +154,8 @@ class ExpiryDateEditText @JvmOverloads constructor(
 
                 val formattedDate = formattedDateBuilder.toString()
                 this.newCursorPosition = updateSelectionIndex(formattedDate.length,
-                    latestChangeStart, latestInsertionSize, MAX_INPUT_LENGTH
+                    latestChangeStart, latestInsertionSize,
+                    MAX_INPUT_LENGTH
                 )
                 this.formattedDate = formattedDate
             }

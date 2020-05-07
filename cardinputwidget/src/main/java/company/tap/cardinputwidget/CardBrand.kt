@@ -1,6 +1,7 @@
 package company.tap.cardinputwidget
 
 import androidx.annotation.DrawableRes
+import company.tap.cardinputwidget.utils.TapTextUtils
 import java.util.regex.Pattern
 
 /**

@@ -1,27 +1,27 @@
-package company.tap.cardinputwidget
+package company.tap.cardinputwidget.views
 
 import android.content.Context
 import android.os.Build
 import android.text.Editable
 import android.text.InputFilter
 import android.text.InputType
-import android.text.method.DigitsKeyListener
 import android.text.method.TextKeyListener
 import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.StringRes
 import com.google.android.material.textfield.TextInputLayout
-import java.util.regex.Pattern
-import kotlin.properties.Delegates
+import company.tap.cardinputwidget.R
+import company.tap.cardinputwidget.TapTextWatcher
+import company.tap.tapuilibrary.TapTextInput
 
 class HolderNameEditText @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = androidx.appcompat.R.attr.editTextStyle
-) : TapEditText(context, attrs, defStyleAttr) {
+) : TapTextInput(context, attrs, defStyleAttr) {
 
 
-    internal val postalCode: String?
+    internal val holderName: String?
         get() {
             return fieldText
         }

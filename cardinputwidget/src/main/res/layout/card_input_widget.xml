@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <company.tap.cardinputwidget.CardBrandView
+    <company.tap.cardinputwidget.views.CardBrandView
         android:id="@+id/card_brand_view"
         android:layout_width="@dimen/card_brand_view_width"
         android:layout_height="@dimen/card_brand_view_height"
@@ -36,7 +36,7 @@
             app:hintEnabled="false"
             tools:ignore="UnusedAttribute">
 
-            <company.tap.cardinputwidget.CardNumberEditText
+            <company.tap.cardinputwidget.views.CardNumberEditText
                 android:id="@+id/card_number_edit_text"
                 style="@style/Tap.CardInputWidget.EditText"
                 android:layout_width="match_parent"
@@ -71,7 +71,7 @@
             app:hintEnabled="false"
             tools:ignore="UnusedAttribute">
 
-            <company.tap.cardinputwidget.ExpiryDateEditText
+            <company.tap.cardinputwidget.views.ExpiryDateEditText
                 android:id="@+id/expiry_date_edit_text"
                 style="@style/Tap.CardInputWidget.EditText"
                 android:layout_width="match_parent"
@@ -101,7 +101,7 @@
             app:hintEnabled="false"
             tools:ignore="UnusedAttribute">
 
-            <company.tap.cardinputwidget.CvcEditText
+            <company.tap.cardinputwidget.views.CvcEditText
                 android:id="@+id/cvc_edit_text"
                 style="@style/Tap.CardInputWidget.EditText"
                 android:layout_width="match_parent"
@@ -112,7 +112,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/postal_code_text_input_layout"
+            android:id="@+id/holder_name_text_input_layout"
             style="@style/Tap.CardInputWidget.TextInputLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -121,16 +121,16 @@
             android:accessibilityLiveRegion="polite"
             android:accessibilityTraversalAfter="@+id/text_input_cvc"
             android:background="@android:color/transparent"
-            android:contentDescription="@string/address_label_postal_code"
-            android:labelFor="@id/postal_code_edit_text"
+            android:contentDescription="@string/acc_label_holder_name"
+            android:labelFor="@id/holder_name_edit_text"
             android:nextFocusLeft="@id/text_input_cvc"
             android:nextFocusUp="@id/text_input_cvc"
             android:visibility="gone"
             app:hintEnabled="false"
             tools:ignore="UnusedAttribute">
 
-            <company.tap.cardinputwidget.HolderNameEditText
-                android:id="@+id/postal_code_edit_text"
+            <company.tap.cardinputwidget.views.HolderNameEditText
+                android:id="@+id/holder_name_edit_text"
                 style="@style/Tap.CardInputWidget.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

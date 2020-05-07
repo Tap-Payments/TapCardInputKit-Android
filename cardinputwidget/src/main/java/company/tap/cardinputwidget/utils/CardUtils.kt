@@ -1,4 +1,6 @@
-package company.tap.cardinputwidget
+package company.tap.cardinputwidget.utils
+
+import company.tap.cardinputwidget.CardBrand
 
 /**
  * Utility class for functions to do with cards.
@@ -12,7 +14,10 @@ object CardUtils {
      */
     @JvmStatic
     fun getPossibleCardBrand(cardNumber: String?): CardBrand {
-        return getPossibleCardBrand(cardNumber, true)
+        return getPossibleCardBrand(
+            cardNumber,
+            true
+        )
     }
 
     /**
@@ -24,8 +29,15 @@ object CardUtils {
      */
     @JvmStatic
     fun isValidCardNumber(cardNumber: String?): Boolean {
-        val normalizedNumber = TapTextUtils.removeSpacesAndHyphens(cardNumber)
-        return isValidLuhnNumber(normalizedNumber) && isValidCardLength(normalizedNumber)
+        val normalizedNumber =
+            TapTextUtils.removeSpacesAndHyphens(
+                cardNumber
+            )
+        return isValidLuhnNumber(
+            normalizedNumber
+        ) && isValidCardLength(
+            normalizedNumber
+        )
     }
 
     /**
@@ -74,7 +86,10 @@ object CardUtils {
      */
     internal fun isValidCardLength(cardNumber: String?): Boolean {
         return cardNumber != null &&
-            getPossibleCardBrand(cardNumber, false).isValidCardNumberLength(cardNumber)
+            getPossibleCardBrand(
+                cardNumber,
+                false
+            ).isValidCardNumberLength(cardNumber)
     }
 
     private fun getPossibleCardBrand(cardNumber: String?, shouldNormalize: Boolean): CardBrand {
@@ -84,11 +99,15 @@ object CardUtils {
 
         val spacelessCardNumber =
             if (shouldNormalize) {
-                TapTextUtils.removeSpacesAndHyphens(cardNumber)
+                TapTextUtils.removeSpacesAndHyphens(
+                    cardNumber
+                )
             } else {
                 cardNumber
             }
 
-        return CardBrand.fromCardNumber(spacelessCardNumber)
+        return CardBrand.fromCardNumber(
+            spacelessCardNumber
+        )
     }
 }

@@ -1,4 +1,4 @@
-package company.tap.cardinputwidget
+package company.tap.cardinputwidget.views
 
 import android.content.Context
 import android.os.Build
@@ -9,6 +9,10 @@ import android.text.method.DigitsKeyListener
 import android.util.AttributeSet
 import android.view.View
 import com.google.android.material.textfield.TextInputLayout
+import company.tap.cardinputwidget.CardBrand
+import company.tap.cardinputwidget.R
+import company.tap.cardinputwidget.TapTextWatcher
+import company.tap.tapuilibrary.TapTextInput
 
 /**
  * A [TapEditText] for CVC input.
@@ -17,7 +21,7 @@ class CvcEditText @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = androidx.appcompat.R.attr.editTextStyle
-) : TapEditText(context, attrs, defStyleAttr) {
+) : TapTextInput(context, attrs, defStyleAttr) {
 
     /**
      * @return the inputted CVC value if valid; otherwise, null
@@ -33,7 +37,8 @@ class CvcEditText @JvmOverloads constructor(
             return fieldText.trim()
         }
 
-    private var cardBrand: CardBrand = CardBrand.Unknown
+    private var cardBrand: CardBrand =
+        CardBrand.Unknown
 
     private val isValid: Boolean
         get() {

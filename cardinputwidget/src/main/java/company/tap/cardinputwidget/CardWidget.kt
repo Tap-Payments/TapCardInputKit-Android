@@ -33,7 +33,7 @@ internal interface CardWidget {
     /**
      * Set a `TextWatcher` to receive postal code changes.
      */
-    fun setPostalCodeTextWatcher(postalCodeTextWatcher: TextWatcher?)
+    fun setHolderNameTextWatcher(holderNameTextWatcher: TextWatcher?)
 
     fun setCardHint(cardHint: String)
 
@@ -49,7 +49,7 @@ internal interface CardWidget {
     fun setCvcCode(cvcCode: String?)
 
     companion object {
-        internal const val DEFAULT_POSTAL_CODE_ENABLED = true
-        internal const val DEFAULT_POSTAL_CODE_REQUIRED = false
+        internal const val DEFAULT_HOLDER_NAME_ENABLED = true
+        internal const val DEFAULT_HOLDER_NAME_REQUIRED = false
     }
 }

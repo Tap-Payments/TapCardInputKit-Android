@@ -1,4 +1,4 @@
-package company.tap.cardinputwidget
+package company.tap.cardinputwidget.views
 
 import android.animation.Animator
 import android.content.Context
@@ -6,8 +6,8 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.annotation.ColorInt
-import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import company.tap.cardinputwidget.CardBrand
 import company.tap.cardinputwidget.databinding.CardBrandViewBinding
 
 internal class CardBrandView @JvmOverloads constructor(
@@ -40,8 +40,7 @@ internal class CardBrandView @JvmOverloads constructor(
             if (animationApplied) {
                 animationApplied = false
                 animateImageChange(brand.icon)
-            }
-            else
+            } else
                 iconView.setImageResource(brand.icon)
             if (brand == CardBrand.Unknown) {
                 applyTint(false)
@@ -55,8 +54,14 @@ internal class CardBrandView @JvmOverloads constructor(
     }
 
     internal fun showCvcIcon(brand: CardBrand) {
-        if (animationApplied)
+        if (animationApplied) return
+
+        if (brand == CardBrand.AmericanExpress) {
+            iconView.setImageResource(brand.cvcIcon)
+            applyTint(true)
             return
+        }
+
         animationApplied = true
         animateImageChange(brand.cvcIcon)
         iconView.setOnClickListener(null)
@@ -64,21 +69,22 @@ internal class CardBrandView @JvmOverloads constructor(
 
     private fun animateImageChange(cvcIcon: Int) {
         iconView.rotationY = 0f
-        iconView.animate().setDuration(100).rotationY(90f).setListener(object : Animator.AnimatorListener {
+        iconView.animate().setDuration(300).rotationY(90f)
+            .setListener(object : Animator.AnimatorListener {
 
-            override fun onAnimationEnd(animation: Animator?) {
-                iconView.setImageResource(cvcIcon)
-                iconView.rotationY = 270f
-                iconView.animate().rotationY(360f).setListener(null)
-                if (animationApplied)
-                    applyTint(true)
-            }
+                override fun onAnimationEnd(animation: Animator?) {
+                    iconView.setImageResource(cvcIcon)
+                    iconView.rotationY = 270f
+                    iconView.animate().rotationY(360f).setListener(null)
+                    if (animationApplied)
+                        applyTint(true)
+                }
 
-            override fun onAnimationRepeat(animation: Animator?) {}
-            override fun onAnimationCancel(animation: Animator?) {}
-            override fun onAnimationStart(animation: Animator?) {}
+                override fun onAnimationRepeat(animation: Animator?) {}
+                override fun onAnimationCancel(animation: Animator?) {}
+                override fun onAnimationStart(animation: Animator?) {}
 
-        })
+            })
     }
 
     internal fun applyTint(apply: Boolean) {

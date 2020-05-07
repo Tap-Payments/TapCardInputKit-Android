@@ -1,4 +1,4 @@
-package company.tap.cardinputwidget
+package company.tap.cardinputwidget.utils
 
 /**
  * Utility class for common text-related operations on Tap data coming from the server.

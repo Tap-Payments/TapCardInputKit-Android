@@ -1,5 +1,7 @@
 package company.tap.cardinputwidget
 
+import company.tap.tapuilibrary.TapTextInput
+
 /**
  * Class used to encapsulate the functionality of "backing up" via the delete/backspace key
  * from one text field to the previous. We use this to simulate multiple fields being all part
@@ -9,8 +11,8 @@ package company.tap.cardinputwidget
  * it will be acting.
  */
 internal class BackUpFieldDeleteListener(
-    private val backUpTarget: TapEditText
-) : TapEditText.DeleteEmptyListener {
+    private val backUpTarget: TapTextInput
+) : TapTextInput.DeleteEmptyListener {
 
     override fun onDeleteEmpty() {
         val fieldText = backUpTarget.text?.toString() ?: ""

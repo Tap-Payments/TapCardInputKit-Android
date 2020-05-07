@@ -1,4 +1,4 @@
-package company.tap.cardinputwidget
+package company.tap.cardinputwidget.utils
 
 import androidx.annotation.IntRange
 import androidx.annotation.Size
@@ -62,7 +62,11 @@ internal object DateUtils {
      */
     @JvmStatic
     fun isExpiryDataValid(expiryMonth: Int, expiryYear: Int): Boolean {
-        return isExpiryDataValid(expiryMonth, expiryYear, Calendar.getInstance())
+        return isExpiryDataValid(
+            expiryMonth,
+            expiryYear,
+            Calendar.getInstance()
+        )
     }
 
     @VisibleForTesting
@@ -138,7 +142,10 @@ internal object DateUtils {
     @IntRange(from = 1000, to = 9999)
     @JvmStatic
     fun convertTwoDigitYearToFour(@IntRange(from = 0, to = 99) inputYear: Int): Int {
-        return convertTwoDigitYearToFour(inputYear, Calendar.getInstance())
+        return convertTwoDigitYearToFour(
+            inputYear,
+            Calendar.getInstance()
+        )
     }
 
     @VisibleForTesting

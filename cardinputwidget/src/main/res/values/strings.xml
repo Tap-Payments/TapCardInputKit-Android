@@ -5,8 +5,6 @@
     <string name="invalid_expiry_year">Your card\'s expiration year is invalid.</string>
     <string name="acc_label_card_number">Card number</string>
     <string name="acc_label_expiry_date">Expiration date</string>
-    <string name="acc_label_zip">ZIP Code</string>
-    <string name="acc_label_zip_short">ZIP</string>
     <string name="acc_label_card_number_node">%s, Card number</string>
     <string name="acc_label_expiry_date_node">%s, Expiration date</string>
     <string name="acc_label_cvc_node">%s, CVC</string>
@@ -15,11 +13,8 @@
     <string name="expiry_date_hint">MM/YY</string>
     <string name="cvc_number_hint">CVC</string>
     <string name="cvc_amex_hint">CVV</string>
-    <string name="address_label_zip_code">ZIP code</string>
-    <string name="address_label_zip_code_optional">ZIP code (optional)</string>
-    <string name="address_label_postal_code">Postal code</string>
-    <string name="invalid_zip">Your postal code is incomplete.</string>
     <string name="holder_name_hint">Holder Name</string>
     <string name="invalid_holder_name">Holder name is incomplete</string>
+    <string name="acc_label_holder_name">Holder name</string>
 
 </resources>

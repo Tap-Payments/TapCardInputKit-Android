@@ -1,12 +1,10 @@
-package company.tap.cardinputwidget
+package company.tap.cardinputwidget.widget
 
 import android.text.TextWatcher
 import androidx.annotation.IntRange
 import company.tap.cardinputwidget.Card
-import company.tap.cardinputwidget.CardInputListener
-import company.tap.cardinputwidget.CardValidCallback
 
-internal interface CardWidget {
+internal interface BaseCardInput {
     val card: Card?
 
     val cardBuilder: Card.Builder?

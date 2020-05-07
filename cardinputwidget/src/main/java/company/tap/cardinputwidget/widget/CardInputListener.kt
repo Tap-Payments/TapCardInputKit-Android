@@ -1,4 +1,4 @@
-package company.tap.cardinputwidget
+package company.tap.cardinputwidget.widget
 
 import androidx.annotation.StringDef
 
@@ -11,7 +11,9 @@ interface CardInputListener {
 
     @Retention(AnnotationRetention.SOURCE)
     @StringDef(
-        FocusField.FOCUS_CARD, FocusField.FOCUS_EXPIRY, FocusField.FOCUS_CVC,
+        FocusField.FOCUS_CARD,
+        FocusField.FOCUS_EXPIRY,
+        FocusField.FOCUS_CVC,
         FocusField.FOCUS_POSTAL
     )
     annotation class FocusField {

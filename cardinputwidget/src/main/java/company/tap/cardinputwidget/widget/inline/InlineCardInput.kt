@@ -1,4 +1,4 @@
-package company.tap.cardinputwidget
+package company.tap.cardinputwidget.widget.inline
 
 import android.content.Context
 import android.os.Bundle
@@ -26,11 +26,15 @@ import androidx.annotation.VisibleForTesting
 import androidx.core.view.AccessibilityDelegateCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
-import company.tap.cardinputwidget.CardInputListener.FocusField.Companion.FOCUS_CARD
-import company.tap.cardinputwidget.CardInputListener.FocusField.Companion.FOCUS_CVC
-import company.tap.cardinputwidget.CardInputListener.FocusField.Companion.FOCUS_EXPIRY
+import company.tap.cardinputwidget.*
+import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_CARD
+import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_CVC
+import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_EXPIRY
 import company.tap.cardinputwidget.databinding.CardInputWidgetBinding
 import company.tap.cardinputwidget.utils.DateUtils
+import company.tap.cardinputwidget.widget.BaseCardInput
+import company.tap.cardinputwidget.widget.CardInputListener
+import company.tap.cardinputwidget.widget.CardValidCallback
 import company.tap.tapuilibrary.TapTextInput
 import company.tap.tapuilibrary.TapTextWatcher
 import kotlin.properties.Delegates
@@ -45,7 +49,8 @@ class InlineCardInput @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr), CardWidget {
+) : LinearLayout(context, attrs, defStyleAttr),
+    BaseCardInput {
     private val viewBinding = CardInputWidgetBinding.inflate(
             LayoutInflater.from(context),
             this
@@ -114,9 +119,11 @@ class InlineCardInput @JvmOverloads constructor(
     private var initFlag: Boolean = false
 
     @JvmSynthetic
-    internal var layoutWidthCalculator: LayoutWidthCalculator = DefaultLayoutWidthCalculator()
+    internal var layoutWidthCalculator: LayoutWidthCalculator =
+        DefaultLayoutWidthCalculator()
 
-    internal val placementParameters: PlacementParameters = PlacementParameters()
+    internal val placementParameters: PlacementParameters =
+        PlacementParameters()
 
     private val holderNameValue: String?
         get() {
@@ -203,7 +210,12 @@ class InlineCardInput @JvmOverloads constructor(
                 }
                 else -> {
                     shouldShowErrorIcon = false
-                    return Card.Builder(cardNumber, cardDate.first, cardDate.second, cvcValue)
+                    return Card.Builder(
+                        cardNumber,
+                        cardDate.first,
+                        cardDate.second,
+                        cvcValue
+                    )
                             .addressZip(holderNameValue)
                             .loggingTokens(setOf(LOGGING_TOKEN))
                 }
@@ -226,7 +238,7 @@ class InlineCardInput @JvmOverloads constructor(
      * code outside of this form.
      */
     var holderNameEnabled: Boolean by Delegates.observable(
-        CardWidget.DEFAULT_HOLDER_NAME_ENABLED
+        BaseCardInput.DEFAULT_HOLDER_NAME_ENABLED
     ) { _, _, isEnabled ->
         if (isEnabled) {
             holderNameEditText.isEnabled = true
@@ -250,14 +262,16 @@ class InlineCardInput @JvmOverloads constructor(
      * Note that some countries do not have postal codes, so requiring postal code will prevent
      * those users from submitting this form successfully.
      */
-    var holderNameRequired: Boolean = CardWidget.DEFAULT_HOLDER_NAME_REQUIRED
+    var holderNameRequired: Boolean =
+        BaseCardInput.DEFAULT_HOLDER_NAME_REQUIRED
 
 
     init {
         // This ensures that onRestoreInstanceState is called
         // during rotations.
         if (id == View.NO_ID) {
-            id = DEFAULT_READER_ID
+            id =
+                DEFAULT_READER_ID
         }
 
         orientation = HORIZONTAL
@@ -568,11 +582,11 @@ class InlineCardInput @JvmOverloads constructor(
         }
 
         placementParameters.cardWidth = getDesiredWidthInPixels(
-                FULL_SIZING_CARD_TEXT, cardNumberEditText
+            FULL_SIZING_CARD_TEXT, cardNumberEditText
         )
 
         placementParameters.dateWidth = getDesiredWidthInPixels(
-                FULL_SIZING_DATE_TEXT, expiryDateEditText
+            FULL_SIZING_DATE_TEXT, expiryDateEditText
         )
 
         placementParameters.hiddenCardWidth = getDesiredWidthInPixels(
@@ -584,7 +598,7 @@ class InlineCardInput @JvmOverloads constructor(
         )
 
         placementParameters.holderNameWidth = getDesiredWidthInPixels(
-                FULL_SIZING_HOLDER_NAME_TEXT, holderNameEditText
+            FULL_SIZING_HOLDER_NAME_TEXT, holderNameEditText
         )
 
         placementParameters.peekCardWidth = getDesiredWidthInPixels(
@@ -630,12 +644,12 @@ class InlineCardInput @JvmOverloads constructor(
         if (attrs != null) {
             val a = context.theme.obtainStyledAttributes(
                     attrs,
-                    R.styleable.CardInputView,
+                R.styleable.CardInputView,
                     0, 0)
 
             try {
                 cardBrandView.tintColorInt = a.getColor(
-                        R.styleable.CardInputView_cardTint,
+                    R.styleable.CardInputView_cardTint,
                         cardBrandView.tintColorInt
                 )
                 errorColorInt = a.getColor(R.styleable.CardInputView_cardTextErrorColor, errorColorInt)
@@ -665,9 +679,21 @@ class InlineCardInput @JvmOverloads constructor(
             }
         }
 
-        expiryDateEditText.setDeleteEmptyListener(BackUpFieldDeleteListener(cardNumberEditText))
-        cvcNumberEditText.setDeleteEmptyListener(BackUpFieldDeleteListener(expiryDateEditText))
-        holderNameEditText.setDeleteEmptyListener(BackUpFieldDeleteListener(cvcNumberEditText))
+        expiryDateEditText.setDeleteEmptyListener(
+            BackUpFieldDeleteListener(
+                cardNumberEditText
+            )
+        )
+        cvcNumberEditText.setDeleteEmptyListener(
+            BackUpFieldDeleteListener(
+                expiryDateEditText
+            )
+        )
+        holderNameEditText.setDeleteEmptyListener(
+            BackUpFieldDeleteListener(
+                cvcNumberEditText
+            )
+        )
 
         cvcNumberEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
@@ -763,12 +789,12 @@ class InlineCardInput @JvmOverloads constructor(
 
         try {
             holderNameEnabled = typedArray.getBoolean(
-                    R.styleable.CardElement_shouldShowHolderName,
-                CardWidget.DEFAULT_HOLDER_NAME_ENABLED
+                R.styleable.CardElement_shouldShowHolderName,
+                BaseCardInput.DEFAULT_HOLDER_NAME_ENABLED
             )
             holderNameRequired = typedArray.getBoolean(
-                    R.styleable.CardElement_shouldRequireHolderName,
-                CardWidget.DEFAULT_HOLDER_NAME_REQUIRED
+                R.styleable.CardElement_shouldRequireHolderName,
+                BaseCardInput.DEFAULT_HOLDER_NAME_REQUIRED
             )
         } finally {
             typedArray.recycle()
@@ -787,32 +813,35 @@ class InlineCardInput @JvmOverloads constructor(
 
         updateSpaceSizes(isCardViewed = true)
 
-        val slideCardLeftAnimation = CardNumberSlideLeftAnimation(
+        val slideCardLeftAnimation =
+            CardNumberSlideLeftAnimation(
                 view = cardNumberTextInputLayout
-        )
+            )
 
         val dateDestination = placementParameters.getDateLeftMargin(isFullCard = true)
-        val slideDateLeftAnimation = ExpiryDateSlideLeftAnimation(
+        val slideDateLeftAnimation =
+            ExpiryDateSlideLeftAnimation(
                 view = expiryDateTextInputLayout,
                 startPosition = dateStartPosition,
                 destination = dateDestination
-        )
+            )
 
         val cvcDestination = cvcStartPosition + (dateDestination - dateStartPosition)
-        val slideCvcLeftAnimation = CvcSlideLeftAnimation(
+        val slideCvcLeftAnimation =
+            CvcSlideLeftAnimation(
                 view = cvcNumberTextInputLayout,
                 startPosition = cvcStartPosition,
                 destination = cvcDestination,
                 newWidth = placementParameters.cvcWidth
-        )
+            )
 
         val holderNameDestination = holderNameStartPosition + (cvcDestination - cvcStartPosition)
         val slideHolderNameLeftAnimation = if (holderNameEnabled) {
             HolderNameSlideLeftAnimation(
-                    view = holderNameTextInputLayout,
-                    startPosition = holderNameStartPosition,
-                    destination = holderNameDestination,
-                    newWidth = placementParameters.holderNameWidth
+                view = holderNameTextInputLayout,
+                startPosition = holderNameStartPosition,
+                destination = holderNameDestination,
+                newWidth = placementParameters.holderNameWidth
             )
         } else {
             null
@@ -838,36 +867,39 @@ class InlineCardInput @JvmOverloads constructor(
 
         updateSpaceSizes(isCardViewed = false)
 
-        val slideCardRightAnimation = CardNumberSlideRightAnimation(
+        val slideCardRightAnimation =
+            CardNumberSlideRightAnimation(
                 view = cardNumberTextInputLayout,
                 hiddenCardWidth = placementParameters.hiddenCardWidth,
                 focusOnEndView = expiryDateEditText
-        )
+            )
 
         val dateDestination = placementParameters.getDateLeftMargin(isFullCard = false)
-        val slideDateRightAnimation = ExpiryDateSlideRightAnimation(
+        val slideDateRightAnimation =
+            ExpiryDateSlideRightAnimation(
                 view = expiryDateTextInputLayout,
                 startMargin = dateStartMargin,
                 destination = dateDestination
-        )
+            )
 
         val cvcDestination = placementParameters.getCvcLeftMargin(isFullCard = false)
         val cvcStartMargin = cvcDestination + (dateStartMargin - dateDestination)
-        val slideCvcRightAnimation = CvcSlideRightAnimation(
+        val slideCvcRightAnimation =
+            CvcSlideRightAnimation(
                 view = cvcNumberTextInputLayout,
                 startMargin = cvcStartMargin,
                 destination = cvcDestination,
                 newWidth = placementParameters.cvcWidth
-        )
+            )
 
         val holderNameDestination = placementParameters.getHolderNameLeftMargin(isFullCard = false)
         val holderNameStartMargin = holderNameDestination + (cvcStartMargin - cvcDestination)
         val slideHolderNameRightAnimation = if (holderNameEnabled) {
             HolderNameSlideRightAnimation(
-                    view = holderNameTextInputLayout,
-                    startMargin = holderNameStartMargin,
-                    destination = holderNameDestination,
-                    newWidth = placementParameters.holderNameWidth
+                view = holderNameTextInputLayout,
+                startMargin = holderNameStartMargin,
+                destination = holderNameDestination,
+                newWidth = placementParameters.holderNameWidth
             )
         } else {
             null
@@ -967,7 +999,11 @@ class InlineCardInput @JvmOverloads constructor(
             shouldShowErrorIcon -> {
                 updateIcon()
             }
-            shouldIconShowBrand(brand, hasFocus, cvcText) -> {
+            shouldIconShowBrand(
+                brand,
+                hasFocus,
+                cvcText
+            ) -> {
                 updateIcon()
             }
             else -> {
@@ -1124,7 +1160,8 @@ class InlineCardInput @JvmOverloads constructor(
 
     private abstract class CardFieldAnimation : Animation() {
         init {
-            duration = ANIMATION_LENGTH
+            duration =
+                ANIMATION_LENGTH
         }
 
         private companion object {
@@ -1284,7 +1321,8 @@ class InlineCardInput @JvmOverloads constructor(
         fun calculate(text: String, paint: TextPaint): Int
     }
 
-    internal class DefaultLayoutWidthCalculator : LayoutWidthCalculator {
+    internal class DefaultLayoutWidthCalculator :
+        LayoutWidthCalculator {
         override fun calculate(text: String, paint: TextPaint): Int {
             return Layout.getDesiredWidth(text, paint).toInt()
         }
@@ -1311,7 +1349,8 @@ class InlineCardInput @JvmOverloads constructor(
         // This value is used to ensure that onSaveInstanceState is called
         // in the event that the user doesn't give this control an ID.
         @IdRes
-        private val DEFAULT_READER_ID = R.id.default_reader_id
+        private val DEFAULT_READER_ID =
+            R.id.default_reader_id
 
         /**
          * Determines whether or not the icon should show the card brand instead of the

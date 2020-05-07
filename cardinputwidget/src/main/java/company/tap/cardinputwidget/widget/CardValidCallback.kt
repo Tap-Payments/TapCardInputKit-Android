@@ -1,4 +1,4 @@
-package company.tap.cardinputwidget
+package company.tap.cardinputwidget.widget
 
 interface CardValidCallback {
     /**

@@ -9,10 +9,10 @@ import android.view.View
 import androidx.annotation.VisibleForTesting
 import company.tap.cardinputwidget.CardBrand
 import company.tap.cardinputwidget.R
-import company.tap.cardinputwidget.TapTextWatcher
 import company.tap.cardinputwidget.utils.CardUtils
 import company.tap.cardinputwidget.utils.TapTextUtils
 import company.tap.tapuilibrary.TapTextInput
+import company.tap.tapuilibrary.TapTextWatcher
 
 /**
  * A [TapEditText] that handles spacing out the digits of a credit card.

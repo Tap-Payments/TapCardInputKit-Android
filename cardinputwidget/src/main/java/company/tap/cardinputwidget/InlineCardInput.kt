@@ -32,6 +32,7 @@ import company.tap.cardinputwidget.CardInputListener.FocusField.Companion.FOCUS_
 import company.tap.cardinputwidget.databinding.CardInputWidgetBinding
 import company.tap.cardinputwidget.utils.DateUtils
 import company.tap.tapuilibrary.TapTextInput
+import company.tap.tapuilibrary.TapTextWatcher
 import kotlin.properties.Delegates
 
 /**
@@ -40,7 +41,7 @@ import kotlin.properties.Delegates
  * The individual `EditText` views of this widget can be styled by defining a style
  * `Tap.CardInputWidget.EditText` that extends `Tap.Base.CardInputWidget.EditText`.
  */
-class CardInputWidget @JvmOverloads constructor(
+class InlineCardInput @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0

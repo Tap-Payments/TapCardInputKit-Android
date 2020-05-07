@@ -8,9 +8,9 @@ import android.view.View
 import android.widget.EditText
 import androidx.annotation.VisibleForTesting
 import company.tap.cardinputwidget.R
-import company.tap.cardinputwidget.TapTextWatcher
 import company.tap.cardinputwidget.utils.DateUtils
 import company.tap.tapuilibrary.TapTextInput
+import company.tap.tapuilibrary.TapTextWatcher
 import kotlin.math.min
 
 /**

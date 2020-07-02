@@ -43,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:hint="@string/card_number_hint"
+                android:fontFamily="sans-serif-light"
                 android:imeOptions="actionNext"
                 android:inputType="number"
                 android:maxLength="19" />
@@ -78,6 +79,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:hint="@string/expiry_date_hint"
+                android:fontFamily="sans-serif-light"
                 android:imeOptions="actionNext"
                 android:inputType="date"
                 android:maxLength="5" />
@@ -106,6 +108,7 @@
                 style="@style/Tap.CardInputWidget.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
                 android:background="@android:color/transparent"
                 android:imeOptions="actionDone" />
 
@@ -136,6 +139,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:enabled="false"
+                android:fontFamily="sans-serif-light"
                 android:imeOptions="actionDone"
                 android:paddingStart="0dp"
                 android:paddingEnd="10dp" />

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "896908348227",
+    "firebase_url": "https://tapcardinputkit.firebaseio.com",
+    "project_id": "tapcardinputkit",
+    "storage_bucket": "tapcardinputkit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:896908348227:android:30d281f8751c48fdb4fdf6",
+        "android_client_info": {
+          "package_name": "company.tap.InlineCardInput"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "896908348227-jn99m1ko5aee142ual46bj3jv2v0arfi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPIL-AzoNrx-nBVCKgzYVaXwVrq_oCfR8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "896908348227-jn99m1ko5aee142ual46bj3jv2v0arfi.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "896908348227-mm59tivo7ht09lro92t3qkberg0va78m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "company.tap.TapCardInputKit-Example"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

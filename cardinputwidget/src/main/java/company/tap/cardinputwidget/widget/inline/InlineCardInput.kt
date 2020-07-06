@@ -113,6 +113,7 @@ class InlineCardInput @JvmOverloads constructor(
             }
         }
 
+
     @JvmSynthetic
     internal var cardNumberIsViewed = true
 
@@ -143,6 +144,8 @@ class InlineCardInput @JvmOverloads constructor(
         get() {
             return cardNumberEditText.cardBrand
         }
+
+    private var shouldShowSingleBrand = false
 
     @VisibleForTesting
     @JvmSynthetic
@@ -311,6 +314,11 @@ class InlineCardInput @JvmOverloads constructor(
      */
     override fun setCardInputListener(listener: CardInputListener?) {
         cardInputListener = listener
+    }
+
+    override fun setSingleCardInput(cardBrand: CardBrand) {
+        shouldShowSingleBrand = true
+        cardBrandView.showBrandIcon(cardBrand, shouldShowErrorIcon)
     }
 
     /**
@@ -988,6 +996,7 @@ class InlineCardInput @JvmOverloads constructor(
         }
 
     private fun updateIcon() {
+        if (shouldShowSingleBrand) return
         cardBrandView.showBrandIcon(brand, shouldShowErrorIcon)
     }
 

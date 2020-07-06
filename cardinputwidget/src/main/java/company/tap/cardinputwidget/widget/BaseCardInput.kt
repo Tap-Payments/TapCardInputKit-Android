@@ -3,6 +3,7 @@ package company.tap.cardinputwidget.widget
 import android.text.TextWatcher
 import androidx.annotation.IntRange
 import company.tap.cardinputwidget.Card
+import company.tap.cardinputwidget.CardBrand
 
 internal interface BaseCardInput {
     val card: Card?
@@ -12,6 +13,8 @@ internal interface BaseCardInput {
     fun setCardValidCallback(callback: CardValidCallback?)
 
     fun setCardInputListener(listener: CardInputListener?)
+
+    fun setSingleCardInput(cardBrand: CardBrand)
 
     /**
      * Set a `TextWatcher` to receive card number changes.

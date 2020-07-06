@@ -145,7 +145,7 @@ class InlineCardInput @JvmOverloads constructor(
             return cardNumberEditText.cardBrand
         }
 
-    private var shouldShowSingleBrand = false
+    var shouldChangeIcon = true
 
     @VisibleForTesting
     @JvmSynthetic
@@ -317,7 +317,7 @@ class InlineCardInput @JvmOverloads constructor(
     }
 
     override fun setSingleCardInput(cardBrand: CardBrand) {
-        shouldShowSingleBrand = true
+        shouldChangeIcon = false
         cardBrandView.showBrandIcon(cardBrand, shouldShowErrorIcon)
     }
 
@@ -996,7 +996,7 @@ class InlineCardInput @JvmOverloads constructor(
         }
 
     private fun updateIcon() {
-        if (shouldShowSingleBrand) return
+        if (!shouldChangeIcon) return
         cardBrandView.showBrandIcon(brand, shouldShowErrorIcon)
     }
 

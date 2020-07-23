@@ -11,8 +11,8 @@ import android.view.View
 import androidx.annotation.StringRes
 import com.google.android.material.textfield.TextInputLayout
 import company.tap.cardinputwidget.R
-import company.tap.tapuilibrary.TapTextInput
-import company.tap.tapuilibrary.TapTextWatcher
+import company.tap.tapuilibrary.atoms.TapTextInput
+import company.tap.tapuilibrary.utils.TapTextWatcher
 
 class HolderNameEditText @JvmOverloads constructor(
     context: Context,

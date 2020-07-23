@@ -1,6 +1,6 @@
 package company.tap.cardinputwidget.widget.inline
 
-import company.tap.tapuilibrary.TapTextInput
+import company.tap.tapuilibrary.atoms.TapTextInput
 
 /**
  * Class used to encapsulate the functionality of "backing up" via the delete/backspace key

@@ -11,8 +11,8 @@ import android.view.View
 import com.google.android.material.textfield.TextInputLayout
 import company.tap.cardinputwidget.CardBrand
 import company.tap.cardinputwidget.R
-import company.tap.tapuilibrary.TapTextInput
-import company.tap.tapuilibrary.TapTextWatcher
+import company.tap.tapuilibrary.atoms.TapTextInput
+import company.tap.tapuilibrary.utils.TapTextWatcher
 
 /**
  * A [TapEditText] for CVC input.

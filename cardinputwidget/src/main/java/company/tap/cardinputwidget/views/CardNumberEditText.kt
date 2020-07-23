@@ -11,8 +11,8 @@ import company.tap.cardinputwidget.CardBrand
 import company.tap.cardinputwidget.R
 import company.tap.cardinputwidget.utils.CardUtils
 import company.tap.cardinputwidget.utils.TapTextUtils
-import company.tap.tapuilibrary.TapTextInput
-import company.tap.tapuilibrary.TapTextWatcher
+import company.tap.tapuilibrary.atoms.TapTextInput
+import company.tap.tapuilibrary.utils.TapTextWatcher
 
 /**
  * A [TapEditText] that handles spacing out the digits of a credit card.

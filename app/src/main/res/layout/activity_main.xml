@@ -9,7 +9,7 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_margin="10dp"
+        android:layout_margin="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -17,7 +17,7 @@
             android:layout_marginStart="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:shouldShowHolderName="true"/>
+            app:shouldShowHolderName="false" />
 
     </com.google.android.material.card.MaterialCardView>
 

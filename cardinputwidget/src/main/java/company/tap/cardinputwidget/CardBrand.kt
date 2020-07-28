@@ -12,7 +12,7 @@ enum class CardBrand(
     val displayName: String,
     @DrawableRes val icon: Int,
     @DrawableRes val cvcIcon: Int = R.drawable.ic_cvc,
-    @DrawableRes val errorIcon: Int = R.drawable.ic_error,
+    @DrawableRes val errorIcon: Int = R.drawable.card_icon,
 
     /**
      * Accepted CVC lengths
@@ -53,9 +53,9 @@ enum class CardBrand(
     AmericanExpress(
         "amex",
         "American Express",
-        R.drawable.ic_amex,
+        R.drawable.card_icon,
         cvcIcon = R.drawable.ic_cvc_amex,
-        errorIcon = R.drawable.ic_error_amex,
+        errorIcon = R.drawable.card_icon,
         cvcLength = setOf(3, 4),
         defaultMaxLength = 15,
         pattern = Pattern.compile("^(34|37)[0-9]*$"),
@@ -65,7 +65,7 @@ enum class CardBrand(
     Discover(
         "discover",
         "Discover",
-        R.drawable.ic_discover,
+        R.drawable.card_icon,
         pattern = Pattern.compile("^(60|64|65)[0-9]*$")
     ),
 
@@ -77,7 +77,7 @@ enum class CardBrand(
     JCB(
         "jcb",
         "JCB",
-        R.drawable.ic_jcb,
+        R.drawable.card_icon,
         pattern = Pattern.compile("^(352[89]|35[3-8][0-9])[0-9]*$"),
         partialPatterns = mapOf(
             2 to Pattern.compile("^(35)$"),
@@ -94,7 +94,7 @@ enum class CardBrand(
     DinersClub(
         "diners",
         "Diners Club",
-        R.drawable.ic_diners,
+        R.drawable.card_icon,
         defaultMaxLength = 16,
         pattern = Pattern.compile("^(36|30|38|39)[0-9]*$"),
         variantMaxLength = mapOf(
@@ -108,21 +108,21 @@ enum class CardBrand(
     Visa(
         "visa",
         "Visa",
-        R.drawable.ic_visa,
+        R.drawable.card_icon,
         pattern = Pattern.compile("^(4)[0-9]*$")
     ),
 
     MasterCard(
         "mastercard",
         "Mastercard",
-        R.drawable.ic_mastercard,
+        R.drawable.card_icon,
         pattern = Pattern.compile("^(2221|2222|2223|2224|2225|2226|2227|2228|2229|223|224|225|226|227|228|229|23|24|25|26|270|271|2720|50|51|52|53|54|55|67)[0-9]*$")
     ),
 
     UnionPay(
         "unionpay",
         "UnionPay",
-        R.drawable.ic_unionpay,
+        R.drawable.card_icon,
         pattern = Pattern.compile("^(62|81)[0-9]*$")
     ),
 

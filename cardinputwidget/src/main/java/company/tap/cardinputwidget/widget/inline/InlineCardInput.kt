@@ -1130,7 +1130,7 @@ class InlineCardInput @JvmOverloads constructor(
                 else -> {
                     this.cardDateSeparation = frameWidth / 2 - peekCardWidth - dateWidth / 2
                     this.dateCvcSeparation = frameWidth - peekCardWidth - cardDateSeparation -
-                            dateWidth - cvcWidth
+                            dateWidth - cvcWidth - 60
 
                     this.cardTouchBufferLimit = frameStart + peekCardWidth + cardDateSeparation / 2
                     this.dateStartPosition = frameStart + peekCardWidth + cardDateSeparation

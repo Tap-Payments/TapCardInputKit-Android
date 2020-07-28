@@ -677,6 +677,7 @@ class InlineCardInput @JvmOverloads constructor(
             if (hasFocus) {
                 scrollLeft()
                 cardInputListener?.onFocusChange(FOCUS_CARD)
+                expiryDateEditText.visibility = View.GONE
             }
         }
 
@@ -731,6 +732,7 @@ class InlineCardInput @JvmOverloads constructor(
         }
 
         cardNumberEditText.completionCallback = {
+            expiryDateEditText.visibility = View.VISIBLE
             scrollRight()
             cardInputListener?.onCardComplete()
         }

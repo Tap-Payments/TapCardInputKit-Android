@@ -44,7 +44,6 @@
                 android:background="@android:color/transparent"
                 android:hint="@string/card_number_hint"
                 android:fontFamily="sans-serif-light"
-                android:imeOptions="actionNext"
                 android:inputType="number"
                 android:maxLength="19" />
 

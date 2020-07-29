@@ -373,10 +373,9 @@ class InlineCardInput @JvmOverloads constructor(
      * Clear all text fields in the CardInputWidget.
      */
     override fun clear() {
-        if (currentFields.any { it.hasFocus() } || this.hasFocus()) {
-            cardNumberEditText.requestFocus()
-        }
-
+//        if (currentFields.any { it.hasFocus() } || this.hasFocus()) {
+//        }
+        cardNumberEditText.requestFocus()
         currentFields.forEach { it.setText("") }
     }
 

@@ -1,6 +1,6 @@
 package company.tap.cardinputwidget.widget.inline
 
-import company.tap.tapuilibrary.atoms.TapTextInput
+import company.tap.tapuilibrary.uikit.atoms.TapTextInput
 
 
 /**

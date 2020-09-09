@@ -35,8 +35,9 @@ import company.tap.cardinputwidget.utils.DateUtils
 import company.tap.cardinputwidget.widget.BaseCardInput
 import company.tap.cardinputwidget.widget.CardInputListener
 import company.tap.cardinputwidget.widget.CardValidCallback
-import company.tap.tapuilibrary.atoms.TapTextInput
-import company.tap.tapuilibrary.utils.TapTextWatcher
+import company.tap.tapuilibrary.uikit.atoms.TapTextInput
+import company.tap.tapuilibrary.uikit.utils.TapTextWatcher
+
 import kotlin.properties.Delegates
 
 /**

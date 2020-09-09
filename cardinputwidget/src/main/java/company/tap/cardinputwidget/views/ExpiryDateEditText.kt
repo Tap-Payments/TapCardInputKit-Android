@@ -9,8 +9,10 @@ import android.widget.EditText
 import androidx.annotation.VisibleForTesting
 import company.tap.cardinputwidget.R
 import company.tap.cardinputwidget.utils.DateUtils
-import company.tap.tapuilibrary.atoms.TapTextInput
-import company.tap.tapuilibrary.utils.TapTextWatcher
+import company.tap.tapuilibrary.uikit.atoms.TapTextInput
+
+import company.tap.tapuilibrary.uikit.utils.TapTextWatcher
+
 import kotlin.math.min
 
 /**
@@ -19,7 +21,7 @@ import kotlin.math.min
 class ExpiryDateEditText @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = androidx.appcompat.R.attr.editTextStyle
+    defStyleAttr: Int = R.attr.editTextStyle
 ) : TapTextInput(context, attrs, defStyleAttr) {
 
     init {

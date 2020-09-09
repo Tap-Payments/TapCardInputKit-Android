@@ -11,8 +11,8 @@ import android.view.View
 import com.google.android.material.textfield.TextInputLayout
 import company.tap.cardinputwidget.CardBrand
 import company.tap.cardinputwidget.R
-import company.tap.tapuilibrary.atoms.TapTextInput
-import company.tap.tapuilibrary.utils.TapTextWatcher
+import company.tap.tapuilibrary.uikit.atoms.TapTextInput
+import company.tap.tapuilibrary.uikit.utils.TapTextWatcher
 
 /**
  * A [TapEditText] for CVC input.
@@ -20,7 +20,7 @@ import company.tap.tapuilibrary.utils.TapTextWatcher
 class CvcEditText @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = androidx.appcompat.R.attr.editTextStyle
+    defStyleAttr: Int = R.attr.editTextStyle
 ) : TapTextInput(context, attrs, defStyleAttr) {
 
     /**

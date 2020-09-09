@@ -9,10 +9,12 @@ import android.view.View
 import androidx.annotation.VisibleForTesting
 import company.tap.cardinputwidget.CardBrand
 import company.tap.cardinputwidget.R
+
 import company.tap.cardinputwidget.utils.CardUtils
 import company.tap.cardinputwidget.utils.TapTextUtils
-import company.tap.tapuilibrary.atoms.TapTextInput
-import company.tap.tapuilibrary.utils.TapTextWatcher
+import company.tap.tapuilibrary.uikit.atoms.TapTextInput
+import company.tap.tapuilibrary.uikit.utils.TapTextWatcher
+
 
 /**
  * A [TapEditText] that handles spacing out the digits of a credit card.
@@ -20,7 +22,7 @@ import company.tap.tapuilibrary.utils.TapTextWatcher
 class CardNumberEditText @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = androidx.appcompat.R.attr.editTextStyle
+    defStyleAttr: Int = R.attr.editTextStyle
 ) : TapTextInput(context, attrs, defStyleAttr) {
 
     @VisibleForTesting

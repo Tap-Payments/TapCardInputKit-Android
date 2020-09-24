@@ -4,6 +4,6 @@
         android:id="@+id/icon"
         android:layout_width="@dimen/card_brand_view_width"
         android:layout_height="@dimen/card_brand_view_height"
-        android:src="@drawable/card_icon"
+        android:src="@drawable/ic_card"
         android:contentDescription="@null" />
 </merge>

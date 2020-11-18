@@ -1,6 +1,7 @@
 package company.tap.cardinputwidget.widget.inline
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Parcelable
 import android.text.Editable
@@ -35,6 +36,7 @@ import company.tap.cardinputwidget.utils.DateUtils
 import company.tap.cardinputwidget.widget.BaseCardInput
 import company.tap.cardinputwidget.widget.CardInputListener
 import company.tap.cardinputwidget.widget.CardValidCallback
+import company.tap.tapuilibrary.themekit.ThemeManager
 import company.tap.tapuilibrary.uikit.atoms.TapTextInput
 import company.tap.tapuilibrary.uikit.utils.TapTextWatcher
 
@@ -638,7 +640,6 @@ class InlineCardInput @JvmOverloads constructor(
                             info: AccessibilityNodeInfoCompat
                     ) {
                         super.onInitializeAccessibilityNodeInfo(host, info)
-
                         // Avoid reading out "1234 1234 1234 1234"
                         info.hintText = null
                     }
@@ -759,6 +760,24 @@ class InlineCardInput @JvmOverloads constructor(
 //        allFields.forEach { it.addTextChangedListener(inputChangeTextWatcher) }
 
         cardNumberEditText.requestFocus()
+//        cardNumberEditText.setHintTextColor(Color.parseColor(ThemeManager.getValue("phoneCard.textFields.placeHolderColor")))
+//        expiryDateEditText.setHintTextColor(Color.parseColor(ThemeManager.getValue("phoneCard.textFields.placeHolderColor")))
+//        cvcNumberEditText.setHintTextColor(Color.parseColor(ThemeManager.getValue("phoneCard.textFields.placeHolderColor")))
+//        holderNameEditText.setHintTextColor(Color.parseColor(ThemeManager.getValue("phoneCard.textFields.placeHolderColor")))
+        cardNumberEditText.setHintTextColor(Color.RED)
+
+
+//        @JvmSynthetic
+//        internal val cardNumberEditText = viewBinding.cardNumberEditText
+//
+//        @JvmSynthetic
+//        internal val expiryDateEditText = viewBinding.expiryDateEditText
+//
+//        @JvmSynthetic
+//        internal val cvcNumberEditText = viewBinding.cvcEditText
+//
+//        @JvmSynthetic
+//        internal val holderNameEditText = viewBinding.holderNameEditText
     }
 
     /**

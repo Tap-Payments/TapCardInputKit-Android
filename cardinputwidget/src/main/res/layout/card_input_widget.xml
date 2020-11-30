@@ -7,7 +7,7 @@
         android:id="@+id/card_brand_view"
         android:layout_width="@dimen/card_brand_view_width"
         android:layout_height="@dimen/card_brand_view_height"
-        android:layout_marginStart="@dimen/add_card_total_margin"
+        android:layout_marginStart="@dimen/activity_total_margin10"
         android:layout_marginTop="@dimen/card_icon_padding"
         android:layout_marginEnd="@dimen/activity_total_margin10"
         android:layout_marginBottom="@dimen/card_icon_padding" />

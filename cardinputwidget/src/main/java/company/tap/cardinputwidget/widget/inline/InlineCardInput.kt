@@ -765,13 +765,13 @@ class InlineCardInput @JvmOverloads constructor(
         cardNumberEditText.requestFocus()
 
         cardNumberEditText.setHintTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.placeHolderColor")))
-        cardNumberEditText.setTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.placeHolderColor")))
+        cardNumberEditText.setTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.textColor")))
         expiryDateEditText.setHintTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.placeHolderColor")))
-        expiryDateEditText.setTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.placeHolderColor")))
+        expiryDateEditText.setTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.textColor")))
         cvcNumberEditText.setHintTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.placeHolderColor")))
-        cvcNumberEditText.setTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.placeHolderColor")))
+        cvcNumberEditText.setTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.textColor")))
         holderNameEditText.setHintTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.placeHolderColor")))
-        holderNameEditText.setTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.placeHolderColor")))
+        holderNameEditText.setTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.textColor")))
 
     }
 

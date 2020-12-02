@@ -4,14 +4,12 @@ import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Parcelable
-import android.text.Editable
-import android.text.Layout
-import android.text.TextPaint
-import android.text.TextWatcher
+import android.text.*
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
+import android.view.View.AUTOFILL_HINT_PASSWORD
 import android.view.View.OnFocusChangeListener
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
@@ -188,6 +186,7 @@ class InlineCardInput @JvmOverloads constructor(
             cardNumberEditText.shouldShowError = cardNumber == null
             expiryDateEditText.shouldShowError = cardDate == null
             cvcNumberEditText.shouldShowError = cvcValue == null
+            cvcNumberEditText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
             holderNameEditText.shouldShowError =
                     holderNameRequired &&
                             holderNameEditText.holderName.isNullOrBlank()
@@ -210,6 +209,8 @@ class InlineCardInput @JvmOverloads constructor(
                 }
                 cvcValue == null -> {
                     cvcNumberEditText.requestFocus()
+                    cvcNumberEditText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+
                 }
                 holderNameEditText.shouldShowError -> {
                     holderNameEditText.requestFocus()
@@ -364,6 +365,7 @@ class InlineCardInput @JvmOverloads constructor(
      * @param cvcCode the CVC value to be set
      */
     override fun setCvcCode(cvcCode: String?) {
+        cvcNumberEditText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
         cvcNumberEditText.setText(cvcCode)
     }
 
@@ -409,6 +411,7 @@ class InlineCardInput @JvmOverloads constructor(
      * Set a `TextWatcher` to receive CVC value changes.
      */
     override fun setCvcNumberTextWatcher(cvcNumberTextWatcher: TextWatcher?) {
+        cvcNumberEditText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
         cvcNumberEditText.addTextChangedListener(cvcNumberTextWatcher)
     }
 

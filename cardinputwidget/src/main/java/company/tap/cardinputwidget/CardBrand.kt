@@ -112,7 +112,7 @@ enum class CardBrand(
     Visa(
         "visa",
         "Visa",
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_card_icon_black else R.drawable.ic_card,
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_visa else R.drawable.ic_visa,
         pattern = Pattern.compile("^(4)[0-9]*$")
     ),
 

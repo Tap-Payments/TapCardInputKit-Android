@@ -34,6 +34,7 @@
             android:nextFocusForward="@+id/text_input_expiry_date"
             android:visibility="visible"
             app:hintEnabled="false"
+            android:gravity="start"
             tools:ignore="UnusedAttribute">
 
             <company.tap.cardinputwidget.views.CardNumberEditText
@@ -45,6 +46,8 @@
                 android:hint="@string/card_number_hint"
                 android:fontFamily="sans-serif-light"
                 android:inputType="number"
+                android:layout_gravity="start"
+                android:gravity="start"
                 android:maxLength="19" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -69,6 +72,7 @@
             android:nextFocusForward="@+id/text_input_cvc"
             android:visibility="visible"
             app:hintEnabled="false"
+            android:gravity="start"
             tools:ignore="UnusedAttribute">
 
             <company.tap.cardinputwidget.views.ExpiryDateEditText
@@ -81,6 +85,8 @@
                 android:fontFamily="sans-serif-light"
                 android:imeOptions="actionNext"
                 android:inputType="date"
+                android:layout_gravity="start"
+                android:gravity="start"
                 android:maxLength="5" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -100,6 +106,7 @@
             android:nextFocusLeft="@id/text_input_expiry_date"
             android:nextFocusUp="@id/text_input_expiry_date"
             app:hintEnabled="false"
+            android:gravity="start"
             tools:ignore="UnusedAttribute">
 
             <company.tap.cardinputwidget.views.CvcEditText
@@ -109,6 +116,9 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-light"
                 android:background="@android:color/transparent"
+                android:layout_gravity="start"
+                android:gravity="start"
+                android:inputType="numberPassword"
                 android:imeOptions="actionDone" />
 
         </com.google.android.material.textfield.TextInputLayout>

@@ -81,6 +81,16 @@ class InlineCardInput @JvmOverloads constructor(
 
     private var cardInputListener: CardInputListener? = null
     private var cardValidCallback: CardValidCallback? = null
+
+    private val frameStart: Int
+        get() {
+            val isLtr = context.resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_LTR
+            return if (isLtr) {
+                containerLayout.left
+            } else {
+                containerLayout.right
+            }
+        }
     private val cardValidTextWatcher = object : TapTextWatcher() {
         override fun afterTextChanged(s: Editable?) {
             super.afterTextChanged(s)
@@ -458,21 +468,21 @@ class InlineCardInput @JvmOverloads constructor(
             cardNumberIsViewed = state.getBoolean(STATE_CARD_VIEWED, true)
             updateSpaceSizes(cardNumberIsViewed)
             placementParameters.totalLengthInPixels = frameWidth
-            val cardLeftMargin: Int
-            val dateLeftMargin: Int
-            val cvcLeftMargin: Int
-            val holderNameLeftMargin: Int
+            val cardStartMargin: Int
+            val dateStartMargin: Int
+            val cvcStartMargin: Int
+            val holderNameStartMargin: Int
             if (cardNumberIsViewed) {
-                cardLeftMargin = 0
-                dateLeftMargin = placementParameters.getDateLeftMargin(isFullCard = true)
-                cvcLeftMargin = placementParameters.getCvcLeftMargin(isFullCard = true)
-                holderNameLeftMargin = placementParameters.getHolderNameLeftMargin(isFullCard = true)
+                cardStartMargin = 0
+                dateStartMargin = placementParameters.getDateStartMargin(isFullCard = true)
+                cvcStartMargin = placementParameters.getCvcStartMargin(isFullCard = true)
+                holderNameStartMargin = placementParameters.getHolderNameStartMargin(isFullCard = true)
             } else {
-                cardLeftMargin = -1 * placementParameters.hiddenCardWidth
-                dateLeftMargin = placementParameters.getDateLeftMargin(isFullCard = false)
-                cvcLeftMargin = placementParameters.getCvcLeftMargin(isFullCard = false)
-                holderNameLeftMargin = if (holderNameEnabled) {
-                    placementParameters.getHolderNameLeftMargin(isFullCard = false)
+                cardStartMargin = -1 * placementParameters.hiddenCardWidth
+                dateStartMargin = placementParameters.getDateStartMargin(isFullCard = false)
+                cvcStartMargin = placementParameters.getCvcStartMargin(isFullCard = false)
+                holderNameStartMargin = if (holderNameEnabled) {
+                    placementParameters.getHolderNameStartMargin(isFullCard = false)
                 } else {
                     placementParameters.totalLengthInPixels
                 }
@@ -481,22 +491,22 @@ class InlineCardInput @JvmOverloads constructor(
             updateFieldLayout(
                     view = cardNumberTextInputLayout,
                     width = placementParameters.cardWidth,
-                    leftMargin = cardLeftMargin
+                marginStart = cardStartMargin
             )
             updateFieldLayout(
                     view = expiryDateTextInputLayout,
                     width = placementParameters.dateWidth,
-                    leftMargin = dateLeftMargin
+                marginStart = dateStartMargin
             )
             updateFieldLayout(
                     view = cvcNumberTextInputLayout,
                     width = placementParameters.cvcWidth,
-                    leftMargin = cvcLeftMargin
+                marginStart = cvcStartMargin
             )
             updateFieldLayout(
                     view = holderNameTextInputLayout,
                     width = placementParameters.holderNameWidth,
-                    leftMargin = holderNameLeftMargin
+                marginStart = holderNameStartMargin
             )
 
             super.onRestoreInstanceState(state.getParcelable(STATE_SUPER_STATE))
@@ -514,13 +524,14 @@ class InlineCardInput @JvmOverloads constructor(
      * naturally give focus to that control, and we don't want to interfere with what
      * Android will naturally do in response to that touch.
      *
-     * @param touchX distance in pixels from the left side of this control
+     * @param touchX distance in pixels from the start side of this control
      * @return a [TapEditText] that needs to request focus, or `null`
      * if no such request is necessary.
      */
     @VisibleForTesting
     internal fun getFocusRequestOnTouch(touchX: Int): View? {
-        val frameStart = containerLayout.left
+        //check this as it was constraint.left
+        val frameStart :Int= this.frameStart
 
         return when {
             cardNumberIsViewed -> {
@@ -550,13 +561,13 @@ class InlineCardInput @JvmOverloads constructor(
                         expiryDateEditText
                     touchX < placementParameters.dateStartPosition + placementParameters.dateWidth -> // Just a regular touch on the date editor.
                         null
-                    touchX < placementParameters.dateRightTouchBufferLimit -> // We need to act like this was a touch on the date editor
+                    touchX < placementParameters.dateEndTouchBufferLimit -> // We need to act like this was a touch on the date editor
                         expiryDateEditText
                     touchX < placementParameters.cvcStartPosition -> // We need to act like this was a touch on the cvc editor.
                         cvcNumberEditText
                     touchX < placementParameters.cvcStartPosition + placementParameters.cvcWidth -> // Just a regular touch on the cvc editor.
                         null
-                    touchX < placementParameters.cvcRightTouchBufferLimit -> // We need to act like this was a touch on the cvc editor.
+                    touchX < placementParameters.cvcEndTouchBufferLimit -> // We need to act like this was a touch on the cvc editor.
                         cvcNumberEditText
                     touchX < placementParameters.holderNameStartPosition -> // We need to act like this was a touch on the postal code editor.
                         holderNameEditText
@@ -575,7 +586,7 @@ class InlineCardInput @JvmOverloads constructor(
                         expiryDateEditText
                     touchX < placementParameters.dateStartPosition + placementParameters.dateWidth -> // Just a regular touch on the date editor.
                         null
-                    touchX < placementParameters.dateRightTouchBufferLimit -> // We need to act like this was a touch on the date editor
+                    touchX < placementParameters.dateEndTouchBufferLimit -> // We need to act like this was a touch on the date editor
                         expiryDateEditText
                     touchX < placementParameters.cvcStartPosition -> // We need to act like this was a touch on the cvc editor.
                         cvcNumberEditText
@@ -588,7 +599,7 @@ class InlineCardInput @JvmOverloads constructor(
     @VisibleForTesting
     internal fun updateSpaceSizes(isCardViewed: Boolean) {
         val frameWidth = frameWidth
-        val frameStart = containerLayout.left
+        val frameStart = this.frameStart
         if (frameWidth == 0) {
             // This is an invalid view state.
             return
@@ -621,10 +632,10 @@ class InlineCardInput @JvmOverloads constructor(
         placementParameters.updateSpacing(isCardViewed, holderNameEnabled, frameStart, frameWidth)
     }
 
-    private fun updateFieldLayout(view: View, width: Int, leftMargin: Int) {
+    private fun updateFieldLayout(view: View, width: Int, marginStart: Int) {
         view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams).apply {
             this.width = width
-            this.leftMargin = leftMargin
+            this.marginStart = marginStart
         }
     }
 
@@ -679,7 +690,7 @@ class InlineCardInput @JvmOverloads constructor(
 
         cardNumberEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                scrollLeft()
+                scrollStart()
                 cardInputListener?.onFocusChange(FOCUS_CARD)
                 expiryDateEditText.visibility = View.GONE
                 cvcNumberEditText.visibility = View.GONE
@@ -688,7 +699,7 @@ class InlineCardInput @JvmOverloads constructor(
 
         expiryDateEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                scrollRight()
+                scrollEnd()
                 cardInputListener?.onFocusChange(FOCUS_EXPIRY)
             }
         }
@@ -711,7 +722,7 @@ class InlineCardInput @JvmOverloads constructor(
 
         cvcNumberEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                scrollRight()
+                scrollEnd()
                 cardInputListener?.onFocusChange(FOCUS_CVC)
             }
             updateIconCvc(hasFocus, cvcValue)
@@ -739,7 +750,7 @@ class InlineCardInput @JvmOverloads constructor(
         cardNumberEditText.completionCallback = {
             expiryDateEditText.visibility = View.VISIBLE
             cvcNumberEditText.visibility = View.VISIBLE
-            scrollRight()
+            scrollEnd()
             cardInputListener?.onCardComplete()
         }
 
@@ -828,33 +839,33 @@ class InlineCardInput @JvmOverloads constructor(
     }
 
     // reveal the full card number field
-    private fun scrollLeft() {
+    private fun scrollStart() {
         if (cardNumberIsViewed || !initFlag) {
             return
         }
 
-        val dateStartPosition = placementParameters.getDateLeftMargin(isFullCard = false)
-        val cvcStartPosition = placementParameters.getCvcLeftMargin(isFullCard = false)
-        val holderNameStartPosition = placementParameters.getHolderNameLeftMargin(isFullCard = false)
+        val dateStartPosition = placementParameters.getCvcStartMargin(isFullCard = false)
+        val cvcStartPosition = placementParameters.getCvcStartMargin(isFullCard = false)
+        val holderNameStartPosition = placementParameters.getHolderNameStartMargin(isFullCard = false)
 
         updateSpaceSizes(isCardViewed = true)
 
-        val slideCardLeftAnimation =
-            CardNumberSlideLeftAnimation(
+        val slideCardStartAnimation =
+            CardNumberSlideStartAnimation(
                 view = cardNumberTextInputLayout
             )
 
-        val dateDestination = placementParameters.getDateLeftMargin(isFullCard = true)
-        val slideDateLeftAnimation =
-            ExpiryDateSlideLeftAnimation(
+        val dateDestination = placementParameters.getDateStartMargin(isFullCard = true)
+        val slideDateStartAnimation =
+            ExpiryDateSlideStartAnimation(
                 view = expiryDateTextInputLayout,
                 startPosition = dateStartPosition,
                 destination = dateDestination
             )
 
         val cvcDestination = cvcStartPosition + (dateDestination - dateStartPosition)
-        val slideCvcLeftAnimation =
-            CvcSlideLeftAnimation(
+        val slideCvcStartAnimation =
+            CvcSlideStartAnimation(
                 view = cvcNumberTextInputLayout,
                 startPosition = cvcStartPosition,
                 destination = cvcDestination,
@@ -862,8 +873,8 @@ class InlineCardInput @JvmOverloads constructor(
             )
 
         val holderNameDestination = holderNameStartPosition + (cvcDestination - cvcStartPosition)
-        val slideHolderNameLeftAnimation = if (holderNameEnabled) {
-            HolderNameSlideLeftAnimation(
+        val slideHolderNameStartAnimation = if (holderNameEnabled) {
+            HolderNameSlideStartAnimation(
                 view = holderNameTextInputLayout,
                 startPosition = holderNameStartPosition,
                 destination = holderNameDestination,
@@ -874,54 +885,54 @@ class InlineCardInput @JvmOverloads constructor(
         }
 
         startSlideAnimation(listOfNotNull(
-                slideCardLeftAnimation,
-                slideDateLeftAnimation,
-                slideCvcLeftAnimation,
-                slideHolderNameLeftAnimation
+                slideCardStartAnimation,
+                slideDateStartAnimation,
+                slideCvcStartAnimation,
+                slideHolderNameStartAnimation
         ))
 
         cardNumberIsViewed = true
     }
 
     // reveal the secondary fields
-    private fun scrollRight() {
+    private fun scrollEnd() {
         if (!cardNumberIsViewed || !initFlag) {
             return
         }
 
-        val dateStartMargin = placementParameters.getDateLeftMargin(isFullCard = true)
+        val dateStartMargin = placementParameters.getDateStartMargin(isFullCard = true)
 
         updateSpaceSizes(isCardViewed = false)
 
-        val slideCardRightAnimation =
-            CardNumberSlideRightAnimation(
+        val slideCardEndAnimation =
+            CardNumberSlideEndAnimation(
                 view = cardNumberTextInputLayout,
                 hiddenCardWidth = placementParameters.hiddenCardWidth,
                 focusOnEndView = expiryDateEditText
             )
 
-        val dateDestination = placementParameters.getDateLeftMargin(isFullCard = false)
-        val slideDateRightAnimation =
-            ExpiryDateSlideRightAnimation(
+        val dateDestination = placementParameters.getDateStartMargin(isFullCard = false)
+        val slideDateEndAnimation =
+            ExpiryDateSlideEndAnimation(
                 view = expiryDateTextInputLayout,
                 startMargin = dateStartMargin,
                 destination = dateDestination
             )
 
-        val cvcDestination = placementParameters.getCvcLeftMargin(isFullCard = false)
+        val cvcDestination = placementParameters.getCvcStartMargin(isFullCard = false)
         val cvcStartMargin = cvcDestination + (dateStartMargin - dateDestination)
-        val slideCvcRightAnimation =
-            CvcSlideRightAnimation(
+        val slideCvcEndAnimation =
+            CvcSlideEndAnimation(
                 view = cvcNumberTextInputLayout,
                 startMargin = cvcStartMargin,
                 destination = cvcDestination,
                 newWidth = placementParameters.cvcWidth
             )
 
-        val holderNameDestination = placementParameters.getHolderNameLeftMargin(isFullCard = false)
+        val holderNameDestination = placementParameters.getHolderNameStartMargin(isFullCard = false)
         val holderNameStartMargin = holderNameDestination + (cvcStartMargin - cvcDestination)
-        val slideHolderNameRightAnimation = if (holderNameEnabled) {
-            HolderNameSlideRightAnimation(
+        val slideHolderNameEndAnimation = if (holderNameEnabled) {
+            HolderNameSlideEndAnimation(
                 view = holderNameTextInputLayout,
                 startMargin = holderNameStartMargin,
                 destination = holderNameDestination,
@@ -932,10 +943,10 @@ class InlineCardInput @JvmOverloads constructor(
         }
 
         startSlideAnimation(listOfNotNull(
-                slideCardRightAnimation,
-                slideDateRightAnimation,
-                slideCvcRightAnimation,
-                slideHolderNameRightAnimation
+                slideCardEndAnimation,
+                slideDateEndAnimation,
+                slideCvcEndAnimation,
+                slideHolderNameEndAnimation
         ))
 
         cardNumberIsViewed = false
@@ -966,7 +977,7 @@ class InlineCardInput @JvmOverloads constructor(
             updateFieldLayout(
                     view = cardNumberTextInputLayout,
                     width = placementParameters.cardWidth,
-                    leftMargin = if (cardNumberIsViewed) {
+                    marginStart  = if (cardNumberIsViewed) {
                         0
                     } else {
                         -1 * placementParameters.hiddenCardWidth
@@ -976,19 +987,19 @@ class InlineCardInput @JvmOverloads constructor(
             updateFieldLayout(
                     view = expiryDateTextInputLayout,
                     width = placementParameters.dateWidth,
-                    leftMargin = placementParameters.getDateLeftMargin(cardNumberIsViewed)
+                    marginStart = placementParameters.getDateStartMargin(cardNumberIsViewed)
             )
 
             updateFieldLayout(
                     view = cvcNumberTextInputLayout,
                     width = placementParameters.cvcWidth,
-                    leftMargin = placementParameters.getCvcLeftMargin(cardNumberIsViewed)
+                    marginStart = placementParameters.getCvcStartMargin(cardNumberIsViewed)
             )
 
             updateFieldLayout(
                     view = holderNameTextInputLayout,
                     width = placementParameters.holderNameWidth,
-                    leftMargin = placementParameters.getHolderNameLeftMargin(cardNumberIsViewed)
+                    marginStart = placementParameters.getHolderNameStartMargin(cardNumberIsViewed)
             )
         }
     }
@@ -1061,53 +1072,53 @@ class InlineCardInput @JvmOverloads constructor(
 
         internal var cardTouchBufferLimit: Int = 0
         internal var dateStartPosition: Int = 0
-        internal var dateRightTouchBufferLimit: Int = 0
+        internal var dateEndTouchBufferLimit: Int = 0
         internal var cvcStartPosition: Int = 0
-        internal var cvcRightTouchBufferLimit: Int = 0
+        internal var cvcEndTouchBufferLimit: Int = 0
         internal var holderNameStartPosition: Int = 0
 
-        private val cardPeekDateLeftMargin: Int
+        private val cardPeekDateStartMargin: Int
             @JvmSynthetic
             get() {
                 return peekCardWidth + cardDateSeparation
             }
 
-        private val cardPeekCvcLeftMargin: Int
+        private val cardPeekCvcStartMargin: Int
             @JvmSynthetic
             get() {
-                return cardPeekDateLeftMargin + dateWidth + dateCvcSeparation
+                return cardPeekDateStartMargin + dateWidth + dateCvcSeparation
             }
 
-        internal val cardPeekHolderNameLeftMargin: Int
+        internal val cardPeekHolderNameStartMargin: Int
             @JvmSynthetic
             get() {
-                return cardPeekCvcLeftMargin + holderNameWidth + cvcHolderNameSeparation
+                return cardPeekCvcStartMargin + holderNameWidth + cvcHolderNameSeparation
             }
 
         @JvmSynthetic
-        internal fun getDateLeftMargin(isFullCard: Boolean): Int {
+        internal fun getDateStartMargin(isFullCard: Boolean): Int {
             return if (isFullCard) {
                 cardWidth + cardDateSeparation
             } else {
-                cardPeekDateLeftMargin
+                cardPeekDateStartMargin
             }
         }
 
         @JvmSynthetic
-        internal fun getCvcLeftMargin(isFullCard: Boolean): Int {
+        internal fun getCvcStartMargin(isFullCard: Boolean): Int {
             return if (isFullCard) {
                 totalLengthInPixels
             } else {
-                cardPeekCvcLeftMargin
+                cardPeekCvcStartMargin
             }
         }
 
         @JvmSynthetic
-        internal fun getHolderNameLeftMargin(isFullCard: Boolean): Int {
+        internal fun getHolderNameStartMargin(isFullCard: Boolean): Int {
             return if (isFullCard) {
                 totalLengthInPixels
             } else {
-                cardPeekHolderNameLeftMargin
+                cardPeekHolderNameStartMargin
             }
         }
 
@@ -1136,11 +1147,11 @@ class InlineCardInput @JvmOverloads constructor(
                     this.dateStartPosition = dateStartPosition
 
                     val cvcStartPosition = dateStartPosition + dateWidth + dateCvcSeparation
-                    this.dateRightTouchBufferLimit = cvcStartPosition / 3
+                    this.dateEndTouchBufferLimit = cvcStartPosition / 3
                     this.cvcStartPosition = cvcStartPosition
 
                     val holderNameStartPosition = cvcStartPosition + cvcWidth + cvcHolderNameSeparation
-                    this.cvcRightTouchBufferLimit = holderNameStartPosition / 3
+                    this.cvcEndTouchBufferLimit = holderNameStartPosition / 3
                     this.holderNameStartPosition = holderNameStartPosition
                 }
                 else -> {
@@ -1151,7 +1162,7 @@ class InlineCardInput @JvmOverloads constructor(
                     this.cardTouchBufferLimit = frameStart + peekCardWidth + cardDateSeparation / 2
                     this.dateStartPosition = frameStart + peekCardWidth + cardDateSeparation
 
-                    this.dateRightTouchBufferLimit = dateStartPosition + dateWidth + dateCvcSeparation / 2
+                    this.dateEndTouchBufferLimit = dateStartPosition + dateWidth + dateCvcSeparation / 2
                     this.cvcStartPosition = dateStartPosition + dateWidth + dateCvcSeparation
                 }
             }
@@ -1162,9 +1173,9 @@ class InlineCardInput @JvmOverloads constructor(
                 Touch Buffer Data:
                 CardTouchBufferLimit = $cardTouchBufferLimit
                 DateStartPosition = $dateStartPosition
-                DateRightTouchBufferLimit = $dateRightTouchBufferLimit
+                DateEndTouchBufferLimit = $dateEndTouchBufferLimit
                 CvcStartPosition = $cvcStartPosition
-                CvcRightTouchBufferLimit = $cvcRightTouchBufferLimit
+                CvcEndTouchBufferLimit = $cvcEndTouchBufferLimit
                 HolderNameStartPosition = $holderNameStartPosition
                 """
 
@@ -1196,7 +1207,7 @@ class InlineCardInput @JvmOverloads constructor(
         }
     }
 
-    private class CardNumberSlideLeftAnimation(
+    private class CardNumberSlideStartAnimation(
             private val view: View
     ) : CardFieldAnimation() {
         init {
@@ -1210,12 +1221,12 @@ class InlineCardInput @JvmOverloads constructor(
         override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
             super.applyTransformation(interpolatedTime, t)
             view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams).apply {
-                leftMargin = (leftMargin * (1 - interpolatedTime)).toInt()
+                marginStart = (marginStart * (1 - interpolatedTime)).toInt()
             }
         }
     }
 
-    private class ExpiryDateSlideLeftAnimation(
+    private class ExpiryDateSlideStartAnimation(
             private val view: View,
             private val startPosition: Int,
             private val destination: Int
@@ -1223,13 +1234,13 @@ class InlineCardInput @JvmOverloads constructor(
         override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
             super.applyTransformation(interpolatedTime, t)
             view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams).apply {
-                leftMargin =
+                marginStart =
                         (interpolatedTime * destination + (1 - interpolatedTime) * startPosition).toInt()
             }
         }
     }
 
-    private class CvcSlideLeftAnimation(
+    private class CvcSlideStartAnimation(
             private val view: View,
             private val startPosition: Int,
             private val destination: Int,
@@ -1238,14 +1249,14 @@ class InlineCardInput @JvmOverloads constructor(
         override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
             super.applyTransformation(interpolatedTime, t)
             view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams).apply {
-                this.leftMargin = (interpolatedTime * destination + (1 - interpolatedTime) * startPosition).toInt()
-                this.rightMargin = 0
+                this.marginStart = (interpolatedTime * destination + (1 - interpolatedTime) * startPosition).toInt()
+                this.marginEnd = 0
                 this.width = newWidth
             }
         }
     }
 
-    private class HolderNameSlideLeftAnimation(
+    private class HolderNameSlideStartAnimation(
             private val view: View,
             private val startPosition: Int,
             private val destination: Int,
@@ -1254,15 +1265,15 @@ class InlineCardInput @JvmOverloads constructor(
         override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
             super.applyTransformation(interpolatedTime, t)
             view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams).apply {
-                this.leftMargin =
+                this.marginStart =
                         (interpolatedTime * destination + (1 - interpolatedTime) * startPosition).toInt()
-                this.rightMargin = 0
+                this.marginEnd = 0
                 this.width = newWidth
             }
         }
     }
 
-    private class CardNumberSlideRightAnimation(
+    private class CardNumberSlideEndAnimation(
             private val view: View,
             private val hiddenCardWidth: Int,
             private val focusOnEndView: View
@@ -1278,12 +1289,12 @@ class InlineCardInput @JvmOverloads constructor(
         override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
             super.applyTransformation(interpolatedTime, t)
             view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams).apply {
-                leftMargin = (-1f * hiddenCardWidth.toFloat() * interpolatedTime).toInt()
+                marginStart = (-1f * hiddenCardWidth.toFloat() * interpolatedTime).toInt()
             }
         }
     }
 
-    private class ExpiryDateSlideRightAnimation(
+    private class ExpiryDateSlideEndAnimation(
             private val view: View,
             private val startMargin: Int,
             private val destination: Int
@@ -1291,13 +1302,13 @@ class InlineCardInput @JvmOverloads constructor(
         override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
             super.applyTransformation(interpolatedTime, t)
             view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams).apply {
-                leftMargin =
+                marginStart =
                         (interpolatedTime * destination + (1 - interpolatedTime) * startMargin).toInt()
             }
         }
     }
 
-    private class CvcSlideRightAnimation(
+    private class CvcSlideEndAnimation(
             private val view: View,
             private val startMargin: Int,
             private val destination: Int,
@@ -1306,15 +1317,15 @@ class InlineCardInput @JvmOverloads constructor(
         override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
             super.applyTransformation(interpolatedTime, t)
             view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams).apply {
-                leftMargin =
+                marginStart =
                         (interpolatedTime * destination + (1 - interpolatedTime) * startMargin).toInt()
-                rightMargin = 0
+                marginEnd = 0
                 width = newWidth
             }
         }
     }
 
-    private class HolderNameSlideRightAnimation(
+    private class HolderNameSlideEndAnimation(
             private val view: View,
             private val startMargin: Int,
             private val destination: Int,
@@ -1323,9 +1334,9 @@ class InlineCardInput @JvmOverloads constructor(
         override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
             super.applyTransformation(interpolatedTime, t)
             view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams).apply {
-                this.leftMargin =
+                this.marginStart =
                         (interpolatedTime * destination + (1 - interpolatedTime) * startMargin).toInt()
-                this.rightMargin = 0
+                this.marginEnd = 0
                 this.width = newWidth
             }
         }

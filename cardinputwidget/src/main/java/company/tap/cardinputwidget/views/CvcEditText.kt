@@ -4,7 +4,8 @@ import android.content.Context
 import android.os.Build
 import android.text.Editable
 import android.text.InputFilter
-import android.text.InputType
+import android.text.InputType.TYPE_CLASS_NUMBER
+import android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD
 import android.text.method.DigitsKeyListener
 import android.util.AttributeSet
 import android.view.View
@@ -55,7 +56,8 @@ class CvcEditText @JvmOverloads constructor(
         maxLines = 1
         filters = createFilters(CardBrand.Unknown)
 
-        inputType = InputType.TYPE_NUMBER_VARIATION_PASSWORD
+       // inputType = InputType.TYPE_NUMBER_VARIATION_PASSWORD
+        inputType = TYPE_CLASS_NUMBER or TYPE_NUMBER_VARIATION_PASSWORD
         keyListener = DigitsKeyListener.getInstance(false, true)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

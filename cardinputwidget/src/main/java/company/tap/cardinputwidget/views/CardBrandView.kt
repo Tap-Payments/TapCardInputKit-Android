@@ -8,6 +8,7 @@ import android.widget.FrameLayout
 import androidx.annotation.ColorInt
 import androidx.core.graphics.drawable.DrawableCompat
 import company.tap.cardinputwidget.CardBrand
+import company.tap.cardinputwidget.CardBrandSingle
 import company.tap.cardinputwidget.databinding.CardBrandViewBinding
 
 internal class CardBrandView @JvmOverloads constructor(
@@ -33,6 +34,22 @@ internal class CardBrandView @JvmOverloads constructor(
     }
 
     internal fun showBrandIcon(brand: CardBrand, shouldShowErrorIcon: Boolean) {
+        iconView.setOnClickListener(null)
+        if (shouldShowErrorIcon) {
+            iconView.setImageResource(brand.errorIcon)
+        } else {
+            if (animationApplied) {
+                animationApplied = false
+                animateImageChange(brand.icon)
+            } else
+                iconView.setImageResource(brand.icon)
+            if (brand == CardBrand.Unknown) {
+                applyTint(false)
+                setScanClickListener()
+            }
+        }
+    }
+    internal fun showBrandIconSingle(brand: CardBrandSingle, shouldShowErrorIcon: Boolean) {
         iconView.setOnClickListener(null)
         if (shouldShowErrorIcon) {
             iconView.setImageResource(brand.errorIcon)

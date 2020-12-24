@@ -330,9 +330,9 @@ class InlineCardInput @JvmOverloads constructor(
         cardInputListener = listener
     }
 
-    override fun setSingleCardInput(cardBrand: CardBrand) {
+    override fun setSingleCardInput(cardBrand: CardBrandSingle) {
         shouldChangeIcon = false
-        cardBrandView.showBrandIcon(cardBrand, shouldShowErrorIcon)
+        cardBrandView.showBrandIconSingle(cardBrand, shouldShowErrorIcon)
     }
 
     /**

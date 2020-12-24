@@ -8,7 +8,7 @@ import java.util.regex.Pattern
 /**
  * A representation of supported card brands and related data
  */
-enum class CardBrand(
+enum class CardBrandSingle(
     val code: String,
     val displayName: String,
     @DrawableRes val icon: Int,
@@ -26,8 +26,8 @@ enum class CardBrand(
     /**
      * The default max length when the card number is formatted without spaces (e.g. "4242424242424242")
      *
-     * Note that [CardBrand.DinersClub]'s max length depends on the BIN (e.g. card number prefix).
-     * In the case of a [CardBrand.DinersClub] card, use [getMaxLengthForCardNumber].
+     * Note that [CardBrandSingle.DinersClub]'s max length depends on the BIN (e.g. card number prefix).
+     * In the case of a [CardBrandSingle.DinersClub] card, use [getMaxLengthForCardNumber].
      */
     val defaultMaxLength: Int = 16,
 
@@ -48,7 +48,7 @@ enum class CardBrand(
     val defaultSpacePositions: Set<Int> = setOf(4, 9, 14),
 
     /**
-     * By default, a [CardBrand] does not have variants.
+     * By default, a [CardBrandSingle] does not have variants.
      */
     private val variantMaxLength: Map<Pattern, Int> = emptyMap(),
 
@@ -57,9 +57,9 @@ enum class CardBrand(
     AmericanExpress(
         "amex",
         "American Express",
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_card_icon_black else R.drawable.ic_card,
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_americanexpress else R.drawable.ic_americanexpress,
         cvcIcon = R.drawable.ic_cvc_amex,
-        errorIcon = if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_card_icon_black else R.drawable.ic_card,
+        errorIcon = if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_americanexpress else R.drawable.ic_americanexpress,
         cvcLength = setOf(3, 4),
         defaultMaxLength = 15,
         pattern = Pattern.compile("^(34|37)[0-9]*$"),
@@ -69,7 +69,7 @@ enum class CardBrand(
     Discover(
         "discover",
         "Discover",
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_card_icon_black else R.drawable.ic_card,
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_discover else R.drawable.ic_discover,
         pattern = Pattern.compile("^(60|64|65)[0-9]*$")
     ),
 
@@ -81,7 +81,7 @@ enum class CardBrand(
     JCB(
         "jcb",
         "JCB",
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_card_icon_black else R.drawable.ic_card,
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_jcb else R.drawable.ic_jcb,
         pattern = Pattern.compile("^(352[89]|35[3-8][0-9])[0-9]*$"),
         partialPatterns = mapOf(
             2 to Pattern.compile("^(35)$"),
@@ -98,7 +98,7 @@ enum class CardBrand(
     DinersClub(
         "diners",
         "Diners Club",
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_card_icon_black else R.drawable.ic_card,
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_diners else R.drawable.ic_diners,
         defaultMaxLength = 16,
         pattern = Pattern.compile("^(36|30|38|39)[0-9]*$"),
         variantMaxLength = mapOf(
@@ -112,28 +112,28 @@ enum class CardBrand(
     Visa(
         "visa",
         "Visa",
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_card_icon_black else R.drawable.ic_card,
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_visa else R.drawable.ic_visa,
         pattern = Pattern.compile("^(4)[0-9]*$")
     ),
 
     MasterCard(
         "mastercard",
         "Mastercard",
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_card_icon_black else R.drawable.ic_card,
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_mastercard else R.drawable.ic_mastercard,
         pattern = Pattern.compile("^(2221|2222|2223|2224|2225|2226|2227|2228|2229|223|224|225|226|227|228|229|23|24|25|26|270|271|2720|50|51|52|53|54|55|67)[0-9]*$")
     ),
 
     UnionPay(
         "unionpay",
         "UnionPay",
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_card_icon_black else R.drawable.ic_card,
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_unionpay else R.drawable.ic_unionpay,
         pattern = Pattern.compile("^(62|81)[0-9]*$")
     ),
 
     Unknown(
         "unknown",
         "Unknown",
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_card_icon_black else R.drawable.ic_card,
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_unknown else R.drawable.ic_unknown,
         cvcLength = setOf(3, 4)
     );
 
@@ -166,10 +166,10 @@ enum class CardBrand(
     }
 
     /**
-     * If the [CardBrand] has variants, and the [cardNumber] starts with one of the variant
+     * If the [CardBrandSingle] has variants, and the [cardNumber] starts with one of the variant
      * prefixes, return the length for that variant. Otherwise, return [defaultMaxLength].
      *
-     * Note: currently only [CardBrand.DinersClub] has variants
+     * Note: currently only [CardBrandSingle.DinersClub] has variants
      */
     fun getMaxLengthForCardNumber(cardNumber: String): Int {
         val normalizedCardNumber =
@@ -185,10 +185,10 @@ enum class CardBrand(
     }
 
     /**
-     * If the [CardBrand] has variants, and the [cardNumber] starts with one of the variant
+     * If the [CardBrandSingle] has variants, and the [cardNumber] starts with one of the variant
      * prefixes, return the length for that variant. Otherwise, return [defaultMaxLength].
      *
-     * Note: currently only [CardBrand.DinersClub] has variants
+     * Note: currently only [CardBrandSingle.DinersClub] has variants
      */
     fun getSpacePositionsForCardNumber(cardNumber: String): Set<Int> {
         val normalizedCardNumber =
@@ -260,10 +260,10 @@ enum class CardBrand(
     companion object {
         /**
          * @param cardNumber a card number
-         * @return the [CardBrand] that matches the [cardNumber]'s prefix, if one is found;
-         * otherwise, [CardBrand.Unknown]
+         * @return the [CardBrandSingle] that matches the [cardNumber]'s prefix, if one is found;
+         * otherwise, [CardBrandSingle.Unknown]
          */
-        fun fromCardNumber(cardNumber: String?): CardBrand {
+        fun fromCardNumber(cardNumber: String?): CardBrandSingle {
             if (cardNumber.isNullOrBlank()) {
                 return Unknown
             }
@@ -278,7 +278,7 @@ enum class CardBrand(
          * @param code a brand code, such as `Visa` or `American Express`.
          * See [PaymentMethod.Card.brand].
          */
-        fun fromCode(code: String?): CardBrand {
+        fun fromCode(code: String?): CardBrandSingle {
             return values().firstOrNull { it.code.equals(code, ignoreCase = true) } ?: Unknown
         }
 

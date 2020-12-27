@@ -196,7 +196,7 @@ class InlineCardInput @JvmOverloads constructor(
             cardNumberEditText.shouldShowError = cardNumber == null
             expiryDateEditText.shouldShowError = cardDate == null
             cvcNumberEditText.shouldShowError = cvcValue == null
-            cvcNumberEditText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+          //  cvcNumberEditText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
             holderNameEditText.shouldShowError =
                     holderNameRequired &&
                             holderNameEditText.holderName.isNullOrBlank()
@@ -219,7 +219,7 @@ class InlineCardInput @JvmOverloads constructor(
                 }
                 cvcValue == null -> {
                     cvcNumberEditText.requestFocus()
-                    cvcNumberEditText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+                  //  cvcNumberEditText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
 
                 }
                 holderNameEditText.shouldShowError -> {
@@ -375,7 +375,7 @@ class InlineCardInput @JvmOverloads constructor(
      * @param cvcCode the CVC value to be set
      */
     override fun setCvcCode(cvcCode: String?) {
-        cvcNumberEditText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+      //  cvcNumberEditText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
         cvcNumberEditText.setText(cvcCode)
     }
 
@@ -421,7 +421,7 @@ class InlineCardInput @JvmOverloads constructor(
      * Set a `TextWatcher` to receive CVC value changes.
      */
     override fun setCvcNumberTextWatcher(cvcNumberTextWatcher: TextWatcher?) {
-        cvcNumberEditText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+      //  cvcNumberEditText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
         cvcNumberEditText.addTextChangedListener(cvcNumberTextWatcher)
     }
 

@@ -5,6 +5,7 @@ import androidx.annotation.IntRange
 import company.tap.cardinputwidget.Card
 import company.tap.cardinputwidget.CardBrand
 import company.tap.cardinputwidget.CardBrandSingle
+import company.tap.cardinputwidget.utils.TextValidator
 
 internal interface BaseCardInput {
     val card: Card?
@@ -20,7 +21,15 @@ internal interface BaseCardInput {
     /**
      * Set a `TextWatcher` to receive card number changes.
      */
+    fun setCardNumberApiTextWatcher(cardApiNumberTextWatcher: TextValidator)
+    /**
+     * Set a `TextWatcher` to receive card number changes.
+     */
     fun setCardNumberTextWatcher(cardNumberTextWatcher: TextWatcher?)
+    /**
+     * Remove a `TextWatcher` to receive card number changes.
+     */
+    fun removeCardNumberTextWatcher(cardNumberTextWatcher: TextWatcher?)
 
     /**
      * Set a `TextWatcher` to receive expiration date changes.

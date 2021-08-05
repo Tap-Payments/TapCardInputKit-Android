@@ -31,6 +31,8 @@ import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion
 import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_EXPIRY
 import company.tap.cardinputwidget.databinding.CardInputWidgetBinding
 import company.tap.cardinputwidget.utils.DateUtils
+import company.tap.cardinputwidget.utils.TextValidator
+import company.tap.cardinputwidget.views.CardNumberEditText
 import company.tap.cardinputwidget.widget.BaseCardInput
 import company.tap.cardinputwidget.widget.CardInputListener
 import company.tap.cardinputwidget.widget.CardValidCallback
@@ -335,6 +337,14 @@ class InlineCardInput @JvmOverloads constructor(
         cardBrandView.showBrandIconSingle(cardBrand, shouldShowErrorIcon)
     }
 
+    override fun setCardNumberApiTextWatcher(cardApiNumberTextWatcher: TextValidator) {
+       cardNumberEditText.addTextChangedListener(object :TextValidator(cardNumberEditText){
+           override fun validate(cardNumberEditText: CardNumberEditText?, text: String?) {
+           }
+
+       })
+    }
+
     /**
      * Set the card number. Method does not change text field focus.
      *
@@ -408,6 +418,12 @@ class InlineCardInput @JvmOverloads constructor(
      */
     override fun setCardNumberTextWatcher(cardNumberTextWatcher: TextWatcher?) {
         cardNumberEditText.addTextChangedListener(cardNumberTextWatcher)
+    }
+    /**
+     * Remove a `TextWatcher` to receive card number changes.
+     */
+    override fun removeCardNumberTextWatcher(cardNumberTextWatcher: TextWatcher?) {
+        cardNumberEditText.removeTextChangedListener(cardNumberTextWatcher)
     }
 
     /**

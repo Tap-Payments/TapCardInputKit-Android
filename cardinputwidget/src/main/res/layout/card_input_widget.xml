@@ -46,6 +46,7 @@
                 android:hint="@string/card_number_hint"
                 android:fontFamily="sans-serif-light"
                 android:inputType="number"
+                android:textDirection="firstStrongLtr"
                 android:layout_gravity="start"
                 android:gravity="start"
                 android:maxLength="19" />

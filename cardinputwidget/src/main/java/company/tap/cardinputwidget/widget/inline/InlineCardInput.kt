@@ -2,6 +2,7 @@ package company.tap.cardinputwidget.widget.inline
 
 import android.content.Context
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import android.text.*
@@ -26,6 +27,7 @@ import androidx.core.view.AccessibilityDelegateCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import company.tap.cardinputwidget.*
+import company.tap.cardinputwidget.databinding.CardBlockInputWidgetBinding
 import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_CARD
 import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_CVC
 import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_EXPIRY
@@ -357,6 +359,18 @@ class InlineCardInput @JvmOverloads constructor(
 
     override fun setCardHint(cardHint: String) {
         cardNumberEditText.hint = cardHint
+    }
+
+    override fun setCardHolderHint(cardHolderHint: String) {
+        holderNameEditText.hint = cardHolderHint
+    }
+
+    override fun setCVVHint(cvvHint: String) {
+        cvcNumberEditText.hint =cvvHint
+    }
+
+    override fun setExpiryHint(expiryHint: String) {
+        expiryDateEditText.hint =expiryHint
     }
 
     /**
@@ -1347,6 +1361,7 @@ class InlineCardInput @JvmOverloads constructor(
             private val destination: Int,
             private val newWidth: Int
     ) : CardFieldAnimation() {
+
         override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
             super.applyTransformation(interpolatedTime, t)
             view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams).apply {

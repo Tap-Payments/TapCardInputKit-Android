@@ -47,6 +47,9 @@ internal interface BaseCardInput {
     fun setHolderNameTextWatcher(holderNameTextWatcher: TextWatcher?)
 
     fun setCardHint(cardHint: String)
+    fun setCardHolderHint(cardHolderHint: String)
+    fun setCVVHint(cvvHint: String)
+    fun setExpiryHint(expiryHint: String)
 
     fun clear()
 

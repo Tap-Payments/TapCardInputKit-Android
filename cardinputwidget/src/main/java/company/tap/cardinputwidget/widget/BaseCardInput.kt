@@ -63,7 +63,7 @@ internal interface BaseCardInput {
     fun setCvcCode(cvcCode: String?)
 
     companion object {
-        internal const val DEFAULT_HOLDER_NAME_ENABLED = true
+        internal const val DEFAULT_HOLDER_NAME_ENABLED = false
         internal const val DEFAULT_HOLDER_NAME_REQUIRED = false
     }
 }

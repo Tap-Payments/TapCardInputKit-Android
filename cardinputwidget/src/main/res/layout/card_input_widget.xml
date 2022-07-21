@@ -122,7 +122,7 @@
                 android:layout_gravity="start"
                 android:gravity="start"
                 android:inputType="numberPassword"
-                android:imeOptions="actionDone" />
+                android:imeOptions="actionNext" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

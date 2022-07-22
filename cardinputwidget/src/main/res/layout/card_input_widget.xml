@@ -14,13 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-        <company.tap.cardinputwidget.views.CardBrandView
-            android:id="@+id/card_brand_view"
-            android:layout_width="@dimen/card_brand_view_width"
-            android:layout_height="@dimen/card_brand_view_height"
-            android:visibility="visible"
-            android:layout_margin="5dp"
-            />
+
         <FrameLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
@@ -33,10 +27,9 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/card_number_text_input_layout"
             style="@style/Tap.CardInputWidget.TextInputLayout"
-            android:layout_marginLeft="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
+
             android:accessibilityLiveRegion="polite"
             android:accessibilityTraversalBefore="@+id/text_input_expiry_date"
             android:background="@android:color/transparent"
@@ -139,6 +132,13 @@
                 android:imeOptions="actionNext" />
 
         </com.google.android.material.textfield.TextInputLayout>
+        <company.tap.cardinputwidget.views.CardBrandView
+            android:id="@+id/card_brand_view"
+            android:layout_width="@dimen/card_brand_view_width"
+            android:layout_height="@dimen/card_brand_view_height"
+            android:visibility="visible"
+
+            />
     </FrameLayout>
 
 

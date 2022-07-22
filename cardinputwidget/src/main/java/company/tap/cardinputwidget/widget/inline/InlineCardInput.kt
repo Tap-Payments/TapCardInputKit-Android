@@ -304,6 +304,7 @@ class InlineCardInput @JvmOverloads constructor(
         requiredFields = listOf(
                 cardNumberEditText, cvcNumberEditText, expiryDateEditText
         )
+
         allFields = requiredFields.plus(holderNameEditText)
        // allFields = requiredFields
         initView(attrs)
@@ -489,13 +490,13 @@ class InlineCardInput @JvmOverloads constructor(
         return Bundle().apply {
             putParcelable(STATE_SUPER_STATE, super.onSaveInstanceState())
             putBoolean(STATE_CARD_VIEWED, cardNumberIsViewed)
-          //  putBoolean(STATE_POSTAL_CODE_ENABLED, holderNameEnabled)
+            putBoolean(STATE_POSTAL_CODE_ENABLED, holderNameEnabled)
         }
     }
 
     override fun onRestoreInstanceState(state: Parcelable) {
         if (state is Bundle) {
-          //  holderNameEnabled = state.getBoolean(STATE_POSTAL_CODE_ENABLED, true)
+            holderNameEnabled = state.getBoolean(STATE_POSTAL_CODE_ENABLED, true)
             cardNumberIsViewed = state.getBoolean(STATE_CARD_VIEWED, true)
             updateSpaceSizes(cardNumberIsViewed)
             placementParameters.totalLengthInPixels = frameWidth
@@ -615,9 +616,9 @@ class InlineCardInput @JvmOverloads constructor(
                         cardNumberEditText
                     touchX < placementParameters.dateStartPosition -> // Then we need to act like this was a touch on the date editor
                         expiryDateEditText
-                    touchX < placementParameters.dateStartPosition + placementParameters.dateWidth -> // Just a regular touch on the date editor.
-                        null
-                    touchX < placementParameters.dateEndTouchBufferLimit -> // We need to act like this was a touch on the date editor
+                   // touchX < placementParameters.dateStartPosition + placementParameters.dateWidth -> // Just a regular touch on the date editor.
+                    //    null
+                   touchX < placementParameters.dateEndTouchBufferLimit -> // We need to act like this was a touch on the date editor
                        expiryDateEditText
                     touchX < placementParameters.cvcStartPosition -> // We need to act like this was a touch on the cvc editor.
                         cvcNumberEditText
@@ -962,7 +963,7 @@ class InlineCardInput @JvmOverloads constructor(
 
         val holderNameDestination = placementParameters.getHolderNameStartMargin(isFullCard = false)
         val holderNameStartMargin = holderNameDestination
-/*
+
         val slideHolderNameEndAnimation = if (holderNameEnabled) {
             HolderNameSlideEndAnimation(
                 view = holderNameTextInputLayout,
@@ -973,7 +974,7 @@ class InlineCardInput @JvmOverloads constructor(
         } else {
             null
         }
-*/
+
 
         startSlideAnimation(listOfNotNull(
                 slideCardEndAnimation,
@@ -1253,6 +1254,12 @@ class InlineCardInput @JvmOverloads constructor(
 
         override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
             super.applyTransformation(interpolatedTime, t)
+            println("view latout"+view.layoutParams)
+            if(view.layoutParams is FrameLayout.LayoutParams){
+                view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams).apply {
+                    marginStart = (marginStart * (1 - interpolatedTime)).toInt()
+                }
+            }else
             view.layoutParams = (view.layoutParams as LinearLayout.LayoutParams).apply {
                 marginStart = (marginStart * (1 - interpolatedTime)).toInt()
             }

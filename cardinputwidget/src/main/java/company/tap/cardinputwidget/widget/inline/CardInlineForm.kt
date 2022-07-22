@@ -8,6 +8,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
 import company.tap.cardinputwidget.databinding.CardInlineFormBinding
 import company.tap.cardinputwidget.widget.BaseCardInput
+import kotlinx.android.synthetic.main.card_input_widget.view.*
 import kotlin.properties.Delegates
 
 class CardInlineForm @JvmOverloads constructor(
@@ -24,7 +25,7 @@ class CardInlineForm @JvmOverloads constructor(
 
     @JvmSynthetic
     internal val holderNameEditText1 = viewBinding.holderNameEditText1
-    private val containerLayout = viewBinding.linearLayout1
+    private val containerLayout = viewBinding.inlineCardInput.container
     internal val holderNameTextInputLayout1 = viewBinding.holderNameTextInputLayout1
     private val frameStart: Int
         get() {

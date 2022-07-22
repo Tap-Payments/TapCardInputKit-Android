@@ -40,6 +40,7 @@ import company.tap.cardinputwidget.widget.CardValidCallback
 import company.tap.tapuilibrary.themekit.ThemeManager
 import company.tap.tapuilibrary.uikit.atoms.TapTextInput
 import company.tap.tapuilibrary.uikit.utils.TapTextWatcher
+import kotlinx.android.synthetic.main.card_input_widget.view.*
 
 import kotlin.properties.Delegates
 
@@ -60,6 +61,7 @@ class InlineCardInput @JvmOverloads constructor(
             this
     )
 
+  //  private val containerLayout1 = viewBinding.container1
     private val containerLayout = viewBinding.container
 
     @JvmSynthetic
@@ -68,7 +70,7 @@ class InlineCardInput @JvmOverloads constructor(
     private val cardNumberTextInputLayout = viewBinding.cardNumberTextInputLayout
     private val expiryDateTextInputLayout = viewBinding.expiryDateTextInputLayout
     private val cvcNumberTextInputLayout = viewBinding.cvcTextInputLayout
- //   internal val holderNameTextInputLayout = viewBinding.holderNameTextInputLayout
+    internal val holderNameTextInputLayout = viewBinding.holderNameTextInputLayout
 
     @JvmSynthetic
     internal val cardNumberEditText = viewBinding.cardNumberEditText
@@ -80,7 +82,7 @@ class InlineCardInput @JvmOverloads constructor(
     internal val cvcNumberEditText = viewBinding.cvcEditText
 
     @JvmSynthetic
- //   internal val holderNameEditText = viewBinding.holderNameEditText
+    internal val holderNameEditText = viewBinding.holderNameEditText
 
     private var cardInputListener: CardInputListener? = null
     private var cardValidCallback: CardValidCallback? = null
@@ -140,7 +142,7 @@ class InlineCardInput @JvmOverloads constructor(
     internal val placementParameters: PlacementParameters =
         PlacementParameters()
 
-   /* private val holderNameValue: String?
+    private val holderNameValue: String?
         get() {
             return if (holderNameEnabled) {
                 holderNameEditText.holderName
@@ -148,7 +150,7 @@ class InlineCardInput @JvmOverloads constructor(
                 null
             }
         }
-*/
+
     private val cvcValue: String?
         get() {
             return cvcNumberEditText.cvcValue
@@ -174,7 +176,7 @@ class InlineCardInput @JvmOverloads constructor(
         @JvmSynthetic
         get() {
             return requiredFields
-                  //  .plus(holderNameEditText.takeIf { holderNameEnabled })
+                   .plus(holderNameEditText.takeIf { holderNameEnabled })
                     .filterNotNull()
         }
 
@@ -200,9 +202,9 @@ class InlineCardInput @JvmOverloads constructor(
             expiryDateEditText.shouldShowError = cardDate == null
             cvcNumberEditText.shouldShowError = cvcValue == null
           //  cvcNumberEditText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
-         /*   holderNameEditText.shouldShowError =
-                    holderNameRequired &&
-                            holderNameEditText.holderName.isNullOrBlank()*/
+            holderNameEditText.shouldShowError =
+                   // holderNameRequired &&
+                            holderNameEditText.holderName.isNullOrBlank()
 
             // Announce error messages for accessibility
             currentFields
@@ -225,9 +227,9 @@ class InlineCardInput @JvmOverloads constructor(
                   //  cvcNumberEditText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
 
                 }
-               /* holderNameEditText.shouldShowError -> {
+                holderNameEditText.shouldShowError -> {
                     holderNameEditText.requestFocus()
-                }*/
+                }
                 else -> {
                     shouldShowErrorIcon = false
                     return Card.Builder(
@@ -236,7 +238,7 @@ class InlineCardInput @JvmOverloads constructor(
                         cardDate.second,
                         cvcValue
                     )
-                        //    .addressZip(holderNameValue)
+                            .addressZip(holderNameValue)
                             .loggingTokens(setOf(LOGGING_TOKEN))
                 }
             }
@@ -257,7 +259,7 @@ class InlineCardInput @JvmOverloads constructor(
      * auth success rates, so it is discouraged to disable it unless you are collecting the postal
      * code outside of this form.
      */
-/*    var holderNameEnabled: Boolean by Delegates.observable(
+    var holderNameEnabled: Boolean by Delegates.observable(
         BaseCardInput.DEFAULT_HOLDER_NAME_ENABLED
     ) { _, _, isEnabled ->
         if (isEnabled) {
@@ -271,7 +273,7 @@ class InlineCardInput @JvmOverloads constructor(
 
             cvcNumberEditText.imeOptions = EditorInfo.IME_ACTION_DONE
         }
-    }*/
+    }
 
   /*  *//**
      * If [holderNameEnabled] is true and [holderNameRequired] is true, then postal code is a
@@ -294,7 +296,7 @@ class InlineCardInput @JvmOverloads constructor(
                 DEFAULT_READER_ID
         }
 
-        orientation = HORIZONTAL
+        orientation = VERTICAL
         minimumWidth = resources.getDimensionPixelSize(R.dimen.card_widget_min_width)
 
         frameWidthSupplier = { containerLayout.width }
@@ -302,8 +304,8 @@ class InlineCardInput @JvmOverloads constructor(
         requiredFields = listOf(
                 cardNumberEditText, cvcNumberEditText, expiryDateEditText
         )
-        //allFields = requiredFields.plus(holderNameEditText)
-        allFields = requiredFields
+        allFields = requiredFields.plus(holderNameEditText)
+       // allFields = requiredFields
         initView(attrs)
     }
 
@@ -361,7 +363,7 @@ class InlineCardInput @JvmOverloads constructor(
     }
 
     override fun setCardHolderHint(cardHolderHint: String) {
-        //holderNameEditText.hint = cardHolderHint
+        holderNameEditText.hint = cardHolderHint
     }
 
     override fun setCVVHint(cvvHint: String) {
@@ -404,7 +406,7 @@ class InlineCardInput @JvmOverloads constructor(
 
     @JvmSynthetic
     internal fun setHolderName(holderName: String?) {
-       // holderNameEditText.setText(holderName)
+        holderNameEditText.setText(holderName)
     }
 
     /**
@@ -458,7 +460,7 @@ class InlineCardInput @JvmOverloads constructor(
      * Set a `TextWatcher` to receive postal code changes.
      */
     override fun setHolderNameTextWatcher(holderNameTextWatcher: TextWatcher?) {
-        //holderNameEditText.addTextChangedListener(holderNameTextWatcher)
+        holderNameEditText.addTextChangedListener(holderNameTextWatcher)
     }
 
     /**
@@ -578,7 +580,7 @@ class InlineCardInput @JvmOverloads constructor(
                         null
                 }
             }
-         /*   holderNameEnabled -> {
+           holderNameEnabled -> {
                 // Our view is
                 // |PEEK||space||DATE||space||CVC||space||POSTAL|
                 when {
@@ -602,7 +604,7 @@ class InlineCardInput @JvmOverloads constructor(
                         holderNameEditText
                     else -> null
                 }
-            }*/
+            }
             else -> {
                 // Our view is
                 // |PEEK||space||DATE||space||CVC|
@@ -616,7 +618,7 @@ class InlineCardInput @JvmOverloads constructor(
                     touchX < placementParameters.dateStartPosition + placementParameters.dateWidth -> // Just a regular touch on the date editor.
                         null
                     touchX < placementParameters.dateEndTouchBufferLimit -> // We need to act like this was a touch on the date editor
-                        expiryDateEditText
+                       expiryDateEditText
                     touchX < placementParameters.cvcStartPosition -> // We need to act like this was a touch on the cvc editor.
                         cvcNumberEditText
                     else -> null
@@ -650,15 +652,15 @@ class InlineCardInput @JvmOverloads constructor(
                 cvcPlaceHolder, cvcNumberEditText
         )
 
-     /*   placementParameters.holderNameWidth = getDesiredWidthInPixels(
+        placementParameters.holderNameWidth = getDesiredWidthInPixels(
             FULL_SIZING_HOLDER_NAME_TEXT, holderNameEditText
         )
-*/
+
         placementParameters.peekCardWidth = getDesiredWidthInPixels(
                 peekCardText, cardNumberEditText
         )
 
-        placementParameters.updateSpacing(isCardViewed, false, frameStart, frameWidth)
+        placementParameters.updateSpacing(isCardViewed, holderNameEnabled, frameStart, frameWidth)
     }
 
     private fun updateFieldLayout(view: View, width: Int, marginStart: Int) {
@@ -743,11 +745,11 @@ class InlineCardInput @JvmOverloads constructor(
                 expiryDateEditText
             )
         )
-      /*  holderNameEditText.setDeleteEmptyListener(
+        holderNameEditText.setDeleteEmptyListener(
             BackUpFieldDeleteListener(
                 cvcNumberEditText
             )
-        )*/
+        )
 
         cvcNumberEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
@@ -795,23 +797,23 @@ class InlineCardInput @JvmOverloads constructor(
         }
 
         cvcNumberEditText.completionCallback = {
-            /*if (holderNameEnabled) {
+            if (holderNameEnabled) {
                 holderNameEditText.requestFocus()
-            }*/
+            }
         }
 
 //        allFields.forEach { it.addTextChangedListener(inputChangeTextWatcher) }
 
         cardNumberEditText.requestFocus()
-
+        ThemeManager.loadTapTheme(context.resources,R.raw.defaulttheme,"lighttheme")
         cardNumberEditText.setHintTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.placeHolderColor")))
         cardNumberEditText.setTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.textColor")))
         expiryDateEditText.setHintTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.placeHolderColor")))
         expiryDateEditText.setTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.textColor")))
         cvcNumberEditText.setHintTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.placeHolderColor")))
         cvcNumberEditText.setTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.textColor")))
-        //holderNameEditText.setHintTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.placeHolderColor")))
-      //  holderNameEditText.setTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.textColor")))
+        holderNameEditText.setHintTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.placeHolderColor")))
+        holderNameEditText.setTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.textColor")))
 
     }
 
@@ -959,8 +961,9 @@ class InlineCardInput @JvmOverloads constructor(
             )
 
         val holderNameDestination = placementParameters.getHolderNameStartMargin(isFullCard = false)
-        val holderNameStartMargin = holderNameDestination + (cvcStartMargin - cvcDestination)
-       /* val slideHolderNameEndAnimation = if (holderNameEnabled) {
+        val holderNameStartMargin = holderNameDestination
+/*
+        val slideHolderNameEndAnimation = if (holderNameEnabled) {
             HolderNameSlideEndAnimation(
                 view = holderNameTextInputLayout,
                 startMargin = holderNameStartMargin,
@@ -969,7 +972,8 @@ class InlineCardInput @JvmOverloads constructor(
             )
         } else {
             null
-        }*/
+        }
+*/
 
         startSlideAnimation(listOfNotNull(
                 slideCardEndAnimation,
@@ -1164,7 +1168,7 @@ class InlineCardInput @JvmOverloads constructor(
                     cardTouchBufferLimit = frameStart + cardWidth + cardDateSeparation / 2
                     dateStartPosition = frameStart + cardWidth + cardDateSeparation
                 }
-                holderNameEnabled -> {
+           /*     holderNameEnabled -> {
                     this.cardDateSeparation = (frameWidth * 4 / 16) - peekCardWidth - dateWidth / 4
                     this.dateCvcSeparation = (frameWidth * 5 / 9) - peekCardWidth - cardDateSeparation -
                             dateWidth - cvcWidth
@@ -1182,7 +1186,7 @@ class InlineCardInput @JvmOverloads constructor(
                     val holderNameStartPosition = cvcStartPosition + cvcWidth + cvcHolderNameSeparation
                     this.cvcEndTouchBufferLimit = holderNameStartPosition / 3
                     this.holderNameStartPosition = holderNameStartPosition
-                }
+                }*/
                 else -> {
                     this.cardDateSeparation = frameWidth / 2 - peekCardWidth - dateWidth / 2
                     this.dateCvcSeparation = frameWidth - peekCardWidth - cardDateSeparation -
@@ -1249,7 +1253,7 @@ class InlineCardInput @JvmOverloads constructor(
 
         override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
             super.applyTransformation(interpolatedTime, t)
-            view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams).apply {
+            view.layoutParams = (view.layoutParams as LinearLayout.LayoutParams).apply {
                 marginStart = (marginStart * (1 - interpolatedTime)).toInt()
             }
         }
@@ -1363,7 +1367,7 @@ class InlineCardInput @JvmOverloads constructor(
 
         override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
             super.applyTransformation(interpolatedTime, t)
-            view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams).apply {
+            view.layoutParams = (view.layoutParams as LinearLayout.LayoutParams).apply {
                 this.marginStart =
                         (interpolatedTime * destination + (1 - interpolatedTime) * startMargin).toInt()
                 this.marginEnd = 0

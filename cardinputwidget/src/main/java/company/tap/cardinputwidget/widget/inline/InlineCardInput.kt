@@ -513,11 +513,12 @@ class InlineCardInput @JvmOverloads constructor(
                 cardStartMargin = -1 * placementParameters.hiddenCardWidth
                 dateStartMargin = placementParameters.getDateStartMargin(isFullCard = false)
                 cvcStartMargin = placementParameters.getCvcStartMargin(isFullCard = false)
-               /* holderNameStartMargin = if (holderNameEnabled) {
-                    placementParameters.getHolderNameStartMargin(isFullCard = false)
+                holderNameStartMargin = if (holderNameEnabled) {
+                  //  placementParameters.getHolderNameStartMargin(isFullCard = false)
+                    placementParameters.totalLengthInPixels
                 } else {
                     placementParameters.totalLengthInPixels
-                }*/
+                }
             }
 
             updateFieldLayout(
@@ -535,11 +536,11 @@ class InlineCardInput @JvmOverloads constructor(
                     width = placementParameters.cvcWidth,
                 marginStart = cvcStartMargin
             )
-           /* updateFieldLayout(
+            updateFieldLayout(
                     view = holderNameTextInputLayout,
                     width = placementParameters.holderNameWidth,
                 marginStart = holderNameStartMargin
-            )*/
+            )
 
             super.onRestoreInstanceState(state.getParcelable(STATE_SUPER_STATE))
         } else {

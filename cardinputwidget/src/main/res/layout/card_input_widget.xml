@@ -21,7 +21,18 @@
             android:layout_height="wrap_content"
 
             />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           >
+            <company.tap.cardinputwidget.views.CardBrandView
+                android:id="@+id/card_brand_view"
+                android:layout_width="@dimen/card_brand_view_width"
+                android:layout_height="@dimen/card_brand_view_height"
+                android:visibility="visible"
 
+                />
+        </LinearLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -41,12 +52,14 @@
             android:visibility="visible"
             app:hintEnabled="false"
             android:gravity="start"
-            android:layout_marginStart="20dp"
+            android:layout_marginLeft="50dp"
+
             tools:ignore="UnusedAttribute">
 
             <company.tap.cardinputwidget.views.CardNumberEditText
                 android:id="@+id/card_number_edit_text"
                 style="@style/Tap.CardInputWidget.EditText"
+                android:layout_marginLeft="35dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
@@ -132,13 +145,7 @@
                 android:imeOptions="actionNext" />
 
         </com.google.android.material.textfield.TextInputLayout>
-        <company.tap.cardinputwidget.views.CardBrandView
-            android:id="@+id/card_brand_view"
-            android:layout_width="@dimen/card_brand_view_width"
-            android:layout_height="@dimen/card_brand_view_height"
-            android:visibility="visible"
 
-            />
     </FrameLayout>
 
 

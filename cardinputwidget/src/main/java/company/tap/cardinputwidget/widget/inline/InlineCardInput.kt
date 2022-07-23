@@ -616,8 +616,8 @@ class InlineCardInput @JvmOverloads constructor(
                         cardNumberEditText
                     touchX < placementParameters.dateStartPosition -> // Then we need to act like this was a touch on the date editor
                         expiryDateEditText
-                   // touchX < placementParameters.dateStartPosition + placementParameters.dateWidth -> // Just a regular touch on the date editor.
-                    //    null
+                    touchX < placementParameters.dateStartPosition + placementParameters.dateWidth -> // Just a regular touch on the date editor.
+                       null
                    touchX < placementParameters.dateEndTouchBufferLimit -> // We need to act like this was a touch on the date editor
                        expiryDateEditText
                     touchX < placementParameters.cvcStartPosition -> // We need to act like this was a touch on the cvc editor.

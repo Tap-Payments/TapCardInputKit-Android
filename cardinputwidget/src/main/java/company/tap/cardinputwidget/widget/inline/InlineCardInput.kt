@@ -1058,7 +1058,7 @@ class InlineCardInput @JvmOverloads constructor(
         cardBrandView.showBrandIcon(brand, shouldShowErrorIcon)
     }
 
-    private fun updateIconCvc(
+     fun updateIconCvc(
             hasFocus: Boolean,
             cvcText: String?
     ) {

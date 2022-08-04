@@ -8,11 +8,21 @@
     tools:orientation="vertical"
 
     >
+    <company.tap.cardinputwidget.views.CardBrandView
+        android:id="@+id/card_brand_view"
+        android:layout_width="@dimen/card_brand_view_width"
+        android:layout_height="@dimen/card_brand_view_height"
+        android:visibility="visible"
+        android:layout_gravity="top|left"
 
+        />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_gravity="top"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="-22dp"
         android:layout_weight="1">
 
         <FrameLayout
@@ -21,7 +31,7 @@
             android:layout_height="wrap_content"
 
             />
-        <LinearLayout
+       <!-- <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
            >
@@ -32,7 +42,7 @@
                 android:visibility="visible"
 
                 />
-        </LinearLayout>
+        </LinearLayout>-->
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -40,7 +50,7 @@
             style="@style/Tap.CardInputWidget.TextInputLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:layout_gravity="start"
             android:accessibilityLiveRegion="polite"
             android:accessibilityTraversalBefore="@+id/text_input_expiry_date"
             android:background="@android:color/transparent"
@@ -52,24 +62,21 @@
             android:visibility="visible"
             app:hintEnabled="false"
             android:gravity="start"
-            android:layout_marginLeft="50dp"
-
             tools:ignore="UnusedAttribute">
 
             <company.tap.cardinputwidget.views.CardNumberEditText
                 android:id="@+id/card_number_edit_text"
                 style="@style/Tap.CardInputWidget.EditText"
-                android:layout_marginLeft="35dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
                 android:background="@android:color/transparent"
-                android:fontFamily="sans-serif-light"
-                android:gravity="start"
                 android:hint="@string/card_number_hint"
+                android:fontFamily="sans-serif-light"
+                android:textDirection="ltr"
                 android:inputType="number"
-                android:maxLength="19"
-                android:textDirection="ltr" />
+                android:layout_gravity="start"
+                android:gravity="start"
+                android:maxLength="19" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -154,6 +161,7 @@
         style="@style/Tap.CardInputWidget.TextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_gravity="bottom"
         android:gravity="bottom"
         android:accessibilityLiveRegion="polite"
@@ -179,7 +187,6 @@
             android:paddingEnd="10dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
 
 
 

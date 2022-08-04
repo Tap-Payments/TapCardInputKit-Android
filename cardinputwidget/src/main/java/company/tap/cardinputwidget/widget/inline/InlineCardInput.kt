@@ -965,7 +965,7 @@ class InlineCardInput @JvmOverloads constructor(
         val holderNameDestination = placementParameters.getHolderNameStartMargin(isFullCard = false)
         val holderNameStartMargin = holderNameDestination
 
-        val slideHolderNameEndAnimation = if (holderNameEnabled) {
+      /*  val slideHolderNameEndAnimation = if (holderNameEnabled) {
             HolderNameSlideEndAnimation(
                 view = holderNameTextInputLayout,
                 startMargin = holderNameStartMargin,
@@ -975,7 +975,7 @@ class InlineCardInput @JvmOverloads constructor(
         } else {
             null
         }
-
+*/
 
         startSlideAnimation(listOfNotNull(
                 slideCardEndAnimation,

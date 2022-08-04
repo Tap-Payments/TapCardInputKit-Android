@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     tools:parentTag="android.widget.FrameLayout"
     tools:orientation="vertical"
-
+    tools:replace="android:supportsRtl"
     >
     <company.tap.cardinputwidget.views.CardBrandView
         android:id="@+id/card_brand_view"

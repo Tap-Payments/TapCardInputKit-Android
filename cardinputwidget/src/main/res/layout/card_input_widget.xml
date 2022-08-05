@@ -150,6 +150,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-light"
                 android:textDirection="locale"
+                android:contentDescription="@string/acc_label_cvc_node"
                 android:background="@android:color/transparent"
                 android:layout_gravity="start"
                 android:gravity="start"
@@ -177,7 +178,8 @@
         android:nextFocusUp="@id/text_input_cvc"
         android:visibility="visible"
         app:hintEnabled="false"
-        tools:ignore="UnusedAttribute">
+        tools:ignore="UnusedAttribute"
+        tools:replace="android:supportsRtl">
 
         <company.tap.cardinputwidget.views.HolderNameEditText
             android:id="@+id/holder_name_edit_text"
@@ -189,7 +191,8 @@
             android:fontFamily="sans-serif-light"
             android:imeOptions="actionDone"
             android:paddingStart="0dp"
-            android:paddingEnd="10dp" />
+            android:paddingEnd="10dp"
+            android:textDirection="locale"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

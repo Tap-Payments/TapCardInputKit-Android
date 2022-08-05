@@ -265,12 +265,12 @@ class InlineCardInput @JvmOverloads constructor(
         if (isEnabled) {
             holderNameEditText.isEnabled = true
             holderNameTextInputLayout.visibility = View.VISIBLE
-
+            holderNameEditText.visibility = View.VISIBLE
             cvcNumberEditText.imeOptions = EditorInfo.IME_ACTION_NEXT
         } else {
             holderNameEditText.isEnabled = false
             holderNameTextInputLayout.visibility = View.GONE
-
+            holderNameEditText.visibility = View.GONE
             cvcNumberEditText.imeOptions = EditorInfo.IME_ACTION_DONE
         }
     }

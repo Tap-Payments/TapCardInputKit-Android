@@ -13,6 +13,7 @@
         android:layout_width="@dimen/card_brand_view_width"
         android:layout_height="@dimen/card_brand_view_height"
         android:visibility="visible"
+        android:layout_marginTop="2dp"
         android:layout_gravity="start|left|top"
 
 
@@ -20,12 +21,13 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginLeft="35dp"
         android:layout_marginEnd="35dp"
         android:layout_marginRight="35dp"
         android:layout_marginStart="35dp"
+        android:layout_marginTop="-21dp"
         android:layout_weight="1">
 
         <FrameLayout
@@ -164,7 +166,7 @@
         style="@style/Tap.CardInputWidget.TextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="7dp"
         android:layout_gravity="bottom"
         android:gravity="bottom"
         android:accessibilityLiveRegion="polite"

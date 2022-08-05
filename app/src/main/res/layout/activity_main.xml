@@ -2,13 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".MainActivity">
-
-    <com.google.android.material.card.MaterialCardView
+    <company.tap.tapuilibrary.uikit.organisms.TapPaymentInput
+        android:id="@+id/tap_payment_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layoutDirection="locale" />
+   <!-- <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -18,6 +22,6 @@
             android:layout_height="wrap_content"
             app:shouldShowHolderName="false" />
 
-    </com.google.android.material.card.MaterialCardView>
+    </com.google.android.material.card.MaterialCardView>-->
 
 </LinearLayout>

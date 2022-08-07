@@ -12,14 +12,13 @@ import androidx.annotation.StringRes
 import com.google.android.material.textfield.TextInputLayout
 import company.tap.cardinputwidget.R
 import company.tap.tapuilibrary.uikit.atoms.TapTextInput
-import company.tap.tapuilibrary.uikit.atoms.TextInputEditText
 import company.tap.tapuilibrary.uikit.utils.TapTextWatcher
 
 class HolderNameEditText @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = R.attr.editTextStyle
-) : TextInputEditText(context, attrs, defStyleAttr) {
+) : TapTextInput(context, attrs, defStyleAttr) {
 
 
     internal val holderName: String?

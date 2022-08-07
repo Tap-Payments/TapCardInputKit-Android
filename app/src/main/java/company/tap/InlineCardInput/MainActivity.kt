@@ -17,7 +17,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         //cardInlineForm =findViewById(R.id.cardInlineForm)
-        ThemeManager.loadTapTheme(this.resources,R.raw.defaulttheme,"ligththeme")
+
+        ThemeManager.loadTapTheme(this.resources,R.raw.defaultdarktheme,"darktheme")
         setContentView(R.layout.activity_main)
 
         cardInlineForm = InlineCardInput(this)

@@ -295,7 +295,6 @@ class InlineCardInput @JvmOverloads constructor(
             id =
                 DEFAULT_READER_ID
         }
-
         orientation = VERTICAL
         minimumWidth = resources.getDimensionPixelSize(R.dimen.card_widget_min_width)
 
@@ -807,7 +806,7 @@ class InlineCardInput @JvmOverloads constructor(
 //        allFields.forEach { it.addTextChangedListener(inputChangeTextWatcher) }
 
         cardNumberEditText.requestFocus()
-        ThemeManager.loadTapTheme(context.resources,R.raw.defaulttheme,"lighttheme")
+
         cardNumberEditText.setHintTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.placeHolderColor")))
         cardNumberEditText.setTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.textColor")))
         expiryDateEditText.setHintTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.placeHolderColor")))

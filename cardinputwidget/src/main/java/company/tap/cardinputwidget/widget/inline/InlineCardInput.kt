@@ -693,8 +693,8 @@ class InlineCardInput @JvmOverloads constructor(
 
         cardNumberIsViewed = true
 
-        @ColorInt var errorColorInt = cardNumberEditText.defaultErrorColorInt
-        cardBrandView.tintColorInt = cardNumberEditText.hintTextColors.defaultColor
+      //  @ColorInt var errorColorInt = cardNumberEditText.defaultErrorColorInt
+      //  cardBrandView.tintColorInt = cardNumberEditText.hintTextColors.defaultColor
         var cardHintText: String? = null
         if (attrs != null) {
             val a = context.theme.obtainStyledAttributes(
@@ -707,8 +707,8 @@ class InlineCardInput @JvmOverloads constructor(
                     R.styleable.CardInputView_cardTint,
                         cardBrandView.tintColorInt
                 )
-                errorColorInt = a.getColor(R.styleable.CardInputView_cardTextErrorColor, errorColorInt)
-                cardHintText = a.getString(R.styleable.CardInputView_cardHintText)
+               // errorColorInt = a.getColor(R.styleable.CardInputView_cardTextErrorColor, errorColorInt)
+               // cardHintText = a.getString(R.styleable.CardInputView_cardHintText)
             } finally {
                 a.recycle()
             }
@@ -718,7 +718,7 @@ class InlineCardInput @JvmOverloads constructor(
             cardNumberEditText.hint = it
         }
 
-        currentFields.forEach { it.setErrorColor(errorColorInt) }
+     //   currentFields.forEach { it.setErrorColor(errorColorInt) }
 
         cardNumberEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {

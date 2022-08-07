@@ -10,6 +10,7 @@ import androidx.annotation.VisibleForTesting
 import company.tap.cardinputwidget.R
 import company.tap.cardinputwidget.utils.DateUtils
 import company.tap.tapuilibrary.uikit.atoms.TapTextInput
+import company.tap.tapuilibrary.uikit.atoms.TextInputEditText
 
 import company.tap.tapuilibrary.uikit.utils.TapTextWatcher
 
@@ -22,7 +23,7 @@ class ExpiryDateEditText @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = R.attr.editTextStyle
-) : TapTextInput(context, attrs, defStyleAttr) {
+) : TextInputEditText(context, attrs, defStyleAttr) {
 
     init {
         setErrorMessage(resources.getString(R.string.invalid_expiry_year))

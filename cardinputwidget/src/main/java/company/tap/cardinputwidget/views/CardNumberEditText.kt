@@ -13,6 +13,7 @@ import company.tap.cardinputwidget.R
 import company.tap.cardinputwidget.utils.CardUtils
 import company.tap.cardinputwidget.utils.TapTextUtils
 import company.tap.tapuilibrary.uikit.atoms.TapTextInput
+import company.tap.tapuilibrary.uikit.atoms.TextInputEditText
 import company.tap.tapuilibrary.uikit.utils.TapTextWatcher
 
 
@@ -23,7 +24,7 @@ class CardNumberEditText @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = R.attr.editTextStyle
-) : TapTextInput(context, attrs, defStyleAttr) {
+) : TextInputEditText(context, attrs, defStyleAttr) {
 
     @VisibleForTesting
     var cardBrand: CardBrand =

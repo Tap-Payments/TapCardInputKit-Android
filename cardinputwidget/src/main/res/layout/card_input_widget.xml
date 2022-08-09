@@ -13,7 +13,7 @@
         android:layout_width="@dimen/card_brand_view_width"
         android:layout_height="@dimen/card_brand_view_height"
         android:visibility="visible"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="15dp"
         android:layout_gravity="start|left|top"
 
 
@@ -27,7 +27,7 @@
         android:layout_marginEnd="42dp"
         android:layout_marginRight="42dp"
         android:layout_marginStart="42dp"
-        android:layout_marginTop="-21dp"
+        android:layout_marginTop="-22dp"
         android:layout_weight="1">
 
         <FrameLayout

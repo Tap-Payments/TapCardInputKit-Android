@@ -176,7 +176,7 @@
         android:labelFor="@id/holder_name_edit_text"
         android:nextFocusDown="@id/text_input_cvc"
         android:nextFocusUp="@id/text_input_cvc"
-        android:visibility="visible"
+        android:visibility="gone"
         app:hintEnabled="false"
         tools:ignore="UnusedAttribute"
         tools:replace="android:supportsRtl">

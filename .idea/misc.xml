@@ -4,11 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="cardinputwidget/src/main/res/drawable/ic_americanexpress.xml" value="0.1765" />
         <entry key="cardinputwidget/src/main/res/drawable/ic_card.xml" value="0.2215" />
         <entry key="cardinputwidget/src/main/res/drawable/ic_card_icon_black.xml" value="0.2215" />
-        <entry key="cardinputwidget/src/main/res/drawable/ic_cvc.xml" value="0.2215" />
+        <entry key="cardinputwidget/src/main/res/drawable/ic_cvc.xml" value="0.1" />
         <entry key="cardinputwidget/src/main/res/drawable/ic_cvc_amex.xml" value="0.2215" />
         <entry key="cardinputwidget/src/main/res/drawable/ic_cvc_light.xml" value="0.2215" />
+        <entry key="cardinputwidget/src/main/res/drawable/ic_error_amex.xml" value="0.1765" />
+        <entry key="cardinputwidget/src/main/res/drawable/ic_jcb.xml" value="0.1765" />
+        <entry key="cardinputwidget/src/main/res/drawable/ic_mastercard.xml" value="0.1765" />
         <entry key="cardinputwidget/src/main/res/layout/card_inline_form.xml" value="0.14791666666666667" />
         <entry key="cardinputwidget/src/main/res/layout/card_input_widget.xml" value="0.25" />
         <entry key="cardinputwidget/src/main/res/layout/image_cardbrand.xml" value="0.1" />

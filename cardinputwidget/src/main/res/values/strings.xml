@@ -7,11 +7,11 @@
     <string name="acc_label_expiry_date">Expiration date</string>
     <string name="acc_label_card_number_node">%s, Card number</string>
     <string name="acc_label_expiry_date_node">%s, Expiration date</string>
-    <string name="acc_label_cvc_node">%s, CVC</string>
+    <string name="acc_label_cvc_node">%s, CVV</string>
     <string name="invalid_cvc">Your card\'s security code is invalid.</string>
     <string name="card_number_hint">0000 0000 0000 0000</string>
     <string name="expiry_date_hint">MM/YY</string>
-    <string name="cvc_number_hint">CVC</string>
+    <string name="cvc_number_hint">CVV</string>
     <string name="cvc_amex_hint">CVV</string>
     <string name="holder_name_hint">Holder Name</string>
     <string name="invalid_holder_name">Holder name is incomplete</string>

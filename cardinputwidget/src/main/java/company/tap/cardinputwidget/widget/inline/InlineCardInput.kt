@@ -1427,7 +1427,7 @@ class InlineCardInput @JvmOverloads constructor(
         private const val PEEK_TEXT_DINERS_14 = "88"
         private const val PEEK_TEXT_AMEX = "34343"
 
-        private const val CVC_PLACEHOLDER_COMMON = "CVC"
+        private const val CVC_PLACEHOLDER_COMMON = "CVV"
         private const val CVC_PLACEHOLDER_AMEX = "2345"
 
         private const val FULL_SIZING_CARD_TEXT = "4242 4242 4242 4242"

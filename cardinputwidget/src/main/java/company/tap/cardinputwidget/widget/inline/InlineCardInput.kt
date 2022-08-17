@@ -1464,4 +1464,8 @@ class InlineCardInput @JvmOverloads constructor(
             return !cvcHasFocus || brand.isMaxCvc(cvcText)
         }
     }
+
+    fun onTouchView(){
+        scrollEnd()
+    }
 }

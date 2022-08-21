@@ -1270,6 +1270,7 @@ class InlineCardInput @JvmOverloads constructor(
             println("view latout"+view.layoutParams)
             if(view.layoutParams is FrameLayout.LayoutParams){
                 view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams).apply {
+
                     marginStart = (marginStart * (1 - interpolatedTime)).toInt()
                 }
             }else

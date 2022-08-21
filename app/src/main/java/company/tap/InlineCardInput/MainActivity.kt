@@ -6,8 +6,10 @@ import android.widget.LinearLayout
 
 import company.tap.cardinputwidget.widget.inline.CardInlineForm
 import company.tap.cardinputwidget.widget.inline.InlineCardInput
+import company.tap.taplocalizationkit.LocalizationManager
 import company.tap.tapuilibrary.themekit.ThemeManager
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     lateinit var cardInlineForm:InlineCardInput
@@ -19,11 +21,12 @@ class MainActivity : AppCompatActivity() {
         //cardInlineForm =findViewById(R.id.cardInlineForm)
 
         ThemeManager.loadTapTheme(this.resources,R.raw.defaultdarktheme,"darktheme")
+        LocalizationManager.setLocale(this, Locale("ar"))
         setContentView(R.layout.activity_main)
 
         cardInlineForm = InlineCardInput(this)
         paymentInputContainer = findViewById(R.id.payment_input_layout)
-        cardInlineForm.holderNameEnabled= true
+        cardInlineForm.holderNameEnabled= false
         paymentInputContainer.addView(cardInlineForm)
     }
 }

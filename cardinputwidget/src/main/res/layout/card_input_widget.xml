@@ -66,7 +66,7 @@
             android:nextFocusForward="@+id/text_input_expiry_date"
             android:visibility="visible"
             app:hintEnabled="false"
-            android:gravity="start"
+            android:gravity="start|end"
             tools:ignore="UnusedAttribute">
 
             <company.tap.cardinputwidget.views.CardNumberEditText
@@ -77,10 +77,10 @@
                 android:background="@android:color/transparent"
                 android:hint="@string/card_number_hint"
                 android:fontFamily="sans-serif-light"
-                android:textDirection="locale"
+                android:textDirection="firstStrongLtr"
                 android:inputType="number"
-                android:layout_gravity="start"
-                android:gravity="start"
+                android:layout_gravity="start|end"
+                android:gravity="start|end"
                 android:maxLength="19" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -105,7 +105,7 @@
             android:nextFocusForward="@+id/text_input_cvc"
             android:visibility="visible"
             app:hintEnabled="false"
-            android:gravity="start"
+            android:gravity="start|end"
             tools:ignore="UnusedAttribute">
 
             <company.tap.cardinputwidget.views.ExpiryDateEditText
@@ -116,7 +116,7 @@
                 android:layout_gravity="start"
                 android:background="@android:color/transparent"
                 android:fontFamily="sans-serif-light"
-                android:gravity="start"
+                android:gravity="start|end"
                 android:hint="@string/expiry_date_hint"
                 android:imeOptions="actionNext"
                 android:inputType="date"
@@ -130,7 +130,7 @@
             style="@style/Tap.CardInputWidget.TextInputLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
+            android:layout_gravity="start|end"
             android:layout_marginStart="@dimen/card_cvc_initial_margin"
             android:accessibilityLiveRegion="polite"
             android:accessibilityTraversalAfter="@+id/text_input_expiry_date"
@@ -140,7 +140,7 @@
             android:nextFocusLeft="@id/text_input_expiry_date"
             android:nextFocusUp="@id/text_input_expiry_date"
             app:hintEnabled="false"
-            android:gravity="start"
+            android:gravity="start|end"
             tools:ignore="UnusedAttribute">
 
             <company.tap.cardinputwidget.views.CvcEditText
@@ -152,8 +152,8 @@
                 android:textDirection="locale"
                 android:contentDescription="@string/acc_label_cvc_node"
                 android:background="@android:color/transparent"
-                android:layout_gravity="start"
-                android:gravity="start"
+                android:layout_gravity="start|end"
+                android:gravity="start|end"
                 android:inputType="numberPassword"
                 android:imeOptions="actionNext" />
 

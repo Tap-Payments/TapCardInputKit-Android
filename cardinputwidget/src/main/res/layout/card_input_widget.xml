@@ -55,7 +55,7 @@
             style="@style/Tap.CardInputWidget.TextInputLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
+            android:layout_gravity="start|end"
             android:accessibilityLiveRegion="polite"
             android:accessibilityTraversalBefore="@+id/text_input_expiry_date"
             android:background="@android:color/transparent"
@@ -66,7 +66,9 @@
             android:nextFocusForward="@+id/text_input_expiry_date"
             android:visibility="visible"
             app:hintEnabled="false"
+            android:layoutDirection="locale"
             android:gravity="start|end"
+
             tools:ignore="UnusedAttribute">
 
             <company.tap.cardinputwidget.views.CardNumberEditText
@@ -77,9 +79,10 @@
                 android:background="@android:color/transparent"
                 android:hint="@string/card_number_hint"
                 android:fontFamily="sans-serif-light"
-                android:textDirection="firstStrongLtr"
                 android:inputType="number"
                 android:layout_gravity="start|end"
+                android:textDirection="firstStrongLtr"
+                android:textAlignment="viewStart"
                 android:gravity="start|end"
                 android:maxLength="19" />
 

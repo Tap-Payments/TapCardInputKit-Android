@@ -4,10 +4,10 @@
     <string name="invalid_expiry_month">Your card\'s expiration month is invalid.</string>
     <string name="invalid_expiry_year">Your card\'s expiration year is invalid.</string>
     <string name="acc_label_card_number">Card number</string>
-    <string name="acc_label_expiry_date">Expiration date</string>
+    <string name="acc_label_expiry_date">شهر/سنة</string>
     <string name="acc_label_card_number_node">%s, Card number</string>
     <string name="acc_label_expiry_date_node">%s, Expiration date</string>
-    <string name="acc_label_cvc_node">%s, CVV</string>
+    <string name="acc_label_cvc_node">%s, الرمز الأمني</string>
     <string name="invalid_cvc">Your card\'s security code is invalid.</string>
     <string name="card_number_hint">0000 0000 0000 0000</string>
     <string name="expiry_date_hint">شهر/سنة</string>

@@ -52,7 +52,6 @@ class CvcEditText @JvmOverloads constructor(
 
     init {
         setErrorMessage(resources.getString(R.string.invalid_cvc))
-        setHint(R.string.cvc_number_hint)
         maxLines = 1
         filters = createFilters(CardBrand.Unknown)
 

@@ -689,9 +689,22 @@ class InlineCardInput @JvmOverloads constructor(
                         super.onInitializeAccessibilityNodeInfo(host, info)
                         // Avoid reading out "1234 1234 1234 1234"
                         info.hintText = null
+
                     }
                 })
+        ViewCompat.setAccessibilityDelegate(
+            cvcNumberEditText,
+            object : AccessibilityDelegateCompat() {
+                override fun onInitializeAccessibilityNodeInfo(
+                    host: View,
+                    info: AccessibilityNodeInfoCompat
+                ) {
+                    super.onInitializeAccessibilityNodeInfo(host, info)
+                    // Avoid reading out "CVV"
+                    info.hintText = null
 
+                }
+            })
         cardNumberIsViewed = true
 
         @ColorInt var errorColorInt = cardNumberEditText.defaultErrorColorInt
@@ -1467,6 +1480,16 @@ class InlineCardInput @JvmOverloads constructor(
     }
 
     fun onTouchView(){
-        scrollEnd()
+        onTouchHandling()
+
     }
-}
+
+    private fun onTouchHandling(){
+        expiryDateEditText.visibility = View.VISIBLE
+        cvcNumberEditText.visibility = View.VISIBLE
+        scrollEnd()
+        cardInputListener?.onCardComplete()
+    }
+
+    }
+

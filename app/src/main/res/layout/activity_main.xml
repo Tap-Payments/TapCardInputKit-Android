@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:orientation="vertical"
+    android:id="@+id/mainView"
     tools:context=".MainActivity">
     <company.tap.tapuilibrary.uikit.organisms.TapPaymentInput
         android:id="@+id/tap_payment_input"

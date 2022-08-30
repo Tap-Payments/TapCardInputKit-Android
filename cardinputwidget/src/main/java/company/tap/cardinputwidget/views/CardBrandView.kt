@@ -110,7 +110,7 @@ internal class CardBrandView @JvmOverloads constructor(
             return
         val icon = iconView.drawable
         val compatIcon = DrawableCompat.wrap(icon)
-        DrawableCompat.setTint(compatIcon.mutate(), tintColorInt)
+       // DrawableCompat.setTint(compatIcon.mutate(), tintColorInt)
         iconView.setImageDrawable(DrawableCompat.unwrap(compatIcon))
     }
 }

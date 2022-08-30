@@ -59,7 +59,7 @@ enum class CardBrandSingle(
         "amex",
         "American Express",
         if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_americanexpress else R.drawable.ic_americanexpress,
-        cvcIcon = R.drawable.ic_cvc_amex,
+        cvcIcon = R.drawable.dark_cvv,
         errorIcon = if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_americanexpress else R.drawable.ic_americanexpress,
         cvcLength = setOf(3, 4),
         defaultMaxLength = 15,
@@ -134,7 +134,7 @@ enum class CardBrandSingle(
     Unknown(
         "unknown",
         "Unknown",
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_unknown else R.drawable.ic_unknown,
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.dark_card else R.drawable.light_card,
         cvcLength = setOf(3, 4)
     );
 

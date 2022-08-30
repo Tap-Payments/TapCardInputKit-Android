@@ -16,6 +16,7 @@
         <entry key="cardinputwidget/src/main/res/drawable/ic_mastercard.xml" value="0.1765" />
         <entry key="cardinputwidget/src/main/res/drawable/ic_newcvv.xml" value="0.1425" />
         <entry key="cardinputwidget/src/main/res/drawable/ic_visa.xml" value="0.1425" />
+        <entry key="cardinputwidget/src/main/res/layout/card_brand_view.xml" value="0.1" />
         <entry key="cardinputwidget/src/main/res/layout/card_inline_form.xml" value="0.14791666666666667" />
         <entry key="cardinputwidget/src/main/res/layout/card_input_widget.xml" value="0.25" />
         <entry key="cardinputwidget/src/main/res/layout/image_cardbrand.xml" value="0.1" />

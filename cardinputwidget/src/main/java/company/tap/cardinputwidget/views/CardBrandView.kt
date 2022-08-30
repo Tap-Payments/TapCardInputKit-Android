@@ -21,6 +21,7 @@ internal class CardBrandView @JvmOverloads constructor(
         this
     )
     private val iconView = viewBinding.icon
+
     private var animationApplied = false
 
     @ColorInt

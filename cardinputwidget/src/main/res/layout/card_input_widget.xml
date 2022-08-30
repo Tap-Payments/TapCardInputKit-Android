@@ -56,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start|end"
-            android:accessibilityLiveRegion="polite"
+            android:accessibilityLiveRegion="none"
             android:accessibilityTraversalBefore="@+id/text_input_expiry_date"
             android:background="@android:color/transparent"
             android:contentDescription="@string/acc_label_card_number"

@@ -55,6 +55,8 @@ internal interface BaseCardInput {
 
     fun setCardNumber(cardNumber: String?)
 
+    fun setCardHolderName(cardHolderName: String?)
+
     fun setExpiryDate(
         @IntRange(from = 1, to = 12) month: Int,
         @IntRange(from = 0, to = 9999) year: Int

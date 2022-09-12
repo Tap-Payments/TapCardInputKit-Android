@@ -359,6 +359,10 @@ class InlineCardInput @JvmOverloads constructor(
         this.cardNumberIsViewed = !cardNumberEditText.isCardNumberValid
     }
 
+    override fun setCardHolderName(cardHolderName: String?) {
+        holderNameEditText.setText(cardHolderName)
+    }
+
     override fun setCardHint(cardHint: String) {
         cardNumberEditText.hint = cardHint
     }

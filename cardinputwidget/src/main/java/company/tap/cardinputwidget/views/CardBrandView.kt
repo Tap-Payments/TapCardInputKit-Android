@@ -60,7 +60,7 @@ internal class CardBrandView @JvmOverloads constructor(
                 animateImageChange(brand.icon)
             } else
                 iconView.setImageResource(brand.icon)
-            if (brand == CardBrand.Unknown) {
+            if (brand.name == CardBrand.Unknown.name) {
                 applyTint(false)
                 setScanClickListener()
             }

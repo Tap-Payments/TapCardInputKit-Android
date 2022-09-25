@@ -142,7 +142,7 @@ enum class CardBrandSingle(
 
     val maxCvcLength: Int
         get() {
-            return cvcLength.max() ?: CVC_COMMON_LENGTH
+            return cvcLength.maxOrNull() ?: CVC_COMMON_LENGTH
         }
 
     /**

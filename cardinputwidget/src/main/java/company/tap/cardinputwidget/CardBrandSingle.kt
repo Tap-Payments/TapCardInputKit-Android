@@ -15,7 +15,7 @@ enum class CardBrandSingle(
     @DrawableRes val cvcIcon: Int = if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.dark_cvv else R.drawable.light_cvv,
 
     @DrawableRes val errorIcon: Int =
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.dark_card else R.drawable.light_card,
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.dark_card else R.drawable.card_icon_light,
 
 
 
@@ -134,7 +134,7 @@ enum class CardBrandSingle(
     Unknown(
         "unknown",
         "Unknown",
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.dark_card else R.drawable.light_card,
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.dark_card else R.drawable.card_icon_light,
         cvcLength = setOf(3, 4)
     );
 

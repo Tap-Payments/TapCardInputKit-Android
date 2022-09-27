@@ -1495,5 +1495,11 @@ class InlineCardInput @JvmOverloads constructor(
         cardInputListener?.onCardComplete()
     }
 
+    private fun maskCardNumber(cardInput: String): String {
+        val maskLen: Int = cardInput.length - 4
+        if (maskLen <= 0) return cardInput // Nothing to mask
+        return (cardInput).replaceRange(0, 6, "•••• ")
+    }
+
     }
 

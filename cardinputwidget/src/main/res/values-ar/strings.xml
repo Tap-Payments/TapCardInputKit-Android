@@ -9,7 +9,7 @@
     <string name="acc_label_expiry_date_node">%s, Expiration date</string>
     <string name="acc_label_cvc_node">%s, الرمز الأمني</string>
     <string name="invalid_cvc">Your card\'s security code is invalid.</string>
-    <string name="card_number_hint">0000 0000 0000 0000</string>
+    <string name="card_number_hint">رقم البطاقة</string>
     <string name="expiry_date_hint">شهر/سنة</string>
     <string name="holder_name_hint">إسم صاحب البطاقة</string>
     <string name="invalid_holder_name">Holder name is incomplete</string>

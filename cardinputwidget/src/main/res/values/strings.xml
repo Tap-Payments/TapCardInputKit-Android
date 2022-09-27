@@ -9,7 +9,7 @@
     <string name="acc_label_expiry_date_node">%s, Expiration date</string>
     <string name="acc_label_cvc_node">%s, CVV</string>
     <string name="invalid_cvc">Your card\'s security code is invalid.</string>
-    <string name="card_number_hint">0000 0000 0000 0000</string>
+    <string name="card_number_hint">Card number</string>
     <string name="expiry_date_hint">MM/YY</string>
     <string name="cvc_number_hint">CVV</string>
     <string name="cvc_amex_hint">CVV</string>

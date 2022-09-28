@@ -2,7 +2,6 @@ package company.tap.cardinputwidget.widget.inline
 
 import android.content.Context
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import android.text.*
@@ -10,7 +9,6 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
-import android.view.View.AUTOFILL_HINT_PASSWORD
 import android.view.View.OnFocusChangeListener
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
@@ -28,20 +26,19 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import company.tap.cardinputwidget.*
 import company.tap.cardinputwidget.databinding.CardInputWidgetBinding
-import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_CARD
-import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_CVC
-import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_EXPIRY
 import company.tap.cardinputwidget.utils.DateUtils
 import company.tap.cardinputwidget.utils.TextValidator
 import company.tap.cardinputwidget.views.CardNumberEditText
 import company.tap.cardinputwidget.widget.BaseCardInput
 import company.tap.cardinputwidget.widget.CardInputListener
+import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_CARD
+import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_CVC
+import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_EXPIRY
 import company.tap.cardinputwidget.widget.CardValidCallback
 import company.tap.tapuilibrary.themekit.ThemeManager
 import company.tap.tapuilibrary.uikit.atoms.TapTextInput
 import company.tap.tapuilibrary.uikit.utils.TapTextWatcher
 import kotlinx.android.synthetic.main.card_input_widget.view.*
-
 import kotlin.properties.Delegates
 
 /**
@@ -232,6 +229,7 @@ class InlineCardInput @JvmOverloads constructor(
                     holderNameEditText.requestFocus()
                 }
                 else -> {
+                    println("cardNumber is"+cardNumber)
                     shouldShowErrorIcon = false
                     return Card.Builder(
                         cardNumber,
@@ -355,7 +353,9 @@ class InlineCardInput @JvmOverloads constructor(
      * @param cardNumber card number to be set
      */
     override fun setCardNumber(cardNumber: String?) {
+        println("setCardNumber value>>>"+cardNumber)
         cardNumberEditText.setText(cardNumber)
+       // println("maskCardNumber>>>"+maskCardNumber(fieldText))
         this.cardNumberIsViewed = !cardNumberEditText.isCardNumberValid
     }
 
@@ -812,6 +812,8 @@ class InlineCardInput @JvmOverloads constructor(
         cardNumberEditText.completionCallback = {
             expiryDateEditText.visibility = View.VISIBLE
             cvcNumberEditText.visibility = View.VISIBLE
+            println("cardNumberEditText is????"+cardNumberEditText.cardNumber)
+
             scrollEnd()
             cardInputListener?.onCardComplete()
         }
@@ -1360,7 +1362,7 @@ class InlineCardInput @JvmOverloads constructor(
         override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
             super.applyTransformation(interpolatedTime, t)
             view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams).apply {
-                marginStart = (-1f * hiddenCardWidth.toFloat() * interpolatedTime).toInt()
+                marginStart = (-0.9f * hiddenCardWidth.toFloat() * interpolatedTime).toInt()
             }
         }
     }
@@ -1495,11 +1497,7 @@ class InlineCardInput @JvmOverloads constructor(
         cardInputListener?.onCardComplete()
     }
 
-    private fun maskCardNumber(cardInput: String): String {
-        val maskLen: Int = cardInput.length - 4
-        if (maskLen <= 0) return cardInput // Nothing to mask
-        return (cardInput).replaceRange(0, 6, "•••• ")
-    }
+
 
     }
 

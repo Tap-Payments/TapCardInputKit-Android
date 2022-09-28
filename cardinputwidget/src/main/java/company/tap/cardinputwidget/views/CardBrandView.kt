@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.annotation.ColorInt
 import androidx.core.graphics.drawable.DrawableCompat
+import com.bumptech.glide.Glide
 import company.tap.cardinputwidget.CardBrand
 import company.tap.cardinputwidget.CardBrandSingle
 import company.tap.cardinputwidget.databinding.CardBrandViewBinding
+import java.net.URL
 
 internal class CardBrandView @JvmOverloads constructor(
     context: Context,
@@ -66,6 +68,25 @@ internal class CardBrandView @JvmOverloads constructor(
             }
         }
     }
+
+    internal fun showBrandIconSingle(brand: CardBrandSingle, iconUrl : URL, shouldShowErrorIcon: Boolean) {
+        iconView.setOnClickListener(null)
+        if (shouldShowErrorIcon) {
+            iconView.setImageResource(brand.errorIcon)
+        } else {
+            if (animationApplied) {
+                animationApplied = false
+                animateImageChange(brand.icon)
+            } else
+                Glide.with(context).load(iconUrl).into(iconView)
+              //  iconView.setImageURI(brand.icon)
+            if (brand.name == CardBrand.Unknown.name) {
+                applyTint(false)
+                setScanClickListener()
+            }
+        }
+    }
+
 
     private fun setScanClickListener() {
         iconView.setOnClickListener { onScanClicked() }

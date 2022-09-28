@@ -334,10 +334,12 @@ class InlineCardInput @JvmOverloads constructor(
         cardInputListener = listener
     }
 
-    override fun setSingleCardInput(cardBrand: CardBrandSingle, iconUrl : String) {
+    override fun setSingleCardInput(cardBrand: CardBrandSingle, iconUrl : String?) {
         shouldChangeIcon = false
       //  cardBrandView.showBrandIconSingle(cardBrand, shouldShowErrorIcon)
-        cardBrandView.showBrandIconSingle(cardBrand, iconUrl ,shouldShowErrorIcon)
+        if (iconUrl != null) {
+            cardBrandView.showBrandIconSingle(cardBrand, iconUrl ,shouldShowErrorIcon)
+        }else  cardBrandView.showBrandIconSingle(cardBrand, shouldShowErrorIcon)
     }
 
     override fun setCardNumberApiTextWatcher(cardApiNumberTextWatcher: TextValidator) {
@@ -1392,7 +1394,7 @@ class InlineCardInput @JvmOverloads constructor(
             super.applyTransformation(interpolatedTime, t)
             view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams).apply {
                 marginStart =
-                        (interpolatedTime * destination + (1 - interpolatedTime) * startMargin).toInt()
+                        (interpolatedTime * destination + (1 + interpolatedTime) * startMargin).toInt()
                 marginEnd = 0
                 width = newWidth
             }
@@ -1444,7 +1446,7 @@ class InlineCardInput @JvmOverloads constructor(
     internal companion object {
         internal const val LOGGING_TOKEN = "CardInputView"
 
-        private const val PEEK_TEXT_COMMON = "4242"
+        private const val PEEK_TEXT_COMMON = "XXXX4242"
         private const val PEEK_TEXT_DINERS_14 = "88"
         private const val PEEK_TEXT_AMEX = "34343"
 

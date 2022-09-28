@@ -16,7 +16,7 @@ internal interface BaseCardInput {
 
     fun setCardInputListener(listener: CardInputListener?)
 
-    fun setSingleCardInput(cardBrand: CardBrandSingle , iconUrl : String)
+    fun setSingleCardInput(cardBrand: CardBrandSingle ,  iconUrl : String?=null)
 
     /**
      * Set a `TextWatcher` to receive card number changes.

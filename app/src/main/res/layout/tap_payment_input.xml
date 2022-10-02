@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainLinear"
+
+    android:orientation="vertical">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        android:elevation="@dimen/margin_basic_10dp"
+        android:layout_margin="8dp"
+        >
+        <company.tap.tapuilibrary.uikit.atoms.TapSeparatorView
+            android:id="@+id/separator"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            tools:background="@color/black_27"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/tabLinear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/header_gray"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/payment_input_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+
+                android:orientation="horizontal" />
+
+            <RelativeLayout
+                android:id="@+id/linear_paylayout"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_alignParentEnd="true"
+                android:orientation="horizontal"
+                android:layout_toEndOf="@+id/payment_input_layout"
+
+
+               >
+
+
+                <ImageView
+                    android:id="@+id/nfc_button"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:padding="6dp"
+                    android:src="@drawable/icon_nfc"
+
+
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/card_scanner_button"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center"
+                    android:layout_toEndOf="@+id/nfc_button"
+                    android:padding="6dp"
+                    android:src="@drawable/icon_scan"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/clear_text"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_toEndOf="@+id/nfc_button"
+                    android:padding="10dp"
+                   android:layout_alignParentEnd="true"
+                    android:src="@drawable/icon_close2"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <company.tap.tapuilibrary.uikit.views.TapSelectionTabLayout
+        android:id="@+id/sections_tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+</LinearLayout>

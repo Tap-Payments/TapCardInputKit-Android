@@ -90,7 +90,7 @@ class InlineCardInput @JvmOverloads constructor(
 
     private var cardInputListener: CardInputListener? = null
     private var cardValidCallback: CardValidCallback? = null
-   private lateinit var alertView :TapAlertView
+   private  var alertView :TapAlertView
     private val frameStart: Int
         get() {
             val isLtr = context.resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_LTR

@@ -11,7 +11,10 @@ import company.tap.cardinputwidget.CardBrandSingle
 import company.tap.cardinputwidget.widget.inline.InlineCardInput
 import company.tap.taplocalizationkit.LocalizationManager
 import company.tap.tapuilibrary.themekit.ThemeManager
+import company.tap.tapuilibrary.uikit.atoms.TapSwitch
 import company.tap.tapuilibrary.uikit.views.TapAlertView
+import company.tap.tapuilibrary.uikit.views.TapCardSwitch
+import company.tap.tapuilibrary.uikit.views.TapInlineCardSwitch
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -23,18 +26,22 @@ class MainActivity : AppCompatActivity() {
     private var cardScannerBtn: ImageView? = null
     private lateinit var tabLayout: company.tap.tapuilibrary.uikit.views.TapSelectionTabLayout
     var tapAlertView: TapAlertView? = null
+    var switchLL: TapInlineCardSwitch? = null
+    var switchSaveCard: TapSwitch? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         //cardInlineForm =findViewById(R.id.cardInlineForm)
 
         ThemeManager.loadTapTheme(this.resources,R.raw.defaultlighttheme,"lighttheme")
+        LocalizationManager.loadTapLocale(this.resources,R.raw.lang)
         LocalizationManager.setLocale(this, Locale("en"))
         setContentView(R.layout.activity_main)
 
         cardInlineForm = InlineCardInput(this)
         paymentInputContainer = findViewById(R.id.payment_input_layout)
         mainView = findViewById(R.id.mainView)
+        switchLL = findViewById(R.id.switchLL)
         cardInlineForm.holderNameEnabled= true
         paymentInputContainer.addView(cardInlineForm)
         tapAlertView = findViewById(R.id.alertView)
@@ -42,10 +49,12 @@ class MainActivity : AppCompatActivity() {
         tabLayout = findViewById(R.id.sections_tablayout)
         cardScannerBtn = findViewById(R.id.card_scanner_button)
         nfcButton = findViewById(R.id.nfc_button)
-        tapAlertView?.alertMessage?.text ="sdasdas"
+        tapAlertView?.alertMessage?.text ="Card number is missing"
         tapAlertView?.visibility =View.GONE
         nfcButton?.visibility =View.VISIBLE
         cardScannerBtn?.visibility =View.VISIBLE
+        switchSaveCard = switchLL?.findViewById(R.id.switchSaveCard)
+        switchSaveCard?.text = "SAVE for later"
         mainView.setOnTouchListener { v, event ->
             cardInlineForm.onTouchView()
             true

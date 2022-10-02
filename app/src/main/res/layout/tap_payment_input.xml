@@ -86,8 +86,6 @@
 
             </RelativeLayout>
 
-
-
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
     <company.tap.tapuilibrary.uikit.views.TapSelectionTabLayout

@@ -66,6 +66,6 @@ internal interface BaseCardInput {
 
     companion object {
         internal const val DEFAULT_HOLDER_NAME_ENABLED = false
-        internal const val DEFAULT_HOLDER_NAME_REQUIRED = false
+        internal const val DEFAULT_SWITCH = false
     }
 }

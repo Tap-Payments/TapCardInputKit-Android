@@ -28,6 +28,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import company.tap.cardinputwidget.*
 import company.tap.cardinputwidget.databinding.CardInputWidgetBinding
+
 import company.tap.cardinputwidget.utils.DateUtils
 import company.tap.cardinputwidget.utils.TextValidator
 import company.tap.cardinputwidget.views.CardNumberEditText
@@ -87,6 +88,9 @@ class InlineCardInput @JvmOverloads constructor(
 
     @JvmSynthetic
     internal val separator_1 = viewBinding.separator1
+
+    @JvmSynthetic
+    internal val mainSwitchInline = viewBinding.mainswitchInline
 
     private var cardInputListener: CardInputListener? = null
     private var cardValidCallback: CardValidCallback? = null
@@ -356,6 +360,21 @@ class InlineCardInput @JvmOverloads constructor(
 
        })
     }
+
+    /**
+     * The switchCardEnabled field is disabled by default. Will be enabled from parent class
+     * on cardform completeion
+     */
+    var switchCardEnabled: Boolean by Delegates.observable(
+        BaseCardInput.DEFAULT_SWITCH
+    ) { _, _, isEnabled ->
+          if (isEnabled) {
+              mainSwitchInline.visibility = View.VISIBLE
+          } else {
+              mainSwitchInline.visibility = View.GONE
+          }
+    }
+
 
     /**
      * Set the card number. Method does not change text field focus.

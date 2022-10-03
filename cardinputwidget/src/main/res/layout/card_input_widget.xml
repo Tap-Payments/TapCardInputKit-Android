@@ -220,10 +220,11 @@
 
     </com.google.android.material.textfield.TextInputLayout>
         <company.tap.tapuilibrary.uikit.views.TapInlineCardSwitch
-            android:id="@+id/switchLL"
+            android:id="@+id/mainswitchInline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Save Card For Later"
+            android:visibility="gone"
             />
 
     </LinearLayout>

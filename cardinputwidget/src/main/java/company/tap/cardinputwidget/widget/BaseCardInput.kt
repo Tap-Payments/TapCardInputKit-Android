@@ -1,6 +1,8 @@
 package company.tap.cardinputwidget.widget
 
 import android.text.TextWatcher
+import android.widget.CompoundButton
+import android.widget.RadioGroup
 import androidx.annotation.IntRange
 import company.tap.cardinputwidget.Card
 import company.tap.cardinputwidget.CardBrand
@@ -40,6 +42,11 @@ internal interface BaseCardInput {
      * Set a `TextWatcher` to receive CVC value changes.
      */
     fun setCvcNumberTextWatcher(cvcNumberTextWatcher: TextWatcher?)
+
+    /**
+     * Set a `setSwitchSaveCardListener value changes.
+     */
+    fun setSwitchSaveCardListener(switchListener: CompoundButton.OnCheckedChangeListener?)
 
     /**
      * Set a `TextWatcher` to receive postal code changes.

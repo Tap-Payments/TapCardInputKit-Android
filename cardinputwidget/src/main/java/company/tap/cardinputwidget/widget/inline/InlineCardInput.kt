@@ -15,10 +15,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.Transformation
 import android.view.inputmethod.EditorInfo
-import android.widget.FrameLayout
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.ColorInt
 import androidx.annotation.IdRes
 import androidx.annotation.IntRange
@@ -489,6 +486,12 @@ class InlineCardInput @JvmOverloads constructor(
     override fun setCvcNumberTextWatcher(cvcNumberTextWatcher: TextWatcher?) {
       //  cvcNumberEditText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
         cvcNumberEditText.addTextChangedListener(cvcNumberTextWatcher)
+    }
+    /**
+     * Set a `Delegate` to receive switch changes.
+     */
+    override fun setSwitchSaveCardListener(switchListener: CompoundButton.OnCheckedChangeListener?) {
+       mainSwitchInline.switchSaveCard?.setOnCheckedChangeListener(switchListener)
     }
 
     /**

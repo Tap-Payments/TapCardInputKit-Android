@@ -14,7 +14,7 @@ import company.tap.tapuilibrary.themekit.ThemeManager
 import company.tap.tapuilibrary.uikit.atoms.TapSwitch
 import company.tap.tapuilibrary.uikit.views.TapAlertView
 import company.tap.tapuilibrary.uikit.views.TapCardSwitch
-import company.tap.tapuilibrary.uikit.views.TapInlineCardSwitch
+import company.tap.tapuilibrary.uikit.datasource.TapSwitchDataSource
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     private var cardScannerBtn: ImageView? = null
     private lateinit var tabLayout: company.tap.tapuilibrary.uikit.views.TapSelectionTabLayout
     var tapAlertView: TapAlertView? = null
-    var switchLL: TapInlineCardSwitch? = null
+    var switchLL: company.tap.tapuilibrary.uikit.views.TapInlineCardSwitch? = null
     var switchSaveCard: TapSwitch? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         nfcButton?.visibility =View.VISIBLE
         cardScannerBtn?.visibility =View.VISIBLE
         switchSaveCard = switchLL?.findViewById(R.id.switchSaveCard)
-        switchSaveCard?.text = "SAVE for later"
+       switchLL?.setSwitchDataSource(TapSwitchDataSource(null,"Save For later"))
         mainView.setOnTouchListener { v, event ->
             cardInlineForm.onTouchView()
             true

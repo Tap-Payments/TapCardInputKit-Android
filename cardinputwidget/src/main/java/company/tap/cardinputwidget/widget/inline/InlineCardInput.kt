@@ -87,7 +87,10 @@ class InlineCardInput @JvmOverloads constructor(
     internal val separator_1 = viewBinding.separator1
 
     @JvmSynthetic
-    internal val mainSwitchInline = viewBinding.mainswitchInline
+    internal val separator2 = viewBinding.separator2
+
+    @JvmSynthetic
+    internal val mainSwitchInline = viewBinding.mainSwitchInline
 
     private var cardInputListener: CardInputListener? = null
     private var cardValidCallback: CardValidCallback? = null
@@ -367,8 +370,10 @@ class InlineCardInput @JvmOverloads constructor(
     ) { _, _, isEnabled ->
           if (isEnabled) {
               mainSwitchInline.visibility = View.VISIBLE
+              separator2.visibility = View.VISIBLE
           } else {
               mainSwitchInline.visibility = View.GONE
+              separator2.visibility = View.GONE
           }
     }
 

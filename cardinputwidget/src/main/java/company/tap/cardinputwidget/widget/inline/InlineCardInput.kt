@@ -317,6 +317,8 @@ class InlineCardInput @JvmOverloads constructor(
         allFields = requiredFields.plus(holderNameEditText)
        // allFields = requiredFields
         alertView =findViewById(R.id.alertView)
+
+        initView(attrs)
     }
 
     override fun onFinishInflate() {
@@ -372,7 +374,7 @@ class InlineCardInput @JvmOverloads constructor(
               mainSwitchInline.visibility = View.VISIBLE
               separator2.visibility = View.VISIBLE
           } else {
-              mainSwitchInline.visibility = View.GONE
+              //mainSwitchInline.visibility = View.GONE
               separator2.visibility = View.GONE
           }
     }

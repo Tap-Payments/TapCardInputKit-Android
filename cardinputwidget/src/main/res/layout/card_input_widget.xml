@@ -200,7 +200,7 @@
         android:layout_marginTop="@dimen/margin_basic_10dp"
         android:contentDescription="@string/acc_label_holder_name"
         android:labelFor="@id/holder_name_edit_text"
-        android:visibility="visible"
+        android:visibility="gone"
         app:hintEnabled="false"
         tools:ignore="UnusedAttribute"
         tools:replace="android:supportsRtl">
@@ -226,12 +226,13 @@
             android:layout_height="0.2dp"
             android:visibility="visible"
             android:background="@color/light_gray" />
+
         <company.tap.tapuilibrary.uikit.views.TapInlineCardSwitch
             android:id="@+id/mainSwitchInline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Save Card For Later"
-            android:visibility="gone"
+            android:visibility="visible"
             />
 
     </LinearLayout>

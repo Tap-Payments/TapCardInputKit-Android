@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
        switchLL?.setSwitchDataSource(TapSwitchDataSource("Sasa","Save For later","sa","asa","asa"))
        cardInlineForm.switchCardEnabled = true
         mainView.setOnTouchListener { v, event ->
-            cardInlineForm.onTouchView()
+            //cardInlineForm.onTouchView()
             true
         }
 

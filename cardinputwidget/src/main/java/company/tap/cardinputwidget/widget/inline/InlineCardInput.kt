@@ -454,6 +454,9 @@ class InlineCardInput @JvmOverloads constructor(
 //        if (currentFields.any { it.hasFocus() } || this.hasFocus()) {
 //        }
         cardNumberEditText.requestFocus()
+        invalidate()
+        currentFields.forEach { it.text?.clearSpans() }
+        currentFields.forEach { it.text?.clear() }
         currentFields.forEach { it.setText("") }
 
     }
@@ -870,7 +873,7 @@ class InlineCardInput @JvmOverloads constructor(
             expiryDateEditText.visibility = View.VISIBLE
             cvcNumberEditText.visibility = View.VISIBLE
             println("cardNumberEditText is????"+cardNumberEditText.cardNumber)
-            scrollEnd()
+           // scrollEnd()
             cardInputListener?.onCardComplete()
         }
 
@@ -1295,15 +1298,18 @@ class InlineCardInput @JvmOverloads constructor(
                     this.holderNameStartPosition = holderNameStartPosition
                 }*/
                 else -> {
-                    this.cardDateSeparation = frameWidth / 2 - peekCardWidth - dateWidth / 2
+                    this.cardDateSeparation = (frameWidth / 2 - peekCardWidth - dateWidth / 2 )- 100
                     this.dateCvcSeparation = frameWidth - peekCardWidth - cardDateSeparation -
-                            dateWidth - cvcWidth - 60
+                            dateWidth - cvcWidth
 
                     this.cardTouchBufferLimit = frameStart + peekCardWidth + cardDateSeparation / 2
                     this.dateStartPosition = frameStart + peekCardWidth + cardDateSeparation
 
                     this.dateEndTouchBufferLimit = dateStartPosition + dateWidth + dateCvcSeparation / 2
-                    this.cvcStartPosition = dateStartPosition + dateWidth + dateCvcSeparation
+                    this.cvcStartPosition = (dateStartPosition + dateWidth + dateCvcSeparation)
+
+                    println("cardDateSeparation is"+cardDateSeparation)
+                    println("cvcStartPosition is"+cvcStartPosition)
                 }
             }
         }

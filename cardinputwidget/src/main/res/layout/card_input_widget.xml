@@ -33,6 +33,7 @@
         android:layout_height="wrap_content"
 
         android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_gravity="center"
 
         >
@@ -93,7 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:layout_marginStart="160dp"
+            android:layout_marginStart="185dp"
             android:accessibilityLiveRegion="polite"
             android:accessibilityTraversalAfter="@+id/text_input_card_number"
             android:accessibilityTraversalBefore="@+id/text_input_cvc"
@@ -124,6 +125,7 @@
                 android:imeOptions="actionNext"
                 android:inputType="date"
                 android:maxLength="5"
+
                 android:textDirection="locale" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -134,7 +136,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start|end"
-            android:layout_marginStart="230dp"
+            android:layout_marginStart="235dp"
             android:accessibilityLiveRegion="polite"
             android:accessibilityTraversalAfter="@+id/text_input_expiry_date"
             android:background="@android:color/transparent"
@@ -162,10 +164,57 @@
                 android:gravity="start|end"
                 android:inputType="numberPassword"
                 android:hint="CVV"
+
                 android:imeOptions="actionNext" />
 
         </com.google.android.material.textfield.TextInputLayout>
+        <LinearLayout
+            android:id="@+id/linear_paylayout"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_gravity="end"
+            android:orientation="horizontal"
+            android:layoutDirection="locale"
 
+
+
+            >
+
+
+            <ImageView
+                android:id="@+id/nfc_button"
+                android:layout_width="32dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+
+                android:src="@drawable/icon_nfc"
+
+
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/card_scanner_button"
+                android:layout_width="32dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center"
+                android:layout_toEndOf="@+id/nfc_button"
+
+                android:src="@drawable/icon_scan"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/clear_text"
+                android:layout_width="32dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_toEndOf="@+id/nfc_button"
+                android:padding="5dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/icon_close2"
+                android:visibility="visible" />
+
+        </LinearLayout>
     </FrameLayout>
 
 

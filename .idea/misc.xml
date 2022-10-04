@@ -5,8 +5,9 @@
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19293478260869565" />
         <entry key="app/src/main/res/layout/tap_payment_input.xml" value="0.19293478260869565" />
+        <entry key="cardinputwidget/src/main/res/drawable/edittext_modified_states.xml" value="0.156" />
         <entry key="cardinputwidget/src/main/res/drawable/focus_tint_list.xml" value="0.178" />
-        <entry key="cardinputwidget/src/main/res/layout/card_input_widget.xml" value="0.45" />
+        <entry key="cardinputwidget/src/main/res/layout/card_input_widget.xml" value="0.3318077803203661" />
       </map>
     </option>
   </component>

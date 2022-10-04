@@ -94,6 +94,7 @@ class InlineCardInput @JvmOverloads constructor(
     @JvmSynthetic
     internal val mainSwitchInline = viewBinding.mainSwitchInline
 
+    val backArrow = viewBinding.backView
     private var cardInputListener: CardInputListener? = null
     private var cardValidCallback: CardValidCallback? = null
     lateinit var alertView :TapAlertView
@@ -101,6 +102,7 @@ class InlineCardInput @JvmOverloads constructor(
     lateinit var scannerButton :ImageView
     lateinit var closeButton :ImageView
     lateinit var linearIconsLayout :LinearLayout
+
     private val frameStart: Int
         get() {
             val isLtr = context.resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_LTR
@@ -471,6 +473,9 @@ class InlineCardInput @JvmOverloads constructor(
         cardNumberEditText.isEnabled = false
         expiryDateEditText.setText(cardDetails?.expMonth.toString()+"/"+cardDetails?.expYear.toString())
         expiryDateEditText.isEnabled = false
+        backArrow.visibility= View.VISIBLE
+        nfcButton.visibility= View.GONE
+        scannerButton.visibility= View.GONE
 
     }
 
@@ -493,8 +498,9 @@ class InlineCardInput @JvmOverloads constructor(
         cardNumberEditText.isEnabled = true
         cvcNumberEditText.isEnabled = true
         expiryDateEditText.isEnabled = true
-
-
+        backArrow.visibility= View.GONE
+        nfcButton.visibility= View.VISIBLE
+        scannerButton.visibility= View.VISIBLE
     }
 
     /**
@@ -767,7 +773,7 @@ class InlineCardInput @JvmOverloads constructor(
 
     private fun initView(attrs: AttributeSet?) {
         attrs?.let { applyAttributes(it) }
-
+        backArrow.visibility = View.GONE
         ViewCompat.setAccessibilityDelegate(
                 cardNumberEditText,
                 object : AccessibilityDelegateCompat() {
@@ -897,6 +903,7 @@ class InlineCardInput @JvmOverloads constructor(
 
                         }
                         updateIconCvc(cvcNumberEditText.hasFocus(), text)
+
                     }
                 }
         )

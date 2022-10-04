@@ -52,6 +52,7 @@ internal class CardBrandView @JvmOverloads constructor(
             }
         }
     }
+
     internal fun showBrandIconSingle(brand: CardBrandSingle, shouldShowErrorIcon: Boolean) {
         iconView.setOnClickListener(null)
         if (shouldShowErrorIcon) {

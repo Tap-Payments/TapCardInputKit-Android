@@ -18,7 +18,6 @@ enum class CardBrand(
         if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.dark_card else R.drawable.card_icon_light,
 
 
-
     /**
      * Accepted CVC lengths
      */

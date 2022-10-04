@@ -14,6 +14,7 @@ import company.tap.cardinputwidget.CardInputUIStatus
 import company.tap.cardinputwidget.widget.inline.InlineCardInput
 import company.tap.taplocalizationkit.LocalizationManager
 import company.tap.tapuilibrary.themekit.ThemeManager
+import company.tap.tapuilibrary.uikit.atoms.TapImageView
 import company.tap.tapuilibrary.uikit.atoms.TapSwitch
 import company.tap.tapuilibrary.uikit.views.TapAlertView
 import company.tap.tapuilibrary.uikit.views.TapCardSwitch
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private var cardScannerBtn: ImageView? = null
     private lateinit var tabLayout: company.tap.tapuilibrary.uikit.views.TapSelectionTabLayout
     var tapAlertView: TapAlertView? = null
+    var backArrow: TapImageView? = null
     var switchLL: TapInlineCardSwitch? = null
     var switchSaveCard: TapSwitch? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,10 +48,11 @@ class MainActivity : AppCompatActivity() {
         paymentInputContainer = findViewById(R.id.payment_input_layout)
         mainView = findViewById(R.id.mainView)
         switchLL = cardInlineForm.findViewById(R.id.mainSwitchInline)
-        cardInlineForm.holderNameEnabled= true
+        cardInlineForm.holderNameEnabled= false
         paymentInputContainer.addView(cardInlineForm)
         tapAlertView = findViewById(R.id.alertView)
         clearView = findViewById(R.id.clear_text)
+        backArrow = findViewById(R.id.backView)
         tabLayout = findViewById(R.id.sections_tablayout)
         cardScannerBtn = findViewById(R.id.card_scanner_button)
         nfcButton = findViewById(R.id.nfc_button)
@@ -57,6 +60,14 @@ class MainActivity : AppCompatActivity() {
         tapAlertView?.visibility =View.GONE
         nfcButton?.visibility =View.VISIBLE
         cardScannerBtn?.visibility =View.VISIBLE
+
+    backArrow?.setOnClickListener {
+            tabLayout.resetBehaviour()
+            cardInlineForm.clear()
+            clearView?.visibility =View.GONE
+            nfcButton?.visibility =View.VISIBLE
+            cardScannerBtn?.visibility =View.VISIBLE
+        }
         switchSaveCard = switchLL?.findViewById(R.id.switchSaveCard)
        switchLL?.setSwitchDataSource(TapSwitchDataSource("Sasa","Save For later","sa","asa","asa"))
        cardInlineForm.switchCardEnabled = true

@@ -7,7 +7,10 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import company.tap.cardinputwidget.Card
+import company.tap.cardinputwidget.CardBrand
 import company.tap.cardinputwidget.CardBrandSingle
+import company.tap.cardinputwidget.CardInputUIStatus
 import company.tap.cardinputwidget.widget.inline.InlineCardInput
 import company.tap.taplocalizationkit.LocalizationManager
 import company.tap.tapuilibrary.themekit.ThemeManager
@@ -43,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         paymentInputContainer = findViewById(R.id.payment_input_layout)
         mainView = findViewById(R.id.mainView)
         switchLL = cardInlineForm.findViewById(R.id.mainSwitchInline)
-        cardInlineForm.holderNameEnabled= false
+        cardInlineForm.holderNameEnabled= true
         paymentInputContainer.addView(cardInlineForm)
         tapAlertView = findViewById(R.id.alertView)
         clearView = findViewById(R.id.clear_text)
@@ -57,10 +60,16 @@ class MainActivity : AppCompatActivity() {
         switchSaveCard = switchLL?.findViewById(R.id.switchSaveCard)
        switchLL?.setSwitchDataSource(TapSwitchDataSource("Sasa","Save For later","sa","asa","asa"))
        cardInlineForm.switchCardEnabled = true
+        cardInlineForm.setSavedCardDetails(Card("5123 4500 0000 0008",null,11,23,
+            "dsd",null,null,null,
+            null,null,null,null,null,
+            "0008",CardBrand.MasterCard,"sdsds",null,null,null,null,null),CardInputUIStatus.SavedCard)
+
         mainView.setOnTouchListener { v, event ->
             //cardInlineForm.onTouchView()
             true
         }
+
 
         cardInlineForm.setCardNumberTextWatcher(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {

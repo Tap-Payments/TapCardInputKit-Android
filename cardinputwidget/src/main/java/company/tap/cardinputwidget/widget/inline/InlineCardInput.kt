@@ -1,7 +1,9 @@
 package company.tap.cardinputwidget.widget.inline
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.os.Parcelable
 import android.text.*
@@ -454,6 +456,24 @@ class InlineCardInput @JvmOverloads constructor(
         cvcNumberEditText.setText(cvcCode)
     }
 
+    @SuppressLint("SetTextI18n")
+    override fun setSavedCardDetails(cardDetails: Card?, cardInputUIStatus: CardInputUIStatus) {
+        initFlag = true
+        cardNumberIsViewed = false
+       // onTouchHandling()
+        cvcNumberEditText.requestFocus()
+        cvcNumberEditText.setHint("Enter CVV")
+       // cvcNumberEditText.getBackground().setColorFilter(getResources().getColor(R.color.red_error), PorterDuff.Mode.SRC_ATOP)
+        cvcNumberEditText.isEnabled = true
+
+
+        cardNumberEditText.setText(cardDetails?.number.toString())
+        cardNumberEditText.isEnabled = false
+        expiryDateEditText.setText(cardDetails?.expMonth.toString()+"/"+cardDetails?.expYear.toString())
+        expiryDateEditText.isEnabled = false
+
+    }
+
     @JvmSynthetic
     internal fun setHolderName(holderName: String?) {
         holderNameEditText.setText(holderName)
@@ -470,6 +490,9 @@ class InlineCardInput @JvmOverloads constructor(
         currentFields.forEach { it.text?.clearSpans() }
         currentFields.forEach { it.text?.clear() }
         currentFields.forEach { it.setText("") }
+        cardNumberEditText.isEnabled = true
+        cvcNumberEditText.isEnabled = true
+        expiryDateEditText.isEnabled = true
 
 
     }
@@ -625,7 +648,7 @@ class InlineCardInput @JvmOverloads constructor(
     internal fun getFocusRequestOnTouch(touchX: Int): View? {
         //check this as it was constraint.left
         val frameStart :Int= this.frameStart
-        println("cardNumberIsViewed"+cardNumberIsViewed)
+        println("cardNumberIsViewed >>>"+cardNumberIsViewed)
         return when {
             cardNumberIsViewed -> {
                 // Then our view is
@@ -852,8 +875,8 @@ class InlineCardInput @JvmOverloads constructor(
                     separator_1.visibility = View.GONE
                     cvcNumberEditText.imeOptions = EditorInfo.IME_ACTION_DONE
                 }
-                holderNameEditText.requestFocus()
-                holderNameEditText.isEnabled = true
+              //  holderNameEditText.requestFocus()
+              //  holderNameEditText.isEnabled = true
             }
             updateIconCvc(hasFocus, cvcValue)
         }
@@ -1048,7 +1071,8 @@ class InlineCardInput @JvmOverloads constructor(
 
     // reveal the secondary fields
     private fun scrollEnd() {
-        if (!cardNumberIsViewed || !initFlag) {
+        if (!cardNumberIsViewed || !initFlag) { println("cardNumberIsViewed"+cardNumberIsViewed)
+
             return
         }
 
@@ -1323,7 +1347,7 @@ class InlineCardInput @JvmOverloads constructor(
                     this.dateStartPosition = frameStart + peekCardWidth + cardDateSeparation
 
                     this.dateEndTouchBufferLimit = dateStartPosition + dateWidth + dateCvcSeparation / 2
-                    this.cvcStartPosition = (dateStartPosition + dateWidth + dateCvcSeparation)
+                    this.cvcStartPosition = (dateStartPosition + dateWidth + dateCvcSeparation )
 
                     println("cardDateSeparation is"+cardDateSeparation)
                     println("cvcStartPosition is"+cvcStartPosition)
@@ -1594,7 +1618,13 @@ class InlineCardInput @JvmOverloads constructor(
         scrollEnd()
         cardInputListener?.onCardComplete()
     }
-
+    private fun  maskCardNumber(cardInput: String): String {
+        val maskLen: Int = cardInput.length - 4
+        println("maskLen"+maskLen)
+        println("cardInput"+cardInput.length)
+        if (maskLen <= 0) return cardInput // Nothing to mask
+        return (cardInput).replaceRange(0, maskLen, "•••• ")
+    }
 
 
     }

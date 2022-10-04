@@ -13,4 +13,8 @@
     <style name="Tap.Base.CardInputWidget.EditText" parent="Widget.AppCompat.EditText">
         <item name="android:textSize">@dimen/ciw_stripe_edit_text_size</item>
     </style>
+
+    <style name="Tap.Base.CardInputWidget.CvvEdit" parent="Widget.AppCompat.EditText">
+        <item name="backgroundTint">@color/red_error</item>
+    </style>
 </resources>

@@ -7,6 +7,7 @@ import androidx.annotation.IntRange
 import company.tap.cardinputwidget.Card
 import company.tap.cardinputwidget.CardBrand
 import company.tap.cardinputwidget.CardBrandSingle
+import company.tap.cardinputwidget.CardInputUIStatus
 import company.tap.cardinputwidget.utils.TextValidator
 
 internal interface BaseCardInput {
@@ -70,6 +71,11 @@ internal interface BaseCardInput {
     )
 
     fun setCvcCode(cvcCode: String?)
+
+    /**
+     * Interface method to collect data from parent to show pre-filled UI
+     */
+    fun setSavedCardDetails(cardDetails:Card?,cardInputUIStatus: CardInputUIStatus)
 
     companion object {
         internal const val DEFAULT_HOLDER_NAME_ENABLED = false

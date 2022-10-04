@@ -7,7 +7,7 @@ import company.tap.cardinputwidget.utils.CardUtils
 /**
  * A representation of a Card API object.
  */
-data class Card internal constructor(
+data class Card(
 
     /**
      * @return the [number] of this card

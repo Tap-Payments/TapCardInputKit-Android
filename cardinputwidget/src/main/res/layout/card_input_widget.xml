@@ -165,6 +165,7 @@
                 android:inputType="numberPassword"
                 android:hint="CVV"
 
+
                 android:imeOptions="actionNext" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -252,6 +253,8 @@
         android:visibility="gone"
         app:hintEnabled="false"
         tools:ignore="UnusedAttribute"
+        android:nextFocusLeft="@id/cvc_text_input_layout"
+        android:nextFocusUp="@id/cvc_text_input_layout"
         tools:replace="android:supportsRtl">
 
         <company.tap.cardinputwidget.views.HolderNameEditText

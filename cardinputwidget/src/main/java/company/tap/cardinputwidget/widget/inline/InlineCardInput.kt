@@ -95,6 +95,10 @@ class InlineCardInput @JvmOverloads constructor(
     private var cardInputListener: CardInputListener? = null
     private var cardValidCallback: CardValidCallback? = null
    private  var alertView :TapAlertView
+   private  var nfcButton :ImageView
+   private  var scannerButton :ImageView
+   private  var closeButton :ImageView
+   private  var linearIconsLayout :LinearLayout
     private val frameStart: Int
         get() {
             val isLtr = context.resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_LTR
@@ -316,9 +320,17 @@ class InlineCardInput @JvmOverloads constructor(
 
         allFields = requiredFields.plus(holderNameEditText)
        // allFields = requiredFields
-        alertView =findViewById(R.id.alertView)
+         initializeViews()
 
         initView(attrs)
+    }
+
+    private fun initializeViews() {
+        alertView =findViewById(R.id.alertView)
+        nfcButton =findViewById(R.id.nfc_button)
+        scannerButton =findViewById(R.id.card_scanner_button)
+        closeButton =findViewById(R.id.clear_text)
+        linearIconsLayout =findViewById(R.id.linear_paylayout)
     }
 
     override fun onFinishInflate() {
@@ -459,6 +471,7 @@ class InlineCardInput @JvmOverloads constructor(
         currentFields.forEach { it.text?.clear() }
         currentFields.forEach { it.setText("") }
 
+
     }
 
     /**
@@ -545,7 +558,7 @@ class InlineCardInput @JvmOverloads constructor(
         if (state is Bundle) {
             holderNameEnabled = state.getBoolean(STATE_POSTAL_CODE_ENABLED, true)
             cardNumberIsViewed = state.getBoolean(STATE_CARD_VIEWED, true)
-            updateSpaceSizes(cardNumberIsViewed)
+
             placementParameters.totalLengthInPixels = frameWidth
             val cardStartMargin: Int
             val dateStartMargin: Int
@@ -612,7 +625,7 @@ class InlineCardInput @JvmOverloads constructor(
     internal fun getFocusRequestOnTouch(touchX: Int): View? {
         //check this as it was constraint.left
         val frameStart :Int= this.frameStart
-
+        println("cardNumberIsViewed"+cardNumberIsViewed)
         return when {
             cardNumberIsViewed -> {
                 // Then our view is
@@ -657,20 +670,24 @@ class InlineCardInput @JvmOverloads constructor(
                 }
             }
             else -> {
+                println("else block called"+placementParameters.cvcStartPosition)
+                println("else block called"+placementParameters.dateStartPosition)
+                println("else block called"+placementParameters.dateEndTouchBufferLimit)
+                println("else block called"+touchX)
                 // Our view is
                 // |PEEK||space||DATE||space||CVC|
                 when {
                     touchX < frameStart + placementParameters.peekCardWidth -> // This was a touch on the card number editor, so we don't need to handle it.
                         null
-                    touchX < placementParameters.cardTouchBufferLimit -> // Then we need to act like the user touched the card editor
+                    touchX <placementParameters.cardTouchBufferLimit -> // Then we need to act like the user touched the card editor
                         cardNumberEditText
-                    touchX < placementParameters.dateStartPosition -> // Then we need to act like this was a touch on the date editor
+                    touchX < placementParameters.dateStartPosition-> // Then we need to act like this was a touch on the date editor
                         expiryDateEditText
-                   touchX < placementParameters.dateStartPosition + placementParameters.dateWidth -> // Just a regular touch on the date editor.
+                  touchX < placementParameters.dateStartPosition + placementParameters.dateWidth -> // Just a regular touch on the date editor.
                        null
                    touchX < placementParameters.dateEndTouchBufferLimit -> // We need to act like this was a touch on the date editor
-                       expiryDateEditText
-                    touchX < placementParameters.cvcStartPosition -> // We need to act like this was a touch on the cvc editor.
+                       null
+                    touchX < placementParameters.cvcStartPosition   -> // We need to act like this was a touch on the cvc editor.
                         cvcNumberEditText
                     else -> null
                 }
@@ -1273,9 +1290,9 @@ class InlineCardInput @JvmOverloads constructor(
         ) {
             when {
                 isCardViewed -> {
-                    cardDateSeparation = frameWidth - cardWidth - dateWidth
+                    cardDateSeparation = (frameWidth - cardWidth - dateWidth)-300
                     cardTouchBufferLimit = frameStart + cardWidth + cardDateSeparation / 2
-                    dateStartPosition = frameStart + cardWidth + cardDateSeparation
+                    dateStartPosition = (frameStart + cardWidth + cardDateSeparation)-300
                 }
 
            /*     holderNameEnabled -> {
@@ -1299,8 +1316,8 @@ class InlineCardInput @JvmOverloads constructor(
                 }*/
                 else -> {
                     this.cardDateSeparation = (frameWidth / 2 - peekCardWidth - dateWidth / 2 )- 100
-                    this.dateCvcSeparation = frameWidth - peekCardWidth - cardDateSeparation -
-                            dateWidth - cvcWidth
+                    this.dateCvcSeparation = (frameWidth - peekCardWidth - cardDateSeparation -
+                            dateWidth - cvcWidth)-300
 
                     this.cardTouchBufferLimit = frameStart + peekCardWidth + cardDateSeparation / 2
                     this.dateStartPosition = frameStart + peekCardWidth + cardDateSeparation
@@ -1310,6 +1327,7 @@ class InlineCardInput @JvmOverloads constructor(
 
                     println("cardDateSeparation is"+cardDateSeparation)
                     println("cvcStartPosition is"+cvcStartPosition)
+                    println("dateCvcSeparation is"+dateCvcSeparation)
                 }
             }
         }
@@ -1404,7 +1422,7 @@ class InlineCardInput @JvmOverloads constructor(
             view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams).apply {
                 this.marginStart = (interpolatedTime * destination + (1 - interpolatedTime) * startPosition).toInt()
                 this.marginEnd = 0
-                this.width = newWidth
+              //  this.width = newWidth
             }
         }
     }

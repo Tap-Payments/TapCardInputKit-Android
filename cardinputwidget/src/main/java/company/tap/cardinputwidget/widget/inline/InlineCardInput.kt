@@ -94,11 +94,11 @@ class InlineCardInput @JvmOverloads constructor(
 
     private var cardInputListener: CardInputListener? = null
     private var cardValidCallback: CardValidCallback? = null
-   private  var alertView :TapAlertView
-   private  var nfcButton :ImageView
-   private  var scannerButton :ImageView
-   private  var closeButton :ImageView
-   private  var linearIconsLayout :LinearLayout
+    lateinit var alertView :TapAlertView
+    lateinit var nfcButton :ImageView
+    lateinit var scannerButton :ImageView
+    lateinit var closeButton :ImageView
+    lateinit var linearIconsLayout :LinearLayout
     private val frameStart: Int
         get() {
             val isLtr = context.resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_LTR

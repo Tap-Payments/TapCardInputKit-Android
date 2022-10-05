@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
         switchSaveCard = switchLL?.findViewById(R.id.switchSaveCard)
        switchLL?.setSwitchDataSource(TapSwitchDataSource("Sasa","Save For later","sa","asa","asa"))
        cardInlineForm.switchCardEnabled = true
-        cardInlineForm.setSavedCardDetails(Card("5123 4500 0000 0008",null,11,23,
+        cardInlineForm.setSavedCardDetails(Card("5123 4500 0000 0008",null,7,23,
             "dsd",null,null,null,
             null,null,null,null,null,
             "0008",CardBrand.MasterCard,"sdsds",null,null,null,null,null),CardInputUIStatus.SavedCard)

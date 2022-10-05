@@ -193,7 +193,16 @@ android:background="@android:color/transparent"
 
 
             >
+            <ImageView
+                android:id="@+id/cvvIcon"
+                android:layout_width="32dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
 
+                android:padding="2dp"
+
+                android:src="@drawable/cvv_icon"
+                android:visibility="visible" />
 
             <ImageView
                 android:id="@+id/nfc_button"

@@ -502,6 +502,10 @@ class InlineCardInput @JvmOverloads constructor(
         backArrow.visibility= View.GONE
         nfcButton.visibility= View.VISIBLE
         scannerButton.visibility= View.VISIBLE
+        closeButton.visibility= View.VISIBLE
+        cvvIcon.visibility= View.GONE
+
+        cvcNumberEditText.hint = "CVV"
     }
 
     /**
@@ -1612,6 +1616,13 @@ class InlineCardInput @JvmOverloads constructor(
             cvcText: String?
         ): Boolean {
             return !cvcHasFocus || brand.isMaxCvc(cvcText)
+        }
+
+        @VisibleForTesting
+        internal fun updateUIStatus(
+            cardInputUIStatus: CardInputUIStatus
+        ): CardInputUIStatus {
+            return cardInputUIStatus
         }
     }
 

@@ -459,7 +459,8 @@ class InlineCardInput @JvmOverloads constructor(
     }
 
     @SuppressLint("SetTextI18n")
-    override fun setSavedCardDetails(cardDetails: Card?, cardInputUIStatus: CardInputUIStatus) {
+    override fun setSavedCardDetails(cardDetails: Any?, cardInputUIStatus: CardInputUIStatus) {
+        cardDetails as Card
         initFlag = true
         cardNumberIsViewed = false
        // onTouchHandling()
@@ -469,9 +470,9 @@ class InlineCardInput @JvmOverloads constructor(
         cvcNumberEditText.isEnabled = true
 
 
-        cardNumberEditText.setText(cardDetails?.number.toString())
+        cardNumberEditText.setText(cardDetails.number.toString())
         cardNumberEditText.isEnabled = false
-        expiryDateEditText.setText(cardDetails?.expMonth.toString()+"/"+cardDetails?.expYear.toString())
+        expiryDateEditText.setText(cardDetails.expMonth.toString()+"/"+cardDetails?.expYear.toString())
         expiryDateEditText.isEnabled = false
         backArrow.visibility= View.VISIBLE
         nfcButton.visibility= View.GONE

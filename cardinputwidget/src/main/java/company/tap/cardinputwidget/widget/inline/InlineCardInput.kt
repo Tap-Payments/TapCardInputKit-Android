@@ -473,6 +473,9 @@ class InlineCardInput @JvmOverloads constructor(
         cardNumberEditText.setText("•••• "+cardDetails.last4)
         cardNumberEditText.isEnabled = false
         expiryDateEditText.setText(cardDetails.expMonth.toString()+"/"+cardDetails?.expYear.toString())
+        cardBrandView.showBrandIcon(cardDetails.brand,false)
+
+        expiryDateEditText.shouldShowError = false
         expiryDateEditText.isEnabled = false
         backArrow.visibility= View.VISIBLE
         nfcButton.visibility= View.GONE

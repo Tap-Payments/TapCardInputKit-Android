@@ -18,16 +18,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layoutDirection="locale" />
-   <!-- <com.google.android.material.card.MaterialCardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
 
-        <company.tap.cardinputwidget.widget.inline.InlineCardInput
-            android:id="@+id/cardInlineForm"
+        <company.tap.cardinputwidget.widget.inline.CardInputForm
+            android:id="@+id/cardInputForm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:shouldShowHolderName="false" />
 
-    </com.google.android.material.card.MaterialCardView>-->
+
 
 </LinearLayout>

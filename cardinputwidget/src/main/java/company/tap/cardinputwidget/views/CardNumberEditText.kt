@@ -1,6 +1,7 @@
 package company.tap.cardinputwidget.views
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Build
 import android.text.Editable
 import android.text.InputFilter
@@ -8,10 +9,12 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.VisibleForTesting
 import company.tap.cardinputwidget.CardBrand
+import company.tap.cardinputwidget.CardInputUIStatus
 import company.tap.cardinputwidget.R
 
 import company.tap.cardinputwidget.utils.CardUtils
 import company.tap.cardinputwidget.utils.TapTextUtils
+import company.tap.cardinputwidget.widget.inline.InlineCardInput
 import company.tap.tapuilibrary.uikit.atoms.TapTextInput
 import company.tap.tapuilibrary.uikit.utils.TapTextWatcher
 
@@ -146,79 +149,98 @@ class CardNumberEditText @JvmOverloads constructor(
     }
 
     private fun listenForTextChanges() {
-        addTextChangedListener(object : TapTextWatcher() {
-            private var latestChangeStart: Int = 0
-            private var latestInsertionSize: Int = 0
+        /*if(text?.toString()?.contains("•••• ") == true){
+            shouldShowError = false
+            displayErrorCallback(false)
+            setTextColor(Color.parseColor("#4B4847"))
 
-            private var newCursorPosition: Int? = null
-            private var formattedNumber: String? = null
+        }else {*/
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                if (!ignoreChanges) {
-                    latestChangeStart = start
-                    latestInsertionSize = after
-                }
-            }
+            addTextChangedListener(object : TapTextWatcher() {
+                private var latestChangeStart: Int = 0
+                private var latestInsertionSize: Int = 0
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (ignoreChanges) {
-                    return
-                }
+                private var newCursorPosition: Int? = null
+                private var formattedNumber: String? = null
 
-                val inputText = s?.toString().orEmpty()
-                if (start < 4) {
-                    updateCardBrandFromNumber(inputText)
-                }
-
-                if (start > 16) {
-                    // no need to do formatting if we're past all of the spaces.
-                    return
-                }
-
-                val spacelessNumber = TapTextUtils.removeSpacesAndHyphens(inputText)
-                    ?: return
-
-                val formattedNumber = cardBrand.formatNumber(spacelessNumber)
-                this.newCursorPosition = updateSelectionIndex(formattedNumber.length,
-                    latestChangeStart, latestInsertionSize)
-                this.formattedNumber = formattedNumber
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                if (ignoreChanges) {
-                    return
-                }
-
-                ignoreChanges = true
-                if (!isLastKeyDelete && formattedNumber != null) {
-                    setText(formattedNumber)
-                    newCursorPosition?.let {
-                        setSelection(it.coerceIn(0, fieldText.length))
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                    if (!ignoreChanges) {
+                        latestChangeStart = start
+                        latestInsertionSize = after
                     }
                 }
-                formattedNumber = null
-                newCursorPosition = null
 
-                ignoreChanges = false
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    if (ignoreChanges) {
+                        return
+                    }
 
-                if (fieldText.length == lengthMax) {
-                    val wasCardNumberValid = isCardNumberValid
-                    isCardNumberValid = CardUtils.isValidCardNumber(fieldText)
-                    shouldShowError = !isCardNumberValid
-                    if (!wasCardNumberValid && isCardNumberValid) {
-                        completionCallback()
+
+                    val inputText = s?.toString().orEmpty()
+                    if (start < 4) {
+                        updateCardBrandFromNumber(inputText)
+                    }
+
+                    if (start > 16) {
+                        // no need to do formatting if we're past all of the spaces.
+                        return
+                    }
+
+                    val spacelessNumber = TapTextUtils.removeSpacesAndHyphens(inputText)
+                        ?: return
+
+                    val formattedNumber = cardBrand.formatNumber(spacelessNumber)
+                    this.newCursorPosition = updateSelectionIndex(
+                        formattedNumber.length,
+                        latestChangeStart, latestInsertionSize
+                    )
+                    this.formattedNumber = formattedNumber
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                    if (ignoreChanges) {
+                        return
+                    }
+
+                    ignoreChanges = true
+                    if (!isLastKeyDelete && formattedNumber != null) {
+                        setText(formattedNumber)
+                        newCursorPosition?.let {
+                            setSelection(it.coerceIn(0, fieldText.length))
+                        }
+                    }
+                    formattedNumber = null
+                    newCursorPosition = null
+
+                    ignoreChanges = false
+
+
+
+                    if (fieldText.length == lengthMax) {
+
+                        val wasCardNumberValid = isCardNumberValid
+                        isCardNumberValid = CardUtils.isValidCardNumber(fieldText)
+                        shouldShowError = !isCardNumberValid
+                        if (!wasCardNumberValid && isCardNumberValid) {
+                            completionCallback()
+                        } else {
+                            displayErrorCallback(true)
+                        }
                     } else {
-                        displayErrorCallback(true)
+                        isCardNumberValid = CardUtils.isValidCardNumber(fieldText)
+                        //Showing red color until card is valid -- made true
+                        // Don't show errors if we aren't full-length.
+                        shouldShowError = false
+                        displayErrorCallback(false)
                     }
-                } else {
-                    isCardNumberValid = CardUtils.isValidCardNumber(fieldText)
-                    //Showing red color until card is valid -- made true
-                    // Don't show errors if we aren't full-length.
-                    shouldShowError = true
-                    displayErrorCallback(false)
                 }
-            }
-        })
+            })
+      //  }
     }
 
     @JvmSynthetic

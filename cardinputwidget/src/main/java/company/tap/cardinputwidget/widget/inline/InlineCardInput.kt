@@ -700,10 +700,10 @@ class InlineCardInput @JvmOverloads constructor(
                 }
             }
             else -> {
-                println("else block called"+placementParameters.cvcStartPosition)
-                println("else block called"+placementParameters.dateStartPosition)
-                println("else block called"+placementParameters.dateEndTouchBufferLimit)
-                println("else block called"+touchX)
+              //  println("else block called"+placementParameters.cvcStartPosition)
+               // println("else block called"+placementParameters.dateStartPosition)
+              //  println("else block called"+placementParameters.dateEndTouchBufferLimit)
+              //  println("else block called"+touchX)
                 // Our view is
                 // |PEEK||space||DATE||space||CVC|
                 when {

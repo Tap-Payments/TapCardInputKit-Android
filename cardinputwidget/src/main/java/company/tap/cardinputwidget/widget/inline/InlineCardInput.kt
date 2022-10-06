@@ -1086,6 +1086,7 @@ class InlineCardInput @JvmOverloads constructor(
             null
         }
 */
+        //Removed slide for date and cvc because of overlapping
         startSlideAnimation(listOfNotNull(
                 slideCardStartAnimation,
                // slideDateStartAnimation,

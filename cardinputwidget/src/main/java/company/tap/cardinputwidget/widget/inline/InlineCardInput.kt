@@ -465,7 +465,7 @@ class InlineCardInput @JvmOverloads constructor(
         cardDetails as Card
         initFlag = true
         cardNumberIsViewed = false
-       // onTouchHandling()
+        onTouchHandling()
         cvcNumberEditText.requestFocus()
         val cvvHint : String = LocalizationManager.getValue("saveCardCVV","SavedCardTitle")
         cvcNumberEditText.hint = cvvHint
@@ -1046,8 +1046,8 @@ class InlineCardInput @JvmOverloads constructor(
             return
         }
 
-        val dateStartPosition = placementParameters.getCvcStartMargin(isFullCard = false)
-        val cvcStartPosition = placementParameters.getCvcStartMargin(isFullCard = false)
+        val dateStartPosition = placementParameters.getCvcStartMargin(isFullCard = true)
+        val cvcStartPosition = placementParameters.getCvcStartMargin(isFullCard = true)
         val holderNameStartPosition = placementParameters.getHolderNameStartMargin(isFullCard = false)
 
         updateSpaceSizes(isCardViewed = true)
@@ -1088,8 +1088,8 @@ class InlineCardInput @JvmOverloads constructor(
 */
         startSlideAnimation(listOfNotNull(
                 slideCardStartAnimation,
-                slideDateStartAnimation,
-                slideCvcStartAnimation
+               // slideDateStartAnimation,
+               // slideCvcStartAnimation
               //  slideHolderNameStartAnimation
         ))
 

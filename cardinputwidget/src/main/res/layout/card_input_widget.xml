@@ -202,7 +202,7 @@ android:background="@android:color/transparent"
                 android:padding="2dp"
 
                 android:src="@drawable/cvv_icon"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/nfc_button"

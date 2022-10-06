@@ -38,6 +38,7 @@ import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion
 import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_EXPIRY
 import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_HOLDERNAME
 import company.tap.cardinputwidget.widget.CardValidCallback
+import company.tap.taplocalizationkit.LocalizationManager
 import company.tap.tapuilibrary.themekit.ThemeManager
 import company.tap.tapuilibrary.uikit.atoms.TapTextInput
 import company.tap.tapuilibrary.uikit.utils.TapTextWatcher
@@ -95,6 +96,7 @@ class InlineCardInput @JvmOverloads constructor(
     internal val mainSwitchInline = viewBinding.mainSwitchInline
 
     val backArrow = viewBinding.backView
+    val cvvIcon = viewBinding.cvvIcon
     private var cardInputListener: CardInputListener? = null
     private var cardValidCallback: CardValidCallback? = null
     lateinit var alertView :TapAlertView
@@ -465,7 +467,8 @@ class InlineCardInput @JvmOverloads constructor(
         cardNumberIsViewed = false
        // onTouchHandling()
         cvcNumberEditText.requestFocus()
-        cvcNumberEditText.setHint("Enter CVV")
+        val cvvHint : String = LocalizationManager.getValue("saveCardCVV","SavedCardTitle")
+        cvcNumberEditText.hint = cvvHint
        // cvcNumberEditText.getBackground().setColorFilter(getResources().getColor(R.color.red_error), PorterDuff.Mode.SRC_ATOP)
         cvcNumberEditText.isEnabled = true
 
@@ -473,7 +476,7 @@ class InlineCardInput @JvmOverloads constructor(
         cardNumberEditText.setText("•••• "+cardDetails.last4)
         cardNumberEditText.isEnabled = false
         if(cardDetails.expMonth.toString().length == 1){
-            if( cardDetails.expMonth?.toInt() !! < 10 ){
+            if( cardDetails.expMonth!! < 10 ){
                 expiryDateEditText.setText("0"+cardDetails.expMonth.toString()+"/"+cardDetails?.expYear.toString())
 
             }
@@ -485,6 +488,7 @@ class InlineCardInput @JvmOverloads constructor(
         expiryDateEditText.shouldShowError = false
         expiryDateEditText.isEnabled = false
         backArrow.visibility= View.VISIBLE
+        cvvIcon.visibility= View.VISIBLE
         nfcButton.visibility= View.GONE
         scannerButton.visibility= View.GONE
         closeButton.visibility= View.GONE
@@ -516,7 +520,7 @@ class InlineCardInput @JvmOverloads constructor(
         closeButton.visibility= View.VISIBLE
         cvvIcon.visibility= View.GONE
 
-        cvcNumberEditText.hint = "CVV"
+        cvcNumberEditText.hint = LocalizationManager.getValue("cardCVVPlaceHolder", "TapCardInputKit")
     }
 
     /**

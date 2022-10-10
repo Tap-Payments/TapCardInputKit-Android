@@ -14,6 +14,10 @@
         <item name="android:textSize">@dimen/ciw_stripe_edit_text_size</item>
     </style>
 
+    <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/light_gray</item>
+        <item name="boxStrokeWidth">1dp</item>
+    </style>
     <style name="Tap.Base.CardInputWidget.CvvEdit" parent="Widget.AppCompat.EditText">
         <item name="colorControlNormal">@android:color/white</item>
         <item name="colorControlActivated">@android:color/white</item>

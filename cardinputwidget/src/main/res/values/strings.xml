@@ -13,7 +13,7 @@
     <string name="expiry_date_hint">MM/YY</string>
     <string name="cvc_number_hint">CVV</string>
     <string name="cvc_amex_hint">CVV</string>
-    <string name="holder_name_hint">Holder Name</string>
+    <string name="holder_name_hint">Card Holder Name</string>
     <string name="invalid_holder_name">Holder name is incomplete</string>
     <string name="acc_label_holder_name">Holder name</string>
 

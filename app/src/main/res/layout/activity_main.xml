@@ -17,7 +17,8 @@
         android:id="@+id/tap_payment_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layoutDirection="locale" />
+        android:layoutDirection="locale"
+        android:visibility="gone"/>
 
         <company.tap.cardinputwidget.widget.inline.CardInputForm
             android:id="@+id/cardInputForm"

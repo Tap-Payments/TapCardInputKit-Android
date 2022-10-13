@@ -216,7 +216,7 @@ android:background="@android:color/transparent"
                 android:src="@drawable/icon_nfc"
 
 
-                android:visibility="visible" />
+                android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/card_scanner_button"

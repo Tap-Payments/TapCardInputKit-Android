@@ -1309,7 +1309,7 @@ class InlineCardInput @JvmOverloads constructor(
         @JvmSynthetic
         internal fun getDateStartMargin(isFullCard: Boolean): Int {
             return if (isFullCard) {
-                cardWidth + cardDateSeparation
+                cardWidth + cardDateSeparation -150
             } else {
                 cardPeekDateStartMargin
             }
@@ -1318,7 +1318,7 @@ class InlineCardInput @JvmOverloads constructor(
         @JvmSynthetic
         internal fun getCvcStartMargin(isFullCard: Boolean): Int {
             return if (isFullCard) {
-                totalLengthInPixels
+                totalLengthInPixels - 400
             } else {
                 cardPeekCvcStartMargin
             }
@@ -1345,6 +1345,7 @@ class InlineCardInput @JvmOverloads constructor(
                     cardDateSeparation = (frameWidth - cardWidth - dateWidth)-300
                     cardTouchBufferLimit = frameStart + cardWidth + cardDateSeparation / 2
                     dateStartPosition = (frameStart + cardWidth + cardDateSeparation)-300
+                    this.cvcStartPosition = (dateStartPosition -200)
                 }
 
            /*     holderNameEnabled -> {

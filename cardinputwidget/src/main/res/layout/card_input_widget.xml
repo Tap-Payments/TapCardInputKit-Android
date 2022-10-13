@@ -168,20 +168,20 @@ android:background="@android:color/transparent"
                 style="@style/Tap.Base.CardInputWidget.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fontFamily="sans-serif-light"
-                android:textDirection="locale"
-                android:contentDescription="@string/acc_label_cvc_node"
-                android:background="@android:color/transparent"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
-                android:textSize="@dimen/font_size_14sp"
                 android:layout_gravity="start|end"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/acc_label_cvc_node"
+                android:fontFamily="sans-serif-light"
                 android:gravity="start|end"
-                android:inputType="numberPassword"
                 android:hint="CVV"
+                android:imeOptions="actionNext"
+                android:inputType="numberPassword"
+                android:textDirection="locale"
+                android:textSize="@dimen/font_size_14sp"
+                app:boxStrokeWidth="0dp"
 
 
-                android:imeOptions="actionNext" />
+                app:boxStrokeWidthFocused="0dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -238,7 +238,7 @@ android:background="@android:color/transparent"
                 android:padding="5dp"
                 android:layout_alignParentEnd="true"
                 android:src="@drawable/icon_close2"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
         </LinearLayout>
     </FrameLayout>

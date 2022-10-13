@@ -140,7 +140,7 @@
         "textFields": {
             "textColor": "greyishBrown",
             "errorTextColor": "#FF0000",
-            "font" : "Roboto-Light,17",
+            "font" : "Roboto-Light,14",
             "placeHolderColor" : "brownGreyThree"
         }
     },

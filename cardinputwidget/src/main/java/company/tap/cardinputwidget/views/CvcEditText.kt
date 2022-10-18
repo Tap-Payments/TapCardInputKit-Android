@@ -57,7 +57,7 @@ class CvcEditText @JvmOverloads constructor(
 
        // inputType = InputType.TYPE_NUMBER_VARIATION_PASSWORD
         inputType = TYPE_CLASS_NUMBER or TYPE_NUMBER_VARIATION_PASSWORD
-        keyListener = DigitsKeyListener.getInstance(false, true)
+        //keyListener = DigitsKeyListener.getInstance(false, true)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             setAutofillHints(View.AUTOFILL_HINT_CREDIT_CARD_SECURITY_CODE)

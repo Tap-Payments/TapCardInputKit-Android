@@ -8,21 +8,20 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.text.*
 import android.util.AttributeSet
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
+import android.view.*
 import android.view.View.OnFocusChangeListener
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.Transformation
 import android.view.inputmethod.EditorInfo
+import android.webkit.WebViewClient
 import android.widget.*
 import androidx.annotation.ColorInt
 import androidx.annotation.IdRes
 import androidx.annotation.IntRange
 import androidx.annotation.VisibleForTesting
 import androidx.core.view.AccessibilityDelegateCompat
+import androidx.core.view.MotionEventCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import company.tap.cardinputwidget.*
@@ -91,6 +90,10 @@ class InlineCardInput @JvmOverloads constructor(
 
     @JvmSynthetic
     internal val separator2 = viewBinding.separator2
+
+    @JvmSynthetic
+    internal val webView = viewBinding.webView
+
 
     @JvmSynthetic
     internal val mainSwitchInline = viewBinding.mainSwitchInline
@@ -337,6 +340,28 @@ class InlineCardInput @JvmOverloads constructor(
         scannerButton =findViewById(R.id.card_scanner_button)
         closeButton =findViewById(R.id.clear_text)
         linearIconsLayout =findViewById(R.id.linear_paylayout)
+      // initWebView() //hide for now based on validation
+    }
+
+    private fun initWebView() {
+        webView.visibility = View.VISIBLE
+       /* cardNumberEditText.visibility = View.GONE
+        cvcNumberEditText.visibility = View.GONE
+        expiryDateEditText.visibility = View.GONE
+
+        expiryDateEditText.visibility = View.GONE
+        cardBrandView.visibility = View.GONE
+        closeButton.visibility = View.GONE */
+        webView.webViewClient = WebViewClient()
+
+        // this will load the url of the website
+        webView.loadUrl("https://www.google.com/")
+
+        // this will enable the javascript settings, it can also allow xss vulnerabilities
+        webView.settings.javaScriptEnabled = true
+
+        // if you want to enable zoom feature
+        webView.settings.setSupportZoom(true)
     }
 
     override fun onFinishInflate() {
@@ -519,7 +544,6 @@ class InlineCardInput @JvmOverloads constructor(
         scannerButton.visibility= View.VISIBLE
         closeButton.visibility= View.VISIBLE
         cvvIcon.visibility= View.GONE
-
         cvcNumberEditText.hint = LocalizationManager.getValue("cardCVVPlaceHolder", "TapCardInputKit")
     }
 
@@ -601,9 +625,11 @@ class InlineCardInput @JvmOverloads constructor(
             putBoolean(STATE_CARD_VIEWED, cardNumberIsViewed)
             putBoolean(STATE_POSTAL_CODE_ENABLED, holderNameEnabled)
         }
+
     }
 
     override fun onRestoreInstanceState(state: Parcelable) {
+
         if (state is Bundle) {
             holderNameEnabled = state.getBoolean(STATE_POSTAL_CODE_ENABLED, true)
             cardNumberIsViewed = state.getBoolean(STATE_CARD_VIEWED, true)
@@ -960,6 +986,7 @@ class InlineCardInput @JvmOverloads constructor(
             if (holderNameEnabled) {
                 holderNameEditText.requestFocus()
             }
+           // initWebView()
         }
 
 //        allFields.forEach { it.addTextChangedListener(inputChangeTextWatcher) }
@@ -1046,7 +1073,8 @@ class InlineCardInput @JvmOverloads constructor(
             return
         }
 
-        val dateStartPosition = placementParameters.getCvcStartMargin(isFullCard = true)
+       // val dateStartPosition = placementParameters.getCvcStartMargin(isFullCard = true)
+        val dateStartPosition = placementParameters.getDateStartMargin(isFullCard = true)
         val cvcStartPosition = placementParameters.getCvcStartMargin(isFullCard = true)
         val holderNameStartPosition = placementParameters.getHolderNameStartMargin(isFullCard = false)
 
@@ -1089,7 +1117,7 @@ class InlineCardInput @JvmOverloads constructor(
         //Removed slide for date and cvc because of overlapping
         startSlideAnimation(listOfNotNull(
                 slideCardStartAnimation,
-               // slideDateStartAnimation,
+                slideDateStartAnimation,
                // slideCvcStartAnimation
               //  slideHolderNameStartAnimation
         ))
@@ -1099,7 +1127,7 @@ class InlineCardInput @JvmOverloads constructor(
 
     // reveal the secondary fields
     private fun scrollEnd() {
-        if (!cardNumberIsViewed || !initFlag) { println("cardNumberIsViewed"+cardNumberIsViewed)
+        if (!cardNumberIsViewed || !initFlag) { println("cardNumberIsViewed??????"+cardNumberIsViewed)
 
             return
         }
@@ -1309,7 +1337,8 @@ class InlineCardInput @JvmOverloads constructor(
         @JvmSynthetic
         internal fun getDateStartMargin(isFullCard: Boolean): Int {
             return if (isFullCard) {
-                cardWidth + cardDateSeparation
+               // cardWidth + cardDateSeparation
+                totalLengthInPixels - 500
             } else {
                 cardPeekDateStartMargin
             }

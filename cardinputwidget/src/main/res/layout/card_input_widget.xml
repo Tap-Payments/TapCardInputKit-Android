@@ -32,7 +32,7 @@
         android:id="@+id/card_brand_view"
         android:layout_width="30dp"
         android:layout_height="22dp"
-android:layout_marginLeft="2dp"
+        android:layout_marginLeft="2dp"
         android:visibility="visible"
 
 

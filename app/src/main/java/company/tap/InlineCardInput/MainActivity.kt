@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         paymentInputContainer = findViewById(R.id.payment_input_layout)
         mainView = findViewById(R.id.mainView)
         switchLL = cardInlineForm.findViewById(R.id.mainSwitchInline)
-        cardInlineForm.holderNameEnabled= false
+        cardInlineForm.holderNameEnabled= true
         paymentInputContainer.addView(cardInlineForm)
         tapAlertView = findViewById(R.id.alertView)
         clearView = findViewById(R.id.clear_text)

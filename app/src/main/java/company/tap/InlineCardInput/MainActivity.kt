@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         //cardInlineForm =findViewById(R.id.cardInlineForm)
 
         ThemeManager.loadTapTheme(this.resources,R.raw.defaultlighttheme,"lighttheme")
-        //ThemeManager.loadTapTheme(this.resources,R.raw.defaultdarktheme,"darktheme")
+       // ThemeManager.loadTapTheme(this.resources,R.raw.defaultdarktheme,"darktheme")
         LocalizationManager.loadTapLocale(this.resources,R.raw.lang)
         LocalizationManager.setLocale(this, Locale("en"))
         setContentView(R.layout.activity_main)

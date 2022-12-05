@@ -34,8 +34,6 @@
         android:layout_height="22dp"
         android:layout_marginLeft="2dp"
         android:visibility="visible"
-
-
         android:layout_gravity="center"
 
 
@@ -225,7 +223,6 @@ android:background="@android:color/transparent"
                 android:layout_alignParentEnd="true"
                 android:layout_gravity="center"
                 android:layout_toEndOf="@+id/nfc_button"
-
                 android:src="@drawable/icon_scan"
                 android:visibility="visible" />
 

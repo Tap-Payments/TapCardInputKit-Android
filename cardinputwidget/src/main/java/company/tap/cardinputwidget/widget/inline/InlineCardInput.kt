@@ -16,10 +16,8 @@ import android.view.animation.Transformation
 import android.view.inputmethod.EditorInfo
 import android.webkit.WebViewClient
 import android.widget.*
-import androidx.annotation.ColorInt
-import androidx.annotation.IdRes
+import androidx.annotation.*
 import androidx.annotation.IntRange
-import androidx.annotation.VisibleForTesting
 import androidx.core.view.AccessibilityDelegateCompat
 import androidx.core.view.MotionEventCompat
 import androidx.core.view.ViewCompat
@@ -107,6 +105,17 @@ class InlineCardInput @JvmOverloads constructor(
     lateinit var scannerButton :ImageView
     lateinit var closeButton :ImageView
     lateinit var linearIconsLayout :LinearLayout
+    @DrawableRes
+    val closeIcon: Int =
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.icon_close_dark else R.drawable.icon_close2
+
+    @DrawableRes
+    val scannerIcon: Int =
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) company.tap.tapuilibrary.R.drawable.icon_scan_light else company.tap.tapuilibrary.R.drawable.icon_scan
+    @DrawableRes
+    val nfcIcon: Int =
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) company.tap.tapuilibrary.R.drawable.icon_nfc_light else company.tap.tapuilibrary.R.drawable.icon_nfc
+
 
     private val frameStart: Int
         get() {
@@ -339,12 +348,9 @@ class InlineCardInput @JvmOverloads constructor(
         nfcButton =findViewById(R.id.nfc_button)
         scannerButton =findViewById(R.id.card_scanner_button)
         closeButton =findViewById(R.id.clear_text)
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) {
-            closeButton.setImageResource(R.drawable.icon_close_dark)
-        }else{
-            closeButton.setImageResource(R.drawable.icon_close2)
-        }
-
+        closeButton.setImageResource(closeIcon)
+        scannerButton.setImageResource(scannerIcon)
+        nfcButton.setImageResource(nfcIcon)
         linearIconsLayout =findViewById(R.id.linear_paylayout)
       // initWebView() //hide for now based on validation
     }

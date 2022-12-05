@@ -339,6 +339,12 @@ class InlineCardInput @JvmOverloads constructor(
         nfcButton =findViewById(R.id.nfc_button)
         scannerButton =findViewById(R.id.card_scanner_button)
         closeButton =findViewById(R.id.clear_text)
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) {
+            closeButton.setImageResource(R.drawable.icon_close_dark)
+        }else{
+            closeButton.setImageResource(R.drawable.icon_close2)
+        }
+
         linearIconsLayout =findViewById(R.id.linear_paylayout)
       // initWebView() //hide for now based on validation
     }

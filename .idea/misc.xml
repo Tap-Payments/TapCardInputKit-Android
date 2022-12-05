@@ -3,10 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../.gradle/caches/transforms-2/files-2.1/9b4b9cfd1c53d16d46b3f036d270348b/jetified-TapUIKit-Android-1.1.1.358.86/res/layout/tap_payment_input.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19293478260869565" />
         <entry key="app/src/main/res/layout/tap_payment_input.xml" value="0.19293478260869565" />
         <entry key="cardinputwidget/src/main/res/drawable/edittext_modified_states.xml" value="0.5" />
         <entry key="cardinputwidget/src/main/res/drawable/focus_tint_list.xml" value="0.178" />
+        <entry key="cardinputwidget/src/main/res/drawable/ic_card.xml" value="0.1655" />
+        <entry key="cardinputwidget/src/main/res/drawable/ic_card_icon_black.xml" value="0.1655" />
         <entry key="cardinputwidget/src/main/res/layout/card_brand_view.xml" value="0.1515625" />
         <entry key="cardinputwidget/src/main/res/layout/card_inline_form.xml" value="0.1828125" />
         <entry key="cardinputwidget/src/main/res/layout/card_input_form.xml" value="0.1828125" />

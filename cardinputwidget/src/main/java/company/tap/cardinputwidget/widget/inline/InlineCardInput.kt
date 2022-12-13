@@ -88,7 +88,7 @@ class InlineCardInput @JvmOverloads constructor(
     internal val separator_1 = viewBinding.separator1
 
     @JvmSynthetic
-    internal val separator2 = viewBinding.separator2
+     var separator2 = viewBinding.separator2
 
     @JvmSynthetic
     internal val webView = viewBinding.webView

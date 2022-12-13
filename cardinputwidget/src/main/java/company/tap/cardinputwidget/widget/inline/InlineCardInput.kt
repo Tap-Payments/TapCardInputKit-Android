@@ -352,6 +352,7 @@ class InlineCardInput @JvmOverloads constructor(
         scannerButton.setImageResource(scannerIcon)
         nfcButton.setImageResource(nfcIcon)
         linearIconsLayout =findViewById(R.id.linear_paylayout)
+        alertView.visibility =View.GONE
       // initWebView() //hide for now based on validation
     }
 

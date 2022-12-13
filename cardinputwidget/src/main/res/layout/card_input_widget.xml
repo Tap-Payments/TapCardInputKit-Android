@@ -250,7 +250,7 @@ android:background="@android:color/transparent"
         android:layout_height="match_parent"
         android:orientation="vertical">
     <company.tap.tapuilibrary.uikit.views.TapAlertView
-        android:id="@+id/alertView"
+        android:id="@+id/alertView1"
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -295,14 +295,14 @@ android:background="@android:color/transparent"
     </com.google.android.material.textfield.TextInputLayout>
         <company.tap.tapuilibrary.uikit.atoms.TapSeparatorView
             android:layout_marginTop="@dimen/activity_total_margin10"
-            android:id="@+id/separator_2"
+            android:id="@+id/separatorcard2"
             android:layout_width="wrap_content"
             android:layout_height="0.2dp"
             android:visibility="visible"
             android:background="@color/light_gray" />
 
         <company.tap.tapuilibrary.uikit.views.TapInlineCardSwitch
-            android:id="@+id/mainSwitchInline"
+            android:id="@+id/mainSwitchInline2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Save Card For Later"

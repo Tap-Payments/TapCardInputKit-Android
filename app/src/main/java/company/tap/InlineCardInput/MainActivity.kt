@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         cardInlineForm = InlineCardInput(this)
         paymentInputContainer = findViewById(R.id.payment_input_layout)
         mainView = findViewById(R.id.mainView)
-        switchLL = cardInlineForm.findViewById(R.id.mainSwitchInline)
+        //switchLL = cardInlineForm.findViewById(R.id.mainSwitchInline)
         cardInlineForm.holderNameEnabled= true
         paymentInputContainer.addView(cardInlineForm)
         tapAlertView = findViewById(R.id.alertView)
@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
             cardScannerBtn?.visibility =View.VISIBLE
         }
         switchSaveCard = switchLL?.findViewById(R.id.switchSaveCard)
-       switchLL?.setSwitchDataSource(TapSwitchDataSource("Sasa","Save For later","sa","asa","asa"))
+    //   switchLL?.setSwitchDataSource(TapSwitchDataSource("Sasa","Save For later","sa","asa","asa"))
        cardInlineForm.switchCardEnabled = true
        /* cardInlineForm.setSavedCardDetails(Card("5123 4500 0000 0008",null,7,23,
             "dsd",null,null,null,

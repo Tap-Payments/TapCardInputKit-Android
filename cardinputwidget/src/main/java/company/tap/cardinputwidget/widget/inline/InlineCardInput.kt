@@ -87,26 +87,26 @@ class InlineCardInput @JvmOverloads constructor(
     @JvmSynthetic
     internal val separator_1 = viewBinding.separator1
 
-    @JvmSynthetic
-     var separator2 = viewBinding.separator2
+    //@JvmSynthetic
+   //  var separator2 = viewBinding.separator2
 
     @JvmSynthetic
     internal val webView = viewBinding.webView
 
 
     @JvmSynthetic
-    internal val mainSwitchInline = viewBinding.mainSwitchInline
+    internal val mainSwitchInline2 = viewBinding.mainSwitchInline2
 
     val backArrow = viewBinding.backView
     val cvvIcon = viewBinding.cvvIcon
     private var cardInputListener: CardInputListener? = null
     private var cardValidCallback: CardValidCallback? = null
-    lateinit var alertView :TapAlertView
+    lateinit var alertView1 :TapAlertView
     lateinit var nfcButton :ImageView
     lateinit var scannerButton :ImageView
     lateinit var closeButton :ImageView
     lateinit var linearIconsLayout :LinearLayout
-   // lateinit var tapSeparator2 :TapSeparatorView
+   // lateinit var separatorcard2 :TapSeparatorView
     @DrawableRes
     val closeIcon: Int =
         if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.icon_close_dark else R.drawable.icon_close2
@@ -346,17 +346,17 @@ class InlineCardInput @JvmOverloads constructor(
     }
 
     private fun initializeViews() {
-        alertView =findViewById(R.id.alertView)
+        alertView1 =findViewById(R.id.alertView1)
         nfcButton =findViewById(R.id.nfc_button)
         scannerButton =findViewById(R.id.card_scanner_button)
         closeButton =findViewById(R.id.clear_text)
-      //  tapSeparator2 =findViewById(R.id.separator_2)
+      //  separatorcard2 =findViewById(R.id.separatorcard2)
         closeButton.setImageResource(closeIcon)
         scannerButton.setImageResource(scannerIcon)
         nfcButton.setImageResource(nfcIcon)
         linearIconsLayout =findViewById(R.id.linear_paylayout)
-        alertView.visibility =View.GONE
-       // tapSeparator2.visibility =View.GONE
+        alertView1.visibility =View.GONE
+       // separatorcard2.visibility =View.GONE
       // initWebView() //hide for now based on validation
     }
 
@@ -431,11 +431,11 @@ class InlineCardInput @JvmOverloads constructor(
         BaseCardInput.DEFAULT_SWITCH
     ) { _, _, isEnabled ->
           if (isEnabled) {
-              mainSwitchInline.visibility = View.VISIBLE
-              separator2.visibility = View.VISIBLE
+             // mainSwitchInline2.visibility = View.VISIBLE
+             // separatorcard2.visibility = View.VISIBLE
           } else {
-              //mainSwitchInline.visibility = View.GONE
-              separator2.visibility = View.GONE
+              //mainSwitchInline2.visibility = View.GONE
+              //separatorcard2.visibility = View.GONE
           }
     }
 
@@ -604,7 +604,7 @@ class InlineCardInput @JvmOverloads constructor(
      * Set a `Delegate` to receive switch changes.
      */
     override fun setSwitchSaveCardListener(switchListener: CompoundButton.OnCheckedChangeListener?) {
-       mainSwitchInline.switchSaveCard?.setOnCheckedChangeListener(switchListener)
+       //mainSwitchInline.switchSaveCard?.setOnCheckedChangeListener(switchListener)
     }
 
     /**

@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../.gradle/caches/transforms-2/files-2.1/87956941f20e57796ecac10975c3475c/jetified-TapUIKit-Android-1.1.1.358.89/res/layout/tap_payment_input.xml" value="0.11197916666666667" />
         <entry key="../../../../.gradle/caches/transforms-2/files-2.1/9b4b9cfd1c53d16d46b3f036d270348b/jetified-TapUIKit-Android-1.1.1.358.86/res/layout/tap_payment_input.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19293478260869565" />
         <entry key="app/src/main/res/layout/tap_payment_input.xml" value="0.19293478260869565" />

@@ -106,7 +106,7 @@ class InlineCardInput @JvmOverloads constructor(
     lateinit var scannerButton :ImageView
     lateinit var closeButton :ImageView
     lateinit var linearIconsLayout :LinearLayout
-    lateinit var tapSeparator2 :TapSeparatorView
+   // lateinit var tapSeparator2 :TapSeparatorView
     @DrawableRes
     val closeIcon: Int =
         if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.icon_close_dark else R.drawable.icon_close2
@@ -350,13 +350,13 @@ class InlineCardInput @JvmOverloads constructor(
         nfcButton =findViewById(R.id.nfc_button)
         scannerButton =findViewById(R.id.card_scanner_button)
         closeButton =findViewById(R.id.clear_text)
-        tapSeparator2 =findViewById(R.id.separator_2)
+      //  tapSeparator2 =findViewById(R.id.separator_2)
         closeButton.setImageResource(closeIcon)
         scannerButton.setImageResource(scannerIcon)
         nfcButton.setImageResource(nfcIcon)
         linearIconsLayout =findViewById(R.id.linear_paylayout)
         alertView.visibility =View.GONE
-        tapSeparator2.visibility =View.GONE
+       // tapSeparator2.visibility =View.GONE
       // initWebView() //hide for now based on validation
     }
 

@@ -107,7 +107,7 @@
       "deleteSavedCardButtonDelete": "Delete",
       "deleteSavedCardButtonCancel": "Cancel",
       "deleteSavedCardMsg": "Are you sure you would like to delete card ending with",
-      "saveCardCVV": "Enter CVV"
+      "saveCardCVV": "EnterCVV"
 
     },
     "ExtraFees": {

@@ -1303,7 +1303,7 @@ class InlineCardInput @JvmOverloads constructor(
             }
             else -> {
                 if(isSavedCard == true){
-                    cardBrandView.showCvcIcon(brand)
+                    
                 }else {
                     updateIconForCvcEntry()
                 }

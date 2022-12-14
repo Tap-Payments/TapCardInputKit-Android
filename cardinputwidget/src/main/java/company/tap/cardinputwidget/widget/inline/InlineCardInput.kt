@@ -947,7 +947,7 @@ class InlineCardInput @JvmOverloads constructor(
               //  holderNameEditText.requestFocus()
               //  holderNameEditText.isEnabled = true
             }
-            updateIconCvc(hasFocus, cvcValue)
+            updateIconCvc(hasFocus, cvcValue,false)
         }
 
         holderNameEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
@@ -965,7 +965,7 @@ class InlineCardInput @JvmOverloads constructor(
                             cardInputListener?.onCvcComplete()
 
                         }
-                        updateIconCvc(cvcNumberEditText.hasFocus(), text)
+                        updateIconCvc(cvcNumberEditText.hasFocus(), text,false)
 
                     }
                 }
@@ -1287,7 +1287,8 @@ class InlineCardInput @JvmOverloads constructor(
 
      fun updateIconCvc(
             hasFocus: Boolean,
-            cvcText: String?
+            cvcText: String?,
+            isSavedCard:Boolean?
     ) {
         when {
             shouldShowErrorIcon -> {
@@ -1301,7 +1302,11 @@ class InlineCardInput @JvmOverloads constructor(
                 updateIcon()
             }
             else -> {
-                updateIconForCvcEntry()
+                if(isSavedCard == true){
+                    cardBrandView.showCvcIcon(brand)
+                }else {
+                    updateIconForCvcEntry()
+                }
             }
         }
     }

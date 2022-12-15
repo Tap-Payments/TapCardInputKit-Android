@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Parcelable
 import android.text.*
@@ -107,6 +108,7 @@ class InlineCardInput @JvmOverloads constructor(
     lateinit var closeButton :ImageView
     lateinit var linearIconsLayout :LinearLayout
    // lateinit var separatorcard2 :TapSeparatorView
+   var closeIconDrawable: Drawable?=null
     @DrawableRes
     val closeIcon: Int =
         if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.icon_close_dark else R.drawable.icon_close2
@@ -363,6 +365,20 @@ class InlineCardInput @JvmOverloads constructor(
         alertView1.visibility =View.GONE
        // separatorcard2.visibility =View.GONE
       // initWebView() //hide for now based on validation
+        //Added close icon for holdername
+         closeIconDrawable = context.resources.getDrawable(R.drawable.icon_close2)
+        closeIconDrawable?.setBounds(0,0,32,40) // set size
+        holderNameEditText.setCompoundDrawables(null,null,closeIconDrawable,null) // set position of drawable
+            // holderNameTextInputLayout.setEndIconDrawable(R.drawable.icon_close2)
+        holderNameEditText.setOnClickListener {
+            println("aszdsadasfa")
+            holderNameEditText.setText("")
+            holderNameEditText.setCompoundDrawables(null,null,null,null) // set position of drawable
+        }
+
+
+
+     //   holderNameTextInputLayout.drawa.setLeftTopRightBottom()
     }
 
     private fun initWebView() {
@@ -1297,7 +1313,7 @@ class InlineCardInput @JvmOverloads constructor(
             cvcText: String?,
             brandIcon: CardBrand?
     ) {
-         println("hasFocus>>"+hasFocus+"cvcText>>"+cvcText+"isSavedCard>>"+isSavedCard+"brandIcon>>>"+brandIcon)
+      //   println("hasFocus>>"+hasFocus+"cvcText>>"+cvcText+"isSavedCard>>"+isSavedCard+"brandIcon>>>"+brandIcon)
         when {
             shouldShowErrorIcon -> {
                 updateIcon()

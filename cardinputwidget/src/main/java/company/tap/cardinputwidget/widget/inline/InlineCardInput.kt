@@ -309,6 +309,11 @@ class InlineCardInput @JvmOverloads constructor(
         }*/
     }
 
+    var isSavedCard: Boolean by Delegates.observable(
+        BaseCardInput.IS_SAVEDCARD
+    ) { _, _, isEnabled ->
+
+    }
   /*  *//**
      * If [holderNameEnabled] is true and [holderNameRequired] is true, then postal code is a
      * required field.
@@ -947,7 +952,8 @@ class InlineCardInput @JvmOverloads constructor(
               //  holderNameEditText.requestFocus()
               //  holderNameEditText.isEnabled = true
             }
-            updateIconCvc(hasFocus, cvcValue,false)
+            println("updateIconCvc call from onFocusChangeListener"+hasFocus)
+            updateIconCvc(hasFocus, cvcValue,null)
         }
 
         holderNameEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
@@ -965,7 +971,8 @@ class InlineCardInput @JvmOverloads constructor(
                             cardInputListener?.onCvcComplete()
 
                         }
-                        updateIconCvc(cvcNumberEditText.hasFocus(), text,false)
+                       // println("updateIconCvc call from cvvnumber"+cvcNumberEditText.hasFocus())
+                        updateIconCvc(cvcNumberEditText.hasFocus(), text,null)
 
                     }
                 }
@@ -1288,8 +1295,9 @@ class InlineCardInput @JvmOverloads constructor(
      fun updateIconCvc(
             hasFocus: Boolean,
             cvcText: String?,
-            isSavedCard:Boolean?
+            brandIcon: CardBrand?
     ) {
+         println("hasFocus>>"+hasFocus+"cvcText>>"+cvcText+"isSavedCard>>"+isSavedCard+"brandIcon>>>"+brandIcon)
         when {
             shouldShowErrorIcon -> {
                 updateIcon()
@@ -1302,8 +1310,8 @@ class InlineCardInput @JvmOverloads constructor(
                 updateIcon()
             }
             else -> {
-                if(isSavedCard == true){
-                    
+                if(isSavedCard){
+
                 }else {
                     updateIconForCvcEntry()
                 }

@@ -298,7 +298,7 @@ class InlineCardInput @JvmOverloads constructor(
     var holderNameEnabled: Boolean by Delegates.observable(
         BaseCardInput.DEFAULT_HOLDER_NAME_ENABLED
     ) { _, _, isEnabled ->
-      if (isEnabled) {
+      /*  if (isEnabled) {
             holderNameEditText.isEnabled = true
             holderNameTextInputLayout.visibility = View.VISIBLE
             holderNameEditText.visibility = View.VISIBLE
@@ -308,7 +308,7 @@ class InlineCardInput @JvmOverloads constructor(
             holderNameTextInputLayout.visibility = View.GONE
             holderNameEditText.visibility = View.GONE
             cvcNumberEditText.imeOptions = EditorInfo.IME_ACTION_DONE
-        }
+        }*/
     }
 
     var isSavedCard: Boolean by Delegates.observable(

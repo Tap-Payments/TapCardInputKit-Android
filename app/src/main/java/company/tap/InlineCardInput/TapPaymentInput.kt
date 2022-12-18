@@ -3,13 +3,12 @@ package company.tap.InlineCardInput
 import android.content.Context
 import android.graphics.Color
 import android.os.Build
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
+import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
 import company.tap.tapuilibrary.R
 import company.tap.tapuilibrary.themekit.ThemeManager
@@ -36,8 +35,22 @@ class TapPaymentInput(context: Context?, attrs: AttributeSet?) :
     val tabLinear by lazy { findViewById<RelativeLayout>(R.id.tabLinear) }
     val clearView by lazy { findViewById<ImageView>(R.id.clear_text) }
     val separator by lazy { findViewById<TapSeparatorView>(R.id.separator) }
+  //  val separator4 by lazy { findViewById<TapSeparatorView>(R.id.separator4) }
+   // val inlineProgressBar by lazy { findViewById<ProgressBar>(R.id.inlineProgressbar) }
+    var cardScannerButton :ImageView
+    var nfcButton :ImageView
     private  var tapMobileInputView: TapMobilePaymentView
     private var displayMetrics: Int? = null
+    @DrawableRes
+    val scannerIcon: Int =
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.icon_scan_light else R.drawable.icon_scan
+    @DrawableRes
+    val nfcIcon: Int =
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.icon_nfc_light else R.drawable.icon_nfc
+    @DrawableRes
+    val closeIcon: Int =
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.icon_close_dark else R.drawable.icon_close2
+
 
     init {
         inflate(context, R.layout.tap_payment_input, this)
@@ -46,14 +59,33 @@ class TapPaymentInput(context: Context?, attrs: AttributeSet?) :
             rootView.invalidate()
         }
         tapMobileInputView = TapMobilePaymentView(context, null)
-
-
-
+       // tapMobileInputViewTextWatcher()
+       // tapMobileInputView.setTapPaymentShowHideClearImage(this)
+        cardScannerButton = findViewById(R.id.card_scanner_button)
+        nfcButton = findViewById(R.id.nfc_button)
+        cardScannerButton.setImageResource(scannerIcon)
+        clearView.setImageResource(closeIcon)
+        nfcButton.setImageResource(nfcIcon)
     }
     fun setDisplayMetrics(displayMetrics: Int) {
         this.displayMetrics = displayMetrics
     }
-
+  /*  private fun tapMobileInputViewTextWatcher(){
+        tapMobileInputView.mobileNumber?.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                showHideClearImage(true)
+            }
+            override fun afterTextChanged(mobileText: Editable) {
+                if (mobileText.length > 2){
+                    clearView?.visibility = View.VISIBLE
+                }else{
+                    clearView?.visibility = View.GONE
+                }
+            }
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+            }
+        })
+    }*/
 
     @RequiresApi(Build.VERSION_CODES.N)
     fun addTabLayoutSection(vararg sections: TabSection) {
@@ -89,9 +121,9 @@ class TapPaymentInput(context: Context?, attrs: AttributeSet?) :
 
     override fun showHideClearImage(show: Boolean) {
         if (show) {
-            clearView.visibility = VISIBLE
+            clearView.visibility = View.VISIBLE
         } else {
-            clearView.visibility = GONE
+            clearView.visibility = View.GONE
         }
     }
 

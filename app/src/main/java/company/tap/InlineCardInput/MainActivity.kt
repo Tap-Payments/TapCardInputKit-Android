@@ -6,7 +6,9 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.marginTop
 import company.tap.cardinputwidget.Card
 import company.tap.cardinputwidget.CardBrand
 import company.tap.cardinputwidget.CardBrandSingle
@@ -27,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var  paymentInputContainer: LinearLayout
     lateinit var  mainView: LinearLayout
     private var clearView: ImageView? = null
+    private var tabLinear: RelativeLayout? = null
     private var nfcButton: ImageView? = null
     private var cardScannerBtn: ImageView? = null
     private lateinit var tabLayout: company.tap.tapuilibrary.uikit.views.TapSelectionTabLayout
@@ -39,9 +42,9 @@ class MainActivity : AppCompatActivity() {
 
         //cardInlineForm =findViewById(R.id.cardInlineForm)
 
-        ThemeManager.loadTapTheme(this.resources,R.raw.defaultlighttheme,"lighttheme")
-       // ThemeManager.loadTapTheme(this.resources,R.raw.defaultdarktheme,"darktheme")
-        LocalizationManager.loadTapLocale(this.resources,R.raw.lang)
+        ThemeManager.loadTapTheme(this.resources, R.raw.defaultlighttheme, "lighttheme")
+        // ThemeManager.loadTapTheme(this.resources,R.raw.defaultdarktheme,"darktheme")
+        LocalizationManager.loadTapLocale(this.resources, R.raw.lang)
         LocalizationManager.setLocale(this, Locale("en"))
         setContentView(R.layout.activity_main)
 
@@ -49,30 +52,31 @@ class MainActivity : AppCompatActivity() {
         paymentInputContainer = findViewById(R.id.payment_input_layout)
         mainView = findViewById(R.id.mainView)
         //switchLL = cardInlineForm.findViewById(R.id.mainSwitchInline)
-        cardInlineForm.holderNameEnabled= true
-        paymentInputContainer.addView(cardInlineForm)
+        switchLL = findViewById(R.id.switch_Inline_card)
+        cardInlineForm.holderNameEnabled = false
+        tabLinear = findViewById(R.id.tabLinear)
         tapAlertView = findViewById(R.id.alertView)
         clearView = findViewById(R.id.clear_text)
         backArrow = findViewById(R.id.backView)
         tabLayout = findViewById(R.id.sections_tablayout)
         cardScannerBtn = findViewById(R.id.card_scanner_button)
         nfcButton = findViewById(R.id.nfc_button)
-        tapAlertView?.alertMessage?.text ="Card number is missing"
-        tapAlertView?.visibility =View.GONE
-        nfcButton?.visibility =View.VISIBLE
-        cardScannerBtn?.visibility =View.VISIBLE
-
-    backArrow?.setOnClickListener {
+        tapAlertView?.alertMessage?.text = "Card number is missing"
+        tapAlertView?.visibility = View.GONE
+        nfcButton?.visibility = View.VISIBLE
+        cardScannerBtn?.visibility = View.VISIBLE
+        paymentInputContainer.addView(cardInlineForm)
+        backArrow?.setOnClickListener {
             tabLayout.resetBehaviour()
             cardInlineForm.clear()
-            clearView?.visibility =View.GONE
-            nfcButton?.visibility =View.VISIBLE
-            cardScannerBtn?.visibility =View.VISIBLE
+            clearView?.visibility = View.GONE
+            nfcButton?.visibility = View.VISIBLE
+            cardScannerBtn?.visibility = View.VISIBLE
         }
         switchSaveCard = switchLL?.findViewById(R.id.switchSaveCard)
-    //   switchLL?.setSwitchDataSource(TapSwitchDataSource("Sasa","Save For later","sa","asa","asa"))
-       cardInlineForm.switchCardEnabled = true
-       /* cardInlineForm.setSavedCardDetails(Card("5123 4500 0000 0008",null,7,23,
+        //   switchLL?.setSwitchDataSource(TapSwitchDataSource("Sasa","Save For later","sa","asa","asa"))
+        cardInlineForm.switchCardEnabled = true
+        /* cardInlineForm.setSavedCardDetails(Card("5123 4500 0000 0008",null,7,23,
             "dsd",null,null,null,
             null,null,null,null,null,
             "0008",CardBrand.MasterCard,"sdsds",null,null,null,null,null),CardInputUIStatus.SavedCard)
@@ -86,23 +90,23 @@ class MainActivity : AppCompatActivity() {
         cardInlineForm.setCardNumberTextWatcher(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
 //                cardNumAfterTextChangeListener(s, this)
-                if( s !=null && s.length >= 19){
+                if (s != null && s.length >= 19) {
 
-                      //cardInlineForm.setCardNumber(maskCardNumber(s.toString()))
-                  }
+                    //cardInlineForm.setCardNumber(maskCardNumber(s.toString()))
+                }
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if(s?.length!=null && s.isNotEmpty()){
-                    clearView?.visibility =View.VISIBLE
-                    nfcButton?.visibility =View.GONE
-                    cardScannerBtn?.visibility =View.GONE
+                if (s?.length != null && s.isNotEmpty()) {
+                    clearView?.visibility = View.VISIBLE
+                    nfcButton?.visibility = View.GONE
+                    cardScannerBtn?.visibility = View.GONE
                 }
 
-                if( s !=null && s.length >= 19){
+                if (s != null && s.length >= 19) {
 
-                  //  cardInlineForm.setCardNumber(maskCardNumber(s.toString()))
+                    //  cardInlineForm.setCardNumber(maskCardNumber(s.toString()))
                     cardInlineForm.setSingleCardInput(CardBrandSingle.fromCode(s.toString()))
 
                 }
@@ -113,11 +117,50 @@ class MainActivity : AppCompatActivity() {
         clearView?.setOnClickListener {
             tabLayout.resetBehaviour()
             cardInlineForm.clear()
-            clearView?.visibility =View.GONE
-            nfcButton?.visibility =View.VISIBLE
-            cardScannerBtn?.visibility =View.VISIBLE
+            clearView?.visibility = View.GONE
+            nfcButton?.visibility = View.VISIBLE
+            cardScannerBtn?.visibility = View.VISIBLE
         }
+
+        cardInlineForm.setHolderNameTextWatcher(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                println("switchLL>>>" + switchLL)
+                println("s val >>>" + s.toString())
+                switchLL?.visibility = View.VISIBLE
+
+            }
+
+        })
+
+        cardInlineForm.setCvcNumberTextWatcher(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                //   checkoutFragment.scrollView?.scrollTo(0,height)
+                // tapCardInputView.requestFocus()
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                switchLL?.switchSaveCard?.text="Save for later"
+                if(cardInlineForm.holderNameEnabled){
+                    switchLL?.setPaddingRelative(0,100,0,0)
+
+                }
+            }
+        })
     }
+
 
     private fun  maskCardNumber(cardInput: String): String {
         val maskLen: Int = cardInput.length - 4

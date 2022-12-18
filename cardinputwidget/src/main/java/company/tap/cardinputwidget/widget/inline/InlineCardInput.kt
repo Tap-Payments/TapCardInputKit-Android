@@ -973,6 +973,7 @@ class InlineCardInput @JvmOverloads constructor(
                     holderNameEditText.visibility = View.VISIBLE
                     separator_1.visibility = View.VISIBLE
                     cvcNumberEditText.imeOptions = EditorInfo.IME_ACTION_NEXT
+                    holderNameEnabled = true
                 } else {
                     holderNameEditText.isEnabled = false
                     holderNameTextInputLayout.visibility = View.GONE

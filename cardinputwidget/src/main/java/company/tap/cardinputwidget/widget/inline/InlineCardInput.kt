@@ -475,6 +475,20 @@ class InlineCardInput @JvmOverloads constructor(
           }
     }
 
+    var holderNameEditable: Boolean by Delegates.observable(
+        BaseCardInput.DEFAULT_HOLDER_NAME_ENABLED
+    ) { _, _, isEnabled ->
+         if (isEnabled) {
+             holderNameEditText.isActivated = true
+              holderNameEditText.isEnabled = true
+              holderNameTextInputLayout.isEnabled = true
+
+          } else {
+             holderNameEditText.isActivated = false
+             holderNameEditText.isEnabled = false
+             holderNameTextInputLayout.isEnabled = false
+          }
+    }
 
     /**
      * Set the card number. Method does not change text field focus.

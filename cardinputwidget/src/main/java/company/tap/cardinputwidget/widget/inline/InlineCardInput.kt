@@ -982,7 +982,8 @@ class InlineCardInput @JvmOverloads constructor(
                 cardInputListener?.onFocusChange(FOCUS_CVC)
                  //holderNameEditText.requestFocus()
                 if (holderNameEnabled) {
-                    holderNameEditText.isEnabled = true
+                    holderNameEditText.isEnabled = holderNameEditable
+
                     holderNameTextInputLayout.visibility = View.VISIBLE
                     holderNameEditText.visibility = View.VISIBLE
                     separator_1.visibility = View.VISIBLE

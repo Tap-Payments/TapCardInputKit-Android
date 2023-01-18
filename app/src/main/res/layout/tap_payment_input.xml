@@ -50,6 +50,7 @@
 
                 >
 
+<!--
 
                 <ImageView
                     android:id="@+id/nfc_button"
@@ -72,6 +73,7 @@
                     android:padding="6dp"
                     android:src="@drawable/icon_scan"
                     android:visibility="visible" />
+-->
 
                 <ImageView
                     android:id="@+id/clear_text"

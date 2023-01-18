@@ -95,8 +95,6 @@ class InlineCardInput @JvmOverloads constructor(
     internal val webView = viewBinding.webView
 
 
-    @JvmSynthetic
-    internal val mainSwitchInline2 = viewBinding.mainSwitchInline2
 
     val backArrow = viewBinding.backView
     val cvvIcon = viewBinding.cvvIcon
@@ -378,7 +376,7 @@ class InlineCardInput @JvmOverloads constructor(
         nfcButton.setImageResource(nfcIcon)
         linearIconsLayout =findViewById(R.id.linear_paylayout)
         alertView1.visibility =View.GONE
-        separatorcard2.visibility =View.GONE
+       // separatorcard2.visibility =View.GONE
       // initWebView() //hide for now based on validation
         //Added close icon for holdername
          closeIconDrawable = context.resources.getDrawable(R.drawable.icon_close2)

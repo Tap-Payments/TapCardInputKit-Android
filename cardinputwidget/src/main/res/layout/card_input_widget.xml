@@ -216,7 +216,7 @@ android:background="@android:color/transparent"
                 android:src="@drawable/icon_nfc"
 
 
-                android:visibility="gone" />
+                android:visibility="visible" />
 
             <ImageView
                 android:id="@+id/card_scanner_button"
@@ -295,23 +295,17 @@ android:background="@android:color/transparent"
             android:textDirection="locale"/>
 
     </com.google.android.material.textfield.TextInputLayout>
-        <company.tap.tapuilibrary.uikit.atoms.TapSeparatorView
-            android:layout_marginTop="@dimen/activity_total_margin10"
-            android:id="@+id/separatorcard2"
-            android:layout_width="wrap_content"
-            android:layout_height="0.2dp"
-            android:visibility="visible"
-            android:background="@color/light_gray" />
 
-        <company.tap.tapuilibrary.uikit.views.TapInlineCardSwitch
-            android:id="@+id/mainSwitchInline2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Save Card For Later"
-            android:visibility="gone"
-            />
 
     </LinearLayout>
+    <company.tap.tapuilibrary.uikit.atoms.TapSeparatorView
+        android:layout_marginTop="@dimen/activity_total_margin10"
+        android:id="@+id/separatorcard2"
+        android:layout_width="wrap_content"
+        android:layout_height="0.2dp"
+        android:visibility="visible"
+        android:background="@color/light_gray" />
+
     <WebView
         android:id="@+id/webView"
         android:layout_width="match_parent"

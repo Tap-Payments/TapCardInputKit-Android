@@ -498,7 +498,7 @@ class InlineCardInput @JvmOverloads constructor(
         cardNumberEditText.setText(cardNumber)
        // println("maskCardNumber>>>"+maskCardNumber(fieldText))
         this.cardNumberIsViewed = !cardNumberEditText.isCardNumberValid
-        cardNumberEditText.imeOptions = EditorInfo.IME_ACTION_DONE
+        expiryDateEditText.requestFocus()
     }
 
     override fun setCardHolderName(cardHolderName: String?) {
@@ -538,6 +538,7 @@ class InlineCardInput @JvmOverloads constructor(
             @IntRange(from = 0, to = 9999) year: Int
     ) {
         expiryDateEditText.setText(DateUtils.createDateStringFromIntegerInput(month, year))
+        cvcNumberEditText.requestFocus()
     }
 
     /**

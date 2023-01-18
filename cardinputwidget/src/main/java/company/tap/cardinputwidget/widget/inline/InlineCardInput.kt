@@ -498,6 +498,7 @@ class InlineCardInput @JvmOverloads constructor(
         cardNumberEditText.setText(cardNumber)
        // println("maskCardNumber>>>"+maskCardNumber(fieldText))
         this.cardNumberIsViewed = !cardNumberEditText.isCardNumberValid
+        cardNumberEditText.imeOptions = EditorInfo.IME_ACTION_DONE
     }
 
     override fun setCardHolderName(cardHolderName: String?) {

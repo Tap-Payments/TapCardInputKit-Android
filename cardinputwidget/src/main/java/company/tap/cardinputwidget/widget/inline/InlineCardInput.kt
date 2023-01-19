@@ -1037,8 +1037,7 @@ class InlineCardInput @JvmOverloads constructor(
 
         cardNumberEditText.displayErrorCallback = {
             shouldShowErrorIcon = it
-            cardNumberEditText.requestFocus()
-            cardNumberEditText.isEnabled = true
+
            // println("displayErrorCallback is????"+cardNumberEditText.cardNumber)
         }
 

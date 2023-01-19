@@ -391,12 +391,8 @@ class InlineCardInput @JvmOverloads constructor(
             holderNameEditText.setCompoundDrawables(null,null,null,null) // set position of drawable
         }
 
-        cardNumberEditText.setOnTouchListener { view, motionEvent ->
-            // your code here....
-            onTouchCardField()
-            false
 
-        }
+
 
 
         //   holderNameTextInputLayout.drawa.setLeftTopRightBottom()
@@ -683,7 +679,7 @@ class InlineCardInput @JvmOverloads constructor(
         return requiredFields.all { it.isEnabled }
     }
 
-    override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
+  /*  override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
         if (ev.action != MotionEvent.ACTION_DOWN) {
             return super.onInterceptTouchEvent(ev)
         }
@@ -692,7 +688,7 @@ class InlineCardInput @JvmOverloads constructor(
             it.requestFocus()
             true
         } ?: super.onInterceptTouchEvent(ev)
-    }
+    }*/
 
     override fun onSaveInstanceState(): Parcelable {
         return Bundle().apply {
@@ -1780,6 +1776,7 @@ class InlineCardInput @JvmOverloads constructor(
     }
 
     fun onTouchCardField(){
+        cardNumberEditText.performClick()
        cardNumberEditText.isEnabled= true
         cardNumberEditText.requestFocus()
         expiryDateEditText.clearFocus()

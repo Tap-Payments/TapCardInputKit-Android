@@ -25,6 +25,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import company.tap.cardinputwidget.*
 import company.tap.cardinputwidget.databinding.CardInputWidgetBinding
+import company.tap.cardinputwidget.utils.CardUtils
 
 import company.tap.cardinputwidget.utils.DateUtils
 import company.tap.cardinputwidget.utils.TextValidator
@@ -498,8 +499,10 @@ class InlineCardInput @JvmOverloads constructor(
         cardNumberEditText.setText(cardNumber)
        // println("maskCardNumber>>>"+maskCardNumber(fieldText))
         this.cardNumberIsViewed = !cardNumberEditText.isCardNumberValid
-        if(cardNumberEditText.isCardNumberValid){
+        if(CardUtils.isValidCardNumber(cardNumber)){
             expiryDateEditText.requestFocus()
+        }else {
+            cardNumberEditText.requestFocus()
         }
 
     }

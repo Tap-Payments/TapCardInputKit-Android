@@ -1037,11 +1037,15 @@ class InlineCardInput @JvmOverloads constructor(
 
         cardNumberEditText.displayErrorCallback = {
             shouldShowErrorIcon = it
+            cardNumberEditText.requestFocus()
+            cardNumberEditText.isEnabled = true
+           // println("displayErrorCallback is????"+cardNumberEditText.cardNumber)
         }
 
         cardNumberEditText.completionCallback = {
             expiryDateEditText.visibility = View.VISIBLE
             cvcNumberEditText.visibility = View.VISIBLE
+
             println("cardNumberEditText is????"+cardNumberEditText.cardNumber)
            // scrollEnd()
             cardInputListener?.onCardComplete()

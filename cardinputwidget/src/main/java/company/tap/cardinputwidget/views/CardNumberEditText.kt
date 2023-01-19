@@ -224,6 +224,7 @@ class CardNumberEditText @JvmOverloads constructor(
                     if (fieldText.length == lengthMax) {
 
                         val wasCardNumberValid = isCardNumberValid
+                        println("")
                         isCardNumberValid = CardUtils.isValidCardNumber(fieldText)
                         shouldShowError = !isCardNumberValid
                         if (!wasCardNumberValid && isCardNumberValid) {

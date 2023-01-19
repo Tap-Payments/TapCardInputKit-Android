@@ -1,6 +1,7 @@
 package company.tap.cardinputwidget.widget.inline
 
 import android.annotation.SuppressLint
+import android.app.usage.UsageEvents
 import android.content.Context
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -390,9 +391,15 @@ class InlineCardInput @JvmOverloads constructor(
             holderNameEditText.setCompoundDrawables(null,null,null,null) // set position of drawable
         }
 
+        cardNumberEditText.setOnTouchListener { view, motionEvent ->
+            // your code here....
+            onTouchCardField()
+            false
+
+        }
 
 
-     //   holderNameTextInputLayout.drawa.setLeftTopRightBottom()
+        //   holderNameTextInputLayout.drawa.setLeftTopRightBottom()
     }
 
     private fun initWebView() {
@@ -1770,6 +1777,13 @@ class InlineCardInput @JvmOverloads constructor(
         println("cardInput"+cardInput.length)
         if (maskLen <= 0) return cardInput // Nothing to mask
         return (cardInput).replaceRange(0, maskLen, "•••• ")
+    }
+
+    fun onTouchCardField(){
+       cardNumberEditText.isEnabled= true
+        cardNumberEditText.requestFocus()
+        expiryDateEditText.clearFocus()
+        cvcNumberEditText.clearFocus()
     }
 
 

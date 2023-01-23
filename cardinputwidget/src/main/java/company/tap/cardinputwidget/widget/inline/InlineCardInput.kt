@@ -20,6 +20,7 @@ import android.webkit.WebViewClient
 import android.widget.*
 import androidx.annotation.*
 import androidx.annotation.IntRange
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.AccessibilityDelegateCompat
 import androidx.core.view.MotionEventCompat
 import androidx.core.view.ViewCompat
@@ -878,7 +879,7 @@ class InlineCardInput @JvmOverloads constructor(
     }
 
     private fun updateFieldLayout(view: View, width: Int, marginStart: Int) {
-        view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams).apply {
+        view.layoutParams = (view.layoutParams as ConstraintLayout.LayoutParams).apply {
             this.width = width
             this.marginStart = marginStart
         }
@@ -1551,8 +1552,8 @@ class InlineCardInput @JvmOverloads constructor(
         override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
             super.applyTransformation(interpolatedTime, t)
             println("view latout"+view.layoutParams)
-            if(view.layoutParams is FrameLayout.LayoutParams){
-                view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams).apply {
+            if(view.layoutParams is ConstraintLayout.LayoutParams){
+                view.layoutParams = (view.layoutParams as ConstraintLayout.LayoutParams).apply {
 
                     marginStart = (marginStart * (1 - interpolatedTime)).toInt()
                 }
@@ -1570,7 +1571,7 @@ class InlineCardInput @JvmOverloads constructor(
     ) : CardFieldAnimation() {
         override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
             super.applyTransformation(interpolatedTime, t)
-            view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams).apply {
+            view.layoutParams = (view.layoutParams as ConstraintLayout.LayoutParams).apply {
                 marginStart =
                         (interpolatedTime * destination + (1 - interpolatedTime) * startPosition).toInt()
             }
@@ -1601,7 +1602,7 @@ class InlineCardInput @JvmOverloads constructor(
     ) : CardFieldAnimation() {
         override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
             super.applyTransformation(interpolatedTime, t)
-            view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams).apply {
+            view.layoutParams = (view.layoutParams as ConstraintLayout.LayoutParams).apply {
                 this.marginStart =
                         (interpolatedTime * destination + (1 - interpolatedTime) * startPosition).toInt()
                 this.marginEnd = 0
@@ -1625,7 +1626,7 @@ class InlineCardInput @JvmOverloads constructor(
 
         override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
             super.applyTransformation(interpolatedTime, t)
-            view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams).apply {
+            view.layoutParams = (view.layoutParams as ConstraintLayout.LayoutParams).apply {
                 marginStart = (-0.9f * hiddenCardWidth.toFloat() * interpolatedTime).toInt()
             }
         }
@@ -1638,7 +1639,7 @@ class InlineCardInput @JvmOverloads constructor(
     ) : CardFieldAnimation() {
         override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
             super.applyTransformation(interpolatedTime, t)
-            view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams).apply {
+            view.layoutParams = (view.layoutParams as ConstraintLayout.LayoutParams).apply {
                 marginStart =
                         (interpolatedTime * destination + (1 - interpolatedTime) * startMargin).toInt()
             }
@@ -1653,7 +1654,7 @@ class InlineCardInput @JvmOverloads constructor(
     ) : CardFieldAnimation() {
         override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
             super.applyTransformation(interpolatedTime, t)
-            view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams).apply {
+            view.layoutParams = (view.layoutParams as ConstraintLayout.LayoutParams).apply {
                 marginStart =
                         (interpolatedTime * destination + (1 - interpolatedTime) * startMargin).toInt()
                 marginEnd = 0

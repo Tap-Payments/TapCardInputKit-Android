@@ -40,7 +40,7 @@
 
         />
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
@@ -50,7 +50,7 @@
 
         >
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -76,6 +76,7 @@
             android:layoutDirection="locale"
             android:layout_marginLeft="5dp"
             android:gravity="start|end"
+            app:layout_constraintStart_toStartOf="parent"
 
             tools:ignore="UnusedAttribute">
 
@@ -120,6 +121,7 @@
             app:hintEnabled="false"
             android:gravity="start|end"
             android:imeOptions="actionNext"
+            app:layout_constraintEnd_toStartOf="@+id/cvc_text_input_layout"
             tools:ignore="UnusedAttribute">
 
             <company.tap.cardinputwidget.views.ExpiryDateEditText
@@ -160,6 +162,7 @@ android:background="@android:color/transparent"
             app:hintEnabled="false"
             android:visibility="visible"
             android:gravity="start|end"
+            app:layout_constraintEnd_toStartOf="@+id/linear_paylayout"
             tools:ignore="UnusedAttribute">
 
             <company.tap.cardinputwidget.views.CvcEditText
@@ -192,6 +195,7 @@ android:background="@android:color/transparent"
             android:layout_gravity="end|center"
             android:orientation="horizontal"
             android:layoutDirection="locale"
+            app:layout_constraintEnd_toEndOf="parent"
 
 
 
@@ -240,7 +244,7 @@ android:background="@android:color/transparent"
                 android:visibility="gone" />
 
         </LinearLayout>
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

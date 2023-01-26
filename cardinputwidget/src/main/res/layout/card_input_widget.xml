@@ -195,12 +195,12 @@ android:background="@android:color/transparent"
         <LinearLayout
             android:id="@+id/linear_paylayout"
             android:layout_width="wrap_content"
-            android:layout_height="22dp"
+            android:layout_height="25dp"
             android:layout_gravity="end|center"
             android:orientation="horizontal"
             android:layoutDirection="locale"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="@dimen/margin_basic_13dp"
+
 
 
 
@@ -234,6 +234,7 @@ android:background="@android:color/transparent"
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
                 android:layout_gravity="center"
+
                 android:layout_toEndOf="@+id/nfc_button"
                 android:src="@drawable/icon_scan"
                 android:visibility="visible" />

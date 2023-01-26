@@ -31,8 +31,8 @@
             />
     <company.tap.cardinputwidget.views.CardBrandView
         android:id="@+id/card_brand_view"
-        android:layout_width="32dp"
-        android:layout_height="22dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="13dp"
         android:visibility="visible"
         android:layout_gravity="center"
@@ -47,8 +47,8 @@
         android:layout_marginLeft="9dp"
         android:layout_marginRight="9dp"
 
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
         android:layout_gravity="center"
 
         >
@@ -195,7 +195,7 @@ android:background="@android:color/transparent"
         <LinearLayout
             android:id="@+id/linear_paylayout"
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
+            android:layout_height="22dp"
             android:layout_gravity="end|center"
             android:orientation="horizontal"
             android:layoutDirection="locale"
@@ -260,7 +260,7 @@ android:background="@android:color/transparent"
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
     <company.tap.tapuilibrary.uikit.views.TapAlertView
         android:id="@+id/alertView1"

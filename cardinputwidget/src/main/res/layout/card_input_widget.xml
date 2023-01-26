@@ -31,9 +31,9 @@
             />
     <company.tap.cardinputwidget.views.CardBrandView
         android:id="@+id/card_brand_view"
-        android:layout_width="30dp"
+        android:layout_width="32dp"
         android:layout_height="22dp"
-        android:layout_marginLeft="7dp"
+        android:layout_marginLeft="13dp"
         android:visibility="visible"
         android:layout_gravity="center"
 
@@ -44,8 +44,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginLeft="9dp"
+        android:layout_marginRight="9dp"
+
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
         android:layout_gravity="center"
 
         >
@@ -74,7 +77,6 @@
             android:visibility="visible"
             app:hintEnabled="false"
             android:layoutDirection="locale"
-            android:layout_marginLeft="5dp"
             android:gravity="start|end"
             app:layout_constraintStart_toStartOf="parent"
 
@@ -122,6 +124,7 @@
             android:gravity="start|end"
             android:imeOptions="actionNext"
             app:layout_constraintEnd_toStartOf="@+id/cvc_text_input_layout"
+            android:layout_marginEnd="18dp"
             tools:ignore="UnusedAttribute">
 
             <company.tap.cardinputwidget.views.ExpiryDateEditText
@@ -163,6 +166,7 @@ android:background="@android:color/transparent"
             android:visibility="visible"
             android:gravity="start|end"
             app:layout_constraintEnd_toStartOf="@+id/linear_paylayout"
+            android:layout_marginEnd="@dimen/margin_basic_14dp"
             tools:ignore="UnusedAttribute">
 
             <company.tap.cardinputwidget.views.CvcEditText
@@ -196,6 +200,7 @@ android:background="@android:color/transparent"
             android:orientation="horizontal"
             android:layoutDirection="locale"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/margin_basic_14dp"
 
 
 
@@ -207,6 +212,7 @@ android:background="@android:color/transparent"
                 android:layout_gravity="center"
 
                 android:padding="2dp"
+
 
                 android:src="@drawable/cvv_icon"
                 android:visibility="gone" />

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:gravity="center"
+
     android:orientation="vertical"
     android:id="@+id/mainView"
 
@@ -17,6 +17,7 @@
         android:id="@+id/tap_payment_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
         android:layoutDirection="locale" />
    <!-- <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"

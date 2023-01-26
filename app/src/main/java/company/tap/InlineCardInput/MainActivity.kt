@@ -51,6 +51,8 @@ class MainActivity : AppCompatActivity() {
         cardInlineForm = InlineCardInput(this)
         paymentInputContainer = findViewById(R.id.payment_input_layout)
         mainView = findViewById(R.id.mainView)
+        cardInlineForm.holderNameEnabled= true
+      //  cardInlineForm.setVisibilityOfHolderField(true)
         //switchLL = cardInlineForm.findViewById(R.id.mainSwitchInline)
         switchLL = findViewById(R.id.switch_Inline_card)
         cardInlineForm.holderNameEnabled = false
@@ -144,7 +146,10 @@ class MainActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 //   checkoutFragment.scrollView?.scrollTo(0,height)
                 // tapCardInputView.requestFocus()
-
+                switchLL?.switchSaveCard?.visibility =View.GONE
+                switchLL?.saveForOtherCheckBox?.visibility =View.GONE
+                switchLL?.toolsTipImageView?.visibility =View.GONE
+                switchLL?.visibility =View.GONE
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -153,6 +158,11 @@ class MainActivity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable?) {
                 switchLL?.switchSaveCard?.text="Save for later"
+                switchLL?.switchSaveCard?.visibility =View.GONE
+                switchLL?.saveForOtherCheckBox?.visibility =View.GONE
+                switchLL?.toolsTipImageView?.visibility =View.GONE
+                switchLL?.visibility =View.GONE
+                cardInlineForm.setVisibilityOfHolderField(true)
                 if(cardInlineForm.holderNameEnabled){
                     switchLL?.setPaddingRelative(0,100,0,0)
 

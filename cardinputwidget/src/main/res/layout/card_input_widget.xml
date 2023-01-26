@@ -200,7 +200,7 @@ android:background="@android:color/transparent"
             android:orientation="horizontal"
             android:layoutDirection="locale"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="@dimen/margin_basic_14dp"
+            android:layout_marginEnd="@dimen/margin_basic_13dp"
 
 
 

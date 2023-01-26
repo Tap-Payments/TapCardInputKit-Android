@@ -15,6 +15,7 @@
         app:cardCornerRadius="8dp"
         android:elevation="@dimen/margin_basic_10dp"
         android:layout_margin="8dp"
+
         >
         <company.tap.tapuilibrary.uikit.atoms.TapSeparatorView
             android:id="@+id/separator"
@@ -107,6 +108,7 @@
                 android:id="@+id/switch_Inline_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
 
                 android:layout_gravity="start"
                 android:layoutDirection="locale"
@@ -130,6 +132,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_basic_10dp"
         android:layout_marginEnd="@dimen/margin_basic_10dp"
+        android:visibility="gone"
 
         />
 

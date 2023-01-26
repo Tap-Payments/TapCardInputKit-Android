@@ -6,11 +6,14 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.annotation.ColorInt
+import androidx.annotation.DrawableRes
 import androidx.core.graphics.drawable.DrawableCompat
 import com.bumptech.glide.Glide
 import company.tap.cardinputwidget.CardBrand
 import company.tap.cardinputwidget.CardBrandSingle
+import company.tap.cardinputwidget.R
 import company.tap.cardinputwidget.databinding.CardBrandViewBinding
+import company.tap.tapuilibrary.themekit.ThemeManager
 import java.net.URL
 
 internal class CardBrandView @JvmOverloads constructor(
@@ -30,10 +33,18 @@ internal class CardBrandView @JvmOverloads constructor(
     internal var tintColorInt: Int = 0
 
     internal var onScanClicked: () -> Unit = {}
+    @DrawableRes
+    val iconViewRes: Int =
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) {
+            R.drawable.card_icon_dark
+        }else if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("light")) {
+            R.drawable.card_icon_light
+        }else  R.drawable.card_icon_light
 
     init {
         isFocusable = false
         setScanClickListener()
+        iconView.setImageResource(iconViewRes)
     }
 
     internal fun showBrandIcon(brand: CardBrand, shouldShowErrorIcon: Boolean) {

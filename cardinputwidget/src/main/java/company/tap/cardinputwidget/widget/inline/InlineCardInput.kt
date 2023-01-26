@@ -112,7 +112,7 @@ class InlineCardInput @JvmOverloads constructor(
    var closeIconDrawable: Drawable?=null
     @DrawableRes
     val closeIcon: Int =
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.icon_close_dark else R.drawable.icon_close2
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.icon_clear_dark_mode else R.drawable.icon_clear_light_mode
 
     @DrawableRes
     val scannerIcon: Int =

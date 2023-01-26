@@ -15,8 +15,11 @@ enum class CardBrand(
     @DrawableRes val cvcIcon: Int =
         if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.dark_cvv else R.drawable.light_cvv,
     @DrawableRes val errorIcon: Int =
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.dark_card else R.drawable.card_icon_light,
-
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) {
+            R.drawable.card_icon_dark
+        }else if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("light")) {
+            R.drawable.card_icon_light
+        }else  R.drawable.card_icon_light,
 
     /**
      * Accepted CVC lengths

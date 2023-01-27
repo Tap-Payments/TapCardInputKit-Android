@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mainLinear"
 
@@ -10,6 +10,7 @@
 
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/inline_CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
@@ -21,7 +22,7 @@
             android:id="@+id/separator"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            tools:background="@color/black_27"
+            tools:background="@color/red_error"
             android:visibility="gone" />
 
         <RelativeLayout
@@ -39,76 +40,31 @@
 
                 android:orientation="horizontal" />
 
-            <RelativeLayout
-                android:id="@+id/linear_paylayout"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_gravity="center"
-                android:layout_alignParentEnd="true"
-                android:orientation="horizontal"
-                android:layout_toEndOf="@+id/payment_input_layout"
 
-
-                >
-
-<!--
-
-                <ImageView
-                    android:id="@+id/nfc_button"
-                    android:layout_width="40dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:padding="6dp"
-                    android:src="@drawable/icon_nfc"
-
-
-                    android:visibility="visible" />
-
-                <ImageView
-                    android:id="@+id/card_scanner_button"
-                    android:layout_width="40dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:layout_gravity="center"
-                    android:layout_toEndOf="@+id/nfc_button"
-                    android:padding="6dp"
-                    android:src="@drawable/icon_scan"
-                    android:visibility="visible" />
--->
-
-                <ImageView
-                    android:id="@+id/clear_text"
-                    android:layout_width="40dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_toEndOf="@+id/nfc_button"
-                    android:padding="10dp"
-                    android:layout_alignParentEnd="true"
-                    android:src="@drawable/icon_close2"
-                    android:visibility="gone" />
-
-            </RelativeLayout>
 
             <company.tap.tapuilibrary.uikit.views.TapAlertView
                 android:id="@+id/alertView"
                 android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_below="@+id/linear_paylayout"/>
+                android:layout_height="42dp"
+                android:layout_marginTop="-4dp"
+                android:layout_below="@+id/payment_input_layout"/>
 
             <company.tap.tapuilibrary.uikit.atoms.TapSeparatorView
                 android:id="@+id/separator4"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                tools:background="@color/black_27"
+                tools:background="@color/red_error"
                 android:visibility="gone"
-                android:layout_below="@+id/linear_paylayout"/>
+                android:layout_below="@+id/payment_input_layout"/>
 
             <company.tap.tapuilibrary.uikit.views.TapInlineCardSwitch
                 android:id="@+id/switch_Inline_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
 
                 android:layout_gravity="start"
                 android:layoutDirection="locale"

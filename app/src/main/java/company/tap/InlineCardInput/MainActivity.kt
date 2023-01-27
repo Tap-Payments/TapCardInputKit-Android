@@ -22,6 +22,7 @@ import company.tap.tapuilibrary.uikit.views.TapAlertView
 import company.tap.tapuilibrary.uikit.views.TapCardSwitch
 import company.tap.tapuilibrary.uikit.datasource.TapSwitchDataSource
 import company.tap.tapuilibrary.uikit.views.TapInlineCardSwitch
+import kotlinx.android.synthetic.main.tap_payment_input.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -78,11 +79,14 @@ class MainActivity : AppCompatActivity() {
         switchSaveCard = switchLL?.findViewById(R.id.switchSaveCard)
         //   switchLL?.setSwitchDataSource(TapSwitchDataSource("Sasa","Save For later","sa","asa","asa"))
         cardInlineForm.switchCardEnabled = true
-        /* cardInlineForm.setSavedCardDetails(Card("5123 4500 0000 0008",null,7,23,
+
+/*
+ cardInlineForm.setSavedCardDetails(Card("5123 4500 0000 0008",null,7,23,
             "dsd",null,null,null,
             null,null,null,null,null,
             "0008",CardBrand.MasterCard,"sdsds",null,null,null,null,null),CardInputUIStatus.SavedCard)
 */
+
         mainView.setOnTouchListener { v, event ->
             //cardInlineForm.onTouchView()
             true
@@ -110,7 +114,8 @@ class MainActivity : AppCompatActivity() {
 
                     //  cardInlineForm.setCardNumber(maskCardNumber(s.toString()))
                     cardInlineForm.setSingleCardInput(CardBrandSingle.fromCode(s.toString()))
-
+                    alertView.visibility =View.VISIBLE
+                    alertView.alertMessage.text ="vwrongggg"
                 }
 
             }
@@ -158,13 +163,18 @@ class MainActivity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable?) {
                 switchLL?.switchSaveCard?.text="Save for later"
-                switchLL?.switchSaveCard?.visibility =View.GONE
-                switchLL?.saveForOtherCheckBox?.visibility =View.GONE
-                switchLL?.toolsTipImageView?.visibility =View.GONE
-                switchLL?.visibility =View.GONE
+
                 cardInlineForm.setVisibilityOfHolderField(true)
+                cardInlineForm.separator_1.visibility =View.VISIBLE
+                alertView.visibility =View.GONE
+                switchLL?.switchSaveCard?.visibility =View.VISIBLE
+                switchLL?.saveForOtherCheckBox?.visibility =View.VISIBLE
+                switchLL?.toolsTipImageView?.visibility =View.VISIBLE
+                switchLL?.brandingLayout?.visibility =View.GONE
+                switchLL?.visibility =View.VISIBLE
                 if(cardInlineForm.holderNameEnabled){
                     switchLL?.setPaddingRelative(0,100,0,0)
+
 
                 }
             }

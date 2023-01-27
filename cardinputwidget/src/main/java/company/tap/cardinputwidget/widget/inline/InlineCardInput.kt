@@ -89,7 +89,7 @@ class InlineCardInput @JvmOverloads constructor(
     internal val holderNameEditText = viewBinding.holderNameEditText
 
     @JvmSynthetic
-    internal val separator_1 = viewBinding.separator1
+     val separator_1 = viewBinding.separator1
 
     //@JvmSynthetic
    //  var separator2 = viewBinding.separator2
@@ -564,6 +564,7 @@ class InlineCardInput @JvmOverloads constructor(
         cardNumberIsViewed = false
         onTouchHandling()
         cvcNumberEditText.requestFocus()
+        cvcNumberEditText.setBackgroundResource(R.drawable.underline_editext)
         val cvvHint : String = LocalizationManager.getValue("saveCardCVV","SavedCardTitle")
         cvcNumberEditText.hint = cvvHint
        // cvcNumberEditText.getBackground().setColorFilter(getResources().getColor(R.color.red_error), PorterDuff.Mode.SRC_ATOP)

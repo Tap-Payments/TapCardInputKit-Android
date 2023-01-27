@@ -47,7 +47,7 @@
         android:layout_marginLeft="9dp"
         android:layout_marginRight="9dp"
 
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="6dp"
         android:layout_gravity="center"
 
@@ -124,7 +124,7 @@
             android:gravity="start|end"
             android:imeOptions="actionNext"
             app:layout_constraintEnd_toStartOf="@+id/cvc_text_input_layout"
-            android:layout_marginEnd="18dp"
+            android:layout_marginEnd="9dp"
             tools:ignore="UnusedAttribute">
 
             <company.tap.cardinputwidget.views.ExpiryDateEditText
@@ -166,7 +166,7 @@ android:background="@android:color/transparent"
             android:visibility="visible"
             android:gravity="start|end"
             app:layout_constraintEnd_toStartOf="@+id/linear_paylayout"
-            android:layout_marginEnd="@dimen/margin_basic_14dp"
+            android:layout_marginEnd="23dp"
             tools:ignore="UnusedAttribute">
 
             <company.tap.cardinputwidget.views.CvcEditText
@@ -175,6 +175,7 @@ android:background="@android:color/transparent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="start|end"
+
 
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/acc_label_cvc_node"
@@ -208,7 +209,7 @@ android:background="@android:color/transparent"
             <ImageView
                 android:id="@+id/cvvIcon"
                 android:layout_width="32dp"
-                android:layout_height="match_parent"
+                android:layout_height="23dp"
                 android:layout_gravity="center"
 
                 android:padding="2dp"
@@ -220,7 +221,7 @@ android:background="@android:color/transparent"
             <ImageView
                 android:id="@+id/nfc_button"
                 android:layout_width="32dp"
-                android:layout_height="match_parent"
+                android:layout_height="20dp"
                 android:layout_gravity="center"
 
                 android:src="@drawable/icon_nfc"
@@ -231,9 +232,11 @@ android:background="@android:color/transparent"
             <ImageView
                 android:id="@+id/card_scanner_button"
                 android:layout_width="32dp"
-                android:layout_height="match_parent"
+                android:layout_height="20dp"
                 android:layout_alignParentEnd="true"
                 android:layout_gravity="center"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
 
                 android:layout_toEndOf="@+id/nfc_button"
                 android:src="@drawable/icon_scan"
@@ -242,7 +245,7 @@ android:background="@android:color/transparent"
             <ImageView
                 android:id="@+id/clear_text"
                 android:layout_width="32dp"
-                android:layout_height="match_parent"
+                android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_toEndOf="@+id/nfc_button"
                 android:padding="5dp"
@@ -282,7 +285,9 @@ android:background="@android:color/transparent"
         android:layout_height="wrap_content"
         android:accessibilityLiveRegion="polite"
         android:background="@android:color/transparent"
-        android:layout_marginTop="@dimen/margin_basic_10dp"
+        android:layout_marginStart="@dimen/margin_basic_10dp"
+        android:layout_marginEnd="@dimen/margin_basic_8dp"
+        android:layout_marginTop="@dimen/margin_basic_8dp"
         android:contentDescription="@string/acc_label_holder_name"
         android:labelFor="@id/holder_name_edit_text"
         android:visibility="gone"

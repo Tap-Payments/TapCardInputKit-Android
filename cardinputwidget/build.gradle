@@ -43,7 +43,7 @@ android {
         implementation 'androidx.core:core-ktx:1.2.0'
         api 'com.google.android.material:material:1.1.0'
         implementation 'com.github.Tap-Payments:CommonDataModelsKit-Android:0.1.5'
-        implementation 'com.github.Tap-Payments:TapUIKit-Android:1.1.1.358.175'
+        implementation 'com.github.Tap-Payments:TapUIKit-Android:1.1.1.358.178'
         implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
         testImplementation 'junit:junit:4.13'
         androidTestImplementation 'androidx.test.ext:junit:1.1.1'

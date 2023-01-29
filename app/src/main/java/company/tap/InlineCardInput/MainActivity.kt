@@ -80,13 +80,18 @@ class MainActivity : AppCompatActivity() {
         //   switchLL?.setSwitchDataSource(TapSwitchDataSource("Sasa","Save For later","sa","asa","asa"))
         cardInlineForm.switchCardEnabled = true
 
-/*
- cardInlineForm.setSavedCardDetails(Card("5123 4500 0000 0008",null,7,23,
+
+   /* cardInlineForm.setSavedCardDetails(Card("5123 4500 0000 0008",null,7,23,
             "dsd",null,null,null,
             null,null,null,null,null,
             "0008",CardBrand.MasterCard,"sdsds",null,null,null,null,null),CardInputUIStatus.SavedCard)
-*/
 
+        cardInlineForm.setSingleCardInput(
+            CardBrandSingle.fromCode(
+                company.tap.cardinputwidget.CardBrand.fromCardNumber("512345")
+                    .toString()
+            ), "https://back-end.b-cdn.net/payment_methods/visa.svg"
+        )*/
         mainView.setOnTouchListener { v, event ->
             //cardInlineForm.onTouchView()
             true
@@ -128,6 +133,15 @@ class MainActivity : AppCompatActivity() {
             nfcButton?.visibility = View.VISIBLE
             cardScannerBtn?.visibility = View.VISIBLE
         }
+        cardInlineForm.setExpiryDateTextWatcher(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
 
         cardInlineForm.setHolderNameTextWatcher(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -151,6 +165,8 @@ class MainActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 //   checkoutFragment.scrollView?.scrollTo(0,height)
                 // tapCardInputView.requestFocus()
+                alertView.visibility =View.VISIBLE
+                alertView.alertMessage.text = "Enter the 3-digit CVV number (usually at the back of the card)"
                 switchLL?.switchSaveCard?.visibility =View.GONE
                 switchLL?.saveForOtherCheckBox?.visibility =View.GONE
                 switchLL?.toolsTipImageView?.visibility =View.GONE
@@ -166,7 +182,7 @@ class MainActivity : AppCompatActivity() {
 
                 cardInlineForm.setVisibilityOfHolderField(true)
                 cardInlineForm.separator_1.visibility =View.VISIBLE
-                alertView.visibility =View.GONE
+
                 switchLL?.switchSaveCard?.visibility =View.VISIBLE
                 switchLL?.saveForOtherCheckBox?.visibility =View.VISIBLE
                 switchLL?.toolsTipImageView?.visibility =View.VISIBLE
@@ -193,4 +209,21 @@ class MainActivity : AppCompatActivity() {
     fun mask(input: String): String? {
         return input.replace(".(?=.{4})".toRegex(), "•")
     }
+
+    fun addME(view: View) {
+        println("clickckc")
+        cardInlineForm.setSavedCardDetails(Card("5123 4500 0000 0008",null,7,23,
+            "dsd",null,null,null,
+            null,null,null,null,null,
+            "0008",CardBrand.MasterCard,"sdsds",null,null,null,null,null),CardInputUIStatus.SavedCard)
+
+        cardInlineForm.setSingleCardInput(
+            CardBrandSingle.fromCode(
+                company.tap.cardinputwidget.CardBrand.fromCardNumber("512345")
+                    .toString()
+            ), "https://back-end.b-cdn.net/payment_methods/visa.svg"
+        )
+    }
+
+
 }

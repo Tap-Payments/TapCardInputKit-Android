@@ -30,5 +30,11 @@
             app:shouldShowHolderName="false" />
 
     </com.google.android.material.card.MaterialCardView>-->
+<Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="addme"
+    android:onClick="addME"
+    />
 
 </LinearLayout>

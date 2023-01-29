@@ -41,6 +41,7 @@
         />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
@@ -54,7 +55,8 @@
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/container"
+            android:id="@+id/container1"
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
@@ -164,6 +166,8 @@ android:background="@android:color/transparent"
             android:nextFocusRight="@id/holder_name_edit_text"
             app:hintEnabled="false"
             android:visibility="visible"
+
+
             android:gravity="start|end"
             app:layout_constraintEnd_toStartOf="@+id/linear_paylayout"
             android:layout_marginEnd="23dp"
@@ -175,8 +179,6 @@ android:background="@android:color/transparent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="start|end"
-
-
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/acc_label_cvc_node"
                 android:fontFamily="sans-serif-light"
@@ -184,6 +186,7 @@ android:background="@android:color/transparent"
                 android:hint="CVV"
                 android:imeOptions="actionNext"
                 android:inputType="numberPassword"
+                app:endIconDrawable="@drawable/cvv_icon"
                 android:textDirection="locale"
                 android:textSize="@dimen/font_size_14sp"
                 app:boxStrokeWidth="0dp"

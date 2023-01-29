@@ -1,10 +1,8 @@
 package company.tap.cardinputwidget.widget.inline
 
 import android.annotation.SuppressLint
-import android.app.usage.UsageEvents
 import android.content.Context
 import android.graphics.Color
-import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Parcelable
@@ -65,8 +63,8 @@ class InlineCardInput @JvmOverloads constructor(
             this,true
     )
 
-  //  private val containerLayout1 = viewBinding.container1
-    private val containerLayout = viewBinding.container
+    private val containerLayout1 = viewBinding.container1
+    internal val containerLayout = viewBinding.container
 
     @JvmSynthetic
     internal val cardBrandView = viewBinding.cardBrandView
@@ -565,8 +563,9 @@ class InlineCardInput @JvmOverloads constructor(
         onTouchHandling()
         cvcNumberEditText.requestFocus()
         cvcNumberEditText.setBackgroundResource(R.drawable.underline_editext)
-        val cvvHint : String = LocalizationManager.getValue("saveCardCVV","SavedCardTitle")
-        cvcNumberEditText.hint = cvvHint
+        cvcNumberEditText.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.icon_cvcdraw, 0, 0)
+      //  val cvvHint : String = LocalizationManager.getValue("saveCardCVV","SavedCardTitle")
+      //  cvcNumberEditText.hint = cvvHint
        // cvcNumberEditText.getBackground().setColorFilter(getResources().getColor(R.color.red_error), PorterDuff.Mode.SRC_ATOP)
         cvcNumberEditText.isEnabled = true
 

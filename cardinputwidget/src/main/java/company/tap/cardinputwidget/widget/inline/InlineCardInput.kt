@@ -563,7 +563,7 @@ class InlineCardInput @JvmOverloads constructor(
         onTouchHandling()
         cvcNumberEditText.requestFocus()
         cvcNumberEditText.setBackgroundResource(R.drawable.underline_editext)
-        cvcNumberEditText.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.icon_cvcdraw, 0, 0)
+      //  cvcNumberEditText.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.icon_cvcdraw, 0, 0)
       //  val cvvHint : String = LocalizationManager.getValue("saveCardCVV","SavedCardTitle")
       //  cvcNumberEditText.hint = cvvHint
        // cvcNumberEditText.getBackground().setColorFilter(getResources().getColor(R.color.red_error), PorterDuff.Mode.SRC_ATOP)

@@ -280,7 +280,7 @@ android:background="@android:color/transparent"
         android:layout_width="wrap_content"
         android:layout_height="0.5dp"
         android:visibility="gone"
-        android:background="@color/light_gray" />
+        android:background="@color/grayunderline" />
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/holder_name_text_input_layout"
         style="@style/Tap.CardInputWidget.TextInputLayout"
@@ -323,7 +323,7 @@ android:background="@android:color/transparent"
         android:layout_width="wrap_content"
         android:layout_height="0.5dp"
         android:visibility="visible"
-        android:background="@color/light_gray" />
+        android:background="@color/grayunderline" />
 
     <WebView
         android:id="@+id/webView"

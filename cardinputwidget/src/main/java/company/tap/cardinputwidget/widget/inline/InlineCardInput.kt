@@ -10,6 +10,7 @@ import android.text.*
 import android.util.AttributeSet
 import android.view.*
 import android.view.View.OnFocusChangeListener
+import android.view.View.OnTouchListener
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.Transformation
@@ -20,13 +21,10 @@ import androidx.annotation.*
 import androidx.annotation.IntRange
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.AccessibilityDelegateCompat
-import androidx.core.view.MotionEventCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import company.tap.cardinputwidget.*
 import company.tap.cardinputwidget.databinding.CardInputWidgetBinding
-import company.tap.cardinputwidget.utils.CardUtils
-
 import company.tap.cardinputwidget.utils.DateUtils
 import company.tap.cardinputwidget.utils.TextValidator
 import company.tap.cardinputwidget.views.CardNumberEditText
@@ -107,7 +105,13 @@ class InlineCardInput @JvmOverloads constructor(
     lateinit var closeButton :ImageView
     lateinit var linearIconsLayout :LinearLayout
     lateinit var separatorcard2 :TapSeparatorView
-   var closeIconDrawable: Drawable?=null
+   var closeIconDrawable: Drawable?     =
+       if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")){
+           context.resources.getDrawable( R.drawable.icon_clear_dark_mode)
+       } else{
+           context.resources.getDrawable( R.drawable.icon_clear_light_mode)
+       }
+
     @DrawableRes
     val closeIcon: Int =
         if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.icon_clear_dark_mode else R.drawable.icon_clear_light_mode
@@ -379,16 +383,16 @@ class InlineCardInput @JvmOverloads constructor(
         alertView1.visibility =View.GONE
        // separatorcard2.visibility =View.GONE
       // initWebView() //hide for now based on validation
+
         //Added close icon for holdername
-         closeIconDrawable = context.resources.getDrawable(R.drawable.icon_close2)
-        closeIconDrawable?.setBounds(0,0,32,40) // set size
-        holderNameEditText.setCompoundDrawables(null,null,closeIconDrawable,null) // set position of drawable
+         //closeIconDrawable = context.resources.getDrawable(R.drawable.icon_close2)
+             setDrawableForHolderName()
             // holderNameTextInputLayout.setEndIconDrawable(R.drawable.icon_close2)
-        holderNameEditText.setOnClickListener {
+       /* holderNameEditText.setOnClickListener {
             println("aszdsadasfa")
             holderNameEditText.setText("")
             holderNameEditText.setCompoundDrawables(null,null,null,null) // set position of drawable
-        }
+        }*/
 
 
 
@@ -667,6 +671,7 @@ class InlineCardInput @JvmOverloads constructor(
      */
     override fun setHolderNameTextWatcher(holderNameTextWatcher: TextWatcher?) {
         holderNameEditText.addTextChangedListener(holderNameTextWatcher)
+
     }
 
     /**
@@ -1012,6 +1017,7 @@ class InlineCardInput @JvmOverloads constructor(
             if (hasFocus) {
                 scrollEnd()
                 cardInputListener?.onFocusChange(FOCUS_HOLDERNAME)
+
             }
           // updateIconCvc(hasFocus, cvcValue)
         }
@@ -1028,6 +1034,15 @@ class InlineCardInput @JvmOverloads constructor(
 
                     }
                 }
+        )
+
+        holderNameEditText.setAfterTextChangedListener(
+            object : TapTextInput.AfterTextChangedListener {
+                override fun onTextChanged(text: String) {
+                    setDrawableForHolderName()
+
+                }
+            }
         )
 
         cardBrandView.onScanClicked = {
@@ -1087,6 +1102,15 @@ class InlineCardInput @JvmOverloads constructor(
                     // do your stuff here
                     println("expiryDateEditText>>>>>>>>"+expiryDateEditText)
                     expiryDateEditText.requestFocus()
+                }
+                return false
+            }
+        })
+
+        holderNameEditText.setOnEditorActionListener(object : TextView.OnEditorActionListener {
+            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    // do your stuff here
                 }
                 return false
             }
@@ -1782,6 +1806,47 @@ class InlineCardInput @JvmOverloads constructor(
         cardNumberEditText.requestFocus()
         expiryDateEditText.clearFocus()
         cvcNumberEditText.clearFocus()
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    fun setDrawableForHolderName(){
+        closeIconDrawable?.setBounds(0,0,35,35) // set size
+        if (context?.let { LocalizationManager.getLocale(it).language } == "en"){
+            holderNameEditText.setCompoundDrawables(null,null,closeIconDrawable,null) // set position of drawable
+
+        }else{
+            holderNameEditText.setCompoundDrawables(closeIconDrawable,null,null,null) // set position of drawable
+
+        }
+
+        holderNameEditText.setOnTouchListener(OnTouchListener { v, event ->
+            val DRAWABLE_LEFT = 0
+            val DRAWABLE_TOP = 1
+            val DRAWABLE_RIGHT = 2
+            val DRAWABLE_BOTTOM = 3
+            if (event.action === MotionEvent.ACTION_UP) {
+                if (context?.let { LocalizationManager.getLocale(it).language } == "en") {
+                    if (event.rawX >= holderNameEditText.right - holderNameEditText.compoundDrawables[DRAWABLE_RIGHT].bounds.width()
+                    ) {
+                        holderNameEditText.setText("")
+                        holderNameEditText.setCompoundDrawables(null, null, null, null)
+                        // your action here
+                        return@OnTouchListener true
+                    }
+
+
+                }else{
+                    if (event.rawX >= holderNameEditText.left - holderNameEditText.compoundDrawables[DRAWABLE_LEFT].bounds.width()
+                    ) {
+                        holderNameEditText.setText("")
+                        holderNameEditText.setCompoundDrawables(null, null, null, null)
+                        // your action here
+                        return@OnTouchListener true
+                    }
+                }
+            }
+            false
+        })
     }
 
 

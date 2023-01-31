@@ -14,10 +14,11 @@
         <entry key="cardinputwidget/src/main/res/drawable/ic_card_icon_black.xml" value="0.1655" />
         <entry key="cardinputwidget/src/main/res/drawable/icon_cvcdraw.xml" value="0.2015" />
         <entry key="cardinputwidget/src/main/res/drawable/underline_editext.xml" value="0.1735" />
+        <entry key="cardinputwidget/src/main/res/drawable/underline_editext_transparent.xml" value="0.1455" />
         <entry key="cardinputwidget/src/main/res/layout/card_brand_view.xml" value="1.339060974121094" />
         <entry key="cardinputwidget/src/main/res/layout/card_inline_form.xml" value="0.1828125" />
         <entry key="cardinputwidget/src/main/res/layout/card_input_form.xml" value="0.1828125" />
-        <entry key="cardinputwidget/src/main/res/layout/card_input_widget.xml" value="1.3204419889502763" />
+        <entry key="cardinputwidget/src/main/res/layout/card_input_widget.xml" value="0.1959016393442623" />
       </map>
     </option>
   </component>

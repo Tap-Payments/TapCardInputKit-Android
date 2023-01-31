@@ -591,6 +591,7 @@ class InlineCardInput @JvmOverloads constructor(
         expiryDateEditText.isEnabled = false
         backArrow.visibility= View.VISIBLE
         cvvIcon.visibility= View.VISIBLE
+
         nfcButton.visibility= View.GONE
         scannerButton.visibility= View.GONE
         closeButton.visibility= View.GONE
@@ -621,6 +622,7 @@ class InlineCardInput @JvmOverloads constructor(
         scannerButton.visibility= View.VISIBLE
         closeButton.visibility= View.VISIBLE
         cvvIcon.visibility= View.GONE
+
         cvcNumberEditText.hint = LocalizationManager.getValue("cardCVVPlaceHolder", "TapCardInputKit")
     }
 
@@ -1046,6 +1048,18 @@ class InlineCardInput @JvmOverloads constructor(
             }
         )
 
+        cvcNumberEditText.setAfterTextChangedListener(
+            object : TapTextInput.AfterTextChangedListener {
+                override fun onTextChanged(text: String) {
+                    cvcNumberEditText.setBackgroundResource(R.drawable.underline_editext_transparent)
+                    cvvIcon.visibility = View.GONE
+
+                }
+            }
+        )
+
+
+
         cardBrandView.onScanClicked = {
             Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show()
         }
@@ -1117,18 +1131,9 @@ class InlineCardInput @JvmOverloads constructor(
                 return false
             }
         })
-        cvcNumberEditText.setOnEditorActionListener(object : TextView.OnEditorActionListener {
-            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    // do your stuff here
 
-                        cvvIcon.visibility = View.GONE
-                        cvcNumberEditText.background=null
 
-                }
-                return false
-            }
-        })
+
 
     }
 

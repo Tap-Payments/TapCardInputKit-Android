@@ -124,6 +124,9 @@ class InlineCardInput @JvmOverloads constructor(
     val nfcIcon: Int =
         if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) company.tap.tapuilibrary.R.drawable.icon_nfc_light else company.tap.tapuilibrary.R.drawable.icon_nfc
 
+    @DrawableRes
+    val cvvIconDrawable: Int =
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.dark_cvv else R.drawable.light_cvv
 
     private val frameStart: Int
         get() {
@@ -378,6 +381,7 @@ class InlineCardInput @JvmOverloads constructor(
         closeButton =findViewById(R.id.clear_text)
         separatorcard2 =findViewById(R.id.separatorcard2)
         closeButton.setImageResource(closeIcon)
+        cvvIcon.setImageResource(cvvIconDrawable)
         scannerButton.setImageResource(scannerIcon)
         nfcButton.setImageResource(nfcIcon)
         linearIconsLayout =findViewById(R.id.linear_paylayout)

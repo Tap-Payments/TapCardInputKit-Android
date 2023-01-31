@@ -219,7 +219,7 @@ android:background="@android:color/transparent"
                 android:layout_gravity="center"
                 android:padding="2dp"
 
-                android:visibility="visible" />
+                android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/nfc_button"

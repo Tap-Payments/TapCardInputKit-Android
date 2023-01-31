@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         paymentInputContainer = findViewById(R.id.payment_input_layout)
         mainView = findViewById(R.id.mainView)
         cardInlineForm.holderNameEnabled= true
-      //  cardInlineForm.setVisibilityOfHolderField(true)
+        cardInlineForm.setVisibilityOfHolderField(true)
         //switchLL = cardInlineForm.findViewById(R.id.mainSwitchInline)
         switchLL = findViewById(R.id.switch_Inline_card)
         cardInlineForm.holderNameEnabled = false
@@ -97,7 +97,8 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-
+        nfcButton?.visibility = View.GONE
+        cardScannerBtn?.visibility = View.GONE
         cardInlineForm.setCardNumberTextWatcher(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
 //                cardNumAfterTextChangeListener(s, this)

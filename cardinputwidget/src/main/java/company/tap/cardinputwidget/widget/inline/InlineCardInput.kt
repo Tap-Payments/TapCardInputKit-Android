@@ -23,6 +23,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.AccessibilityDelegateCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
+import androidx.core.view.isVisible
 import company.tap.cardinputwidget.*
 import company.tap.cardinputwidget.databinding.CardInputWidgetBinding
 import company.tap.cardinputwidget.utils.DateUtils
@@ -1080,6 +1081,7 @@ class InlineCardInput @JvmOverloads constructor(
             if (holderNameEnabled) {
                 holderNameEditText.requestFocus()
             }
+
            // initWebView()
         }
 
@@ -1111,6 +1113,18 @@ class InlineCardInput @JvmOverloads constructor(
             override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     // do your stuff here
+                }
+                return false
+            }
+        })
+        cvcNumberEditText.setOnEditorActionListener(object : TextView.OnEditorActionListener {
+            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    // do your stuff here
+
+                        cvvIcon.visibility = View.GONE
+                        cvcNumberEditText.background=null
+
                 }
                 return false
             }
@@ -1810,7 +1824,9 @@ class InlineCardInput @JvmOverloads constructor(
 
     @SuppressLint("ClickableViewAccessibility")
     fun setDrawableForHolderName(){
-        closeIconDrawable?.setBounds(0,0,35,35) // set size
+
+        closeIconDrawable?.setBounds(0,0,30,30) // set size
+
         if (context?.let { LocalizationManager.getLocale(it).language } == "en"){
             holderNameEditText.setCompoundDrawables(null,null,closeIconDrawable,null) // set position of drawable
 

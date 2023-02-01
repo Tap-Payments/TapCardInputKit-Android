@@ -3,6 +3,7 @@ package company.tap.cardinputwidget.widget.inline
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Parcelable
@@ -37,6 +38,7 @@ import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion
 import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_HOLDERNAME
 import company.tap.cardinputwidget.widget.CardValidCallback
 import company.tap.taplocalizationkit.LocalizationManager
+import company.tap.tapuilibrary.fontskit.enums.TapFont
 import company.tap.tapuilibrary.themekit.ThemeManager
 import company.tap.tapuilibrary.uikit.atoms.TapSeparatorView
 import company.tap.tapuilibrary.uikit.atoms.TapTextInput
@@ -391,20 +393,59 @@ class InlineCardInput @JvmOverloads constructor(
       // initWebView() //hide for now based on validation
 
         //Added close icon for holdername
-         //closeIconDrawable = context.resources.getDrawable(R.drawable.icon_close2)
              setDrawableForHolderName()
-            // holderNameTextInputLayout.setEndIconDrawable(R.drawable.icon_close2)
-       /* holderNameEditText.setOnClickListener {
-            println("aszdsadasfa")
-            holderNameEditText.setText("")
-            holderNameEditText.setCompoundDrawables(null,null,null,null) // set position of drawable
-        }*/
 
+        setThemeForHints()
+    }
 
+    private fun setThemeForHints() {
+        if (context?.let { LocalizationManager.getLocale(it).language } == "en") setFontsEnglish() else setFontsArabic()
+    }
 
+    private fun setFontsArabic() {
+        cardNumberEditText.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.TajawalLight
+            )
+        )
+        cvcNumberEditText.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.TajawalLight
+            )
+        )
+            holderNameEditText.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.TajawalLight
+            )
+        )
+        expiryDateEditText.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.TajawalLight
+            )
+        )
+    }
 
-
-        //   holderNameTextInputLayout.drawa.setLeftTopRightBottom()
+    private fun setFontsEnglish() {
+        cardNumberEditText.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.RobotoLight
+            )
+        )
+        cvcNumberEditText.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.RobotoLight
+            )
+        )
+        holderNameEditText.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.RobotoLight
+            )
+        )
+        expiryDateEditText.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.RobotoLight
+            )
+        )
     }
 
     private fun initWebView() {

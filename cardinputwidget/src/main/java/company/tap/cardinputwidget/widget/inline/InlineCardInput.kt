@@ -382,6 +382,7 @@ class InlineCardInput @JvmOverloads constructor(
         separatorcard2 =findViewById(R.id.separatorcard2)
         closeButton.setImageResource(closeIcon)
         cvvIcon.setImageResource(cvvIconDrawable)
+        cardBrandView.iconViewRes
         scannerButton.setImageResource(scannerIcon)
         nfcButton.setImageResource(nfcIcon)
         linearIconsLayout =findViewById(R.id.linear_paylayout)

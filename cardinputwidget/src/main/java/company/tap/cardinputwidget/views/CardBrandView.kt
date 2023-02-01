@@ -39,7 +39,9 @@ internal class CardBrandView @JvmOverloads constructor(
             R.drawable.card_icon_dark
         }else if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("light")) {
             R.drawable.card_icon_light
-        }else  R.drawable.card_icon_light
+        }else  {
+            R.drawable.card_icon_light
+        }
 
     init {
         isFocusable = false

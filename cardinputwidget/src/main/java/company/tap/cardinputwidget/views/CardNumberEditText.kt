@@ -224,7 +224,7 @@ class CardNumberEditText @JvmOverloads constructor(
                     if (fieldText.length == lengthMax) {
 
                         val wasCardNumberValid = isCardNumberValid
-                        println("")
+                        println("filed vl"+maskCardNumber(fieldText))
                         isCardNumberValid = CardUtils.isValidCardNumber(fieldText)
                         shouldShowError = !isCardNumberValid
                         if (!wasCardNumberValid && isCardNumberValid) {
@@ -247,5 +247,12 @@ class CardNumberEditText @JvmOverloads constructor(
     @JvmSynthetic
     internal fun updateCardBrandFromNumber(partialNumber: String) {
         cardBrand = CardUtils.getPossibleCardBrand(partialNumber)
+    }
+    private fun  maskCardNumber(cardInput: String): String {
+        val maskLen: Int = cardInput.length - 4
+        println("maskLen"+maskLen)
+        println("cardInput"+cardInput.length)
+        if (maskLen <= 0) return cardInput // Nothing to mask
+        return (cardInput).replaceRange(0, maskLen, "•••• ")
     }
 }

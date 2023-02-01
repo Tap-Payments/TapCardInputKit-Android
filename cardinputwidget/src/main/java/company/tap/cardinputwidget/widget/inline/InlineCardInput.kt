@@ -549,7 +549,7 @@ class InlineCardInput @JvmOverloads constructor(
      */
     override fun setCardNumber(cardNumber: String?) {
         println("setCardNumber value>>>"+cardNumber)
-        cardNumberEditText.setText(cardNumber)
+        cardNumberEditText.setText(cardNumber?.let { maskCardNumber(it) })
        // println("maskCardNumber>>>"+maskCardNumber(fieldText))
         this.cardNumberIsViewed = !cardNumberEditText.isCardNumberValid
         expiryDateEditText.requestFocus()
@@ -1121,6 +1121,7 @@ class InlineCardInput @JvmOverloads constructor(
             cvcNumberEditText.visibility = View.VISIBLE
 
             println("cardNumberEditText is????"+cardNumberEditText.cardNumber)
+            setCardNumber(cardNumberEditText.cardNumber)
            // scrollEnd()
             cardInputListener?.onCardComplete()
         }
@@ -1716,7 +1717,8 @@ class InlineCardInput @JvmOverloads constructor(
         override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
             super.applyTransformation(interpolatedTime, t)
             view.layoutParams = (view.layoutParams as ConstraintLayout.LayoutParams).apply {
-                marginStart = (-0.9f * hiddenCardWidth.toFloat() * interpolatedTime).toInt()
+                marginStart = (0f * hiddenCardWidth.toFloat() * interpolatedTime).toInt()
+              //  marginStart = (-0.9f * hiddenCardWidth.toFloat() * interpolatedTime).toInt() //commented by ahlaam for masking
             }
         }
     }

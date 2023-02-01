@@ -60,9 +60,9 @@ enum class CardBrand(
     AmericanExpress(
         "amex",
         "American Express",
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.dark_card else R.drawable.card_icon_light,
-        cvcIcon = R.drawable.dark_cvv,
-        errorIcon = if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.dark_card else R.drawable.card_icon_light,
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")){ R.drawable.card_icon_dark} else R.drawable.card_icon_light,
+        cvcIcon = if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")){ R.drawable.dark_cvv }else R.drawable.light_cvv,
+        errorIcon = if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")){ R.drawable.card_icon_dark }else R.drawable.card_icon_light,
         cvcLength = setOf(3, 4),
         defaultMaxLength = 15,
         pattern = Pattern.compile("^(34|37)[0-9]*$"),
@@ -72,7 +72,7 @@ enum class CardBrand(
     Discover(
         "discover",
         "Discover",
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.dark_card else R.drawable.card_icon_light,
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.card_icon_dark else R.drawable.card_icon_light,
         pattern = Pattern.compile("^(60|64|65)[0-9]*$")
     ),
 
@@ -84,7 +84,7 @@ enum class CardBrand(
     JCB(
         "jcb",
         "JCB",
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.dark_card else R.drawable.card_icon_light,
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.card_icon_dark else R.drawable.card_icon_light,
         pattern = Pattern.compile("^(352[89]|35[3-8][0-9])[0-9]*$"),
         partialPatterns = mapOf(
             2 to Pattern.compile("^(35)$"),
@@ -101,7 +101,7 @@ enum class CardBrand(
     DinersClub(
         "diners",
         "Diners Club",
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.dark_card else R.drawable.card_icon_light,
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.card_icon_dark else R.drawable.card_icon_light,
         defaultMaxLength = 16,
         pattern = Pattern.compile("^(36|30|38|39)[0-9]*$"),
         variantMaxLength = mapOf(
@@ -115,7 +115,7 @@ enum class CardBrand(
     Visa(
         "visa",
         "Visa",
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.dark_card else R.drawable.card_icon_light,
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.card_icon_dark else R.drawable.card_icon_light,
         pattern = Pattern.compile("^(4)[0-9]*$")
     ),
 
@@ -129,14 +129,14 @@ enum class CardBrand(
     UnionPay(
         "unionpay",
         "UnionPay",
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.dark_card else R.drawable.card_icon_light,
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.card_icon_dark else R.drawable.card_icon_light,
         pattern = Pattern.compile("^(62|81)[0-9]*$")
     ),
 
     Unknown(
         "unknown",
         "Unknown",
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.dark_card else R.drawable.card_icon_light,
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.card_icon_dark else R.drawable.card_icon_light,
         cvcLength = setOf(3, 4)
     );
 

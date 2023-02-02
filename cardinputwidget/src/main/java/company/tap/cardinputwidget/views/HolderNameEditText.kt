@@ -39,6 +39,18 @@ class HolderNameEditText @JvmOverloads constructor(
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             setAutofillHints(View.AUTOFILL_HINT_POSTAL_CODE)
         }
+     /*   filters = arrayOf(
+            InputFilter { cs, start, end, spanned, dStart, dEnd -> // TODO Auto-generated method stub
+                if (cs == "") { // for backspace
+                    return@InputFilter cs
+                }
+                val pattern = Regex("[ABCDEFGHIJKLMNOPQRSTUVWXYZ .]")
+                (if (cs.toString().matches(pattern)){
+
+                } else "").toString()
+            }
+        )*/
+
     }
 
     override fun onFinishInflate() {
@@ -55,6 +67,8 @@ class HolderNameEditText @JvmOverloads constructor(
         keyListener = TextKeyListener.getInstance()
         inputType = InputType.TYPE_TEXT_VARIATION_POSTAL_ADDRESS
     }
+
+
 
     /**
      * If a `TextInputLayout` is an ancestor of this view, set the hint on it. Otherwise, set

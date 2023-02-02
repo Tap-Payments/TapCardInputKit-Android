@@ -298,6 +298,8 @@ android:background="@android:color/transparent"
         tools:ignore="UnusedAttribute"
         android:nextFocusLeft="@id/cvc_text_input_layout"
         android:nextFocusUp="@id/cvc_text_input_layout"
+        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ "
+        android:inputType="text"
         tools:replace="android:supportsRtl">
 
         <company.tap.cardinputwidget.views.HolderNameEditText
@@ -308,6 +310,8 @@ android:background="@android:color/transparent"
             android:background="@android:color/transparent"
             android:enabled="true"
             android:fontFamily="sans-serif-light"
+            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ "
+            android:inputType="text"
             android:imeOptions="actionDone"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"

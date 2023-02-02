@@ -1895,6 +1895,7 @@ class InlineCardInput @JvmOverloads constructor(
             val DRAWABLE_BOTTOM = 3
             if (event.action === MotionEvent.ACTION_UP) {
                 if (context?.let { LocalizationManager.getLocale(it).language } == "en") {
+                   if( holderNameEditText.compoundDrawables[DRAWABLE_RIGHT]!=null )
                     if (event.rawX >= holderNameEditText.right - holderNameEditText.compoundDrawables[DRAWABLE_RIGHT].bounds.width()
                     ) {
                         holderNameEditText.setText("")
@@ -1905,6 +1906,7 @@ class InlineCardInput @JvmOverloads constructor(
 
 
                 }else{
+                    if( holderNameEditText.compoundDrawables[DRAWABLE_LEFT]!=null )
                     if (event.rawX >= holderNameEditText.left - holderNameEditText.compoundDrawables[DRAWABLE_LEFT].bounds.width()
                     ) {
                         holderNameEditText.setText("")

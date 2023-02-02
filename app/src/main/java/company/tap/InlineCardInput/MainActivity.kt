@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         cardScannerBtn = findViewById(R.id.card_scanner_button)
         nfcButton = findViewById(R.id.nfc_button)
         cardBrna = cardInlineForm.findViewById(R.id.card_brand_view)
-        cardBrna?.iconView?.setImageResource(R.drawable.bahrain)
+       // cardBrna?.iconView?.setImageResource(R.drawable.bahrain)
         tapAlertView?.alertMessage?.text = "Card number is missing"
         tapAlertView?.visibility = View.GONE
         nfcButton?.visibility = View.VISIBLE
@@ -80,6 +80,7 @@ class MainActivity : AppCompatActivity() {
             nfcButton?.visibility = View.VISIBLE
             cardScannerBtn?.visibility = View.VISIBLE
         }
+
         switchSaveCard = switchLL?.findViewById(R.id.switchSaveCard)
         //   switchLL?.setSwitchDataSource(TapSwitchDataSource("Sasa","Save For later","sa","asa","asa"))
         cardInlineForm.switchCardEnabled = true

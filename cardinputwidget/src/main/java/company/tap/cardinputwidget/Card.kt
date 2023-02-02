@@ -12,7 +12,7 @@ data class Card(
     /**
      * @return the [number] of this card
      */
-    val number: String?,
+    var number: String?,
 
     /**
      * @return the [cvc] for this card

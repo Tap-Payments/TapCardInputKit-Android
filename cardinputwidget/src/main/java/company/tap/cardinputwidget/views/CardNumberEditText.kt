@@ -85,6 +85,13 @@ class CardNumberEditText @JvmOverloads constructor(
             null
         }
 
+    val maskedCardNumber: String?
+        get() = if (isCardNumberValid) {
+            maskCardNumber(fieldText)
+        } else {
+            null
+        }
+
     init {
         setErrorMessage(resources.getString(R.string.invalid_card_number))
         listenForTextChanges()

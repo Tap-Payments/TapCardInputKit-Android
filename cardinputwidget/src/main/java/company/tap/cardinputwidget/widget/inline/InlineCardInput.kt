@@ -549,10 +549,16 @@ class InlineCardInput @JvmOverloads constructor(
      */
     override fun setCardNumber(cardNumber: String?) {
         println("setCardNumber value>>>"+cardNumber)
-        cardNumberEditText.setText(cardNumber?.let { maskCardNumber(it) })
+        card?.number = cardNumber
        // println("maskCardNumber>>>"+maskCardNumber(fieldText))
         this.cardNumberIsViewed = !cardNumberEditText.isCardNumberValid
         expiryDateEditText.requestFocus()
+    }
+
+    override fun setCardNumberMasked(cardNumber: String?) {
+        println("setCardNumberMasked value>>>"+cardNumber)
+        cardNumberEditText.setText(cardNumber?.let { maskCardNumber(it) })
+
     }
 
     override fun setCardHolderName(cardHolderName: String?) {
@@ -1120,9 +1126,10 @@ class InlineCardInput @JvmOverloads constructor(
             expiryDateEditText.visibility = View.VISIBLE
             cvcNumberEditText.visibility = View.VISIBLE
 
-            println("cardNumberEditText is????"+cardNumberEditText.cardNumber)
+            println("cardNumberEditText is????"+cardNumberEditText.maskedCardNumber)
             setCardNumber(cardNumberEditText.cardNumber)
-           // scrollEnd()
+            setCardNumberMasked(cardNumberEditText.maskedCardNumber)
+            scrollEnd()
             cardInputListener?.onCardComplete()
         }
 

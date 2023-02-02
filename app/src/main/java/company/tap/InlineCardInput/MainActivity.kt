@@ -108,8 +108,8 @@ class MainActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {
 //                cardNumAfterTextChangeListener(s, this)
                 if (s != null && s.length >= 19) {
-
-                    //cardInlineForm.setCardNumber(maskCardNumber(s.toString()))
+                    println(" cardInlineForm.card.number"+cardInlineForm?.card?.number)
+                  // cardInlineForm.setCardNumber(maskCardNumber(s.toString()))
                 }
             }
 

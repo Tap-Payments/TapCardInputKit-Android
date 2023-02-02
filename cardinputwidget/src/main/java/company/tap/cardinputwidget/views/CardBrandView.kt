@@ -16,7 +16,7 @@ import company.tap.cardinputwidget.databinding.CardBrandViewBinding
 import company.tap.tapuilibrary.themekit.ThemeManager
 import java.net.URL
 
-internal class CardBrandView @JvmOverloads constructor(
+ class CardBrandView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -25,7 +25,7 @@ internal class CardBrandView @JvmOverloads constructor(
         LayoutInflater.from(context),
         this
     )
-    private val iconView = viewBinding.icon
+     val iconView = viewBinding.icon
 
     private var animationApplied = false
 

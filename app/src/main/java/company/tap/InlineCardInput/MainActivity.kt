@@ -13,6 +13,7 @@ import company.tap.cardinputwidget.Card
 import company.tap.cardinputwidget.CardBrand
 import company.tap.cardinputwidget.CardBrandSingle
 import company.tap.cardinputwidget.CardInputUIStatus
+import company.tap.cardinputwidget.views.CardBrandView
 import company.tap.cardinputwidget.widget.inline.InlineCardInput
 import company.tap.taplocalizationkit.LocalizationManager
 import company.tap.tapuilibrary.themekit.ThemeManager
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity() {
     var backArrow: TapImageView? = null
     var switchLL: TapInlineCardSwitch? = null
     var switchSaveCard: TapSwitch? = null
+    var cardBrna: CardBrandView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -64,6 +66,8 @@ class MainActivity : AppCompatActivity() {
         tabLayout = findViewById(R.id.sections_tablayout)
         cardScannerBtn = findViewById(R.id.card_scanner_button)
         nfcButton = findViewById(R.id.nfc_button)
+        cardBrna = cardInlineForm.findViewById(R.id.card_brand_view)
+        cardBrna?.iconView?.setImageResource(R.drawable.bahrain)
         tapAlertView?.alertMessage?.text = "Card number is missing"
         tapAlertView?.visibility = View.GONE
         nfcButton?.visibility = View.VISIBLE

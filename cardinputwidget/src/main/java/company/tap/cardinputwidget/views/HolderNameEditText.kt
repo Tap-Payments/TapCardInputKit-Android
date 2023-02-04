@@ -29,7 +29,7 @@ class HolderNameEditText @JvmOverloads constructor(
     init {
         setErrorMessage(resources.getString(R.string.invalid_holder_name))
         maxLines = 1
-
+        inputType=InputType.TYPE_CLASS_TEXT
         addTextChangedListener(object : TapTextWatcher() {
             override fun afterTextChanged(s: Editable?) {
                 shouldShowError = false

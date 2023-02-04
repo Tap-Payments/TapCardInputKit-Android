@@ -2,7 +2,9 @@ package company.tap.cardinputwidget.widget.inline
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.Matrix
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -129,6 +131,10 @@ class InlineCardInput @JvmOverloads constructor(
     @DrawableRes
     val cvvIconDrawable: Int =
         if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.dark_cvv else R.drawable.light_cvv
+
+    @DrawableRes
+    val backIcon: Int =
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.back_arrow_dark else R.drawable.back_arrow_light
 
     private val frameStart: Int
         get() {
@@ -384,6 +390,13 @@ class InlineCardInput @JvmOverloads constructor(
         separatorcard2 =findViewById(R.id.separatorcard2)
         closeButton.setImageResource(closeIcon)
         cvvIcon.setImageResource(cvvIconDrawable)
+        if (LocalizationManager.getLocale(context).language == "ar") {
+            backArrow.scaleX=-1.0f
+        }
+
+        backArrow.setImageResource(backIcon)
+
+
         cardBrandView.iconViewRes
         scannerButton.setImageResource(scannerIcon)
         nfcButton.setImageResource(nfcIcon)
@@ -1926,7 +1939,10 @@ class InlineCardInput @JvmOverloads constructor(
             false
         })
     }
-
+    fun Bitmap.flipHorizontally(): Bitmap {
+        val matrix = Matrix().apply { postScale(-1f, 1f, width / 2f, height / 2f) }
+        return Bitmap.createBitmap(this, 0, 0, width, height, matrix, true)
+    }
 
     }
 

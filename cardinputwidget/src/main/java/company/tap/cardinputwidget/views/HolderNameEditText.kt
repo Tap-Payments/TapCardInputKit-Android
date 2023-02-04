@@ -50,7 +50,18 @@ class HolderNameEditText @JvmOverloads constructor(
                 } else "").toString()
             }
         )*/
-
+        val letterFilter =
+            InputFilter { source, start, end, dest, dstart, dend ->
+                var filtered: String? = ""
+                for (i in start until end) {
+                    val character = source[i]
+                    if (!Character.isWhitespace(character) && Character.isLetter(character)) {
+                        filtered += character
+                    }
+                }
+                filtered
+            }
+        filters = arrayOf(letterFilter)
     }
 
     override fun onFinishInflate() {
@@ -65,7 +76,20 @@ class HolderNameEditText @JvmOverloads constructor(
         hint = resources.getString(R.string.holder_name_hint)
         filters = arrayOf(InputFilter.LengthFilter(MAX_LENGTH), InputFilter.AllCaps())
         keyListener = TextKeyListener.getInstance()
-        inputType = InputType.TYPE_TEXT_VARIATION_POSTAL_ADDRESS
+        inputType = InputType.TYPE_CLASS_TEXT
+        val letterFilter =
+            InputFilter { source, start, end, dest, dstart, dend ->
+                var filtered: String? = ""
+                for (i in start until end) {
+                    val character = source[i]
+                    if (!Character.isWhitespace(character) && Character.isLetter(character)) {
+                        filtered += character
+                    }
+                }
+                filtered.toString().toUpperCase()
+            }
+        filters = arrayOf(letterFilter)
+
     }
 
 

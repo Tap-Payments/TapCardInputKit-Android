@@ -23,7 +23,7 @@ import java.net.URL
 ) : FrameLayout(context, attrs, defStyleAttr) {
     private val viewBinding: CardBrandViewBinding = CardBrandViewBinding.inflate(
         LayoutInflater.from(context),
-        this
+        this,true
     )
      val iconView = viewBinding.icon
 

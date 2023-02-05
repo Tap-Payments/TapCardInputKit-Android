@@ -11,7 +11,11 @@ import java.util.regex.Pattern
 enum class CardBrand(
     val code: String,
     val displayName: String,
-    @DrawableRes val icon: Int,
+    @DrawableRes val icon: Int = if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) {
+    R.drawable.card_icon_dark
+}else if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("light")) {
+    R.drawable.card_icon_light
+}else  R.drawable.card_icon_light,
     @DrawableRes val cvcIcon: Int =
         if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.dark_cvv else R.drawable.light_cvv,
     @DrawableRes val errorIcon: Int =

@@ -49,7 +49,7 @@ import java.net.URL
         iconView.setImageResource(iconViewRes)
     }
 
-    internal fun showBrandIcon(brand: CardBrand, shouldShowErrorIcon: Boolean) {
+    fun showBrandIcon(brand: CardBrand, shouldShowErrorIcon: Boolean) {
         iconView.setOnClickListener(null)
         if (shouldShowErrorIcon) {
             iconView.setImageResource(brand.errorIcon)

@@ -70,7 +70,7 @@ class InlineCardInput @JvmOverloads constructor(
     internal val containerLayout = viewBinding.container
 
     @JvmSynthetic
-    internal val cardBrandView = viewBinding.cardBrandView
+    val cardBrandView = viewBinding.cardBrandView
 
     private val cardNumberTextInputLayout = viewBinding.cardNumberTextInputLayout
     private val expiryDateTextInputLayout = viewBinding.expiryDateTextInputLayout
@@ -687,6 +687,7 @@ class InlineCardInput @JvmOverloads constructor(
         scannerButton.visibility= View.VISIBLE
         closeButton.visibility= View.VISIBLE
         cvvIcon.visibility= View.GONE
+        updateIcon()
 
         cvcNumberEditText.hint = LocalizationManager.getValue("cardCVVPlaceHolder", "TapCardInputKit")
     }

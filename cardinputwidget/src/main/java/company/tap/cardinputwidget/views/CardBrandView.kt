@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
+import android.widget.ImageView
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.core.graphics.drawable.DrawableCompat
@@ -25,7 +26,8 @@ import java.net.URL
         LayoutInflater.from(context),
         this,true
     )
-     val iconView = viewBinding.icon
+  //   val iconView = viewBinding.icon
+      var iconView :ImageView
 
     private var animationApplied = false
 
@@ -45,8 +47,10 @@ import java.net.URL
 
     init {
         isFocusable = false
-        setScanClickListener()
+
+        iconView = findViewById(R.id.icon)
         iconView.setImageResource(iconViewRes)
+        setScanClickListener()
     }
 
    internal fun showBrandIcon(brand: CardBrand, shouldShowErrorIcon: Boolean) {
@@ -103,7 +107,7 @@ import java.net.URL
 
 
     private fun setScanClickListener() {
-        iconView.setOnClickListener { onScanClicked() }
+        iconView?.setOnClickListener { onScanClicked() }
     }
 
     internal fun showCvcIcon(brand: CardBrand) {

@@ -122,7 +122,6 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 if (s != null && s.length >= 19) {
-
                     //  cardInlineForm.setCardNumber(maskCardNumber(s.toString()))
                     cardInlineForm.setSingleCardInput(CardBrandSingle.fromCode(s.toString()))
                     alertView.visibility =View.VISIBLE

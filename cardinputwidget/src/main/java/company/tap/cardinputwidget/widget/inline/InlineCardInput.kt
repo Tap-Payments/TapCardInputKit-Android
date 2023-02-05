@@ -31,6 +31,7 @@ import company.tap.cardinputwidget.*
 import company.tap.cardinputwidget.databinding.CardInputWidgetBinding
 import company.tap.cardinputwidget.utils.DateUtils
 import company.tap.cardinputwidget.utils.TextValidator
+import company.tap.cardinputwidget.views.CardBrandView
 import company.tap.cardinputwidget.views.CardNumberEditText
 import company.tap.cardinputwidget.widget.BaseCardInput
 import company.tap.cardinputwidget.widget.CardInputListener
@@ -69,8 +70,8 @@ class InlineCardInput @JvmOverloads constructor(
     private val containerLayout1 = viewBinding.container1
     internal val containerLayout = viewBinding.container
 
-    @JvmSynthetic
-    val cardBrandView = viewBinding.cardBrandView
+   // @JvmSynthetic
+  //  val cardBrandView = viewBinding.cardBrandView
 
     private val cardNumberTextInputLayout = viewBinding.cardNumberTextInputLayout
     private val expiryDateTextInputLayout = viewBinding.expiryDateTextInputLayout
@@ -110,6 +111,7 @@ class InlineCardInput @JvmOverloads constructor(
     lateinit var closeButton :ImageView
     lateinit var linearIconsLayout :LinearLayout
     lateinit var separatorcard2 :TapSeparatorView
+    lateinit var cardBrandView:CardBrandView
    var closeIconDrawable: Drawable?     =
        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")){
            context.resources.getDrawable( R.drawable.icon_clear_dark_mode)
@@ -388,6 +390,8 @@ class InlineCardInput @JvmOverloads constructor(
         scannerButton =findViewById(R.id.card_scanner_button)
         closeButton =findViewById(R.id.clear_text)
         separatorcard2 =findViewById(R.id.separatorcard2)
+        cardBrandView = findViewById(R.id.card_brand_view)
+        cardBrandView.iconView.setImageResource(cardBrandView.iconViewRes)
         closeButton.setImageResource(closeIcon)
         cvvIcon.setImageResource(cvvIconDrawable)
         if (LocalizationManager.getLocale(context).language == "ar") {

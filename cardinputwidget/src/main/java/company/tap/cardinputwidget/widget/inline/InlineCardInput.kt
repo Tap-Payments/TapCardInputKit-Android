@@ -1381,7 +1381,7 @@ class InlineCardInput @JvmOverloads constructor(
         startSlideAnimation(listOfNotNull(
                 slideCardEndAnimation,
                 slideDateEndAnimation,
-               // slideCvcEndAnimation
+                slideCvcEndAnimation
                // slideHolderNameEndAnimation
         ))
 
@@ -1397,7 +1397,7 @@ class InlineCardInput @JvmOverloads constructor(
         val animationSet = AnimationSet(true).apply {
             animations.forEach { addAnimation(it) }
         }
-        containerLayout.startAnimation(animationSet)
+       // containerLayout.startAnimation(animationSet)
     }
 
     override fun onWindowFocusChanged(hasWindowFocus: Boolean) {

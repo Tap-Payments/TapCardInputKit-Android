@@ -1379,7 +1379,7 @@ class InlineCardInput @JvmOverloads constructor(
 */
 
         startSlideAnimation(listOfNotNull(
-                slideCardEndAnimation,
+               // slideCardEndAnimation,
                 slideDateEndAnimation,
                 slideCvcEndAnimation
                // slideHolderNameEndAnimation
@@ -1397,7 +1397,7 @@ class InlineCardInput @JvmOverloads constructor(
         val animationSet = AnimationSet(true).apply {
             animations.forEach { addAnimation(it) }
         }
-       // containerLayout.startAnimation(animationSet)
+        containerLayout.startAnimation(animationSet)
     }
 
     override fun onWindowFocusChanged(hasWindowFocus: Boolean) {
@@ -1750,7 +1750,10 @@ class InlineCardInput @JvmOverloads constructor(
         override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
             super.applyTransformation(interpolatedTime, t)
             view.layoutParams = (view.layoutParams as ConstraintLayout.LayoutParams).apply {
-                marginStart = (0f * hiddenCardWidth.toFloat() * interpolatedTime).toInt()
+                println("hiddenCardWidth"+hiddenCardWidth.toFloat())
+                println("interpolatedTime"+ interpolatedTime)
+              //  marginStart = (1f * hiddenCardWidth.toFloat() * interpolatedTime).toInt()
+                marginStart = (1f * hiddenCardWidth.toFloat()).toInt()
                // marginStart = (-0.9f * hiddenCardWidth.toFloat() * interpolatedTime).toInt() //commented by ahlaam for masking
             }
         }

@@ -4,12 +4,13 @@
             "white" : "#1c1c1e",
             "black" : "#000000",
             "black50" : "#00000080",
+            "black30" : "#00000026",
             "lightPeach" : "#98989f",
             "greyishBrown" : "#ffffff",
+            "greyishBrown2" : "#C1C1C1",
             "veryLightPinkTwo" : "#404043",
             "brownGrey" : "#98989f",
-            "main_switch_background": "#2b2b2f",
-            "whiteTwo": "#2b2b2f",
+            "whiteTwo": "#211F1F",
             "deepSkyBlue": "#007aff",
             "white30":"#ffffff4D",
             "lightPeriwinkle": "#d9d9da",
@@ -19,6 +20,7 @@
             "paleLilac":"#e4e4e5",
             "clear":"#00000000",
             "brownGreyTwo":"#b2b2b2",
+            "cardPlaceHolder":"#CFCFCF",
             "brownGreyThree":"#ababab",
             "orange":"#ea611c",
             "apricot30":"#ffbe604C",
@@ -28,59 +30,104 @@
             "cherryRed20":"#e12132",
             "deepSkyBlue15":"#007aff26",
             "brownGreyFive":"#aeaeae",
-            "veryLightPinkThree": "#1c1c1e",
+            "deepSkyBlue15":"#007aff26",
+            "veryLightPinkThree": "#2C2A29",
             "azure": "#009aff",
             "brownGreySix": "#a7a7a7",
             "brownGreySeven": "#7e7e7e",
             "white78": "#f9f9f9C6",
             "brownGreyFour": "#a6a6a6",
-            "transperant": "#c7f9f9f9"
-
+            "cancelBorder": "#DEDEDE"
         }
+    },
+    "asyncView": {
+        "labelsFont":"Roboto-Regular,20",
+        "labelsColor":"greyishBrown",
+        "codeLabelFont":"Roboto-Regular,30",
+        "codeLabelColor":"greyishBrown"
     },
     "inlineCard": {
         "commonAttributes": {
-            "backgroundColor": "white",
+            "backgroundColor": "black",
             "borderColor": "clear",
-            "cornerRadius": 0,
+            "cornerRadius": 8,
             "borderWidth": 0,
             "itemSpacing": 5,
-            "cvvPlaceHolder": "CvvPlaceholder",
+            "cvvPlaceHolder": "dark-cvv",
             "shadow":{
-                "color": "clear",
-                "radius": 0,
+                "color": "black30",
+                "radius": 8,
                 "offsetWidth": 0,
                 "offsetHeight": 0,
-                "opacity": 0
+                "opacity": 1
             },
             "widthMargin": 7
         },
         "iconImage": {
             "image": "card",
-            "width": 32
+            "width": 32,
+            "tint": "cardPlaceHolder"
         },
+        "closeSavedCardIcon" : "closeSavedCardInputIcon",
         "scanImage": {
             "image": "scanIcon",
             "selected": "selectedScan",
-            "width": 32
+            "width": 32,
+            "tint": "cardPlaceHolder"
         },
         "clearImage": {
             "image": "clearFormIcon",
-            "width": 32
+            "width": 32,
+            "tint": "cardPlaceHolder"
         },
         "textFields": {
-            "textColor": "greyishBrown",
-            "errorTextColor": "#FF0000",
-            "font" : "Roboto-Light,17",
-            "placeHolderColor" : "brownGreyTwo"
+            "textColor": "#CFCFCF",
+            "errorTextColor": "#CFCFCF",
+            "font" : "Roboto-Light,14",
+            "saveCardFontDots" : "Roboto-Bold,24",
+            "placeHolderColor" : "cardPlaceHolder"
         },
         "saveCardOption": {
-            "labelTextColor": "black",
-            "labelTextFont": "20",
+            "labelTextColor": "greyishBrown",
+            "labelTextFont": "Roboto-Light,14",
             "switchTintColor": "white",
-            "switchThumbColor": "white",
+            "switchThumbColor": "greyishBrown",
             "switchOnThumbColor": "#2ACE00"
+        },
+        "saveCardForTapOption": {
+            "labelTextColor": "#7E7E7E",
+            "labelTextFont": "Roboto-Light,12",
+            "saveButtonActivatedTintColor": "azure",
+            "saveButtonDeactivatedTintColor": "#626262",
+            "infoButtonTintColor": "#626262"
         }
+    },
+    "customerDataCollection": {
+        "backgroundColor":"black",
+        "shadow":{
+            "color": "black30",
+            "radius": 8,
+            "offsetWidth": 0,
+            "offsetHeight": 0,
+            "opacity": 1
+        },
+        "textfields":{
+            "font":"Roboto-Light,14",
+            "countryCodeLabelFont":"Roboto,14",
+            "color":"#CFCFCF",
+            "placeHolderColor":"cardPlaceHolder"
+        },
+        "countryPicker": {
+            "countryCell":{
+                "backgroundColor":"clear",
+                "titleLabelFont":"Roboto,14",
+                "titleLabelColor":"greyishBrown"
+            },
+            "countryTable":{
+                "backgroundColor":"white"
+            }
+        },
+        "cornerRadius":8
     },
     "phoneCard": {
         "commonAttributes": {
@@ -152,7 +199,7 @@
             "borderWidth": 0,
             "itemSpacing": 0,
             "separatorColor": "#0000001E",
-            "cvvPlaceHolder": "CvvPlaceholder",
+            "cvvPlaceHolder": "dark-cvv",
             "shadow":{
                 "color": "#2ACE00",
                 "radius": 3,
@@ -252,10 +299,39 @@
         "width" : 75,
         "height" : 4,
         "corner" : 2,
-        "backgroundColor": "white",
-        "cancelButton": {
-            "titleLabelFont" : "Roboto-Light,13",
-            "titleLabelColor" : "greyishBrown"
+        "backgroundColor": "black"
+    },
+    "loyaltyView" : {
+        "cardView": {
+            "backgroundColor" : "white",
+            "radius": 8,
+            "shadowColor":"#00000027",
+            "shadowRadius":26,
+            "shadowOpacity":1
+        },
+        "headerView": {
+            "backgroundColor" : "clear",
+            "switchOnTintColor" : "deepSkyBlue",
+            "titleTextColor" : "greyishBrown",
+            "subTitleTextColor" : "brownGreySeven",
+            "titleFont" : "Roboto-Regular,12",
+            "subTitleFont" : "Roboto-Regular,11"
+        },
+        "amountView": {
+            "titleTextColor" : "#9F9F9F",
+            "titleFont" : "Roboto-Regular,11",
+            "currencyTextColor" : "greyishBrown",
+            "currencyFont" : "Roboto-Regular,16",
+            "amountTextColor" : "greyishBrown",
+            "amountFont" : "Roboto-Regular,16",
+            "pointsTextColor" : "greyishBrown",
+            "pointsFont" : "Roboto-Regular,12"
+        },
+        "footerView": {
+            "pointsTextColor" : "#7E7E7E",
+            "pointsFont" : "Roboto-Regular,11",
+            "amountTextColor" : "greyishBrown",
+            "amountFont" : "Roboto-Regular,11"
         }
     },
     "merchantHeaderView": {
@@ -265,11 +341,11 @@
         "subTitleLabelColor" : "greyishBrown",
         "merchantLogoCorner" : 8,
         "merchantLogoShadowRadius":12,
-        "merchantLogoShadowColor":"#FFFFFF64",
+        "merchantLogoShadowColor":"#FFFFFF54",
         "merchantLogoPlaceHolderColor" : "black",
         "merchantLogoPlaceHolderFont" : "Roboto-Regular,16",
         "merchantLogoPlaceHolderLabelColor" : "white",
-        "backgroundColor" : "white",
+        "backgroundColor" : "black",
         "closeCheckoutIcon": "closeCheckoutDarkIcon",
         "cancelButton": {
             "titleLabelFont" : "Roboto-Light,13",
@@ -282,15 +358,16 @@
         "originalAmountLabelColor" : "greyishBrown",
         "convertedAmountLabelFont" : "Roboto-Light,14",
         "convertedAmountLabelColor" : "brownGrey",
-        "itemsLabelFont" : "Roboto-Light,9",
-        "itemsLabelColor" : "greyishBrown",
+        "itemsLabelFont" : "Roboto-Regular,10",
+        "itemsLabelColor" : "greyishBrown2",
         "itemsNumberButtonBackgroundColor" : "whiteTwo",
         "itemsNumberButtonBorder" : {
             "color" : "veryLightPinkTwo",
-            "width" : 1
+            "width" : 0
         },
+        "itemsButtonArrowIcon":"arrowItemsIcon",
         "itemsNumberButtonCorner" : 10,
-        "backgroundColor" : "white"
+        "backgroundColor" : "black"
     },
     "horizontalList": {
         "backgroundColor" : "whiteTwo",
@@ -301,52 +378,55 @@
                 "backgroundColor" : "whiteTwo",
                 "leftButton": {
                     "labelTextFont": "Roboto-Regular,10",
-                    "labelTextColor": "greyishBrown"
+                    "labelTextColor": "greyishBrown2"
                 },
                 "rightButton": {
                     "labelTextFont": "Roboto-Regular,10",
-                    "labelTextColor": "greyishBrown"
+                    "labelTextColor": "greyishBrown2"
                 }
             }
         },
         "chips": {
             "radius" : 15,
             "currencyChip": {
-                "backgroundColor" : "white",
+                "backgroundColor" : "black",
                 "labelTextFont": "Roboto-Regular,12",
                 "labelTextColor": "greyishBrown",
                 "selected": {
-
                     "shadow": {
-
-                        "color" : "deepSkyBlue",
+                        "color" : "lightPeriwinkle",
                         "radius" : 3,
                         "offsetWidth": 0,
                         "offsetHeight": 0,
-                        "opacity": 1
+                        "opacity": 1,
+                        "borderColor":"vibrantGreenTwo",
+                        "borderWidth":1
                     }
                 },
                 "unSelected": {
-
                     "shadow": {
                         "color" : "lightPeriwinkle",
                         "radius" : 0,
                         "offsetWidth": 0,
                         "offsetHeight": 0,
-                        "opacity": 1
+                        "opacity": 0,
+                        "borderColor":"clear",
+                        "borderWidth":0
                     }
                 }
             },
             "gatewayChip": {
-                "backgroundColor" : "white",
+                "backgroundColor" : "black",
                 "logoutIcon": "logoutIcon",
                 "selected": {
                     "shadow": {
-                        "color" : "vibrantGreenTwo",
+                        "color" : "lightPeriwinkle",
                         "radius" : 3,
                         "offsetWidth": 0,
                         "offsetHeight": 0,
-                        "opacity": 1
+                        "opacity": 1,
+                        "borderColor":"vibrantGreenTwo",
+                        "borderWidth":1
                     }
                 },
                 "unSelected": {
@@ -355,7 +435,9 @@
                         "radius" : 0,
                         "offsetWidth": 0,
                         "offsetHeight": 0,
-                        "opacity": 1
+                        "opacity": 0,
+                        "borderColor":"clear",
+                        "borderWidth":0
                     }
                 }
             },
@@ -365,11 +447,13 @@
                 "labelTextColor": "greyishBrown",
                 "selected": {
                     "shadow": {
-                        "color" : "vibrantGreenTwo",
+                        "color" : "lightPeriwinkle",
                         "radius" : 3,
                         "offsetWidth": 0,
                         "offsetHeight": 0,
-                        "opacity": 1
+                        "opacity": 1,
+                        "borderColor":"vibrantGreenTwo",
+                        "borderWidth":1
                     }
                 },
                 "unSelected": {
@@ -378,7 +462,9 @@
                         "radius" : 0,
                         "offsetWidth": 0,
                         "offsetHeight": 0,
-                        "opacity": 0
+                        "opacity": 0,
+                        "borderColor":"clear",
+                        "borderWidth":0
                     }
                 }
             },
@@ -394,21 +480,25 @@
                         "radius" : 3,
                         "offsetWidth": 0,
                         "offsetHeight": 0,
-                        "opacity": 1
+                        "opacity": 1,
+                        "borderColor":"clear",
+                        "borderWidth":0
                     }
                 },
                 "unSelected": {
                     "shadow": {
                         "color" : "lightPeriwinkle",
-                        "radius" : 3,
+                        "radius" : 0,
                         "offsetWidth": 0,
                         "offsetHeight": 0,
-                        "opacity": 1
+                        "opacity": 0,
+                        "borderColor":"clear",
+                        "borderWidth":0
                     }
                 }
             },
             "savedCardChip": {
-                "backgroundColor" : "white",
+                "backgroundColor" : "black",
                 "labelTextFont": "Roboto-Regular,12",
                 "labelTextColor": "greyishBrown",
                 "editMode": {
@@ -417,20 +507,24 @@
                 },
                 "selected": {
                     "shadow": {
-                        "color" : "vibrantGreenTwo",
+                        "color" : "lightPeriwinkle",
                         "radius" : 3,
                         "offsetWidth": 0,
                         "offsetHeight": 0,
-                        "opacity": 1
+                        "opacity": 1,
+                        "borderColor":"vibrantGreenTwo",
+                        "borderWidth":1
                     }
                 },
                 "unSelected": {
                     "shadow": {
                         "color" : "lightPeriwinkle",
-                        "radius" : 3,
+                        "radius" : 0,
                         "offsetWidth": 0,
                         "offsetHeight": 0,
-                        "opacity": 1
+                        "opacity": 0,
+                        "borderColor":"clear",
+                        "borderWidth":0
                     }
                 }
             }
@@ -462,7 +556,7 @@
     {
         "backgroundColor": "whiteTwo",
         "maxWidth":60,
-        "insets":16,
+        "insets":0,
         "underline":{
             "unselected": {
                 "backgroundColor" : "brownGrey"
@@ -484,6 +578,10 @@
                 "backgroundColor" : "clear",
                 "alpha": 1
             }
+        },
+        "weAcceptLabel":{
+            "textFont": "Roboto,10",
+            "textColor": "greyishBrown2"
         }
     },
     "TapVerticalView":
@@ -505,9 +603,9 @@
         "Error":
         {
             "textFont": "Roboto-Light,12",
-            "textColor": "cherryRed",
-            "backgroundColor": "cherryRed10",
-            "borderColor": "cherryRed20",
+            "textColor": "#FBDFD2",
+            "backgroundColor": "#80EA611C",
+            "borderColor": "clear",
             "actionButtonTextColor" : "clear",
             "actionButtonTextFont" : "Roboto-Regular,12"
         },
@@ -539,11 +637,16 @@
             "actionButtonTextFont" : "Roboto-Regular,12"
         }
     },
+    "poweredByTap": {
+        "powerLabel": {
+            "textColor": "greyishBrown",
+            "font" : "Roboto-Light,10"
+        },
+        "tapLogo":"poweredByTapLogoDark"
+    },
     "goPay": {
         "loginBar" :{
             "backgroundColor" : "whiteTwo",
-            "inputFieldBackground" : "black",
-            "selectedTabIndicatorColor": "#a8a8a8",
             "underline": {
                 "selected": {
                     "backgroundColor" : "deepSkyBlue"
@@ -570,7 +673,6 @@
         "passwordView" :{
             "backgroundColor": "clear"
         },
-
         "passwordField": {
             "backgroundColor" : "clear",
             "textFont": "Roboto-Light,17",
@@ -585,11 +687,7 @@
                 "filled": {
                     "backgroundColor" : "deepSkyBlue"
                 }
-            },
-            "changeTextColor": "deepSkyBlue",
-            "changeTextFont": "Roboto-Light,12",
-            "emailTextColor": "brownGreySix",
-            "emailTextFont": "Roboto-Light,14"
+            }
         }
     },
     "actionButton": {
@@ -601,12 +699,19 @@
                 "success": "white-success-mob.gif",
                 "faceID": "faceID",
                 "touchID": "touchID"
-            }
+            },
+            "borderColor": "clear"
+        },
+        "Cancel" : {
+            "goLoginBackgroundColor" : "clear",
+            "backgroundColor" : "white",
+            "titleLabelColor" : "greyishBrown",
+            "borderColor": "cancelBorder"
         },
         "Invalid" : {
             "goLoginBackgroundColor" : "clear",
             "backgroundColor" : "veryLightPinkThree",
-            "titleLabelColor" : "brownGrey"
+            "titleLabelColor" : "#626262"
         },
         "Valid" : {
             "goLoginBackgroundColor" : "deepSkyBlue",
@@ -619,12 +724,12 @@
         }
     },
     "TapOtpView": {
-        "backgroundColor": "transperant",
+        "backgroundColor": "clear",
         "OtpController": {
             "bottomLineColor": "brownGreyFour",
             "activeBottomColor": "deepSkyBlue",
             "textColor": "greyishBrown",
-            "textFont": "Roboto-Light,14"
+            "textFont": "Roboto-Light,25"
         },
         "Timer": {
             "textFont": "Roboto-Regular,16",
@@ -700,59 +805,5 @@
                 "textColor": "greyishBrown"
             }
         }
-    },
-    "TapAlertMessage": {
-        "backgroundColor": "#ea611c",
-        "separatorColor" : "#33ea6724",
-        "separatorHeight" : 1,
-        "textField": {
-            "textFont": "Roboto-Light,12",
-            "textColor": "#ffffff"
-        }
-    },
-    "Nfc": {
-        "topTextBackgroundColor": "whiteTwo",
-        "topTextColor": "brownGreySix",
-        "topTextFont": "Roboto-Light,12",
-        "bottomTextColor": "brownGreySix",
-        "bottomTextFont": "Roboto-Light,14"
     }
-,
-    "loyaltyView" : {
-        "cardView": {
-            "backgroundColor" : "white",
-            "radius": 8,
-            "shadowColor":"#00000027",
-            "shadowRadius":26,
-            "shadowOpacity":1
-        },
-        "headerView": {
-            "backgroundColor" : "clear",
-            "switchOnTintColor" : "deepSkyBlue",
-            "titleTextColor" : "greyishBrown",
-            "subTitleTextColor" : "brownGreySeven",
-            "titleFont" : "Roboto-Regular,12",
-            "subTitleFont" : "Roboto-Regular,10"
-        },"amountView": {
-            "titleTextColor" : "#9F9F9F",
-            "titleFont" : "Roboto-Regular,10",
-            "currencyTextColor" : "greyishBrown",
-            "currencyFont" : "Roboto-Regular,16",
-            "amountTextColor" : "greyishBrown",
-            "amountFont" : "Roboto-Regular,16",
-            "pointsTextColor" : "greyishBrown",
-            "pointsFont" : "Roboto-Regular,12"
-        },"footerView": {
-            "pointsTextColor" : "#7E7E7E",
-            "pointsFont" : "Roboto-Regular,11",
-            "amountTextColor" : "greyishBrown",
-            "amountFont" : "Roboto-Regular,11"
-        }
-    },"poweredByTap": {
-    "powerLabel": {
-        "textColor": "greyishBrown",
-        "font" : "Roboto-Light,10"
-    },
-    "tapLogo":"poweredByTapLogo"
-}
 }

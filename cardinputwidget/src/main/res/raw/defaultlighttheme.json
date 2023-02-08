@@ -23,15 +23,14 @@
             "brownGreyThree":"#ababab",
             "orange":"#ea611c",
             "apricot30":"#ffbe604C",
-            "main_switch_background": "#E0E0E0",
             "reddishOrange20":"#ea672433",
             "cherryRed":"#e12131",
             "cherryRed10":"#e1213119",
             "cherryRed20":"#e12132",
             "deepSkyBlue15":"#007aff26",
             "brownGreyFive":"#aeaeae",
-            "deepSkyBlue15":"#007aff26",
-            "veryLightPinkThree": "#d7d7d7",
+
+            "veryLightPinkThree": "#BBBABA",
             "azure": "#009aff",
             "brownGreySix": "#a7a7a7",
             "brownGreySeven": "#7e7e7e",
@@ -46,6 +45,12 @@
             "font" : "Roboto-Light,10"
         },
         "tapLogo":"poweredByTapLogo"
+    },
+    "asyncView": {
+        "labelsFont":"Roboto-Regular,20",
+        "labelsColor":"greyishBrown",
+        "codeLabelFont":"Roboto-Regular,30",
+        "codeLabelColor":"greyishBrown"
     },
     "inlineCard": {
         "commonAttributes": {
@@ -83,7 +88,7 @@
         },
         "textFields": {
             "textColor": "greyishBrown",
-            "errorTextColor": "#FF0000",
+            "errorTextColor": "greyishBrown",
             "font" : "Roboto-Light,14",
             "saveCardFontDots" : "Roboto-Bold,24",
             "placeHolderColor" : "brownGreyTwo"
@@ -607,7 +612,7 @@
         {
             "textFont": "Roboto-Light,12",
             "textColor": "#EA611C",
-            "backgroundColor": "#EA611C33",
+            "backgroundColor": "#20EA611C",
             "borderColor": "clear",
             "actionButtonTextColor" : "clear",
             "actionButtonTextFont" : "Roboto-Regular,12"
@@ -801,64 +806,14 @@
                 "textColor": "greyishBrown"
             }
         }
-    },"TapAlertMessage": {
-    "backgroundColor": "#f8e5c8",
-    "separatorColor" : "#eac6a3",
-    "separatorHeight" : 1,
-    "textField": {
-        "textFont": "Roboto-Light,12",
-        "textColor": "#ea611c"
-    }
-},    "goPay": {
-    "loginBar" :{
-        "backgroundColor" : "whiteTwo",
-        "inputFieldBackground" : "white",
-        "selectedTabIndicatorColor": "#a8a8a8",
-        "underline": {
-            "selected": {
-                "backgroundColor" : "deepSkyBlue"
-            },
-            "unselected": {
-                "backgroundColor" : "brownGrey"
-            }
-        },
-        "title": {
-            "selected": {
-                "textFont": "Roboto-Regular,12",
-                "textColor": "greyishBrown"
-            },
-            "otherSegmentSelected" : {
-                "textFont": "Roboto-Regular,12",
-                "textColor": "brownGreyFive"
-            }
-        },
-        "hintLabel": {
-            "textFont": "Roboto-Light,10",
-            "textColor": "brownGreyThree"
+    },
+    "TapAlertMessage": {
+        "backgroundColor": "#f8e5c8",
+        "separatorColor" : "#eac6a3",
+        "separatorHeight" : 1,
+        "textField": {
+            "textFont": "Roboto-Light,12",
+            "textColor": "#ea611c"
         }
-    },
-    "passwordView" :{
-        "backgroundColor": "clear"
-    },
-    "passwordField": {
-        "backgroundColor" : "transperant",
-        "textFont": "Roboto-Light,17",
-        "textColor": "#4b4847",
-        "placeHolderColor" : "#878787",
-        "showPasswordIcon" : "passwordEye",
-        "hidePasswordIcon" : "passwordEye",
-        "underline":{
-            "empty": {
-                "backgroundColor" : "#a0a0a0"
-            },
-            "filled": {
-                "backgroundColor" : "deepSkyBlue"
-            }
-        },
-        "changeTextColor": "#007aff",
-        "changeTextFont": "Roboto-Light,12",
-        "emailTextColor": "#4b4847",
-        "emailTextFont": "Roboto-Light,14"
     }
-}
 }

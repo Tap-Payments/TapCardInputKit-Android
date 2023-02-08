@@ -140,7 +140,7 @@ data class Card(
      * @param cvc the card CVC number
      */
     class Builder(
-        internal val number: String? = null,
+        internal val number: String,
         @param:IntRange(from = 1, to = 12) internal val expMonth: Int? = null,
         @param:IntRange(from = 0) internal val expYear: Int? = null,
         internal val cvc: String? = null

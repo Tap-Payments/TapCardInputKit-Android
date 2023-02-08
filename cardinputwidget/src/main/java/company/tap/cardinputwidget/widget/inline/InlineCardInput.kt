@@ -62,6 +62,7 @@ class InlineCardInput @JvmOverloads constructor(
         defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr),
     BaseCardInput {
+
     private val viewBinding = CardInputWidgetBinding.inflate(
             LayoutInflater.from(context),
             this,true
@@ -112,6 +113,9 @@ class InlineCardInput @JvmOverloads constructor(
     lateinit var linearIconsLayout :LinearLayout
     lateinit var separatorcard2 :TapSeparatorView
     lateinit var cardBrandView:CardBrandView
+
+     var fullCardNumber :String? =null
+
    var closeIconDrawable: Drawable?     =
        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")){
            context.resources.getDrawable( R.drawable.icon_clear_dark_mode)
@@ -566,7 +570,10 @@ class InlineCardInput @JvmOverloads constructor(
      */
     override fun setCardNumber(cardNumber: String?) {
         println("setCardNumber value>>>"+cardNumber)
-        card?.number = cardNumber
+       // cardBuilder?.build()?.number = cardNumber
+        if (cardNumber != null) {
+            fullCardNumber = cardNumber
+        }
        // println("maskCardNumber>>>"+maskCardNumber(fieldText))
         this.cardNumberIsViewed = !cardNumberEditText.isCardNumberValid
         expiryDateEditText.requestFocus()
@@ -1743,7 +1750,7 @@ class InlineCardInput @JvmOverloads constructor(
             super.applyTransformation(interpolatedTime, t)
             view.layoutParams = (view.layoutParams as ConstraintLayout.LayoutParams).apply {
                 marginStart = (0f * hiddenCardWidth.toFloat() * interpolatedTime).toInt()
-              //  marginStart = (-0.9f * hiddenCardWidth.toFloat() * interpolatedTime).toInt() //commented by ahlaam for masking
+               // marginStart = (-0.9f * hiddenCardWidth.toFloat() * interpolatedTime).toInt() //commented by ahlaam for masking
             }
         }
     }

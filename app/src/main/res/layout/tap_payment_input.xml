@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mainLinear"
 
     android:orientation="vertical">
@@ -14,8 +15,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
-        android:elevation="@dimen/margin_basic_10dp"
-        android:layout_margin="8dp"
+        app:cardElevation="6dp"
+        android:clipToPadding="false"
+        android:clipChildren="false"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="true"
+
+
+
 
         >
         <company.tap.tapuilibrary.uikit.atoms.TapSeparatorView

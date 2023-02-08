@@ -1,6 +1,7 @@
 package company.tap.InlineCardInput
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -26,12 +27,14 @@ import company.tap.tapuilibrary.uikit.atoms.TapSwitch
 import company.tap.tapuilibrary.uikit.views.TapAlertView
 import company.tap.tapuilibrary.uikit.views.TapCardSwitch
 import company.tap.tapuilibrary.uikit.datasource.TapSwitchDataSource
+import company.tap.tapuilibrary.uikit.ktx.setBorderedView
 import company.tap.tapuilibrary.uikit.views.TapInlineCardSwitch
-import kotlinx.android.synthetic.main.tap_payment_input.*
+
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
     lateinit var cardInlineForm:InlineCardInput
+    lateinit var tap_payment_input:TapPaymentInput
     lateinit var  paymentInputContainer: LinearLayout
     lateinit var  mainView: LinearLayout
     private var clearView: ImageView? = null
@@ -60,6 +63,7 @@ class MainActivity : AppCompatActivity() {
         cardInlineForm = InlineCardInput(this)
         paymentInputContainer = findViewById(R.id.payment_input_layout)
         mainView = findViewById(R.id.mainView)
+        tap_payment_input = findViewById(R.id.tap_payment_input)
         cardInlineForm.holderNameEnabled= true
         cardInlineForm.setVisibilityOfHolderField(true)
         //switchLL = cardInlineForm.findViewById(R.id.mainSwitchInline)
@@ -67,7 +71,7 @@ class MainActivity : AppCompatActivity() {
         cardInlineForm.holderNameEnabled = false
         tabLinear = findViewById(R.id.tabLinear)
         tapAlertView = findViewById(R.id.alertView)
-        clearView = findViewById(R.id.clear_text)
+        clearView = cardInlineForm.findViewById(R.id.clear_text)
         backArrow = cardInlineForm.findViewById(R.id.backView)
         tabLayout = findViewById(R.id.sections_tablayout)
         cardScannerBtn = findViewById(R.id.card_scanner_button)
@@ -88,10 +92,35 @@ class MainActivity : AppCompatActivity() {
             cardScannerBtn?.visibility = View.VISIBLE
         }
 
+        clearView?.setOnClickListener {
+            tabLayout.resetBehaviour()
+            cardInlineForm.clear()
+            clearView?.visibility = View.GONE
+            nfcButton?.visibility = View.VISIBLE
+            cardScannerBtn?.visibility = View.VISIBLE
+        }
+
         switchSaveCard = switchLL?.findViewById(R.id.switchSaveCard)
         //   switchLL?.setSwitchDataSource(TapSwitchDataSource("Sasa","Save For later","sa","asa","asa"))
         cardInlineForm.switchCardEnabled = true
+       /* if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) {
+            //   tapPaymentInput?.cardInputChipView?.setBackgroundResource(R.drawable.border_unclick_black)
+        } else {
+            tap_payment_input?.cardInputChipView?.setBackgroundResource(R.drawable.border_unclick_cardinput)
+        }*/
+      /*  tap_payment_input?.cardInputChipView?.let {
+            setBorderedView(
+                it,
+                15.0f,// corner raduis
+                0.2f,
+                Color.parseColor(ThemeManager.getValue("inlineCard.commonAttributes.shadow.color")),
+                Color.parseColor(ThemeManager.getValue("inlineCard.commonAttributes.shadow.color")),
+                Color.parseColor(ThemeManager.getValue("inlineCard.commonAttributes.shadow.color"))
 
+            )
+        }
+        */
+      //  tap_payment_input?.cardInputChipView?.cardElevation= 0.2f
 
    /* cardInlineForm.setSavedCardDetails(Card("5123 4500 0000 0008",null,7,23,
             "dsd",null,null,null,
@@ -117,7 +146,8 @@ class MainActivity : AppCompatActivity() {
                 println("cardInlineForm.card.number"+cardInlineForm?.card?.number)
 
                 if (s != null && s.length >= 19) {
-                    println("cardInlineForm.card.number"+cardInlineForm?.card?.number)
+
+                    println("full no"+cardInlineForm?.fullCardNumber)
                   // cardInlineForm.setCardNumber(maskCardNumber(s.toString()))
                 }
             }
@@ -133,8 +163,8 @@ class MainActivity : AppCompatActivity() {
                 if (s != null && s.length >= 19) {
                     //  cardInlineForm.setCardNumber(maskCardNumber(s.toString()))
                     cardInlineForm.setSingleCardInput(CardBrandSingle.fromCode(s.toString()))
-                    alertView.visibility =View.VISIBLE
-                    alertView.alertMessage.text ="vwrongggg"
+                   // alertView.visibility =View.VISIBLE
+                   // alertView.alertMessage.text ="vwrongggg"
                     cardNumber = s.toString()
                 }
 
@@ -155,7 +185,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                cardInlineForm.setCardNumberText(cardNumber?.let { mask(it) })
+               // cardInlineForm.setCardNumberText(cardNumber?.let { mask(it) })
             }
         })
 
@@ -181,8 +211,8 @@ class MainActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 //   checkoutFragment.scrollView?.scrollTo(0,height)
                 // tapCardInputView.requestFocus()
-                alertView.visibility =View.VISIBLE
-                alertView.alertMessage.text = "Enter the 3-digit CVV number (usually at the back of the card)"
+                //alertView.visibility =View.VISIBLE
+               // alertView.alertMessage.text = "Enter the 3-digit CVV number (usually at the back of the card)"
                 switchLL?.switchSaveCard?.visibility =View.GONE
                 switchLL?.saveForOtherCheckBox?.visibility =View.GONE
                 switchLL?.toolsTipImageView?.visibility =View.GONE

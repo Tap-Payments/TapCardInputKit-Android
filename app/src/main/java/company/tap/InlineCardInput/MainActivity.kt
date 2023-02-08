@@ -1,13 +1,17 @@
 package company.tap.InlineCardInput
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.marginTop
 import company.tap.cardinputwidget.Card
 import company.tap.cardinputwidget.CardBrand
@@ -40,13 +44,15 @@ class MainActivity : AppCompatActivity() {
     var switchLL: TapInlineCardSwitch? = null
     var switchSaveCard: TapSwitch? = null
     var cardBrna: CardBrandView? = null
+    var cardNumber:String?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         //cardInlineForm =findViewById(R.id.cardInlineForm)
+        initTheme()
 
-        ThemeManager.loadTapTheme(this.resources, R.raw.defaultlighttheme, "lighttheme")
-        // ThemeManager.loadTapTheme(this.resources,R.raw.defaultdarktheme,"darktheme")
+       // ThemeManager.loadTapTheme(this.resources, R.raw.defaultlighttheme, "lighttheme")
+       //  ThemeManager.loadTapTheme(this.resources,R.raw.defaultdarktheme,"darktheme")
         LocalizationManager.loadTapLocale(this.resources, R.raw.lang)
         LocalizationManager.setLocale(this, Locale("en"))
         setContentView(R.layout.activity_main)
@@ -62,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         tabLinear = findViewById(R.id.tabLinear)
         tapAlertView = findViewById(R.id.alertView)
         clearView = findViewById(R.id.clear_text)
-        backArrow = findViewById(R.id.backView)
+        backArrow = cardInlineForm.findViewById(R.id.backView)
         tabLayout = findViewById(R.id.sections_tablayout)
         cardScannerBtn = findViewById(R.id.card_scanner_button)
         nfcButton = findViewById(R.id.nfc_button)
@@ -73,6 +79,7 @@ class MainActivity : AppCompatActivity() {
         nfcButton?.visibility = View.VISIBLE
         cardScannerBtn?.visibility = View.VISIBLE
         paymentInputContainer.addView(cardInlineForm)
+
         backArrow?.setOnClickListener {
             tabLayout.resetBehaviour()
             cardInlineForm.clear()
@@ -107,8 +114,10 @@ class MainActivity : AppCompatActivity() {
         cardInlineForm.setCardNumberTextWatcher(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
 //                cardNumAfterTextChangeListener(s, this)
+                println("cardInlineForm.card.number"+cardInlineForm?.card?.number)
+
                 if (s != null && s.length >= 19) {
-                    println(" cardInlineForm.card.number"+cardInlineForm?.card?.number)
+                    println("cardInlineForm.card.number"+cardInlineForm?.card?.number)
                   // cardInlineForm.setCardNumber(maskCardNumber(s.toString()))
                 }
             }
@@ -126,6 +135,7 @@ class MainActivity : AppCompatActivity() {
                     cardInlineForm.setSingleCardInput(CardBrandSingle.fromCode(s.toString()))
                     alertView.visibility =View.VISIBLE
                     alertView.alertMessage.text ="vwrongggg"
+                    cardNumber = s.toString()
                 }
 
             }
@@ -141,10 +151,11 @@ class MainActivity : AppCompatActivity() {
         cardInlineForm.setExpiryDateTextWatcher(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
             }
 
             override fun afterTextChanged(s: Editable?) {
-
+                cardInlineForm.setCardNumberText(cardNumber?.let { mask(it) })
             }
         })
 
@@ -202,6 +213,15 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    private fun initTheme() {
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark"))
+            ThemeManager.loadTapTheme(resources, R.raw.defaultdarktheme, "darktheme")
+        else if (ThemeManager.currentTheme.isNotEmpty() && !ThemeManager.currentTheme.contains("dark"))
+            ThemeManager.loadTapTheme(resources, R.raw.defaultlighttheme, "lighttheme")
+        else ThemeManager.loadTapTheme(resources, R.raw.defaultlighttheme, "lighttheme")
+
+    }
+
 
     private fun  maskCardNumber(cardInput: String): String {
         val maskLen: Int = cardInput.length - 4
@@ -229,6 +249,36 @@ class MainActivity : AppCompatActivity() {
             ), "https://back-end.b-cdn.net/payment_methods/visa.svg"
         )
     }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menumain, menu)
+        return true
+    }
+    // actions on click menu items
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.action_dark -> {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            ThemeManager.loadTapTheme(resources, R.raw.defaultdarktheme, "darktheme")
+
+            recreate()
+            true
+        }
+        R.id.action_light -> {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            ThemeManager.loadTapTheme(resources, R.raw.defaultlighttheme, "lighttheme")
+            recreate()
+            true
+        }
+
+
+        else -> {
+            // If we got here, the user's action was not recognized.
+            // Invoke the superclass to handle it.
+            super.onOptionsItemSelected(item)
+        }
+    }
+
 
 
 }

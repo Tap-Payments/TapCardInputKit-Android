@@ -115,6 +115,7 @@ class InlineCardInput @JvmOverloads constructor(
     lateinit var cardBrandView:CardBrandView
 
      var fullCardNumber :String? =null
+     var maskedValue :Boolean? =false
 
    var closeIconDrawable: Drawable?     =
        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")){
@@ -1380,7 +1381,7 @@ class InlineCardInput @JvmOverloads constructor(
         startSlideAnimation(listOfNotNull(
                 slideCardEndAnimation,
                 slideDateEndAnimation,
-                slideCvcEndAnimation
+               // slideCvcEndAnimation
                // slideHolderNameEndAnimation
         ))
 

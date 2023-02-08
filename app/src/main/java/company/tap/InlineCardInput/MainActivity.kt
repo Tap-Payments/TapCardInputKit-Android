@@ -13,6 +13,7 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.cardview.widget.CardView
 import androidx.core.view.marginTop
 import company.tap.cardinputwidget.Card
 import company.tap.cardinputwidget.CardBrand
@@ -48,6 +49,7 @@ class MainActivity : AppCompatActivity() {
     var switchSaveCard: TapSwitch? = null
     var cardBrna: CardBrandView? = null
     var cardNumber:String?=null
+    var cardInputChipView:CardView ?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -103,12 +105,13 @@ class MainActivity : AppCompatActivity() {
         switchSaveCard = switchLL?.findViewById(R.id.switchSaveCard)
         //   switchLL?.setSwitchDataSource(TapSwitchDataSource("Sasa","Save For later","sa","asa","asa"))
         cardInlineForm.switchCardEnabled = true
-       /* if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) {
+        cardInputChipView = tap_payment_input.findViewById(R.id.inline_CardView)
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) {
             //   tapPaymentInput?.cardInputChipView?.setBackgroundResource(R.drawable.border_unclick_black)
         } else {
-            tap_payment_input?.cardInputChipView?.setBackgroundResource(R.drawable.border_unclick_cardinput)
-        }*/
-      /*  tap_payment_input?.cardInputChipView?.let {
+            cardInputChipView?.setBackgroundResource(R.drawable.border_unclick_cardinput)
+        }
+        cardInputChipView?.let {
             setBorderedView(
                 it,
                 15.0f,// corner raduis
@@ -119,7 +122,7 @@ class MainActivity : AppCompatActivity() {
 
             )
         }
-        */
+
       //  tap_payment_input?.cardInputChipView?.cardElevation= 0.2f
 
    /* cardInlineForm.setSavedCardDetails(Card("5123 4500 0000 0008",null,7,23,

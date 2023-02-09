@@ -115,7 +115,7 @@ import java.net.URL
 
         if (brand == CardBrand.AmericanExpress) {
             iconView.setImageResource(brand.cvcIcon)
-            applyTint(true)
+            applyTint(false)
             return
         }
 
@@ -134,7 +134,7 @@ import java.net.URL
                     iconView.rotationY = 270f
                     iconView.animate().rotationY(360f).setListener(null)
                     if (animationApplied)
-                        applyTint(true)
+                        applyTint(false)
                 }
 
                 override fun onAnimationRepeat(animation: Animator?) {}

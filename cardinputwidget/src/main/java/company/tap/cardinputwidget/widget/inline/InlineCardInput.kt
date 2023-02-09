@@ -642,8 +642,10 @@ class InlineCardInput @JvmOverloads constructor(
         cardDetails as Card
         initFlag = true
         cardNumberIsViewed = false
-        onTouchHandling()
-        cvcNumberEditText.requestFocus()
+        expiryDateEditText.visibility = View.VISIBLE
+        cvcNumberEditText.visibility = View.VISIBLE
+        cardInputListener?.onCardComplete()
+       // cvcNumberEditText.requestFocus()
         cvcNumberEditText.setBackgroundResource(R.drawable.underline_editext)
       //  cvcNumberEditText.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.icon_cvcdraw, 0, 0)
       //  val cvvHint : String = LocalizationManager.getValue("saveCardCVV","SavedCardTitle")
@@ -686,18 +688,19 @@ class InlineCardInput @JvmOverloads constructor(
     override fun clear() {
 //        if (currentFields.any { it.hasFocus() } || this.hasFocus()) {
 //        }
-        cardNumberEditText.requestFocus()
-        invalidate()
+       // cardNumberTextInputLayout.requestFocus()
+       // cvcNumberTextInputLayout.clearFocus()
         currentFields.forEach { it.text?.clearSpans() }
         currentFields.forEach { it.text?.clear() }
         currentFields.forEach { it.setText("") }
+        scrollStart()
         cardNumberEditText.isEnabled = true
         cvcNumberEditText.isEnabled = true
         expiryDateEditText.isEnabled = true
         backArrow.visibility= View.GONE
-        nfcButton.visibility= View.VISIBLE
-        scannerButton.visibility= View.VISIBLE
-        closeButton.visibility= View.VISIBLE
+      //  nfcButton.visibility= View.VISIBLE
+       // scannerButton.visibility= View.VISIBLE
+       // closeButton.visibility= View.VISIBLE
         cvvIcon.visibility= View.GONE
         updateIcon()
 
@@ -1044,7 +1047,7 @@ class InlineCardInput @JvmOverloads constructor(
 
         expiryDateEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                scrollEnd()
+              //  scrollEnd()
                 cardInputListener?.onFocusChange(FOCUS_EXPIRY)
 
             }
@@ -1069,7 +1072,7 @@ class InlineCardInput @JvmOverloads constructor(
 
         cvcNumberEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                scrollEnd()
+               // scrollEnd()
                 cardInputListener?.onFocusChange(FOCUS_CVC)
                  //holderNameEditText.requestFocus()
                 if (holderNameEnabled) {
@@ -1096,7 +1099,7 @@ class InlineCardInput @JvmOverloads constructor(
 
         holderNameEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                scrollEnd()
+
                 cardInputListener?.onFocusChange(FOCUS_HOLDERNAME)
 
             }

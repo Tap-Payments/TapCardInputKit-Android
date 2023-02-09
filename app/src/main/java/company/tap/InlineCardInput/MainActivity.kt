@@ -73,11 +73,11 @@ class MainActivity : AppCompatActivity() {
         cardInlineForm.holderNameEnabled = false
         tabLinear = findViewById(R.id.tabLinear)
         tapAlertView = findViewById(R.id.alertView)
-        clearView = cardInlineForm.findViewById(R.id.clear_text)
+        clearView = tap_payment_input.findViewById(R.id.clear_text)
         backArrow = cardInlineForm.findViewById(R.id.backView)
         tabLayout = findViewById(R.id.sections_tablayout)
-        cardScannerBtn = findViewById(R.id.card_scanner_button)
-        nfcButton = findViewById(R.id.nfc_button)
+        cardScannerBtn = tap_payment_input.findViewById(R.id.card_scanner_button)
+        nfcButton = tap_payment_input.findViewById(R.id.nfc_button)
         cardBrna = cardInlineForm.findViewById(R.id.card_brand_view)
        // cardBrna?.iconView?.setImageResource(R.drawable.bahrain)
         tapAlertView?.alertMessage?.text = "Card number is missing"
@@ -90,16 +90,14 @@ class MainActivity : AppCompatActivity() {
             tabLayout.resetBehaviour()
             cardInlineForm.clear()
             clearView?.visibility = View.GONE
-            nfcButton?.visibility = View.VISIBLE
-            cardScannerBtn?.visibility = View.VISIBLE
+            controlScannerOptions()
         }
 
         clearView?.setOnClickListener {
             tabLayout.resetBehaviour()
             cardInlineForm.clear()
             clearView?.visibility = View.GONE
-            nfcButton?.visibility = View.VISIBLE
-            cardScannerBtn?.visibility = View.VISIBLE
+            controlScannerOptions()
         }
 
         switchSaveCard = switchLL?.findViewById(R.id.switchSaveCard)
@@ -311,7 +309,17 @@ class MainActivity : AppCompatActivity() {
             super.onOptionsItemSelected(item)
         }
     }
+    private fun controlScannerOptions() {
+        if (true) {
+            nfcButton?.visibility = View.GONE
 
+            cardScannerBtn?.visibility = View.VISIBLE
+        } else {
+
+            nfcButton?.visibility = View.GONE
+            cardScannerBtn?.visibility = View.VISIBLE
+        }
+    }
 
 
 }

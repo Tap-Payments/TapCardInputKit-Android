@@ -643,7 +643,7 @@ class InlineCardInput @JvmOverloads constructor(
         initFlag = true
         cardNumberIsViewed = false
         onTouchHandling()
-       // cvcNumberEditText.requestFocus()
+        cvcNumberEditText.requestFocus()
         cvcNumberEditText.setBackgroundResource(R.drawable.underline_editext)
       //  cvcNumberEditText.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.icon_cvcdraw, 0, 0)
       //  val cvvHint : String = LocalizationManager.getValue("saveCardCVV","SavedCardTitle")
@@ -662,7 +662,7 @@ class InlineCardInput @JvmOverloads constructor(
 
         }else expiryDateEditText.setText(cardDetails.expMonth.toString()+"/"+cardDetails?.expYear.toString())
 
-       // cardBrandView.showBrandIcon(cardDetails.brand,false)
+        cardBrandView.showBrandIcon(cardDetails.brand,false)
 
         expiryDateEditText.shouldShowError = false
         expiryDateEditText.isEnabled = false
@@ -688,15 +688,9 @@ class InlineCardInput @JvmOverloads constructor(
 //        }
         cardNumberEditText.requestFocus()
         invalidate()
-       // currentFields.forEach { it.text?.clearSpans() }
-      //  currentFields.forEach { it.text?.clear() }
-       // currentFields.forEach { it.setText("") }
-      //  currentFields.toMutableList().clear()
-        cardNumberEditText.text?.clear()
-        expiryDateEditText.text?.clear()
-        cvcNumberEditText.text?.clear()
-        holderNameEditText.text?.clear()
-
+        currentFields.forEach { it.text?.clearSpans() }
+        currentFields.forEach { it.text?.clear() }
+        currentFields.forEach { it.setText("") }
         cardNumberEditText.isEnabled = true
         cvcNumberEditText.isEnabled = true
         expiryDateEditText.isEnabled = true

@@ -1379,7 +1379,7 @@ class InlineCardInput @JvmOverloads constructor(
 */
 
         startSlideAnimation(listOfNotNull(
-               // slideCardEndAnimation,
+               slideCardEndAnimation,
                 slideDateEndAnimation,
                 slideCvcEndAnimation
                // slideHolderNameEndAnimation

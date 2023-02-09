@@ -165,7 +165,7 @@ class MainActivity : AppCompatActivity() {
 
                 if (s != null && s.length >= 19) {
                     //  cardInlineForm.setCardNumber(maskCardNumber(s.toString()))
-                    cardInlineForm.setSingleCardInput(CardBrandSingle.fromCode(s.toString()))
+                    cardInlineForm.setSingleCardInput(CardBrandSingle.fromCode(s.toString()),"https://back-end.b-cdn.net/payment_methods/visa.svg")
                    // alertView.visibility =View.VISIBLE
                    // alertView.alertMessage.text ="vwrongggg"
                     cardNumber = s.toString()
@@ -273,7 +273,7 @@ class MainActivity : AppCompatActivity() {
         cardInlineForm.setSavedCardDetails(Card("5123 4500 0000 0008",null,7,23,
             "dsd",null,null,null,
             null,null,null,null,null,
-            "0008",CardBrand.MasterCard,"sdsds",null,null,null,null,null),CardInputUIStatus.SavedCard)
+            "0008",CardBrand.Visa,"sdsds",null,null,null,null,null),CardInputUIStatus.SavedCard)
 
         cardInlineForm.setSingleCardInput(
             CardBrandSingle.fromCode(

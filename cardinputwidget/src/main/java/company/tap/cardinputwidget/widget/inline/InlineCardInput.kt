@@ -68,7 +68,7 @@ class InlineCardInput @JvmOverloads constructor(
             this,true
     )
 
-    private val containerLayout1 = viewBinding.container1
+   // private val containerLayout1 = viewBinding.container1
     internal val containerLayout = viewBinding.container
 
    // @JvmSynthetic
@@ -1750,10 +1750,7 @@ class InlineCardInput @JvmOverloads constructor(
         override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
             super.applyTransformation(interpolatedTime, t)
             view.layoutParams = (view.layoutParams as ConstraintLayout.LayoutParams).apply {
-                println("hiddenCardWidth"+hiddenCardWidth.toFloat())
-                println("interpolatedTime"+ interpolatedTime)
-              //  marginStart = (1f * hiddenCardWidth.toFloat() * interpolatedTime).toInt()
-                marginStart = (1f * hiddenCardWidth.toFloat()).toInt()
+                marginStart = (0f * hiddenCardWidth.toFloat() * interpolatedTime).toInt()
                // marginStart = (-0.9f * hiddenCardWidth.toFloat() * interpolatedTime).toInt() //commented by ahlaam for masking
             }
         }

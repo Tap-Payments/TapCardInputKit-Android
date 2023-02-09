@@ -11,11 +11,7 @@ import java.util.regex.Pattern
 enum class CardBrand(
     val code: String,
     val displayName: String,
-    @DrawableRes val icon: Int = if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) {
-    R.drawable.card_icon_dark
-}else if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("light")) {
-    R.drawable.card_icon_light
-}else  R.drawable.card_icon_light,
+    @DrawableRes val icon: Int,
     @DrawableRes val cvcIcon: Int =
         if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.dark_cvv else R.drawable.light_cvv,
     @DrawableRes val errorIcon: Int =
@@ -76,7 +72,7 @@ enum class CardBrand(
     Discover(
         "discover",
         "Discover",
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.card_icon_dark else R.drawable.card_icon_light,
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_discover else R.drawable.ic_discover,
         pattern = Pattern.compile("^(60|64|65)[0-9]*$")
     ),
 
@@ -88,7 +84,7 @@ enum class CardBrand(
     JCB(
         "jcb",
         "JCB",
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.card_icon_dark else R.drawable.card_icon_light,
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_jcb else R.drawable.ic_jcb,
         pattern = Pattern.compile("^(352[89]|35[3-8][0-9])[0-9]*$"),
         partialPatterns = mapOf(
             2 to Pattern.compile("^(35)$"),
@@ -105,7 +101,7 @@ enum class CardBrand(
     DinersClub(
         "diners",
         "Diners Club",
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.card_icon_dark else R.drawable.card_icon_light,
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_diners else R.drawable.ic_diners,
         defaultMaxLength = 16,
         pattern = Pattern.compile("^(36|30|38|39)[0-9]*$"),
         variantMaxLength = mapOf(
@@ -119,21 +115,21 @@ enum class CardBrand(
     Visa(
         "visa",
         "Visa",
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.card_icon_dark else R.drawable.card_icon_light,
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_visa else R.drawable.ic_visa,
         pattern = Pattern.compile("^(4)[0-9]*$")
     ),
 
     MasterCard(
         "mastercard",
         "Mastercard",
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.dark_card else R.drawable.card_icon_light,
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_mastercard else R.drawable.ic_mastercard,
         pattern = Pattern.compile("^(2221|2222|2223|2224|2225|2226|2227|2228|2229|223|224|225|226|227|228|229|23|24|25|26|270|271|2720|50|51|52|53|54|55|67)[0-9]*$")
     ),
 
     UnionPay(
         "unionpay",
         "UnionPay",
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.card_icon_dark else R.drawable.card_icon_light,
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_unionpay else R.drawable.ic_unionpay,
         pattern = Pattern.compile("^(62|81)[0-9]*$")
     ),
 

@@ -106,7 +106,7 @@ class MainActivity : AppCompatActivity() {
         //   switchLL?.setSwitchDataSource(TapSwitchDataSource("Sasa","Save For later","sa","asa","asa"))
         cardInlineForm.switchCardEnabled = true
         cardInputChipView = tap_payment_input.findViewById(R.id.inline_CardView)
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) {
+       /* if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) {
             //   tapPaymentInput?.cardInputChipView?.setBackgroundResource(R.drawable.border_unclick_black)
         } else {
             cardInputChipView?.setBackgroundResource(R.drawable.border_unclick_cardinput)
@@ -121,7 +121,7 @@ class MainActivity : AppCompatActivity() {
                 Color.parseColor(ThemeManager.getValue("inlineCard.commonAttributes.shadow.color"))
 
             )
-        }
+        }*/
 
       //  tap_payment_input?.cardInputChipView?.cardElevation= 0.2f
 

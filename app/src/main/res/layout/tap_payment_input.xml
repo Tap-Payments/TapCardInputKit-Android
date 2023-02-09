@@ -20,6 +20,7 @@
         android:clipChildren="false"
         app:cardPreventCornerOverlap="false"
         app:cardUseCompatPadding="true"
+        android:layout_margin="@dimen/margin_basic_8dp"
 
 
 

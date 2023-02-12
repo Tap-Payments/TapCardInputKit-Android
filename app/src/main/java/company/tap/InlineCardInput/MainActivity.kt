@@ -20,6 +20,7 @@ import company.tap.cardinputwidget.CardBrand
 import company.tap.cardinputwidget.CardBrandSingle
 import company.tap.cardinputwidget.CardInputUIStatus
 import company.tap.cardinputwidget.views.CardBrandView
+import company.tap.cardinputwidget.widget.inline.CardInlineForm
 import company.tap.cardinputwidget.widget.inline.InlineCardInput
 import company.tap.taplocalizationkit.LocalizationManager
 import company.tap.tapuilibrary.themekit.ThemeManager
@@ -171,6 +172,8 @@ class MainActivity : AppCompatActivity() {
 
             }
         })
+        cardInlineForm.iconUrl ="https://back-end.b-cdn.net/payment_methods/visa.svg"
+        //cardInlineForm.setIconUrl("https://back-end.b-cdn.net/payment_methods/visa.svg")
 
         clearView?.setOnClickListener {
             tabLayout.resetBehaviour()

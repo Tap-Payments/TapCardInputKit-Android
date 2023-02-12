@@ -12,14 +12,11 @@ enum class CardBrand(
     val code: String,
     val displayName: String,
     @DrawableRes val icon: Int,
-    @DrawableRes val cvcIcon: Int =
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.dark_cvv else R.drawable.light_cvv,
-    @DrawableRes val errorIcon: Int =
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) {
-            R.drawable.card_icon_dark
-        }else if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("light")) {
-            R.drawable.card_icon_light
-        }else  R.drawable.card_icon_light,
+    @DrawableRes val cvcIconDark: Int =R.drawable.dark_cvv,
+    @DrawableRes val cvcIconLight: Int =R.drawable.light_cvv,
+    @DrawableRes val errorIconDark: Int = R.drawable.card_icon_dark,
+    @DrawableRes val errorIconLight: Int = R.drawable.card_icon_light,
+    var iconUrl: String? =null,
 
     /**
      * Accepted CVC lengths
@@ -55,14 +52,15 @@ enum class CardBrand(
      */
     private val variantMaxLength: Map<Pattern, Int> = emptyMap(),
 
-    private val variantSpacePositions: Map<Pattern, Set<Int>> = emptyMap()
-) {
+    private val variantSpacePositions: Map<Pattern, Set<Int>> = emptyMap(),
+
+    ) {
+
+
     AmericanExpress(
         "amex",
         "American Express",
         if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")){ R.drawable.card_icon_dark} else R.drawable.card_icon_light,
-        cvcIcon = if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")){ R.drawable.dark_cvv }else R.drawable.light_cvv,
-        errorIcon = if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")){ R.drawable.card_icon_dark }else R.drawable.card_icon_light,
         cvcLength = setOf(3, 4),
         defaultMaxLength = 15,
         pattern = Pattern.compile("^(34|37)[0-9]*$"),
@@ -73,7 +71,8 @@ enum class CardBrand(
         "discover",
         "Discover",
         if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_discover else R.drawable.ic_discover,
-        pattern = Pattern.compile("^(60|64|65)[0-9]*$")
+        pattern = Pattern.compile("^(60|64|65)[0-9]*$"),
+       
     ),
 
     /**
@@ -109,7 +108,8 @@ enum class CardBrand(
         ),
         variantSpacePositions = mapOf(
             Pattern.compile("^(36)[0-9]*$") to setOf(4, 11)
-        )
+        ),
+
     ),
 
     Visa(
@@ -117,6 +117,7 @@ enum class CardBrand(
         "Visa",
         if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_visa else R.drawable.ic_visa,
         pattern = Pattern.compile("^(4)[0-9]*$")
+
     ),
 
     MasterCard(
@@ -124,6 +125,7 @@ enum class CardBrand(
         "Mastercard",
         if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_mastercard else R.drawable.ic_mastercard,
         pattern = Pattern.compile("^(2221|2222|2223|2224|2225|2226|2227|2228|2229|223|224|225|226|227|228|229|23|24|25|26|270|271|2720|50|51|52|53|54|55|67)[0-9]*$")
+
     ),
 
     UnionPay(
@@ -138,6 +140,7 @@ enum class CardBrand(
         "Unknown",
         if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.card_icon_dark else R.drawable.card_icon_light,
         cvcLength = setOf(3, 4)
+
     );
 
     val defaultMaxLengthWithSpaces: Int = defaultMaxLength + defaultSpacePositions.size
@@ -259,8 +262,13 @@ enum class CardBrand(
     private fun getPatternForLength(cardNumber: String): Pattern? {
         return partialPatterns[cardNumber.length] ?: pattern
     }
+    private fun setCardIcon(iconUrl: String?): String? {
+        return iconUrl
+    }
 
     companion object {
+
+
         /**
          * @param cardNumber a card number
          * @return the [CardBrand] that matches the [cardNumber]'s prefix, if one is found;
@@ -285,6 +293,20 @@ enum class CardBrand(
             return values().firstOrNull { it.code.equals(code, ignoreCase = true) } ?: Unknown
         }
 
+        fun setIconUrl(iconUrl: String?): CardBrand {
+
+            println("Icon>>"+iconUrl)
+            return values().firstOrNull { it.iconUrl?.contains(iconUrl.toString(), ignoreCase = true) == true } ?: Unknown
+        }
+
+
+
+
+
+
         private const val CVC_COMMON_LENGTH: Int = 3
     }
+
+
+
 }

@@ -113,6 +113,7 @@ class InlineCardInput @JvmOverloads constructor(
     lateinit var linearIconsLayout :LinearLayout
     lateinit var separatorcard2 :TapSeparatorView
     lateinit var cardBrandView:CardBrandView
+     var iconUrl: String?=null
 
      var fullCardNumber :String? =null
      var maskedValue :Boolean? =false
@@ -1470,7 +1471,7 @@ class InlineCardInput @JvmOverloads constructor(
 
     private fun updateIcon() {
         if (!shouldChangeIcon) return
-        cardBrandView.showBrandIcon(brand, shouldShowErrorIcon)
+       cardBrandView.showBrandIcon(brand, shouldShowErrorIcon)
     }
 
      fun updateIconCvc(

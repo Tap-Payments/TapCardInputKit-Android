@@ -56,7 +56,11 @@ import java.net.URL
    internal fun showBrandIcon(brand: CardBrand, shouldShowErrorIcon: Boolean) {
         iconView.setOnClickListener(null)
         if (shouldShowErrorIcon) {
-            iconView.setImageResource(brand.errorIcon)
+            if(ThemeManager.currentTheme.contains("dark")){
+                iconView.setImageResource(brand.errorIconDark)
+
+            }else iconView.setImageResource(brand.errorIconLight)
+
         } else {
             if (animationApplied) {
                 animationApplied = false
@@ -114,13 +118,21 @@ import java.net.URL
         if (animationApplied) return
 
         if (brand == CardBrand.AmericanExpress) {
-            iconView.setImageResource(brand.cvcIcon)
+            if(ThemeManager.currentTheme.contains("dark")){
+                iconView.setImageResource(brand.cvcIconDark)
+
+            }else  iconView.setImageResource(brand.cvcIconLight)
             applyTint(false)
             return
         }
 
         animationApplied = true
-        animateImageChange(brand.cvcIcon)
+        if(ThemeManager.currentTheme.contains("dark")){
+            iconView.setImageResource(brand.cvcIconDark)
+            animateImageChange(brand.cvcIconDark)
+
+        }else    animateImageChange(brand.cvcIconLight)
+
         iconView.setOnClickListener(null)
     }
 

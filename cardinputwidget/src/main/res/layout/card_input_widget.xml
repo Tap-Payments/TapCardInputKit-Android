@@ -183,13 +183,13 @@ android:background="@android:color/transparent"
                 android:hint="@string/cvc_number_hint"
                 android:imeOptions="actionNext"
                 android:inputType="numberPassword"
-                app:endIconDrawable="@drawable/cvv_icon"
                 android:textDirection="locale"
                 android:textSize="@dimen/font_size_14sp"
                 app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
 
 
-                app:boxStrokeWidthFocused="0dp" />
+                app:endIconDrawable="@drawable/cvv_icon" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

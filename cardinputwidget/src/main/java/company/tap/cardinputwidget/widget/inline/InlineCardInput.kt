@@ -706,7 +706,7 @@ class InlineCardInput @JvmOverloads constructor(
         shouldShowErrorIcon=true
         cardBrandView.showBrandIcon(brand, true)
 
-        cvcNumberEditText.hint = LocalizationManager.getValue("cardCVVPlaceHolder", "TapCardInputKit")
+        //cvcNumberEditText.hint = LocalizationManager.getValue("cardCVVPlaceHolder", "TapCardInputKit")
     }
 
     /**

@@ -1,6 +1,7 @@
 package company.tap.cardinputwidget.widget.inline
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -11,9 +12,9 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.text.*
 import android.util.AttributeSet
+import android.util.DisplayMetrics
 import android.view.*
-import android.view.View.OnFocusChangeListener
-import android.view.View.OnTouchListener
+import android.view.View.*
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.Transformation
@@ -26,7 +27,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.AccessibilityDelegateCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
-import androidx.core.view.isVisible
 import company.tap.cardinputwidget.*
 import company.tap.cardinputwidget.databinding.CardInputWidgetBinding
 import company.tap.cardinputwidget.utils.DateUtils
@@ -522,8 +522,8 @@ class InlineCardInput @JvmOverloads constructor(
         shouldChangeIcon = false
       //  cardBrandView.showBrandIconSingle(cardBrand, shouldShowErrorIcon)
         if (iconUrl != null) {
-            cardBrandView.showBrandIconSingle(cardBrand, iconUrl ,shouldShowErrorIcon)
-        }else  cardBrandView.showBrandIconSingle(cardBrand, shouldShowErrorIcon)
+            cardBrandView.showBrandIconSingle(cardBrand, iconUrl ,false)
+        }else  cardBrandView.showBrandIconSingle(cardBrand, true)
     }
 
     override fun setCardNumberApiTextWatcher(cardApiNumberTextWatcher: TextValidator) {
@@ -703,7 +703,8 @@ class InlineCardInput @JvmOverloads constructor(
        // scannerButton.visibility= View.VISIBLE
        // closeButton.visibility= View.VISIBLE
         cvvIcon.visibility= View.GONE
-        updateIcon()
+        shouldShowErrorIcon=true
+        cardBrandView.showBrandIcon(brand, true)
 
         cvcNumberEditText.hint = LocalizationManager.getValue("cardCVVPlaceHolder", "TapCardInputKit")
     }
@@ -1165,6 +1166,8 @@ class InlineCardInput @JvmOverloads constructor(
 
         cardNumberEditText.brandChangeCallback = { brand ->
             hiddenCardText = createHiddenCardText(brand)
+            println("shouldShowErrorIcon is????"+shouldShowErrorIcon)
+            shouldShowErrorIcon = true
             updateIcon()
             cvcNumberEditText.updateBrand(brand)
         }
@@ -1200,13 +1203,22 @@ class InlineCardInput @JvmOverloads constructor(
             override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     // do your stuff here
-                    println("expiryDateEditText>>>>>>>>"+expiryDateEditText)
+                  //  println("expiryDateEditText>>>>>>>>"+expiryDateEditText)
                     expiryDateEditText.requestFocus()
+
                 }
                 return false
             }
         })
+        //Added to detect keyboard delete event
+        cardNumberEditText.setOnKeyListener(OnKeyListener { view, keyCode, keyEvent ->
+            if (keyCode == KeyEvent.KEYCODE_DEL) {
+                shouldChangeIcon= true
+                cardBrandView.showBrandIcon(brand, true)
 
+            }
+            false
+        })
         holderNameEditText.setOnEditorActionListener(object : TextView.OnEditorActionListener {
             override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -1914,9 +1926,14 @@ class InlineCardInput @JvmOverloads constructor(
 
     @SuppressLint("ClickableViewAccessibility")
     fun setDrawableForHolderName(){
-
-        closeIconDrawable?.setBounds(0,0,30,30) // set size
-
+       val displayMetrics = getDeviceDisplayMetrics(context as Activity)
+        println("displayMetrics"+displayMetrics)
+        if (displayMetrics == DisplayMetrics.DENSITY_260 || displayMetrics == DisplayMetrics.DENSITY_280 || displayMetrics == DisplayMetrics.DENSITY_300 || displayMetrics == DisplayMetrics.DENSITY_XHIGH || displayMetrics == DisplayMetrics.DENSITY_340 || displayMetrics == DisplayMetrics.DENSITY_360) {
+            closeIconDrawable?.setBounds(0, 0, 25, 25) // set size
+        }else  if (displayMetrics == DisplayMetrics.DENSITY_360|| displayMetrics == DisplayMetrics.DENSITY_400|| displayMetrics == DisplayMetrics.DENSITY_420|| displayMetrics == DisplayMetrics.DENSITY_440 ){ closeIconDrawable?.setBounds(0, 0, 30, 30) // set size}
+        }else {
+            closeIconDrawable?.setBounds(0, 0, 35, 35) // set size}
+        }
         if (context?.let { LocalizationManager.getLocale(it).language } == "en"){
             holderNameEditText.setCompoundDrawables(null,null,closeIconDrawable,null) // set position of drawable
 
@@ -1960,6 +1977,16 @@ class InlineCardInput @JvmOverloads constructor(
         val matrix = Matrix().apply { postScale(-1f, 1f, width / 2f, height / 2f) }
         return Bitmap.createBitmap(this, 0, 0, width, height, matrix, true)
     }
-
+    private  fun getDeviceDisplayMetrics(activity: Activity) : Int{
+        // Determine density
+        val metrics = DisplayMetrics()
+        activity.windowManager.defaultDisplay.getMetrics(metrics)
+        val density = metrics.densityDpi
+        return density
     }
+    }
+
+
+
+
 

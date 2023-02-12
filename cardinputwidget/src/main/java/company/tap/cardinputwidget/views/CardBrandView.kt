@@ -55,13 +55,14 @@ import java.net.URL
 
    internal fun showBrandIcon(brand: CardBrand, shouldShowErrorIcon: Boolean) {
         iconView.setOnClickListener(null)
-        if (shouldShowErrorIcon) {
+       if (shouldShowErrorIcon) {
             if(ThemeManager.currentTheme.contains("dark")){
                 iconView.setImageResource(brand.errorIconDark)
 
             }else iconView.setImageResource(brand.errorIconLight)
 
         } else {
+            println("brand val"+brand)
             if (animationApplied) {
                 animationApplied = false
                 animateImageChange(brand.icon)
@@ -77,7 +78,11 @@ import java.net.URL
     internal fun showBrandIconSingle(brand: CardBrandSingle, shouldShowErrorIcon: Boolean) {
         iconView.setOnClickListener(null)
         if (shouldShowErrorIcon) {
-            iconView.setImageResource(brand.errorIcon)
+            if(ThemeManager.currentTheme.contains("dark")){
+                iconView.setImageResource(brand.errorIconDark)
+
+            }else iconView.setImageResource(brand.errorIconLight)
+
         } else {
             if (animationApplied) {
                 animationApplied = false
@@ -93,8 +98,12 @@ import java.net.URL
 
     internal fun showBrandIconSingle(brand: CardBrandSingle, iconUrl : String, shouldShowErrorIcon: Boolean) {
         iconView.setOnClickListener(null)
+        println("shouldShowErrorIcon"+shouldShowErrorIcon)
         if (shouldShowErrorIcon) {
-            iconView.setImageResource(brand.errorIcon)
+            if(ThemeManager.currentTheme.contains("dark")){
+                iconView.setImageResource(brand.errorIconDark)
+
+            }else iconView.setImageResource(brand.errorIconLight)
         } else {
             if (animationApplied) {
                 animationApplied = false

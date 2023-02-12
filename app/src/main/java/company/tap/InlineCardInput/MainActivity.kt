@@ -22,6 +22,7 @@ import company.tap.cardinputwidget.CardInputUIStatus
 import company.tap.cardinputwidget.views.CardBrandView
 import company.tap.cardinputwidget.widget.inline.CardInlineForm
 import company.tap.cardinputwidget.widget.inline.InlineCardInput
+import company.tap.tapcardvalidator_android.CardValidator
 import company.tap.taplocalizationkit.LocalizationManager
 import company.tap.tapuilibrary.themekit.ThemeManager
 import company.tap.tapuilibrary.uikit.atoms.TapImageView
@@ -74,7 +75,7 @@ class MainActivity : AppCompatActivity() {
         cardInlineForm.holderNameEnabled = false
         tabLinear = findViewById(R.id.tabLinear)
         tapAlertView = findViewById(R.id.alertView)
-        clearView = tap_payment_input.findViewById(R.id.clear_text)
+        clearView = cardInlineForm.findViewById(R.id.clear_text)
         backArrow = cardInlineForm.findViewById(R.id.backView)
         tabLayout = findViewById(R.id.sections_tablayout)
         cardScannerBtn = tap_payment_input.findViewById(R.id.card_scanner_button)
@@ -95,6 +96,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         clearView?.setOnClickListener {
+            println("clearView lcicc")
             tabLayout.resetBehaviour()
             cardInlineForm.clear()
             clearView?.visibility = View.GONE
@@ -161,9 +163,12 @@ class MainActivity : AppCompatActivity() {
                     nfcButton?.visibility = View.GONE
                     cardScannerBtn?.visibility = View.GONE
                 }
-
+                val card = CardValidator.validate(s.toString())
+                if(card.cardBrand!=null)
+                logicTosetValues(card.cardBrand)
                 if (s != null && s.length >= 19) {
                     //  cardInlineForm.setCardNumber(maskCardNumber(s.toString()))
+                        //Dynamically set value from API
                     cardInlineForm.setSingleCardInput(CardBrandSingle.fromCode(s.toString()),"https://back-end.b-cdn.net/payment_methods/visa.svg")
                    // alertView.visibility =View.VISIBLE
                    // alertView.alertMessage.text ="vwrongggg"
@@ -323,6 +328,16 @@ class MainActivity : AppCompatActivity() {
             cardScannerBtn?.visibility = View.VISIBLE
         }
     }
+    fun logicTosetValues(card: company.tap.tapcardvalidator_android.CardBrand){
+
+                cardInlineForm.setSingleCardInput(
+                    CardBrandSingle.fromCardNumber(
+                        card.name,
+                    ), "https://back-end.b-cdn.net/payment_methods/visa.svg"
+                )
 
 
-}
+        }
+    }
+
+

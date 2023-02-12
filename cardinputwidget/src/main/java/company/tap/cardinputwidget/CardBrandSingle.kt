@@ -12,12 +12,10 @@ enum class CardBrandSingle(
     val code: String,
     val displayName: String,
     @DrawableRes val icon: Int,
-    @DrawableRes val cvcIcon: Int = if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.dark_cvv else R.drawable.light_cvv,
-
-    @DrawableRes val errorIcon: Int =
-        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.dark_card else R.drawable.card_icon_light,
-
-
+    @DrawableRes val cvcIconDark: Int =R.drawable.dark_cvv,
+    @DrawableRes val cvcIconLight: Int =R.drawable.light_cvv,
+    @DrawableRes val errorIconDark: Int = R.drawable.card_icon_dark,
+    @DrawableRes val errorIconLight: Int = R.drawable.card_icon_light,
 
     /**
      * Accepted CVC lengths
@@ -59,8 +57,6 @@ enum class CardBrandSingle(
         "amex",
         "American Express",
         if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_americanexpress else R.drawable.ic_americanexpress,
-        cvcIcon = R.drawable.dark_cvv,
-        errorIcon = if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_americanexpress else R.drawable.ic_americanexpress,
         cvcLength = setOf(3, 4),
         defaultMaxLength = 15,
         pattern = Pattern.compile("^(34|37)[0-9]*$"),
@@ -275,12 +271,19 @@ enum class CardBrandSingle(
                 } ?: Unknown
         }
 
+        fun getUnKnown():Int{
+            if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark"))
+             return   R.drawable.dark_card else return R.drawable.card_icon_light
+
+
+        }
+
         /**
          * @param code a brand code, such as `Visa` or `American Express`.
          * See [PaymentMethod.Card.brand].
          */
         fun fromCode(code: String?): CardBrandSingle {
-            return values().firstOrNull { it.code.equals(code, ignoreCase = true) } ?: Unknown
+            return values().firstOrNull { it.code.equals(code) } ?: Unknown
         }
 
         private const val CVC_COMMON_LENGTH: Int = 3

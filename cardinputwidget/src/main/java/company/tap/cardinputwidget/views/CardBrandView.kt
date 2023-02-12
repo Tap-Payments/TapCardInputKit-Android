@@ -1,6 +1,7 @@
 package company.tap.cardinputwidget.views
 
 import android.animation.Animator
+import android.app.Activity
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -9,7 +10,9 @@ import android.widget.ImageView
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.net.toUri
 import com.bumptech.glide.Glide
+import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import company.tap.cardinputwidget.CardBrand
 import company.tap.cardinputwidget.CardBrandSingle
 import company.tap.cardinputwidget.R
@@ -109,7 +112,8 @@ import java.net.URL
                 animationApplied = false
                 animateImageChange(brand.icon)
             } else
-                Glide.with(context).load(iconUrl).into(iconView)
+                GlideToVectorYou.justLoadImage(context as Activity, iconUrl.toUri(),iconView)
+             //   Glide.with(context).load(iconUrl).into(iconView)
               //  iconView.setImageURI(brand.icon)
             if (brand.name == CardBrand.Unknown.name) {
                 applyTint(false)

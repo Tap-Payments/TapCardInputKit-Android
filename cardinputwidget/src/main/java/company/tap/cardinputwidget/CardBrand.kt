@@ -16,7 +16,7 @@ enum class CardBrand(
     @DrawableRes val cvcIconLight: Int =R.drawable.light_cvv,
     @DrawableRes val errorIconDark: Int = R.drawable.card_icon_dark,
     @DrawableRes val errorIconLight: Int = R.drawable.card_icon_light,
-    var iconUrl: String? =null,
+
 
     /**
      * Accepted CVC lengths
@@ -262,9 +262,7 @@ enum class CardBrand(
     private fun getPatternForLength(cardNumber: String): Pattern? {
         return partialPatterns[cardNumber.length] ?: pattern
     }
-    private fun setCardIcon(iconUrl: String?): String? {
-        return iconUrl
-    }
+
 
     companion object {
 
@@ -292,15 +290,6 @@ enum class CardBrand(
         fun fromCode(code: String?): CardBrand {
             return values().firstOrNull { it.code.equals(code, ignoreCase = true) } ?: Unknown
         }
-
-        fun setIconUrl(iconUrl: String?): CardBrand {
-
-            println("Icon>>"+iconUrl)
-            return values().firstOrNull { it.iconUrl?.contains(iconUrl.toString(), ignoreCase = true) == true } ?: Unknown
-        }
-
-
-
 
 
 

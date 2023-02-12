@@ -12,6 +12,7 @@ import androidx.annotation.DrawableRes
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.net.toUri
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import company.tap.cardinputwidget.CardBrand
 import company.tap.cardinputwidget.CardBrandSingle
@@ -112,8 +113,9 @@ import java.net.URL
                 animationApplied = false
                 animateImageChange(brand.icon)
             } else
-                GlideToVectorYou.justLoadImage(context as Activity, iconUrl.toUri(),iconView)
-             //   Glide.with(context).load(iconUrl).into(iconView)
+                //GlideToVectorYou.justLoadImage(context as Activity, iconUrl.toUri(),iconView)
+                Glide.with(context).load(iconUrl) .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true).into(iconView)
               //  iconView.setImageURI(brand.icon)
             if (brand.name == CardBrand.Unknown.name) {
                 applyTint(false)

@@ -164,12 +164,18 @@ class MainActivity : AppCompatActivity() {
                     cardScannerBtn?.visibility = View.GONE
                 }
                 val card = CardValidator.validate(s.toString())
-                if(card.cardBrand!=null)
-                logicTosetValues(card.cardBrand)
+                if(card.cardBrand!=null && s?.toString()?.length!! <= 6)
+                logicTosetValues(card.cardBrand,s.toString())
                 if (s != null && s.length >= 19) {
                     //  cardInlineForm.setCardNumber(maskCardNumber(s.toString()))
                         //Dynamically set value from API
-                    cardInlineForm.setSingleCardInput(CardBrandSingle.fromCode(s.toString()),"https://back-end.b-cdn.net/payment_methods/visa.svg")
+                  if(s.toString().startsWith("5")){
+                      cardInlineForm.setSingleCardInput(CardBrandSingle.fromCode(s.toString()),"https://back-end.b-cdn.net/payment_methods/mastercard.svg")
+
+                  }else {
+                      cardInlineForm.setSingleCardInput(CardBrandSingle.fromCode(s.toString()),"https://back-end.b-cdn.net/payment_methods/visa.svg")
+
+                  }
                    // alertView.visibility =View.VISIBLE
                    // alertView.alertMessage.text ="vwrongggg"
                     cardNumber = s.toString()
@@ -328,14 +334,15 @@ class MainActivity : AppCompatActivity() {
             cardScannerBtn?.visibility = View.VISIBLE
         }
     }
-    fun logicTosetValues(card: company.tap.tapcardvalidator_android.CardBrand){
+    fun logicTosetValues(card: company.tap.tapcardvalidator_android.CardBrand,s:String){
 
-                cardInlineForm.setSingleCardInput(
-                    CardBrandSingle.fromCardNumber(
-                        card.name,
-                    ), "https://back-end.b-cdn.net/payment_methods/visa.svg"
-                )
+        if(s.toString().startsWith("5")){
+            cardInlineForm.setSingleCardInput(CardBrandSingle.fromCode(s.toString()),"https://back-end.b-cdn.net/payment_methods/mastercard.svg")
 
+        }else {
+            cardInlineForm.setSingleCardInput(CardBrandSingle.fromCode(s.toString()),"https://back-end.b-cdn.net/payment_methods/visa.svg")
+
+        }
 
         }
     }

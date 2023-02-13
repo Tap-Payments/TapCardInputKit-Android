@@ -1117,6 +1117,8 @@ class InlineCardInput @JvmOverloads constructor(
                             cardInputListener?.onCvcComplete()
 
                         }
+                        cvcNumberEditText.setBackgroundResource(R.drawable.underline_editext_transparent)
+                        cvvIcon.visibility = View.GONE
                        // println("updateIconCvc call from cvvnumber"+cvcNumberEditText.hasFocus())
                         updateIconCvc(cvcNumberEditText.hasFocus(), text,null)
 
@@ -1133,19 +1135,7 @@ class InlineCardInput @JvmOverloads constructor(
             }
         )
 
-        cvcNumberEditText.setAfterTextChangedListener(
-            object : TapTextInput.AfterTextChangedListener {
-                override fun onTextChanged(text: String) {
-                    if(cardInputUIStatus==CardInputUIStatus.SavedCard && cvcNumberEditText.text?.isEmpty() == true){
-                        cvcNumberEditText.setBackgroundResource(R.drawable.underline_editext)
-                        cvvIcon.visibility = View.VISIBLE
-                    }else {
-                        cvcNumberEditText.setBackgroundResource(R.drawable.underline_editext_transparent)
-                        cvvIcon.visibility = View.GONE
-                    }
-                }
-            }
-        )
+
 
         cvcNumberEditText.setOnKeyListener(OnKeyListener { view, keyCode, keyEvent ->
             if (keyCode == KeyEvent.KEYCODE_DEL) {

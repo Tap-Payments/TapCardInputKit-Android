@@ -84,8 +84,8 @@
             <company.tap.cardinputwidget.views.CardNumberEditText
                 android:id="@+id/card_number_edit_text"
                 style="@style/Tap.CardInputWidget.EditText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:nextFocusRight="@+id/expiry_date_text_input_layout"
                 android:hint="@string/card_number_hint"

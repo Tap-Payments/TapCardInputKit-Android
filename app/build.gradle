@@ -44,10 +44,10 @@ dependencies {
 
     implementation project(':cardinputwidget')
     implementation 'com.github.Tap-Payments:CommonDataModelsKit-Android:0.1.5'
-    implementation 'com.github.Tap-Payments:TapUIKit-Android:1.1.1.358.222'
+    implementation 'com.github.Tap-Payments:TapUIKit-Android:1.1.1.358.228'
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.google.firebase:firebase-analytics:18.0.0'
-
+    implementation 'com.tomergoldst.android:tooltips:1.0.10'
 }

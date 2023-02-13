@@ -1220,7 +1220,6 @@ class InlineCardInput @JvmOverloads constructor(
             if (keyCode == KeyEvent.KEYCODE_DEL) {
                 shouldChangeIcon= true
                 cardBrandView.showBrandIcon(brand, true)
-                setCardNumber(cardNumberEditText.cardNumber)
 
 
             }

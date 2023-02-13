@@ -106,6 +106,7 @@ class InlineCardInput @JvmOverloads constructor(
     val cvvIcon = viewBinding.cvvIcon
     private var cardInputListener: CardInputListener? = null
     private var cardValidCallback: CardValidCallback? = null
+    private var cardInputUIStatus: CardInputUIStatus = CardInputUIStatus.NormalCard
     lateinit var alertView1 :TapAlertView
     lateinit var nfcButton :ImageView
     lateinit var scannerButton :ImageView
@@ -639,7 +640,8 @@ class InlineCardInput @JvmOverloads constructor(
     }
 
     @SuppressLint("SetTextI18n")
-    override fun setSavedCardDetails(cardDetails: Any?, cardInputUIStatus: CardInputUIStatus) {
+    override fun setSavedCardDetails(cardDetails: Any?, _cardInputUIStatus: CardInputUIStatus) {
+        this.cardInputUIStatus = _cardInputUIStatus
         cardDetails as Card
         initFlag = true
         cardNumberIsViewed = false
@@ -1134,14 +1136,27 @@ class InlineCardInput @JvmOverloads constructor(
         cvcNumberEditText.setAfterTextChangedListener(
             object : TapTextInput.AfterTextChangedListener {
                 override fun onTextChanged(text: String) {
-                    cvcNumberEditText.setBackgroundResource(R.drawable.underline_editext_transparent)
-                    cvvIcon.visibility = View.GONE
-
+                    if(cardInputUIStatus==CardInputUIStatus.SavedCard && cvcNumberEditText.text?.isEmpty() == true){
+                        cvcNumberEditText.setBackgroundResource(R.drawable.underline_editext)
+                        cvvIcon.visibility = View.VISIBLE
+                    }else {
+                        cvcNumberEditText.setBackgroundResource(R.drawable.underline_editext_transparent)
+                        cvvIcon.visibility = View.GONE
+                    }
                 }
             }
         )
 
+        cvcNumberEditText.setOnKeyListener(OnKeyListener { view, keyCode, keyEvent ->
+            if (keyCode == KeyEvent.KEYCODE_DEL) {
+                if(cardInputUIStatus==CardInputUIStatus.SavedCard && cvcNumberEditText.text?.isEmpty() == true){
+                    cvcNumberEditText.setBackgroundResource(R.drawable.underline_editext)
+                    cvvIcon.visibility = View.VISIBLE
+                }
 
+            }
+            false
+        })
 
         cardBrandView.onScanClicked = {
             Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show()

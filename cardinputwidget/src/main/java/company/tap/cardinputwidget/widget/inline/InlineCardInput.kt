@@ -1935,7 +1935,8 @@ class InlineCardInput @JvmOverloads constructor(
         println("displayMetrics"+displayMetrics)
         if (displayMetrics == DisplayMetrics.DENSITY_260 || displayMetrics == DisplayMetrics.DENSITY_280 || displayMetrics == DisplayMetrics.DENSITY_300 || displayMetrics == DisplayMetrics.DENSITY_XHIGH || displayMetrics == DisplayMetrics.DENSITY_340 || displayMetrics == DisplayMetrics.DENSITY_360) {
             closeIconDrawable?.setBounds(0, 0, 25, 25) // set size
-        }else  if (displayMetrics == DisplayMetrics.DENSITY_360|| displayMetrics == DisplayMetrics.DENSITY_400|| displayMetrics == DisplayMetrics.DENSITY_420|| displayMetrics == DisplayMetrics.DENSITY_440 ){ closeIconDrawable?.setBounds(0, 0, 30, 30) // set size}
+        }else  if (displayMetrics == DisplayMetrics.DENSITY_360|| displayMetrics == DisplayMetrics.DENSITY_400|| displayMetrics == DisplayMetrics.DENSITY_420|| displayMetrics == DisplayMetrics.DENSITY_440 ){
+            closeIconDrawable?.setBounds(0, 0, 32, 32) // set size}
         }else {
             closeIconDrawable?.setBounds(0, 0, 35, 35) // set size}
         }

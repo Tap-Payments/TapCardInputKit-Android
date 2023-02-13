@@ -11,6 +11,14 @@
         android:id="@+id/action_light"
         android:title="Light Theme" />
 
+    <item
+        android:id="@+id/action_arabic"
+        android:title="Arabic Theme" />
+
+    <item
+        android:id="@+id/action_english"
+        android:title="English Theme" />
+
 
 
 </menu>

@@ -8,6 +8,7 @@ import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
@@ -312,6 +313,27 @@ class MainActivity : AppCompatActivity() {
         R.id.action_light -> {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             ThemeManager.loadTapTheme(resources, R.raw.defaultlighttheme, "lighttheme")
+            recreate()
+            true
+        }
+        R.id.action_arabic -> {
+            if (ThemeManager.currentTheme.isNotEmpty() && LocalizationManager.currentLocalized.toString()
+                    .isNotEmpty()) {
+
+                LocalizationManager.setLocale(this, Locale("ar"))
+
+            }
+            recreate()
+            true
+        }
+        R.id.action_english -> {
+            if (ThemeManager.currentTheme.isNotEmpty() && LocalizationManager.currentLocalized.toString()
+                    .isNotEmpty()
+            ) {
+
+                LocalizationManager.setLocale(this, Locale("en"))
+
+            }
             recreate()
             true
         }

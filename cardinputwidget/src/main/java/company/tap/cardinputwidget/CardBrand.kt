@@ -112,22 +112,22 @@ enum class CardBrand(
 
     ),
 
-    Visa(
+    /*Visa(
         "visa",
         "Visa",
         if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_visa else R.drawable.ic_visa,
         pattern = Pattern.compile("^(4)[0-9]*$")
 
-    ),
+    ),*/
 
-    MasterCard(
+    /*MasterCard(
         "mastercard",
         "Mastercard",
         if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.ic_mastercard else R.drawable.ic_mastercard,
         pattern = Pattern.compile("^(2221|2222|2223|2224|2225|2226|2227|2228|2229|223|224|225|226|227|228|229|23|24|25|26|270|271|2720|50|51|52|53|54|55|67)[0-9]*$")
 
     ),
-
+*/
     UnionPay(
         "unionpay",
         "UnionPay",

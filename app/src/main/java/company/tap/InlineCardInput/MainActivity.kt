@@ -286,7 +286,7 @@ class MainActivity : AppCompatActivity() {
         cardInlineForm.setSavedCardDetails(Card("5123 4500 0000 0008",null,7,23,
             "dsd",null,null,null,
             null,null,null,null,null,
-            "0008",CardBrand.Visa,"sdsds",null,null,null,null,null),CardInputUIStatus.SavedCard)
+            "0008",CardBrand.fromCardNumber("512345"),"sdsds",null,null,null,null,null),CardInputUIStatus.SavedCard)
 
         cardInlineForm.setSingleCardInput(
             CardBrandSingle.fromCode(

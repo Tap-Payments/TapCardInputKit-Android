@@ -1206,7 +1206,7 @@ class InlineCardInput @JvmOverloads constructor(
 
         cardNumberEditText.setOnEditorActionListener(object : TextView.OnEditorActionListener {
             override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                if (actionId == EditorInfo.IME_ACTION_NEXT) {
                     // do your stuff here
                   //  println("expiryDateEditText>>>>>>>>"+expiryDateEditText)
                     expiryDateEditText.requestFocus()
@@ -1220,6 +1220,8 @@ class InlineCardInput @JvmOverloads constructor(
             if (keyCode == KeyEvent.KEYCODE_DEL) {
                 shouldChangeIcon= true
                 cardBrandView.showBrandIcon(brand, true)
+                setCardNumber(cardNumberEditText.cardNumber)
+
 
             }
             false

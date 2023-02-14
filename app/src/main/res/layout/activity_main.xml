@@ -30,6 +30,13 @@
             app:shouldShowHolderName="false" />
 
     </com.google.android.material.card.MaterialCardView>-->
+    <company.tap.InlineCardInput.TapPaymentInput
+
+        android:id="@+id/tap_payment_input2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="450dp"
+        android:layoutDirection="locale" />
 <Button
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

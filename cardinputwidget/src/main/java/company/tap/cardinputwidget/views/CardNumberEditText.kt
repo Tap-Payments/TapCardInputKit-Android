@@ -260,6 +260,6 @@ class CardNumberEditText @JvmOverloads constructor(
         println("maskLen"+maskLen)
         println("cardInput"+cardInput.length)
         if (maskLen <= 0) return cardInput // Nothing to mask
-        return (cardInput).replaceRange(0, maskLen, "•••• ")
+        return (cardInput).replaceRange(0, 4, "•••• ")
     }
 }

@@ -1173,8 +1173,6 @@ class InlineCardInput @JvmOverloads constructor(
             println("cardNumberEditText is????"+cardNumberEditText.maskedCardNumber)
             setCardNumber(cardNumberEditText.cardNumber)
             isDeleting= false
-          //  setCardNumberMasked(cardNumberEditText.maskedCardNumber)
-
             cardInputListener?.onCardComplete()
         }
 
@@ -1216,7 +1214,7 @@ class InlineCardInput @JvmOverloads constructor(
 
         cardNumberEditText.setOnEditorActionListener(object : TextView.OnEditorActionListener {
             override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
-                if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                if (actionId == EditorInfo.IME_ACTION_NEXT ||actionId == EditorInfo.IME_ACTION_DONE ) {
                     // do your stuff here
                   //  println("expiryDateEditText>>>>>>>>"+expiryDateEditText)
                     expiryDateEditText.visibility = View.VISIBLE

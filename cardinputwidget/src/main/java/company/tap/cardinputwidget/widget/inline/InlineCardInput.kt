@@ -1106,7 +1106,7 @@ class InlineCardInput @JvmOverloads constructor(
               //  holderNameEditText.isEnabled = true
             }
             println("updateIconCvc call from onFocusChangeListener"+hasFocus)
-            updateIconCvc(hasFocus, cvcValue,null)
+            //updateIconCvc(hasFocus, cvcValue,null)
         }
 
         holderNameEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
@@ -1238,8 +1238,9 @@ class InlineCardInput @JvmOverloads constructor(
                 isDeleting = true
                 if(cardNumberEditText.text.toString().contains("•")){
                     setCardNumberMasked(fullCardNumber)
+                    fullCardNumber= null
   }
-                fullCardNumber= null
+
             }
             false
         })

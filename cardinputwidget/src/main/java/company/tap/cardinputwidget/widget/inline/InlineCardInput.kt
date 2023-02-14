@@ -1128,7 +1128,7 @@ class InlineCardInput @JvmOverloads constructor(
                         cvcNumberEditText.setBackgroundResource(R.drawable.underline_editext_transparent)
                         cvvIcon.visibility = View.GONE
                        // println("updateIconCvc call from cvvnumber"+cvcNumberEditText.hasFocus())
-                        updateIconCvc(cvcNumberEditText.hasFocus(), text,null)
+                       // updateIconCvc(cvcNumberEditText.hasFocus(), text,null)
 
                     }
                 }

@@ -1241,7 +1241,7 @@ class InlineCardInput @JvmOverloads constructor(
                 if(cardNumberEditText.text.toString().contains("•")){
                     setCardNumberMasked(fullCardNumber)
   }
-
+                fullCardNumber= null
             }
             false
         })

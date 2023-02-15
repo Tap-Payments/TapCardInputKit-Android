@@ -1220,7 +1220,10 @@ class InlineCardInput @JvmOverloads constructor(
                     expiryDateEditText.visibility = View.VISIBLE
                     cvcNumberEditText.visibility = View.VISIBLE
                     expiryDateEditText.requestFocus()
-
+                    if(!cardNumberEditText.text.toString().contains("•")){
+                        setCardNumberMasked(fullCardNumber?.let { maskCardNumber(it) })
+                        //   fullCardNumber= null
+                    }
                     scrollEnd()
 
                 }

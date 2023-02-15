@@ -1238,7 +1238,7 @@ class InlineCardInput @JvmOverloads constructor(
                 isDeleting = true
                 if(cardNumberEditText.text.toString().contains("•")){
                     setCardNumberMasked(fullCardNumber)
-                    fullCardNumber= null
+                 //   fullCardNumber= null
   }
 
             }

@@ -56,6 +56,7 @@ class MainActivity : AppCompatActivity() {
     var cardBrna: CardBrandView? = null
     var cardNumber:String?=null
     var cardInputChipView:CardView ?=null
+    var watcherRemoved:Boolean ?=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -171,6 +172,7 @@ class MainActivity : AppCompatActivity() {
                         })
                     }
                     cardInlineForm.removeCardNumberTextWatcher(this)
+
                     cardInlineForm.setCardNumberTextWatcher(this)
 
                     // cardInlineForm.setCardNumber(maskCardNumber(s.toString()))
@@ -180,6 +182,7 @@ class MainActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
 
                 if (s?.length != null && s.isNotEmpty()) {
                     clearView?.visibility = View.VISIBLE

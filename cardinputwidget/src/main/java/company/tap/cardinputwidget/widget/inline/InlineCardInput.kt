@@ -1217,15 +1217,16 @@ class InlineCardInput @JvmOverloads constructor(
             override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
                 if (actionId == EditorInfo.IME_ACTION_NEXT ||actionId == EditorInfo.IME_ACTION_DONE ) {
                     // do your stuff here
-                  //  println("expiryDateEditText>>>>>>>>"+expiryDateEditText)
+                    println("fullCardNumber>>>>>>>>"+expiryDateEditText)
 
                     if(!cardNumberEditText.text.toString().contains("•")){
                         setCardNumberMasked(fullCardNumber?.let { maskCardNumber(it) })
                         //   fullCardNumber= null
-                    }
+                    }else{
                     expiryDateEditText.visibility = View.VISIBLE
                     cvcNumberEditText.visibility = View.VISIBLE
                     expiryDateEditText.requestFocus()
+                    }
                     scrollEnd()
 
                 }

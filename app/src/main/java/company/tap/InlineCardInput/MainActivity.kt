@@ -63,10 +63,11 @@ class MainActivity : AppCompatActivity() {
         //cardInlineForm =findViewById(R.id.cardInlineForm)
         initTheme()
 
+        initLangugae()
+
        // ThemeManager.loadTapTheme(this.resources, R.raw.defaultlighttheme, "lighttheme")
        //  ThemeManager.loadTapTheme(this.resources,R.raw.defaultdarktheme,"darktheme")
-        LocalizationManager.loadTapLocale(this.resources, R.raw.lang)
-        LocalizationManager.setLocale(this, Locale("en"))
+
         setContentView(R.layout.activity_main)
 
         cardInlineForm = InlineCardInput(this)
@@ -286,6 +287,20 @@ class MainActivity : AppCompatActivity() {
 
             }
         })
+    }
+
+    private fun initLangugae() {
+        LocalizationManager.loadTapLocale(this.resources, R.raw.lang)
+        LocalizationManager.setLocale(this, Locale("ar"))
+        if (LocalizationManager.getLocale(this).toString().contains("ar"))
+            LocalizationManager.setLocale(this, Locale("ar"))
+        else if (LocalizationManager.getLocale(this).toString().contains("en"))
+            LocalizationManager.setLocale(this, Locale("en"))
+        else LocalizationManager.setLocale(this, Locale("ar"))
+
+
+
+
     }
 
     private fun initTheme() {

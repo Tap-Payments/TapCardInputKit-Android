@@ -11,7 +11,7 @@
     <style name="Tap.CardInputWidget.EditText" parent="Tap.Base.CardInputWidget.EditText" />
 
     <style name="Tap.Base.CardInputWidget.EditText" parent="Widget.AppCompat.EditText">
-        <item name="android:textSize">@dimen/ciw_stripe_edit_text_size</item>
+      <!--  <item name="android:textSize">@dimen/ciw_stripe_edit_text_size</item>-->
     </style>
 
     <style name="Tap.Base.CardInputWidget.CvvEdit" parent="Widget.AppCompat.EditText">

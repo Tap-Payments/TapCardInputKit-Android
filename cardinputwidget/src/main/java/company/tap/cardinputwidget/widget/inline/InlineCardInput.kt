@@ -1167,11 +1167,12 @@ class InlineCardInput @JvmOverloads constructor(
         }
 
         cardNumberEditText.completionCallback = {
+
+            println("cardNumberEditText is????"+cardNumberEditText.maskedCardNumber)
+            setCardNumber(cardNumberEditText.cardNumber)
             expiryDateEditText.visibility = View.VISIBLE
             cvcNumberEditText.visibility = View.VISIBLE
             scrollEnd()
-            println("cardNumberEditText is????"+cardNumberEditText.maskedCardNumber)
-            setCardNumber(cardNumberEditText.cardNumber)
             isDeleting= false
             cardInputListener?.onCardComplete()
         }
@@ -1217,13 +1218,14 @@ class InlineCardInput @JvmOverloads constructor(
                 if (actionId == EditorInfo.IME_ACTION_NEXT ||actionId == EditorInfo.IME_ACTION_DONE ) {
                     // do your stuff here
                   //  println("expiryDateEditText>>>>>>>>"+expiryDateEditText)
-                    expiryDateEditText.visibility = View.VISIBLE
-                    cvcNumberEditText.visibility = View.VISIBLE
-                    expiryDateEditText.requestFocus()
+
                     if(!cardNumberEditText.text.toString().contains("•")){
                         setCardNumberMasked(fullCardNumber?.let { maskCardNumber(it) })
                         //   fullCardNumber= null
                     }
+                    expiryDateEditText.visibility = View.VISIBLE
+                    cvcNumberEditText.visibility = View.VISIBLE
+                    expiryDateEditText.requestFocus()
                     scrollEnd()
 
                 }

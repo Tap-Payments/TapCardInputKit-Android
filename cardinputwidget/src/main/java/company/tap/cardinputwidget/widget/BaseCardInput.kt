@@ -61,7 +61,7 @@ internal interface BaseCardInput {
 
     fun clear()
 
-    fun setCardNumber(cardNumber: String?)
+    fun setCardNumber(cardNumber: String?, hasFocus: Boolean)
     fun setCardNumberMasked(cardNumber: String?)
 
     fun setCardHolderName(cardHolderName: String?)

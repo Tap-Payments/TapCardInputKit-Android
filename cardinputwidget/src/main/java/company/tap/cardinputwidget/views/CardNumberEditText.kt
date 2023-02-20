@@ -1,7 +1,6 @@
 package company.tap.cardinputwidget.views
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Build
 import android.text.Editable
 import android.text.InputFilter
@@ -9,12 +8,9 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.VisibleForTesting
 import company.tap.cardinputwidget.CardBrand
-import company.tap.cardinputwidget.CardInputUIStatus
 import company.tap.cardinputwidget.R
-
 import company.tap.cardinputwidget.utils.CardUtils
 import company.tap.cardinputwidget.utils.TapTextUtils
-import company.tap.cardinputwidget.widget.inline.InlineCardInput
 import company.tap.tapuilibrary.uikit.atoms.TapTextInput
 import company.tap.tapuilibrary.uikit.utils.TapTextWatcher
 
@@ -39,6 +35,10 @@ class CardNumberEditText @JvmOverloads constructor(
                 updateLengthFilter()
             }
         }
+     var textcard:String ?=null
+     var originalStr:String ?=null
+     var showFields:Boolean ?=false
+    var backSpace = false
 
     @JvmSynthetic
     internal var brandChangeCallback: (CardBrand) -> Unit = {}
@@ -53,6 +53,8 @@ class CardNumberEditText @JvmOverloads constructor(
     // invoked when a valid card has been entered
     @JvmSynthetic
     internal var completionCallback: () -> Unit = {}
+
+
 
     // invoked when an invalid card has been entered
     @JvmSynthetic
@@ -79,15 +81,18 @@ class CardNumberEditText @JvmOverloads constructor(
      * @return a space-free version of the card number, or `null` if the number is invalid
      */
     val cardNumber: String?
-        get() = if (isCardNumberValid) {
-            TapTextUtils.removeSpacesAndHyphens(fieldText)
-        } else {
-            null
-        }
+        get() =
+            fieldText
+         //   TapTextUtils.removeSpacesAndHyphens(fieldText)
+
 
     val maskedCardNumber: String?
+        get() =
+            fieldText.replace("(?<=\\d{0})\\d(?=\\d{3})".toRegex(), "X")
+
+    var cardNumberVal: String? = null
         get() = if (isCardNumberValid) {
-            maskCardNumber(fieldText)
+           fieldText
         } else {
             null
         }
@@ -163,103 +168,136 @@ class CardNumberEditText @JvmOverloads constructor(
 
         }else {*/
 
-            addTextChangedListener(object : TapTextWatcher() {
-                private var latestChangeStart: Int = 0
-                private var latestInsertionSize: Int = 0
+        addTextChangedListener(object : TapTextWatcher() {
+            private var latestChangeStart: Int = 0
+            private var latestInsertionSize: Int = 0
 
-                private var newCursorPosition: Int? = null
-                private var formattedNumber: String? = null
+            private var newCursorPosition: Int? = null
+            private var formattedNumber: String? = null
 
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
-                    if (!ignoreChanges) {
-                        latestChangeStart = start
-                        latestInsertionSize = after
-                    }
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+
+                if (!ignoreChanges) {
+                    latestChangeStart = start
+                    latestInsertionSize = after
+                }
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (ignoreChanges) {
+                    return
                 }
 
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    if (ignoreChanges) {
-                        return
-                    }
-
-
-                    val inputText = s?.toString().orEmpty()
-                    if (start < 4) {
-                        updateCardBrandFromNumber(inputText)
-                    }
-
-                    if (start > 16) {
-                        // no need to do formatting if we're past all of the spaces.
-                        return
-                    }
-
-                    val spacelessNumber = TapTextUtils.removeSpacesAndHyphens(inputText)
-                        ?: return
-
-                    val formattedNumber = cardBrand.formatNumber(spacelessNumber)
-                    this.newCursorPosition = updateSelectionIndex(
-                        formattedNumber.length,
-                        latestChangeStart, latestInsertionSize
-                    )
-                    this.formattedNumber = formattedNumber
+                val inputText = s?.toString().orEmpty()
+                if (start < 4) {
+                    updateCardBrandFromNumber(inputText)
                 }
 
-                override fun afterTextChanged(s: Editable?) {
-                    if (ignoreChanges) {
-                        return
+                if (start > 16) {
+                    // no need to do formatting if we're past all of the spaces.
+                    return
+                }
+
+
+
+                val spacelessNumber = TapTextUtils.removeSpacesAndHyphens(inputText)
+                    ?: return
+
+                val formattedNumber = cardBrand.formatNumber(spacelessNumber)
+                this.newCursorPosition = updateSelectionIndex(
+                    formattedNumber.length,
+                    latestChangeStart, latestInsertionSize
+                )
+                this.formattedNumber = formattedNumber
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+
+                if (ignoreChanges) {
+                    ignoreChanges= false
+
+                    return
+                }
+
+                ignoreChanges = true
+             if (!isLastKeyDelete && formattedNumber != null) {
+                    setText(formattedNumber)
+                    newCursorPosition?.let {
+                        setSelection(it.coerceIn(0, fieldText.length))
                     }
 
-                    ignoreChanges = true
-                    if (!isLastKeyDelete && formattedNumber != null) {
-                        setText(formattedNumber)
-                        newCursorPosition?.let {
-                            setSelection(it.coerceIn(0, fieldText.length))
-                        }
-                    }
-                    formattedNumber = null
-                    newCursorPosition = null
+                }
 
+
+
+                formattedNumber = null
+                newCursorPosition = null
+
+               ignoreChanges = false
+
+
+
+                if (fieldText.length == lengthMax) {
+
+                    val wasCardNumberValid = isCardNumberValid
+
+                    isCardNumberValid = CardUtils.isValidCardNumber(fieldText)
+                    textcard = fieldText
+
+                    shouldShowError = !isCardNumberValid
+                    println("shouldShowError>>>>"+shouldShowError)
+                    println("isCardNumberValid>>>>"+isCardNumberValid)
+                    println("wasCardNumberValid>>>>"+wasCardNumberValid)
+                    println("ignoreChanges>>>>"+ignoreChanges)
+                    if (!wasCardNumberValid && isCardNumberValid) {
+                        backSpace = false
+                        originalStr = s.toString()
+                        completionCallback()
+                        ignoreChanges = true
+                    }else ignoreChanges = false
+
+
+                } else {
+                    isCardNumberValid = CardUtils.isValidCardNumber(fieldText)
+                    backSpace= true
                     ignoreChanges = false
-
-
-
-                    if (fieldText.length == lengthMax) {
-
-                        val wasCardNumberValid = isCardNumberValid
-
-                        isCardNumberValid = CardUtils.isValidCardNumber(fieldText)
-                        shouldShowError = !isCardNumberValid
-                        if (!wasCardNumberValid && isCardNumberValid) {
-                            completionCallback()
-                        } else {
-                            displayErrorCallback(true)
-                        }
-                    } else {
-                        isCardNumberValid = CardUtils.isValidCardNumber(fieldText)
-                        //Showing red color until card is valid -- made true
-                        // Don't show errors if we aren't full-length.
-                        shouldShowError = false
-                        displayErrorCallback(false)
-                    }
+                    //Showing red color until card is valid -- made true
+                    // Don't show errors if we aren't full-length.
+                    shouldShowError = false
+                    displayErrorCallback(false)
                 }
-            })
-      //  }
+
+            }
+
+        })
+        //  }
+
+
+
     }
+
 
     @JvmSynthetic
     internal fun updateCardBrandFromNumber(partialNumber: String) {
         cardBrand = CardUtils.getPossibleCardBrand(partialNumber)
     }
-    private fun  maskCardNumber(cardInput: String): String {
+     fun  maskCardNumber(cardInput: String): String {
         val maskLen: Int = cardInput.length - 4
         println("maskLen"+maskLen)
+         //•••••
         println("cardInput"+cardInput.length)
         if (maskLen <= 0) return cardInput // Nothing to mask
-        return (cardInput).replaceRange(0, 4, "•••• ")
+        return (cardInput).replaceRange(11, 13, "XXX")
     }
+
+
+
+
 }

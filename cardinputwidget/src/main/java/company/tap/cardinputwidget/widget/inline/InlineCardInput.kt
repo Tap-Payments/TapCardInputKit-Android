@@ -8,7 +8,6 @@ import android.graphics.Color
 import android.graphics.Matrix
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import android.text.*
@@ -28,10 +27,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.AccessibilityDelegateCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
-import androidx.core.view.marginEnd
-import androidx.core.widget.doOnTextChanged
 import company.tap.cardinputwidget.*
-import company.tap.cardinputwidget.databinding.CardInputWidgetArBinding
 import company.tap.cardinputwidget.databinding.CardInputWidgetBinding
 import company.tap.cardinputwidget.utils.DateUtils
 import company.tap.cardinputwidget.utils.TextValidator
@@ -574,7 +570,7 @@ class InlineCardInput @JvmOverloads constructor(
      *
      * @param cardNumber card number to be set
      */
-    override fun setCardNumber(cardNumber: String?) {
+    override fun setCardNumber(cardNumber: String?, hasFocus: Boolean) {
         println("setCardNumber value>>>"+cardNumber)
        // cardBuilder?.build()?.number = cardNumber
         if (cardNumber != null) {
@@ -1172,7 +1168,6 @@ class InlineCardInput @JvmOverloads constructor(
         cardNumberEditText.completionCallback = {
 
             println("cardNumberEditText is????"+cardNumberEditText.maskedCardNumber)
-            setCardNumber(cardNumberEditText.cardNumber)
             expiryDateEditText.visibility = View.VISIBLE
             cvcNumberEditText.visibility = View.VISIBLE
             scrollEnd()

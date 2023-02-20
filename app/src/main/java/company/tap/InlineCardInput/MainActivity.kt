@@ -28,6 +28,7 @@ import company.tap.tapcardvalidator_android.CardValidator
 import company.tap.taplocalizationkit.LocalizationManager
 import company.tap.tapuilibrary.themekit.ThemeManager
 import company.tap.tapuilibrary.uikit.atoms.TapImageView
+import company.tap.tapuilibrary.uikit.atoms.TapSeparatorView
 import company.tap.tapuilibrary.uikit.atoms.TapSwitch
 import company.tap.tapuilibrary.uikit.views.TapAlertView
 import company.tap.tapuilibrary.uikit.views.TapCardSwitch
@@ -53,6 +54,7 @@ class MainActivity : AppCompatActivity() {
     var backArrow: TapImageView? = null
     var switchLL: TapInlineCardSwitch? = null
     var switchSaveCard: TapSwitch? = null
+    var separator1: TapSeparatorView? = null
     var cardBrna: CardBrandView? = null
     var cardNumber:String?=null
     var cardInputChipView:CardView ?=null
@@ -75,7 +77,7 @@ class MainActivity : AppCompatActivity() {
         paymentInputContainer = findViewById(R.id.payment_input_layout)
         mainView = findViewById(R.id.mainView)
         tap_payment_input = findViewById(R.id.tap_payment_input)
-        tap_payment_input2 = findViewById(R.id.tap_payment_input2)
+        //tap_payment_input2 = findViewById(R.id.tap_payment_input2)
         cardInlineForm.holderNameEnabled= true
         cardInlineForm.setVisibilityOfHolderField(true)
         //switchLL = cardInlineForm.findViewById(R.id.mainSwitchInline)
@@ -83,34 +85,29 @@ class MainActivity : AppCompatActivity() {
         cardInlineForm.holderNameEnabled = false
         tabLinear = findViewById(R.id.tabLinear)
         tapAlertView = findViewById(R.id.alertView)
-        clearView = cardInlineForm.findViewById(R.id.clear_text)
-        backArrow = cardInlineForm.findViewById(R.id.backView)
+        clearView = cardInlineForm2.findViewById(R.id.clear_text)
+        backArrow = cardInlineForm2.findViewById(R.id.backView)
         tabLayout = findViewById(R.id.sections_tablayout)
-        cardScannerBtn = tap_payment_input.findViewById(R.id.card_scanner_button)
-        nfcButton = tap_payment_input.findViewById(R.id.nfc_button)
+        cardScannerBtn = cardInlineForm.findViewById(R.id.card_scanner_button)
+        nfcButton = cardInlineForm.findViewById(R.id.nfc_button)
         cardBrna = cardInlineForm.findViewById(R.id.card_brand_view)
+        separator1 = cardInlineForm2.findViewById(R.id.separator_1)
        // cardBrna?.iconView?.setImageResource(R.drawable.bahrain)
         tapAlertView?.alertMessage?.text = "Card number is missing"
         tapAlertView?.visibility = View.GONE
         nfcButton?.visibility = View.VISIBLE
         cardScannerBtn?.visibility = View.VISIBLE
-        paymentInputContainer.addView(cardInlineForm)
-        //paymentInputContainer.addView(cardInlineForm2)
+      // paymentInputContainer.addView(cardInlineForm)
+        paymentInputContainer.addView(cardInlineForm2)
 
         backArrow?.setOnClickListener {
             tabLayout.resetBehaviour()
-            cardInlineForm.clear()
+            cardInlineForm2.clear()
             clearView?.visibility = View.GONE
             controlScannerOptions()
         }
 
-        clearView?.setOnClickListener {
-            println("clearView lcicc")
-            tabLayout.resetBehaviour()
-            cardInlineForm.clear()
-            clearView?.visibility = View.GONE
-            controlScannerOptions()
-        }
+
 
         switchSaveCard = switchLL?.findViewById(R.id.switchSaveCard)
         //   switchLL?.setSwitchDataSource(TapSwitchDataSource("Sasa","Save For later","sa","asa","asa"))
@@ -153,33 +150,13 @@ class MainActivity : AppCompatActivity() {
 
         nfcButton?.visibility = View.GONE
         cardScannerBtn?.visibility = View.GONE
-        cardInlineForm.setCardNumberTextWatcher(object : TextWatcher {
+        cardInlineForm2.setCardNumberTextWatcher(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
 //                cardNumAfterTextChangeListener(s, this)
-                println("cardInlineForm.card.number"+cardInlineForm?.card?.number)
-                println("isDeleting"+cardInlineForm.isDeleting)
-
-                if (s != null && s.length >= 19) {
-
-                    if(cardInlineForm.isDeleting == true){
-
-
-                    }else {
-                        println("full no" + cardInlineForm.fullCardNumber)
-                        cardInlineForm.setCardNumberMasked(cardInlineForm.fullCardNumber?.let {
-                            maskCardNumber(
-                                it
-                            )
-                        })
-                    }
-                    cardInlineForm.removeCardNumberTextWatcher(this)
-
-                    cardInlineForm.setCardNumberTextWatcher(this)
-
-                    // cardInlineForm.setCardNumber(maskCardNumber(s.toString()))
-                }
+                println("cardInlineForm.card.number" + cardInlineForm?.card?.number)
+                println("isDeleting" + cardInlineForm.isDeleting)
+                // cardInlineForm2.removeCardNumberTextWatcher(this)
             }
-
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -197,10 +174,10 @@ class MainActivity : AppCompatActivity() {
                     //  cardInlineForm.setCardNumber(maskCardNumber(s.toString()))
                         //Dynamically set value from API
                   if(s.toString().startsWith("5")){
-                      cardInlineForm.setSingleCardInput(CardBrandSingle.fromCode(s.toString()),"https://back-end.b-cdn.net/payment_methods/mastercard.svg")
+                      cardInlineForm2.setSingleCardInput(CardBrandSingle.fromCode(s.toString()),"https://back-end.b-cdn.net/payment_methods/mastercard.svg")
 
                   }else {
-                      cardInlineForm.setSingleCardInput(CardBrandSingle.fromCode(s.toString()),"https://back-end.b-cdn.net/payment_methods/visa.svg")
+                      cardInlineForm2.setSingleCardInput(CardBrandSingle.fromCode(s.toString()),"https://back-end.b-cdn.net/payment_methods/visa.svg")
 
                   }
                    // alertView.visibility =View.VISIBLE
@@ -217,10 +194,11 @@ class MainActivity : AppCompatActivity() {
 
         clearView?.setOnClickListener {
             tabLayout.resetBehaviour()
-            cardInlineForm.clear()
+            cardInlineForm2.clear()
             clearView?.visibility = View.GONE
             nfcButton?.visibility = View.VISIBLE
             cardScannerBtn?.visibility = View.VISIBLE
+            controlScannerOptions()
         }
         cardInlineForm.setExpiryDateTextWatcher(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -251,7 +229,7 @@ class MainActivity : AppCompatActivity() {
 
         })
 
-        cardInlineForm.setCvcNumberTextWatcher(object : TextWatcher {
+        cardInlineForm2.setCvcNumberTextWatcher(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 //   checkoutFragment.scrollView?.scrollTo(0,height)
                 // tapCardInputView.requestFocus()
@@ -270,8 +248,8 @@ class MainActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {
                 switchLL?.switchSaveCard?.text="Save for later"
 
-                cardInlineForm.setVisibilityOfHolderField(true)
-                cardInlineForm.separator_1.visibility =View.VISIBLE
+                cardInlineForm2.setVisibilityOfHolderField(true)
+                separator1?.visibility =View.VISIBLE
 
                 switchLL?.switchSaveCard?.visibility =View.VISIBLE
                 switchLL?.saveForOtherCheckBox?.visibility =View.VISIBLE
@@ -291,12 +269,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun initLangugae() {
         LocalizationManager.loadTapLocale(this.resources, R.raw.lang)
-        LocalizationManager.setLocale(this, Locale("ar"))
+        LocalizationManager.setLocale(this, Locale("en"))
         if (LocalizationManager.getLocale(this).toString().contains("ar"))
             LocalizationManager.setLocale(this, Locale("ar"))
         else if (LocalizationManager.getLocale(this).toString().contains("en"))
             LocalizationManager.setLocale(this, Locale("en"))
-        else LocalizationManager.setLocale(this, Locale("ar"))
+        else LocalizationManager.setLocale(this, Locale("en"))
 
 
 
@@ -327,12 +305,12 @@ class MainActivity : AppCompatActivity() {
 
     fun addME(view: View) {
         println("clickckc")
-        cardInlineForm.setSavedCardDetails(Card("5123 4500 0000 0008",null,7,23,
+        cardInlineForm2.setSavedCardDetails(Card("5123 4500 0000 0008",null,7,23,
             "dsd",null,null,null,
             null,null,null,null,null,
             "0008",CardBrand.fromCardNumber("512345"),"sdsds",null,null,null,null,null),CardInputUIStatus.SavedCard)
 
-        cardInlineForm.setSingleCardInput(
+        cardInlineForm2.setSingleCardInput(
             CardBrandSingle.fromCode(
                 company.tap.cardinputwidget.CardBrand.fromCardNumber("512345")
                     .toString()

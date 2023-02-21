@@ -261,7 +261,12 @@ class MainActivity : AppCompatActivity() {
 
 
                 }
-                cardInlineForm2.setCardBrandUrl("https://back-end.b-cdn.net/payment_methods/mastercard.svg")
+                if(s.toString().startsWith("5")){
+                    cardInlineForm2.setCardBrandUrl("https://back-end.b-cdn.net/payment_methods/mastercard.svg")
+
+                }else {
+                    cardInlineForm2.setCardBrandUrl("https://back-end.b-cdn.net/payment_methods/visa.svg")
+                }
 
             }
         })

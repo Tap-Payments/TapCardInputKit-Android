@@ -1,4 +1,6 @@
 package company.tap.cardinputwidget.widget.inline
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.Drawable
@@ -6,6 +8,7 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.text.*
 import android.util.AttributeSet
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -992,6 +995,10 @@ class InlineCardInput2 @JvmOverloads constructor(
         holderNameEditText.setHintTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.placeHolderColor")))
         holderNameEditText.setTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.textColor")))
 
+        //Added close icon for holdername
+        setDrawableForHolderName()
+
+
     }
 
 
@@ -1669,6 +1676,63 @@ class InlineCardInput2 @JvmOverloads constructor(
 
     fun setCardBrandUrl(iconUrl: String?){
         this.brandIconUrl =iconUrl
+    }
+    @SuppressLint("ClickableViewAccessibility")
+   private fun setDrawableForHolderName(){
+        val displayMetrics = getDeviceDisplayMetrics(context as Activity)
+        println("displayMetrics"+displayMetrics)
+        if (displayMetrics == DisplayMetrics.DENSITY_260 || displayMetrics == DisplayMetrics.DENSITY_280 || displayMetrics == DisplayMetrics.DENSITY_300 || displayMetrics == DisplayMetrics.DENSITY_XHIGH || displayMetrics == DisplayMetrics.DENSITY_340 || displayMetrics == DisplayMetrics.DENSITY_360) {
+            closeIconDrawable?.setBounds(0, 0, 25, 25) // set size
+        }else  if (displayMetrics == DisplayMetrics.DENSITY_360|| displayMetrics == DisplayMetrics.DENSITY_400|| displayMetrics == DisplayMetrics.DENSITY_420|| displayMetrics == DisplayMetrics.DENSITY_440 ){
+            closeIconDrawable?.setBounds(0, 0, 32, 31) // set size}
+        }else {
+            closeIconDrawable?.setBounds(0, 0, 35, 35) // set size}
+        }
+        if (context?.let { LocalizationManager.getLocale(it).language } == "en"){
+            holderNameEditText.setCompoundDrawables(null,null,closeIconDrawable,null) // set position of drawable
+
+        }else{
+            holderNameEditText.setCompoundDrawables(closeIconDrawable,null,null,null) // set position of drawable
+
+        }
+
+        holderNameEditText.setOnTouchListener(OnTouchListener { v, event ->
+            val DRAWABLE_LEFT = 0
+            val DRAWABLE_TOP = 1
+            val DRAWABLE_RIGHT = 2
+            val DRAWABLE_BOTTOM = 3
+            if (event.action === MotionEvent.ACTION_UP) {
+                if (context?.let { LocalizationManager.getLocale(it).language } == "en") {
+                    if( holderNameEditText.compoundDrawables[DRAWABLE_RIGHT]!=null )
+                        if (event.rawX >= holderNameEditText.right - holderNameEditText.compoundDrawables[DRAWABLE_RIGHT].bounds.width()
+                        ) {
+                            holderNameEditText.setText("")
+                            holderNameEditText.setCompoundDrawables(null, null, null, null)
+                            // your action here
+                            return@OnTouchListener true
+                        }
+
+
+                }else{
+                    if( holderNameEditText.compoundDrawables[DRAWABLE_LEFT]!=null )
+                        if (event.rawX >= holderNameEditText.left - holderNameEditText.compoundDrawables[DRAWABLE_LEFT].bounds.width()
+                        ) {
+                            holderNameEditText.setText("")
+                            holderNameEditText.setCompoundDrawables(null, null, null, null)
+                            // your action here
+                            return@OnTouchListener true
+                        }
+                }
+            }
+            false
+        })
+    }
+    private  fun getDeviceDisplayMetrics(activity: Activity) : Int{
+        // Determine density
+        val metrics = DisplayMetrics()
+        activity.windowManager.defaultDisplay.getMetrics(metrics)
+        val density = metrics.densityDpi
+        return density
     }
 
 }

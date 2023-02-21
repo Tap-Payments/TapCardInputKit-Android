@@ -70,7 +70,9 @@ class HolderNameEditText @JvmOverloads constructor(
      */
     private fun configureField() {
         hint = resources.getString(R.string.holder_name_hint)
-        filters = arrayOf(InputFilter.LengthFilter(MAX_LENGTH), InputFilter.AllCaps())
+       val filtersL = InputFilter.LengthFilter(MAX_LENGTH)
+
+
         keyListener = TextKeyListener.getInstance()
         inputType = InputType.TYPE_CLASS_TEXT
        /* val letterFilter =
@@ -92,7 +94,7 @@ class HolderNameEditText @JvmOverloads constructor(
                 filtered =source.replace(Regex("[^a-zA-Z ]*"), "")
                 return@InputFilter filtered.toString().toUpperCase()
             }
-        filters = arrayOf(letterFilter)
+        filters = arrayOf(letterFilter,filtersL)
     }
 
 

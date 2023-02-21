@@ -872,7 +872,8 @@ class InlineCardInput2 @JvmOverloads constructor(
                     cardNumberEditText.showFields = false
                     expiryDateEditText.visibility = View.GONE
                     cvcNumberEditText.visibility = View.GONE
-               cardNumberEditText.text?.clear() //Added to stop write null in text
+                cardNumberEditText.text?.clear() //Added to stop write null in text
+                cardBrandView.showBrandIcon(brand, true)
                 } else {
                 cardNumberEditText.showFields = true
                 expiryDateEditText.visibility = View.VISIBLE

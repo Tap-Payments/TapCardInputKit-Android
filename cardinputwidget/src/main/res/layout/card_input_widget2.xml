@@ -128,7 +128,7 @@
                 android:layoutDirection="locale"
                 android:textDirection="locale"
                 app:layout_constraintEnd_toStartOf="@+id/cvc_text_input_layout"
-                android:layout_marginEnd="9dp"
+                android:layout_marginEnd="15dp"
                 tools:ignore="UnusedAttribute">
 
                 <company.tap.cardinputwidget.views.ExpiryDateEditText
@@ -173,7 +173,7 @@
                 android:textDirection="locale"
                 android:gravity="start|end"
                 app:layout_constraintEnd_toStartOf="@+id/linear_paylayout"
-                android:layout_marginEnd="23dp"
+                android:layout_marginEnd="29dp"
                 tools:ignore="UnusedAttribute">
 
                 <company.tap.cardinputwidget.views.CvcEditText

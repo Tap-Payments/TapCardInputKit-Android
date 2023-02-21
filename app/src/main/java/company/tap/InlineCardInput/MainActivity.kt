@@ -321,6 +321,8 @@ class MainActivity : AppCompatActivity() {
                     .toString()
             ), "https://back-end.b-cdn.net/payment_methods/visa.svg"
         )
+
+        separator1?.visibility= View.GONE
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

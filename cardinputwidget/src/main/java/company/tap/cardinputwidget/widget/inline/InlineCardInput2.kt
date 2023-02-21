@@ -866,13 +866,13 @@ class InlineCardInput2 @JvmOverloads constructor(
                 expiryDateEditText.visibility = View.GONE
                 cvcNumberEditText.visibility = View.GONE
                 setCardNumber(cardNumberEditText.originalStr,hasFocus)
-            }else if (hasFocus) {
+            }else if (hasFocus || !cardNumberEditText.isCardNumberValid) {
                     cardInputListener?.onFocusChange(FOCUS_CARD)
                     scrollStart()
                     cardNumberEditText.showFields = false
                     expiryDateEditText.visibility = View.GONE
                     cvcNumberEditText.visibility = View.GONE
-
+               cardNumberEditText.text?.clear() //Added to stop write null in text
                 } else {
                 cardNumberEditText.showFields = true
                 expiryDateEditText.visibility = View.VISIBLE
@@ -887,8 +887,15 @@ class InlineCardInput2 @JvmOverloads constructor(
 
         expiryDateEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
+                if(cardNumberEditText.text.isNullOrBlank() || cardNumberEditText.text.isNullOrEmpty() || !cardNumberEditText.isCardNumberValid) {
+                    cardInputListener?.onFocusChange(
+                        FOCUS_CARD
+                    )
+                    cardNumberEditText.requestFocus()
+                    updateIconCvc(false,"")
+                }else
                 scrollEnd()
-                cardInputListener?.onFocusChange(FOCUS_EXPIRY)
+                 cardInputListener?.onFocusChange(FOCUS_EXPIRY)
             }
 
         }
@@ -911,7 +918,6 @@ class InlineCardInput2 @JvmOverloads constructor(
 //Adding delete OnKeyListener for cvc
         cvcNumberEditText.setOnKeyListener(OnKeyListener { view, keyCode, keyEvent ->
             if (keyCode == KeyEvent.KEYCODE_DEL) {
-                    println("cardInputUIStatus"+cardInputUIStatus)
                     if(cardInputUIStatus==CardInputUIStatus.SavedCard && cvcNumberEditText.text?.isEmpty() == true){
                         cvcNumberEditText.setBackgroundResource(R.drawable.underline_editext)
                         cvvIcon.visibility = View.VISIBLE
@@ -924,8 +930,24 @@ class InlineCardInput2 @JvmOverloads constructor(
             false
         })
         cvcNumberEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
+            println("hasFocus"+hasFocus)
+            println("cardNumberEditText.text"+cardNumberEditText.text)
             if (hasFocus) {
-
+                if(cardNumberEditText.text.isNullOrBlank() || cardNumberEditText.text.isNullOrEmpty() || !cardNumberEditText.isCardNumberValid) {
+                    cardInputListener?.onFocusChange(
+                        FOCUS_CARD
+                    )
+                    cardNumberEditText.requestFocus()
+                    updateIconCvc(false,"")
+                }
+                if(expiryDateEditText.text.isNullOrBlank() || expiryDateEditText.text.isNullOrEmpty() || !expiryDateEditText.isDateValid) {
+                    cardInputListener?.onFocusChange(
+                        FOCUS_EXPIRY
+                    )
+                    expiryDateEditText.requestFocus()
+                    updateIconCvc(false,"")
+                }
+                else
                 scrollEnd()
                 cardInputListener?.onFocusChange(FOCUS_CVC)
                 //holderNameEditText.requestFocus()
@@ -1805,11 +1827,12 @@ class InlineCardInput2 @JvmOverloads constructor(
                 TapFont.TajawalLight
             )
         )
-        cvcNumberEditText.typeface = Typeface.createFromAsset(
+      /*cvcNumberEditText.typeface = Typeface.createFromAsset(
             context?.assets, TapFont.tapFontType(
                 TapFont.TajawalLight
             )
-        )
+        )*/
+
         holderNameEditText.typeface = Typeface.createFromAsset(
             context?.assets, TapFont.tapFontType(
                 TapFont.TajawalLight

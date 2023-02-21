@@ -10,10 +10,11 @@
     <string name="acc_label_cvc_node">%s, الرمز الأمني</string>
     <string name="invalid_cvc">Your card\'s security code is invalid.</string>
     <string name="card_number_hint">رقم البطاقة</string>
-    <string name="expiry_date_hint"><font size="12">شش/سس</font></string>
+    <string name="expiry_date_hint"><font size="12">ش/س</font></string>
     <string name="holder_name_hint">إسم صاحب البطاقة</string>
     <string name="invalid_holder_name">Holder name is incomplete</string>
     <string name="acc_label_holder_name">إسم صاحب البطاقة</string>
-    <string name="cvc_number_hint"><font size="8"> الرمزالأمني</font></string>
+   <!-- <string name="cvc_number_hint"><font size="2"> الرمزالأمني</font></string>-->
+    <string name="cvc_number_hint">الرمزالأمني </string>
     <string name="cvc_amex_hint">الرمز الأمني</string>
 </resources>

@@ -874,7 +874,7 @@ class InlineCardInput2 @JvmOverloads constructor(
 
         expiryDateEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                //scrollEnd()
+                scrollEnd()
                 cardInputListener?.onFocusChange(FOCUS_EXPIRY)
             }
 

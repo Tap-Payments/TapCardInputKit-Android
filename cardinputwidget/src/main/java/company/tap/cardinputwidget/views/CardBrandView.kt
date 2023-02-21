@@ -134,12 +134,7 @@ import java.net.URL
 
     internal fun showCvcIcon(brand: CardBrand) {
         if (animationApplied) {
-            if(ThemeManager.currentTheme.contains("dark")){
-                iconView.setImageResource(brand.cvcIconDark)
-                animateImageChange(brand.cvcIconDark)
-
-            }else    animateImageChange(brand.cvcIconLight)
-return
+          return
         }
 
         if (brand == CardBrand.AmericanExpress) {
@@ -149,7 +144,13 @@ return
             }else  iconView.setImageResource(brand.cvcIconLight)
             applyTint(false)
             return
-        }
+        }else
+            if(ThemeManager.currentTheme.contains("dark")){
+            iconView.setImageResource(brand.cvcIconDark)
+            animateImageChange(brand.cvcIconDark)
+
+        }else    animateImageChange(brand.cvcIconLight)
+        return
 
         animationApplied = true
 

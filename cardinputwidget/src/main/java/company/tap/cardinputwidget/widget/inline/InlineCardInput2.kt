@@ -82,6 +82,7 @@ class InlineCardInput2 @JvmOverloads constructor(
     lateinit var scannerButton : ImageView
     lateinit var closeButton : ImageView
 
+     var brandIconUrl:String?=null
     var closeIconDrawable: Drawable?     =
         if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")){
             context.resources.getDrawable( R.drawable.icon_clear_dark_mode)
@@ -915,8 +916,9 @@ class InlineCardInput2 @JvmOverloads constructor(
                     separator_1.visibility = View.GONE
                     cvcNumberEditText.imeOptions = EditorInfo.IME_ACTION_DONE
                 }
-                updateIconCvc(hasFocus, cvcValue)
 
+             //   cardBrandView.showBrandIcon(brand,true,null)
+                updateIconCvc(hasFocus, cvcValue)
             }
         }
 
@@ -971,6 +973,7 @@ class InlineCardInput2 @JvmOverloads constructor(
         }
 
         cvcNumberEditText.completionCallback = {
+            cardBrandView.showBrandIcon(brand,false,brandIconUrl)
             if (holderNameEnabled) {
                 holderNameEditText.requestFocus()
             }
@@ -1662,6 +1665,10 @@ class InlineCardInput2 @JvmOverloads constructor(
             cvcNumberEditText.imeOptions = EditorInfo.IME_ACTION_DONE
         }
 
+    }
+
+    fun setCardBrandUrl(iconUrl: String?){
+        this.brandIconUrl =iconUrl
     }
 
 }

@@ -261,7 +261,7 @@ class MainActivity : AppCompatActivity() {
 
 
                 }
-
+                cardInlineForm2.setCardBrandUrl("https://back-end.b-cdn.net/payment_methods/mastercard.svg")
 
             }
         })

@@ -57,7 +57,7 @@ import java.net.URL
         setScanClickListener()
     }
 
-   internal fun showBrandIcon(brand: CardBrand, shouldShowErrorIcon: Boolean) {
+   internal fun showBrandIcon(brand: CardBrand, shouldShowErrorIcon: Boolean , iconUrl: String?=null) {
         iconView.setOnClickListener(null)
        if (shouldShowErrorIcon) {
             if(ThemeManager.currentTheme.contains("dark")){
@@ -67,11 +67,14 @@ import java.net.URL
 
         } else {
             println("brand val"+brand)
-            if (animationApplied) {
+            println("iconUrl val"+iconUrl)
+           if(iconUrl!=null)   Glide.with(context).load(iconUrl) .diskCacheStrategy(DiskCacheStrategy.NONE)
+               .skipMemoryCache(true).into(iconView)
+          else if (animationApplied) {
                 animationApplied = false
                 animateImageChange(brand.icon)
-            } else
-                iconView.setImageResource(brand.icon)
+            }
+           else iconView.setImageResource(brand.icon)
             if (brand == CardBrand.Unknown) {
                 applyTint(false)
                 setScanClickListener()
@@ -130,7 +133,14 @@ import java.net.URL
     }
 
     internal fun showCvcIcon(brand: CardBrand) {
-        if (animationApplied) return
+        if (animationApplied) {
+            if(ThemeManager.currentTheme.contains("dark")){
+                iconView.setImageResource(brand.cvcIconDark)
+                animateImageChange(brand.cvcIconDark)
+
+            }else    animateImageChange(brand.cvcIconLight)
+return
+        }
 
         if (brand == CardBrand.AmericanExpress) {
             if(ThemeManager.currentTheme.contains("dark")){
@@ -142,11 +152,6 @@ import java.net.URL
         }
 
         animationApplied = true
-        if(ThemeManager.currentTheme.contains("dark")){
-            iconView.setImageResource(brand.cvcIconDark)
-            animateImageChange(brand.cvcIconDark)
-
-        }else    animateImageChange(brand.cvcIconLight)
 
         iconView.setOnClickListener(null)
     }

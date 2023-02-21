@@ -252,10 +252,6 @@ class CardNumberEditText @JvmOverloads constructor(
                     textcard = fieldText
 
                     shouldShowError = !isCardNumberValid
-                    println("shouldShowError>>>>"+shouldShowError)
-                    println("isCardNumberValid>>>>"+isCardNumberValid)
-                    println("wasCardNumberValid>>>>"+wasCardNumberValid)
-                    println("ignoreChanges>>>>"+ignoreChanges)
                     if (!wasCardNumberValid && isCardNumberValid) {
                         backSpace = false
                         originalStr = s.toString()
@@ -294,7 +290,7 @@ class CardNumberEditText @JvmOverloads constructor(
          //•••••
         println("cardInput"+cardInput.length)
         if (maskLen <= 0) return cardInput // Nothing to mask
-        return (cardInput).replaceRange(11, 13, "XXX")
+        return (cardInput).replaceRange(0, maskLen, "••••")
     }
 
 

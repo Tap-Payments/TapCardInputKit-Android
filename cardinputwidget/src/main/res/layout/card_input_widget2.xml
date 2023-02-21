@@ -39,6 +39,7 @@
             android:layout_marginTop="1dp"
             android:visibility="visible"
             android:layout_gravity="center"
+            android:layoutDirection="locale"
 
 
             />
@@ -48,12 +49,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
 
             android:layout_marginTop="8dp"
             android:layout_marginBottom="6dp"
             android:layout_gravity="center"
+            android:layoutDirection="locale"
 
             >
 
@@ -76,6 +78,7 @@
                 android:visibility="visible"
                 app:hintEnabled="false"
                 android:layoutDirection="locale"
+                android:textDirection="locale"
                 android:gravity="start|end"
                 app:layout_constraintStart_toStartOf="parent"
 
@@ -122,6 +125,8 @@
                 app:hintEnabled="false"
                 android:gravity="start|end"
                 android:imeOptions="actionNext"
+                android:layoutDirection="locale"
+                android:textDirection="locale"
                 app:layout_constraintEnd_toStartOf="@+id/cvc_text_input_layout"
                 android:layout_marginEnd="9dp"
                 tools:ignore="UnusedAttribute">
@@ -129,7 +134,7 @@
                 <company.tap.cardinputwidget.views.ExpiryDateEditText
                     android:id="@+id/expiry_date_edit_text"
                     style="@style/Tap.CardInputWidget.EditText"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="start"
                     android:background="@android:color/transparent"
@@ -140,7 +145,7 @@
                     android:imeOptions="actionNext"
                     android:inputType="date"
                     android:maxLength="5"
-
+                    android:textAlignment="viewStart"
                     android:textDirection="locale" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -164,7 +169,8 @@
                 app:hintEnabled="false"
                 android:visibility="visible"
 
-
+                android:layoutDirection="locale"
+                android:textDirection="locale"
                 android:gravity="start|end"
                 app:layout_constraintEnd_toStartOf="@+id/linear_paylayout"
                 android:layout_marginEnd="23dp"
@@ -173,19 +179,21 @@
                 <company.tap.cardinputwidget.views.CvcEditText
                     android:id="@+id/cvc_edit_text"
                     style="@style/Tap.Base.CardInputWidget.EditText"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="start|end"
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/acc_label_cvc_node"
                     android:fontFamily="sans-serif-light"
                     android:gravity="start|end"
+
                     android:hint="@string/cvc_number_hint"
                     android:imeOptions="actionNext"
-                    android:inputType="numberPassword"
+
                     android:textDirection="locale"
                     android:textSize="@dimen/font_size_14sp"
                     app:boxStrokeWidth="0dp"
+                    android:textAlignment="viewStart"
                     app:boxStrokeWidthFocused="0dp"
 
 
@@ -200,6 +208,7 @@
                 android:layout_gravity="end|center"
                 android:orientation="horizontal"
                 android:layoutDirection="locale"
+                android:textDirection="locale"
                 app:layout_constraintEnd_toEndOf="parent"
 
 

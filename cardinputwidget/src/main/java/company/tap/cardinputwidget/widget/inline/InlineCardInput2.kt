@@ -514,6 +514,16 @@ class InlineCardInput2 @JvmOverloads constructor(
         currentFields.forEach { it.text?.clearSpans() }
         currentFields.forEach { it.text?.clear() }
         currentFields.forEach { it.clearFocus() }
+        cardNumberEditText.originalStr=null
+        cardNumberEditText.isEnabled = true
+        cvcNumberEditText.isEnabled = true
+        expiryDateEditText.isEnabled = true
+        backArrow.visibility= View.GONE
+
+        cvvIcon.visibility= View.GONE
+        shouldShowErrorIcon=true
+        expiryDateEditText.visibility = View.VISIBLE
+        cvcNumberEditText.visibility = View.VISIBLE
 
     }
 
@@ -836,9 +846,6 @@ class InlineCardInput2 @JvmOverloads constructor(
         //   currentFields.forEach { it.setErrorColor(errorColorInt) }
 
         cardNumberEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
-            println("hasFocus"+hasFocus)
-            println("cardNumberEditText.cardNumber"+cardNumberEditText.cardNumber?.length)
-            println("cardNumberEditText org"+cardNumberEditText.originalStr)
             if (hasFocus && cardNumberEditText.originalStr!=null) {
                 cardInputListener?.onFocusChange(FOCUS_CARD)
                 scrollStart()
@@ -858,10 +865,7 @@ class InlineCardInput2 @JvmOverloads constructor(
                 expiryDateEditText.visibility = View.VISIBLE
                 cvcNumberEditText.visibility = View.VISIBLE
                 scrollEnd()
-              // setCardNumber(cardNumberEditText.textcard?.replace(".(?=.{4})".toRegex(), "X"),hasFocus)
-               setCardNumber(cardNumberEditText.textcard?.replace("(?<!^.).(?=.{5})".toRegex(), "X"),hasFocus)
-              // setCardNumber(cardNumberEditText.textcard?.replace("(\\d(?=\\d{3}))".toRegex(), "•"),hasFocus)
-               //setCardNumber(cardNumberEditText.maskCardNumber(cardNumberEditText.textcard.toString()),hasFocus)
+               setCardNumber(cardNumberEditText.maskCardNumber(cardNumberEditText.textcard.toString()),hasFocus)
             }
 
         }
@@ -1505,7 +1509,8 @@ class InlineCardInput2 @JvmOverloads constructor(
         override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
             super.applyTransformation(interpolatedTime, t)
             view.layoutParams = (view.layoutParams as ConstraintLayout.LayoutParams).apply {
-                marginStart = (-1f * hiddenCardWidth.toFloat() * interpolatedTime).toInt()
+              //  marginStart = (-1f * hiddenCardWidth.toFloat() * interpolatedTime).toInt()
+                marginStart = (0f * hiddenCardWidth.toFloat() * interpolatedTime).toInt() //Added as masked value was not showing
             }
         }
     }

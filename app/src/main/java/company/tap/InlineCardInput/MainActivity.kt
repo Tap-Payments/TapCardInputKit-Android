@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
         cardInlineForm.setVisibilityOfHolderField(true)
         //switchLL = cardInlineForm.findViewById(R.id.mainSwitchInline)
         switchLL = findViewById(R.id.switch_Inline_card)
-        cardInlineForm.holderNameEnabled = false
+        cardInlineForm2.holderNameEnabled = true
         tabLinear = findViewById(R.id.tabLinear)
         tapAlertView = findViewById(R.id.alertView)
         clearView = cardInlineForm2.findViewById(R.id.clear_text)

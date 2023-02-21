@@ -3,6 +3,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Parcelable
@@ -37,6 +38,7 @@ import company.tap.cardinputwidget.widget.BaseCardInput
 import company.tap.cardinputwidget.widget.CardInputListener
 import company.tap.cardinputwidget.widget.CardValidCallback
 import company.tap.taplocalizationkit.LocalizationManager
+import company.tap.tapuilibrary.fontskit.enums.TapFont
 import company.tap.tapuilibrary.themekit.ThemeManager
 import company.tap.tapuilibrary.uikit.atoms.TapTextInput
 import company.tap.tapuilibrary.uikit.utils.TapTextWatcher
@@ -872,7 +874,9 @@ class InlineCardInput2 @JvmOverloads constructor(
                 scrollEnd()
                setCardNumber(cardNumberEditText.maskCardNumber(cardNumberEditText.textcard.toString()),hasFocus)
             }
-
+            holderNameTextInputLayout.visibility = View.GONE
+            holderNameEditText.visibility = View.GONE
+            separator_1.visibility = View.GONE
         }
 
         expiryDateEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
@@ -911,7 +915,7 @@ class InlineCardInput2 @JvmOverloads constructor(
                     holderNameEditText.visibility = View.VISIBLE
                     separator_1.visibility = View.VISIBLE
                     cvcNumberEditText.imeOptions = EditorInfo.IME_ACTION_NEXT
-                    holderNameEnabled = true
+                    //holderNameEnabled = true
                 } else {
                     holderNameEditText.isEnabled = false
                     holderNameTextInputLayout.visibility = View.GONE
@@ -923,8 +927,16 @@ class InlineCardInput2 @JvmOverloads constructor(
              //   cardBrandView.showBrandIcon(brand,true,null)
                 updateIconCvc(hasFocus, cvcValue)
             }
+
         }
 
+        holderNameEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+
+                cardInputListener?.onFocusChange(CardInputListener.FocusField.FOCUS_HOLDERNAME)
+
+            }
+        }
         cvcNumberEditText.setAfterTextChangedListener(
             object : TapTextInput.AfterTextChangedListener {
                 override fun onTextChanged(text: String) {
@@ -933,6 +945,15 @@ class InlineCardInput2 @JvmOverloads constructor(
                         updateIconCvc(cvcNumberEditText.hasFocus(), text)
 
                     }
+                }
+            }
+        )
+
+        holderNameEditText.setAfterTextChangedListener(
+            object : TapTextInput.AfterTextChangedListener {
+                override fun onTextChanged(text: String) {
+                    setDrawableForHolderName()
+
                 }
             }
         )
@@ -998,6 +1019,8 @@ class InlineCardInput2 @JvmOverloads constructor(
         //Added close icon for holdername
         setDrawableForHolderName()
 
+
+        setThemeForHints()
 
     }
 
@@ -1600,7 +1623,20 @@ class InlineCardInput2 @JvmOverloads constructor(
             return Layout.getDesiredWidth(text, paint).toInt()
         }
     }
+    var holderNameEditable: Boolean by Delegates.observable(
+        BaseCardInput.DEFAULT_HOLDER_NAME_ENABLED
+    ) { _, _, isEnabled ->
+        if (isEnabled) {
+            holderNameEditText.isActivated = true
+            holderNameEditText.isEnabled = true
+            holderNameTextInputLayout.isEnabled = true
 
+        } else {
+            holderNameEditText.isActivated = false
+            holderNameEditText.isEnabled = false
+            holderNameTextInputLayout.isEnabled = false
+        }
+    }
     internal companion object {
         internal const val LOGGING_TOKEN = "CardInputView"
 
@@ -1733,6 +1769,55 @@ class InlineCardInput2 @JvmOverloads constructor(
         activity.windowManager.defaultDisplay.getMetrics(metrics)
         val density = metrics.densityDpi
         return density
+    }
+    private fun setThemeForHints() {
+        if (context?.let { LocalizationManager.getLocale(it).language } == "en") setFontsEnglish() else setFontsArabic()
+    }
+
+    private fun setFontsArabic() {
+        cardNumberEditText.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.TajawalLight
+            )
+        )
+        cvcNumberEditText.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.TajawalLight
+            )
+        )
+        holderNameEditText.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.TajawalLight
+            )
+        )
+        expiryDateEditText.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.TajawalLight
+            )
+        )
+    }
+
+    private fun setFontsEnglish() {
+        cardNumberEditText.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.RobotoLight
+            )
+        )
+        cvcNumberEditText.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.RobotoLight
+            )
+        )
+        holderNameEditText.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.RobotoLight
+            )
+        )
+        expiryDateEditText.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.RobotoLight
+            )
+        )
     }
 
 }

@@ -10,6 +10,7 @@ import android.os.Parcelable
 import android.text.*
 import android.util.AttributeSet
 import android.util.DisplayMetrics
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -88,6 +89,8 @@ class InlineCardInput2 @JvmOverloads constructor(
     lateinit var closeButton : ImageView
 
      var brandIconUrl:String?=null
+
+
     var closeIconDrawable: Drawable?     =
         if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")){
             context.resources.getDrawable( R.drawable.icon_clear_dark_mode)
@@ -492,13 +495,15 @@ class InlineCardInput2 @JvmOverloads constructor(
 
         }else expiryDateEditText.setText(cardDetails.expMonth.toString()+"/"+cardDetails?.expYear.toString())
 
+
+        cvcNumberEditText.updateBrand(cardDetails.brand)
         cardBrandView.showBrandIcon(cardDetails.brand,false)
 
         expiryDateEditText.shouldShowError = false
         expiryDateEditText.isEnabled = false
         backArrow.visibility= View.VISIBLE
         cvvIcon.visibility= View.VISIBLE
-
+        setVisibilityOfHolderField(false)
         nfcButton.visibility= View.GONE
         scannerButton.visibility= View.GONE
         closeButton.visibility= View.GONE
@@ -527,6 +532,7 @@ class InlineCardInput2 @JvmOverloads constructor(
         expiryDateEditText.isEnabled = true
         backArrow.visibility= View.GONE
         cardBrandView.showBrandIcon(brand, true)
+        cardInputUIStatus = CardInputUIStatus.NormalCard
         cvvIcon.visibility= View.GONE
         shouldShowErrorIcon=true
         expiryDateEditText.visibility = View.VISIBLE
@@ -796,7 +802,7 @@ class InlineCardInput2 @JvmOverloads constructor(
 
     private fun initView(attrs: AttributeSet?) {
         attrs?.let { applyAttributes(it) }
-
+        backArrow.visibility = View.GONE
         ViewCompat.setAccessibilityDelegate(
             cardNumberEditText,
             object : AccessibilityDelegateCompat() {
@@ -902,9 +908,24 @@ class InlineCardInput2 @JvmOverloads constructor(
                 cvcNumberEditText
             )
         )
+//Adding delete OnKeyListener for cvc
+        cvcNumberEditText.setOnKeyListener(OnKeyListener { view, keyCode, keyEvent ->
+            if (keyCode == KeyEvent.KEYCODE_DEL) {
+                    println("cardInputUIStatus"+cardInputUIStatus)
+                    if(cardInputUIStatus==CardInputUIStatus.SavedCard && cvcNumberEditText.text?.isEmpty() == true){
+                        cvcNumberEditText.setBackgroundResource(R.drawable.underline_editext)
+                        cvvIcon.visibility = View.VISIBLE
+                    }else {
+                        cvcNumberEditText.setBackgroundResource(R.drawable.underline_editext_transparent)
+                        cvvIcon.visibility = View.GONE
+                    }
 
+                }
+            false
+        })
         cvcNumberEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
+
                 scrollEnd()
                 cardInputListener?.onFocusChange(FOCUS_CVC)
                 //holderNameEditText.requestFocus()
@@ -923,6 +944,7 @@ class InlineCardInput2 @JvmOverloads constructor(
                     separator_1.visibility = View.GONE
                     cvcNumberEditText.imeOptions = EditorInfo.IME_ACTION_DONE
                 }
+
 
              //   cardBrandView.showBrandIcon(brand,true,null)
                 updateIconCvc(hasFocus, cvcValue)
@@ -945,6 +967,8 @@ class InlineCardInput2 @JvmOverloads constructor(
                         updateIconCvc(cvcNumberEditText.hasFocus(), text)
 
                     }
+                    cvcNumberEditText.setBackgroundResource(R.drawable.underline_editext_transparent)
+                    cvvIcon.visibility = View.GONE
                 }
             }
         )
@@ -1294,6 +1318,7 @@ class InlineCardInput2 @JvmOverloads constructor(
                 updateIcon()
             }
             else -> {
+               if(cardInputUIStatus==CardInputUIStatus.NormalCard)
                 updateIconForCvcEntry()
             }
         }

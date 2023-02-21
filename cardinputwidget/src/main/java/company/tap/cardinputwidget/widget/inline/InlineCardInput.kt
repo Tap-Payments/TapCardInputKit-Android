@@ -711,7 +711,7 @@ class InlineCardInput @JvmOverloads constructor(
         cardBrandView.showBrandIcon(brand, true)
         expiryDateEditText.visibility = View.VISIBLE
         cvcNumberEditText.visibility = View.VISIBLE
-
+        cardInputUIStatus = CardInputUIStatus.NormalCard
         //cvcNumberEditText.hint = LocalizationManager.getValue("cardCVVPlaceHolder", "TapCardInputKit")
     }
 
@@ -1132,6 +1132,20 @@ class InlineCardInput @JvmOverloads constructor(
                     }
                 }
         )
+        cvcNumberEditText.setAfterTextChangedListener(
+                object : TapTextInput.AfterTextChangedListener {
+                    override fun onTextChanged(text: String) {
+                        if (brand.isMaxCvc(text)) {
+                            cardInputListener?.onCvcComplete()
+
+                        }
+                        cvcNumberEditText.setBackgroundResource(R.drawable.underline_editext_transparent)
+                        cvvIcon.visibility = View.GONE
+                        // println("updateIconCvc call from cvvnumber"+cvcNumberEditText.hasFocus())
+                        // updateIconCvc(cvcNumberEditText.hasFocus(), text,null)
+
+                    }
+                })
 
         holderNameEditText.setAfterTextChangedListener(
             object : TapTextInput.AfterTextChangedListener {
@@ -1146,10 +1160,13 @@ class InlineCardInput @JvmOverloads constructor(
 
         cvcNumberEditText.setOnKeyListener(OnKeyListener { view, keyCode, keyEvent ->
             if (keyCode == KeyEvent.KEYCODE_DEL) {
+                println("cardInputUIStatus"+cardInputUIStatus)
                 if(cardInputUIStatus==CardInputUIStatus.SavedCard && cvcNumberEditText.text?.isEmpty() == true){
                     cvcNumberEditText.setBackgroundResource(R.drawable.underline_editext)
                     cvvIcon.visibility = View.VISIBLE
-                }
+                }else
+                    cvcNumberEditText.setBackgroundResource(R.drawable.underline_editext_transparent)
+                cvvIcon.visibility = View.GONE
 
             }
             false

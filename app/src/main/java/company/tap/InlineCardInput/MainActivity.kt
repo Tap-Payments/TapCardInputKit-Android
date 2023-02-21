@@ -78,8 +78,8 @@ class MainActivity : AppCompatActivity() {
         mainView = findViewById(R.id.mainView)
         tap_payment_input = findViewById(R.id.tap_payment_input)
         //tap_payment_input2 = findViewById(R.id.tap_payment_input2)
-        cardInlineForm.holderNameEnabled= true
-        cardInlineForm.setVisibilityOfHolderField(true)
+       // cardInlineForm.holderNameEnabled= true
+      //  cardInlineForm.setVisibilityOfHolderField(true)
         //switchLL = cardInlineForm.findViewById(R.id.mainSwitchInline)
         switchLL = findViewById(R.id.switch_Inline_card)
         cardInlineForm2.holderNameEnabled = true

@@ -1004,7 +1004,20 @@ class InlineCardInput2 @JvmOverloads constructor(
                 }
             }
         )
+        var holderNameEditable: Boolean by Delegates.observable(
+            BaseCardInput.DEFAULT_HOLDER_NAME_ENABLED
+        ) { _, _, isEnabled ->
+            if (isEnabled) {
+                holderNameEditText.isActivated = true
+                holderNameEditText.isEnabled = true
+                holderNameTextInputLayout.isEnabled = true
 
+            } else {
+                holderNameEditText.isActivated = false
+                holderNameEditText.isEnabled = false
+                holderNameTextInputLayout.isEnabled = false
+            }
+        }
         cardBrandView.onScanClicked = {
             Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show()
         }

@@ -511,15 +511,16 @@ class InlineCardInput2 @JvmOverloads constructor(
 //        }
 
         currentFields.forEach { it.setText("") }
-        currentFields.forEach { it.text?.clearSpans() }
+       // currentFields.forEach { it.text?.clearSpans() }
         currentFields.forEach { it.text?.clear() }
         currentFields.forEach { it.clearFocus() }
         cardNumberEditText.originalStr=null
+        cardNumberEditText.textcard=null
         cardNumberEditText.isEnabled = true
         cvcNumberEditText.isEnabled = true
         expiryDateEditText.isEnabled = true
         backArrow.visibility= View.GONE
-
+        cardBrandView.showBrandIcon(brand, true)
         cvvIcon.visibility= View.GONE
         shouldShowErrorIcon=true
         expiryDateEditText.visibility = View.VISIBLE
@@ -914,8 +915,9 @@ class InlineCardInput2 @JvmOverloads constructor(
                     separator_1.visibility = View.GONE
                     cvcNumberEditText.imeOptions = EditorInfo.IME_ACTION_DONE
                 }
+                updateIconCvc(hasFocus, cvcValue)
+
             }
-            updateIconCvc(hasFocus, cvcValue)
         }
 
         cvcNumberEditText.setAfterTextChangedListener(
@@ -923,8 +925,9 @@ class InlineCardInput2 @JvmOverloads constructor(
                 override fun onTextChanged(text: String) {
                     if (brand.isMaxCvc(text)) {
                         cardInputListener?.onCvcComplete()
+                        updateIconCvc(cvcNumberEditText.hasFocus(), text)
+
                     }
-                    updateIconCvc(cvcNumberEditText.hasFocus(), text)
                 }
             }
         )

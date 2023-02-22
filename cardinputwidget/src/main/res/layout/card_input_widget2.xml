@@ -21,9 +21,8 @@
             android:id="@+id/backView"
             android:layout_width="10dp"
             android:layout_height="14dp"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_marginStart="16dp"
-
             android:src="@drawable/back_arrow_light"
             android:layout_gravity="center"
             android:layoutDirection="locale"
@@ -195,8 +194,6 @@
                 android:imeOptions="actionNext"
                 android:textAlignment="viewStart"
                 android:textDirection="locale"
-
-
                 android:textSize="@dimen/font_size_14sp"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
@@ -294,12 +291,13 @@
             android:id="@+id/holder_name_text_input_layout"
             style="@style/Tap.CardInputWidget.TextInputLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:accessibilityLiveRegion="polite"
             android:background="@android:color/transparent"
             android:layout_marginStart="@dimen/margin_basic_10dp"
             android:layout_marginEnd="@dimen/margin_basic_8dp"
-            android:layout_marginTop="@dimen/margin_basic_8dp"
+            android:layout_marginTop="12dp"
+
             android:contentDescription="@string/acc_label_holder_name"
             android:labelFor="@id/holder_name_edit_text"
             android:visibility="gone"
@@ -325,6 +323,7 @@
                 android:imeOptions="actionDone"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
+
                 android:textSize="@dimen/font_size_14sp"
                 android:maxLength="22"
                 android:textDirection="locale"/>

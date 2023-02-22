@@ -83,8 +83,9 @@ class InlineCardInput2 @JvmOverloads constructor(
     private var cardInputListener: CardInputListener? = null
     private var cardValidCallback: CardValidCallback? = null
 
-    val backArrow = viewBinding.backView
+
     lateinit var nfcButton : ImageView
+    lateinit var backArrow : ImageView
     lateinit var scannerButton : ImageView
     lateinit var closeButton : ImageView
 
@@ -345,6 +346,7 @@ class InlineCardInput2 @JvmOverloads constructor(
     private fun initV() {
         nfcButton =findViewById(R.id.nfc_button)
         scannerButton =findViewById(R.id.card_scanner_button)
+        backArrow =findViewById(R.id.backView)
         closeButton =findViewById(R.id.clear_text)
         //separatorcard2 =findViewById(R.id.separatorcard2)
         cardBrandView.iconView.setImageResource(cardBrandView.iconViewRes)
@@ -352,6 +354,8 @@ class InlineCardInput2 @JvmOverloads constructor(
         cvvIcon.setImageResource(cvvIconDrawable)
         if (LocalizationManager.getLocale(context).language == "ar") {
             backArrow.scaleX=-1.0f
+            cvcNumberEditText.textAlignment =View.TEXT_ALIGNMENT_CENTER
+            backArrow.isClickable = true
         }
 
         backArrow.setImageResource(backIcon)
@@ -803,7 +807,6 @@ class InlineCardInput2 @JvmOverloads constructor(
 
     private fun initView(attrs: AttributeSet?) {
         attrs?.let { applyAttributes(it) }
-        backArrow.visibility = View.GONE
         ViewCompat.setAccessibilityDelegate(
             cardNumberEditText,
             object : AccessibilityDelegateCompat() {

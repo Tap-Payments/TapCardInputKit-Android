@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tabLayout: company.tap.tapuilibrary.uikit.views.TapSelectionTabLayout
     var tapAlertView: TapAlertView? = null
     var backArrow: TapImageView? = null
+    var backArrowAr: TapImageView? = null
     var switchLL: TapInlineCardSwitch? = null
     var switchSaveCard: TapSwitch? = null
     var separator1: TapSeparatorView? = null
@@ -87,6 +88,7 @@ class MainActivity : AppCompatActivity() {
         tapAlertView = findViewById(R.id.alertView)
         clearView = cardInlineForm2.findViewById(R.id.clear_text)
         backArrow = cardInlineForm2.findViewById(R.id.backView)
+        backArrowAr = cardInlineForm2.findViewById(R.id.backView_Ar)
         tabLayout = findViewById(R.id.sections_tablayout)
         cardScannerBtn = cardInlineForm.findViewById(R.id.card_scanner_button)
         nfcButton = cardInlineForm.findViewById(R.id.nfc_button)
@@ -101,6 +103,14 @@ class MainActivity : AppCompatActivity() {
         paymentInputContainer.addView(cardInlineForm2)
 
         backArrow?.setOnClickListener {
+            println("called")
+            tabLayout.resetBehaviour()
+            cardInlineForm2.clear()
+            clearView?.visibility = View.GONE
+            controlScannerOptions()
+        }
+        backArrowAr?.setOnClickListener {
+            println("called22")
             tabLayout.resetBehaviour()
             cardInlineForm2.clear()
             clearView?.visibility = View.GONE

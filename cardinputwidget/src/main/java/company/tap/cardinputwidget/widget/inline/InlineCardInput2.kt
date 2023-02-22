@@ -87,6 +87,7 @@ class InlineCardInput2 @JvmOverloads constructor(
 
     lateinit var nfcButton : ImageView
     lateinit var backArrow : ImageView
+    lateinit var backViewAr : ImageView
     lateinit var scannerButton : ImageView
     lateinit var closeButton : ImageView
 
@@ -120,6 +121,10 @@ class InlineCardInput2 @JvmOverloads constructor(
     @DrawableRes
     val backIcon: Int =
         if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.back_arrow_dark else R.drawable.back_arrow_light
+
+    @DrawableRes
+    val backIconAr: Int =
+        if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) R.drawable.back_arrow_dark_ar else R.drawable.back_arrow_light_ar
 
     private val frameStart: Int
         get() {
@@ -350,18 +355,20 @@ class InlineCardInput2 @JvmOverloads constructor(
         nfcButton =findViewById(R.id.nfc_button)
         scannerButton =findViewById(R.id.card_scanner_button)
         backArrow =findViewById(R.id.backView)
+        backViewAr =findViewById(R.id.backView_Ar)
         closeButton =findViewById(R.id.clear_text)
         //separatorcard2 =findViewById(R.id.separatorcard2)
         cardBrandView.iconView.setImageResource(cardBrandView.iconViewRes)
         closeButton.setImageResource(closeIcon)
         cvvIcon.setImageResource(cvvIconDrawable)
         if (LocalizationManager.getLocale(context).language == "ar") {
-            backArrow.scaleX=-1.0f
+           // backArrow.scaleX=-1.0f
             cvcNumberEditText.textAlignment =View.TEXT_ALIGNMENT_CENTER
-            backArrow.isClickable = true
+           // backArrow.isClickable = true
         }
 
         backArrow.setImageResource(backIcon)
+        backViewAr.setImageResource(backIconAr)
 
 
         scannerButton.setImageResource(scannerIcon)
@@ -509,12 +516,23 @@ class InlineCardInput2 @JvmOverloads constructor(
 
         expiryDateEditText.shouldShowError = false
         expiryDateEditText.isEnabled = false
-        backArrow.visibility= View.VISIBLE
+        if (LocalizationManager.getLocale(context).language == "ar") {
+            // backArrow.scaleX=-1.0f
+            // backArrow.isClickable = true
+            backViewAr.visibility = View.VISIBLE
+            backArrow.visibility = View.GONE
+        }
         cvvIcon.visibility= View.VISIBLE
         setVisibilityOfHolderField(false)
         nfcButton.visibility= View.GONE
         scannerButton.visibility= View.GONE
         closeButton.visibility= View.GONE
+    }
+
+    fun setOnclickLister(imageView: ImageView){
+        imageView.setOnClickListener {
+
+        }
     }
 
     @JvmSynthetic

@@ -29,6 +29,18 @@
             android:focusable="true"
             android:layoutDirection="locale"
             />
+        <company.tap.tapuilibrary.uikit.atoms.TapImageView
+            android:id="@+id/backView_Ar"
+            android:layout_width="10dp"
+            android:layout_height="14dp"
+            android:visibility="gone"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/back_arrow_light_ar"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:layoutDirection="locale"
+            />
         <company.tap.cardinputwidget.views.CardBrandView
             android:id="@+id/card_brand_view"
             android:layout_width="wrap_content"

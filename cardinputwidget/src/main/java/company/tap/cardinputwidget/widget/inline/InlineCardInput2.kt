@@ -1,4 +1,6 @@
 package company.tap.cardinputwidget.widget.inline
+
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
@@ -14,7 +16,7 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
-import android.view.View.OnFocusChangeListener
+import android.view.View.*
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.Transformation
@@ -28,15 +30,14 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import company.tap.cardinputwidget.*
 import company.tap.cardinputwidget.databinding.CardInputWidget2Binding
-import company.tap.cardinputwidget.utils.CardUtils
-import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_CARD
-import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_CVC
-import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_EXPIRY
 import company.tap.cardinputwidget.utils.DateUtils
 import company.tap.cardinputwidget.utils.TextValidator
 import company.tap.cardinputwidget.views.CardNumberEditText
 import company.tap.cardinputwidget.widget.BaseCardInput
 import company.tap.cardinputwidget.widget.CardInputListener
+import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_CARD
+import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_CVC
+import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_EXPIRY
 import company.tap.cardinputwidget.widget.CardValidCallback
 import company.tap.taplocalizationkit.LocalizationManager
 import company.tap.tapuilibrary.fontskit.enums.TapFont
@@ -44,8 +45,8 @@ import company.tap.tapuilibrary.themekit.ThemeManager
 import company.tap.tapuilibrary.uikit.atoms.TapTextInput
 import company.tap.tapuilibrary.uikit.utils.TapTextWatcher
 import kotlinx.android.synthetic.main.card_input_widget.view.*
-
 import kotlin.properties.Delegates
+
 class InlineCardInput2 @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -90,6 +91,8 @@ class InlineCardInput2 @JvmOverloads constructor(
     lateinit var closeButton : ImageView
 
      var brandIconUrl:String?=null
+
+    var isExpDateValid:Boolean = false
 
 
     var closeIconDrawable: Drawable?     =
@@ -1058,6 +1061,7 @@ class InlineCardInput2 @JvmOverloads constructor(
         expiryDateEditText.completionCallback = {
             cvcNumberEditText.requestFocus()
             cardInputListener?.onExpirationComplete()
+            isExpDateValid = expiryDateEditText.isDateValid
         }
 
         cvcNumberEditText.completionCallback = {

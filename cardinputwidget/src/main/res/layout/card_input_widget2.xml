@@ -25,11 +25,9 @@
             android:layout_marginStart="16dp"
             android:src="@drawable/back_arrow_light"
             android:layout_gravity="center"
+            android:clickable="true"
+            android:focusable="true"
             android:layoutDirection="locale"
-
-
-
-
             />
         <company.tap.cardinputwidget.views.CardBrandView
             android:id="@+id/card_brand_view"

@@ -59,10 +59,10 @@ class CvcEditText @JvmOverloads constructor(
         inputType = TYPE_CLASS_NUMBER or TYPE_NUMBER_VARIATION_PASSWORD
         //keyListener = DigitsKeyListener.getInstance(false, true)
 
-       /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             setAutofillHints(View.AUTOFILL_HINT_CREDIT_CARD_SECURITY_CODE)
         }
-*/
+
         addTextChangedListener(object : TapTextWatcher() {
             override fun afterTextChanged(s: Editable?) {
                 shouldShowError = false
@@ -93,7 +93,7 @@ class CvcEditText @JvmOverloads constructor(
         this.cardBrand = cardBrand
         filters = createFilters(cardBrand)
 
-        val hintText = customHintText
+     /*   val hintText = customHintText
             ?: if (cardBrand == CardBrand.AmericanExpress) {
                 resources.getString(R.string.cvc_amex_hint)
             } else {
@@ -104,7 +104,7 @@ class CvcEditText @JvmOverloads constructor(
             textInputLayout.hint = hintText
         } else {
             this.hint = hintText
-        }
+        }*/
     }
 
     private fun createFilters(cardBrand: CardBrand): Array<InputFilter> {

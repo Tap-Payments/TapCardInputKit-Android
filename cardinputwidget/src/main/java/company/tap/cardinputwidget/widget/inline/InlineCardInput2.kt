@@ -432,6 +432,7 @@ class InlineCardInput2 @JvmOverloads constructor(
 
     override fun setCVVHint(cvvHint: String) {
         cvcNumberEditText.hint =cvvHint
+
     }
 
     override fun setExpiryHint(expiryHint: String) {
@@ -1841,11 +1842,11 @@ class InlineCardInput2 @JvmOverloads constructor(
                 TapFont.TajawalLight
             )
         )
-      /*cvcNumberEditText.typeface = Typeface.createFromAsset(
+   cvcNumberEditText.typeface = Typeface.createFromAsset(
             context?.assets, TapFont.tapFontType(
                 TapFont.TajawalLight
             )
-        )*/
+        )
 
         holderNameEditText.typeface = Typeface.createFromAsset(
             context?.assets, TapFont.tapFontType(

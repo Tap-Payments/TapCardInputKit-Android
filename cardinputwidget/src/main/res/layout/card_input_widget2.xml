@@ -109,26 +109,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:layout_marginStart="185dp"
                 android:accessibilityLiveRegion="polite"
                 android:accessibilityTraversalAfter="@+id/text_input_card_number"
                 android:accessibilityTraversalBefore="@+id/text_input_cvc"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/acc_label_expiry_date"
+                android:gravity="start|end"
+                android:imeOptions="actionNext"
                 android:labelFor="@id/expiry_date_edit_text"
+                android:layoutDirection="locale"
                 android:nextFocusLeft="@id/text_input_card_number"
                 android:nextFocusRight="@+id/text_input_cvc"
                 android:nextFocusUp="@id/text_input_card_number"
                 android:nextFocusDown="@+id/text_input_cvc"
                 android:nextFocusForward="@+id/text_input_cvc"
+                android:textDirection="locale"
                 android:visibility="visible"
                 app:hintEnabled="false"
-                android:gravity="start|end"
-                android:imeOptions="actionNext"
-                android:layoutDirection="locale"
-                android:textDirection="locale"
                 app:layout_constraintEnd_toStartOf="@+id/cvc_text_input_layout"
-                android:layout_marginEnd="15dp"
                 tools:ignore="UnusedAttribute">
 
                 <company.tap.cardinputwidget.views.ExpiryDateEditText
@@ -140,13 +138,13 @@
                     android:background="@android:color/transparent"
                     android:fontFamily="sans-serif-light"
                     android:gravity="start|end"
-                    android:textSize="@dimen/font_size_14sp"
                     android:hint="@string/expiry_date_hint"
                     android:imeOptions="actionNext"
                     android:inputType="date"
                     android:maxLength="5"
                     android:textAlignment="viewStart"
-                    android:textDirection="locale" />
+                    android:textDirection="locale"
+                    android:textSize="@dimen/font_size_14sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -156,65 +154,69 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|end"
-                android:layout_marginStart="245dp"
+                android:layout_marginEnd="29dp"
                 android:accessibilityLiveRegion="polite"
                 android:accessibilityTraversalAfter="@+id/text_input_expiry_date"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/cvc_number_hint"
-                android:labelFor="@id/cvc_edit_text"
-                android:nextFocusLeft="@id/text_input_expiry_date"
-                android:nextFocusUp="@id/text_input_expiry_date"
-                android:nextFocusDown="@id/holder_name_edit_text"
-                android:nextFocusRight="@id/holder_name_edit_text"
-                app:hintEnabled="false"
-                android:visibility="visible"
-
-                android:layoutDirection="locale"
-                android:textDirection="locale"
                 android:gravity="start|end"
+                android:labelFor="@id/cvc_edit_text"
+                android:layoutDirection="locale"
+                android:nextFocusLeft="@id/text_input_expiry_date"
+                android:nextFocusRight="@id/holder_name_edit_text"
+                android:nextFocusUp="@id/text_input_expiry_date"
+
+                android:nextFocusDown="@id/holder_name_edit_text"
+                android:textDirection="locale"
+                android:visibility="visible"
+                app:hintEnabled="false"
                 app:layout_constraintEnd_toStartOf="@+id/linear_paylayout"
-                android:layout_marginEnd="29dp"
+                app:layout_constraintStart_toEndOf="@+id/expiry_date_text_input_layout"
                 tools:ignore="UnusedAttribute">
 
-                <company.tap.cardinputwidget.views.CvcEditText
-                    android:id="@+id/cvc_edit_text"
-                    style="@style/Tap.Base.CardInputWidget.EditText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="start|end"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/acc_label_cvc_node"
-                    android:fontFamily="sans-serif-light"
-                    android:gravity="start|end"
-
-                    android:hint="@string/cvc_number_hint"
-                    android:imeOptions="actionNext"
-
-                    android:textDirection="locale"
-                    android:textSize="@dimen/font_size_14sp"
-                    app:boxStrokeWidth="0dp"
-                    android:textAlignment="viewStart"
-                    app:boxStrokeWidthFocused="0dp"
-
-
-                    app:endIconDrawable="@drawable/cvv_icon" />
-
             </com.google.android.material.textfield.TextInputLayout>
+
+            <company.tap.cardinputwidget.views.CvcEditText
+                android:id="@+id/cvc_edit_text"
+                style="@style/Tap.Base.CardInputWidget.EditText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="start|end"
+                android:layout_marginStart="8dp"
+                android:background="@android:color/transparent"
+
+                android:contentDescription="@string/acc_label_cvc_node"
+                android:fontFamily="sans-serif-light"
+
+                android:gravity="start|end"
+                android:hint="@string/cvc_number_hint"
+                android:imeOptions="actionNext"
+                android:textAlignment="viewStart"
+                android:textDirection="locale"
+
+
+                android:textSize="@dimen/font_size_14sp"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:endIconDrawable="@drawable/cvv_icon"
+                app:layout_constraintEnd_toStartOf="@+id/linear_paylayout"
+                app:layout_constraintStart_toEndOf="@+id/expiry_date_text_input_layout"
+                tools:layout_editor_absoluteY="0dp" />
 
             <LinearLayout
                 android:id="@+id/linear_paylayout"
                 android:layout_width="wrap_content"
                 android:layout_height="22dp"
                 android:layout_gravity="end|center"
-                android:orientation="horizontal"
+                android:layout_marginStart="16dp"
                 android:layoutDirection="locale"
+                android:orientation="horizontal"
                 android:textDirection="locale"
+
+
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cvc_edit_text">
 
-
-
-
-                >
                 <ImageView
                     android:id="@+id/cvvIcon"
                     android:layout_width="32dp"
@@ -250,16 +252,18 @@
                     android:layout_width="32dp"
                     android:layout_height="22dp"
                     android:layout_gravity="center"
+                    android:layout_marginRight="7dp"
                     android:layoutDirection="locale"
+                    android:paddingLeft="7dp"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"
-                    android:paddingLeft="7dp"
-                    android:layout_marginRight="7dp"
                     android:src="@drawable/icon_close2"
 
                     android:visibility="visible" />
 
             </LinearLayout>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

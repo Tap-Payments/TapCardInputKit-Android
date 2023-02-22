@@ -113,6 +113,7 @@ class MainActivity : AppCompatActivity() {
         //   switchLL?.setSwitchDataSource(TapSwitchDataSource("Sasa","Save For later","sa","asa","asa"))
         cardInlineForm.switchCardEnabled = true
         cardInputChipView = tap_payment_input.findViewById(R.id.inline_CardView)
+
        /* if (ThemeManager.currentTheme.isNotEmpty() && ThemeManager.currentTheme.contains("dark")) {
             //   tapPaymentInput?.cardInputChipView?.setBackgroundResource(R.drawable.border_unclick_black)
         } else {
@@ -274,12 +275,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun initLangugae() {
         LocalizationManager.loadTapLocale(this.resources, R.raw.lang)
-        LocalizationManager.setLocale(this, Locale("en"))
+        LocalizationManager.setLocale(this, Locale("ar"))
         if (LocalizationManager.getLocale(this).toString().contains("ar"))
             LocalizationManager.setLocale(this, Locale("ar"))
         else if (LocalizationManager.getLocale(this).toString().contains("en"))
             LocalizationManager.setLocale(this, Locale("en"))
-        else LocalizationManager.setLocale(this, Locale("en"))
+        else LocalizationManager.setLocale(this, Locale("ar"))
 
 
 

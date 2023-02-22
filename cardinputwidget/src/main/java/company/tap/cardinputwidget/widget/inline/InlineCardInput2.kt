@@ -865,14 +865,14 @@ class InlineCardInput2 @JvmOverloads constructor(
                 scrollStart()
                 cardNumberEditText.showFields = false
                 expiryDateEditText.visibility = View.GONE
-                cvcNumberEditText.visibility = View.GONE
+                cvcNumberEditText.visibility = View.INVISIBLE
                 setCardNumber(cardNumberEditText.originalStr,hasFocus)
             }else if (hasFocus || !cardNumberEditText.isCardNumberValid) {
                     cardInputListener?.onFocusChange(FOCUS_CARD)
                     scrollStart()
                     cardNumberEditText.showFields = false
                     expiryDateEditText.visibility = View.GONE
-                    cvcNumberEditText.visibility = View.GONE
+                    cvcNumberEditText.visibility = View.INVISIBLE
                 cardNumberEditText.text?.clear() //Added to stop write null in text
                 cardBrandView.showBrandIcon(brand, true)
                 } else {

@@ -19,13 +19,15 @@
 
         <company.tap.tapuilibrary.uikit.atoms.TapImageView
             android:id="@+id/backView"
-            android:layout_width="30dp"
-            android:layout_height="22dp"
-            android:visibility="gone"
-            android:layout_marginLeft="10dp"
+            android:layout_width="10dp"
+            android:layout_height="14dp"
+            android:visibility="visible"
+            android:layout_marginStart="16dp"
+
             android:src="@drawable/back_arrow_light"
             android:layout_gravity="center"
             android:layoutDirection="locale"
+
 
 
 
@@ -34,8 +36,8 @@
             android:id="@+id/card_brand_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="13dp"
-            android:layout_marginRight="@dimen/margin_basic_13dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
             android:layout_marginTop="1dp"
             android:visibility="visible"
             android:layout_gravity="center"

@@ -1,27 +1,24 @@
 package company.tap.InlineCardInput
 
-import android.content.Intent
-import android.graphics.Color
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
+import android.view.MotionEvent
 import android.view.View
-import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.cardview.widget.CardView
-import androidx.core.view.marginTop
 import company.tap.cardinputwidget.Card
 import company.tap.cardinputwidget.CardBrand
 import company.tap.cardinputwidget.CardBrandSingle
 import company.tap.cardinputwidget.CardInputUIStatus
 import company.tap.cardinputwidget.views.CardBrandView
-import company.tap.cardinputwidget.widget.inline.CardInlineForm
 import company.tap.cardinputwidget.widget.inline.InlineCardInput
 import company.tap.cardinputwidget.widget.inline.InlineCardInput2
 import company.tap.tapcardvalidator_android.CardValidator
@@ -31,11 +28,7 @@ import company.tap.tapuilibrary.uikit.atoms.TapImageView
 import company.tap.tapuilibrary.uikit.atoms.TapSeparatorView
 import company.tap.tapuilibrary.uikit.atoms.TapSwitch
 import company.tap.tapuilibrary.uikit.views.TapAlertView
-import company.tap.tapuilibrary.uikit.views.TapCardSwitch
-import company.tap.tapuilibrary.uikit.datasource.TapSwitchDataSource
-import company.tap.tapuilibrary.uikit.ktx.setBorderedView
 import company.tap.tapuilibrary.uikit.views.TapInlineCardSwitch
-
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -51,7 +44,7 @@ class MainActivity : AppCompatActivity() {
     private var cardScannerBtn: ImageView? = null
     private lateinit var tabLayout: company.tap.tapuilibrary.uikit.views.TapSelectionTabLayout
     var tapAlertView: TapAlertView? = null
-    var backArrow: TapImageView? = null
+    var backArrow: ImageView? = null
     var backArrowAr: TapImageView? = null
     var switchLL: TapInlineCardSwitch? = null
     var switchSaveCard: TapSwitch? = null
@@ -60,6 +53,7 @@ class MainActivity : AppCompatActivity() {
     var cardNumber:String?=null
     var cardInputChipView:CardView ?=null
     var watcherRemoved:Boolean ?=false
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -88,7 +82,7 @@ class MainActivity : AppCompatActivity() {
         tapAlertView = findViewById(R.id.alertView)
         clearView = cardInlineForm2.findViewById(R.id.clear_text)
         backArrow = cardInlineForm2.findViewById(R.id.backView)
-        backArrowAr = cardInlineForm2.findViewById(R.id.backView_Ar)
+       // backArrowAr = cardInlineForm2.findViewById(R.id.backView_Ar)
         tabLayout = findViewById(R.id.sections_tablayout)
         cardScannerBtn = cardInlineForm.findViewById(R.id.card_scanner_button)
         nfcButton = cardInlineForm.findViewById(R.id.nfc_button)
@@ -102,20 +96,29 @@ class MainActivity : AppCompatActivity() {
       // paymentInputContainer.addView(cardInlineForm)
         paymentInputContainer.addView(cardInlineForm2)
 
-        backArrow?.setOnClickListener {
+      backArrow?.setOnClickListener {
             println("called")
             tabLayout.resetBehaviour()
             cardInlineForm2.clear()
             clearView?.visibility = View.GONE
             controlScannerOptions()
         }
-        backArrowAr?.setOnClickListener {
+      /*  backArrowAr?.setOnTouchListener(object : View.OnTouchListener {
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean { tabLayout.resetBehaviour()
+                cardInlineForm2.clear()
+                clearView?.visibility = View.GONE
+                controlScannerOptions()
+
+                return false
+            }
+        })*/
+        /*backArrowAr?.setOnClickListener {
             println("called22")
             tabLayout.resetBehaviour()
             cardInlineForm2.clear()
             clearView?.visibility = View.GONE
             controlScannerOptions()
-        }
+        }*/
 
 
 
@@ -285,12 +288,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun initLangugae() {
         LocalizationManager.loadTapLocale(this.resources, R.raw.lang)
-        LocalizationManager.setLocale(this, Locale("ar"))
+        LocalizationManager.setLocale(this, Locale("en"))
         if (LocalizationManager.getLocale(this).toString().contains("ar"))
             LocalizationManager.setLocale(this, Locale("ar"))
         else if (LocalizationManager.getLocale(this).toString().contains("en"))
             LocalizationManager.setLocale(this, Locale("en"))
-        else LocalizationManager.setLocale(this, Locale("ar"))
+        else LocalizationManager.setLocale(this, Locale("en"))
 
 
 

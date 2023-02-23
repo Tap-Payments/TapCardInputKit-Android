@@ -24,6 +24,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.*
 import androidx.annotation.*
 import androidx.annotation.IntRange
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.AccessibilityDelegateCompat
 import androidx.core.view.ViewCompat
@@ -80,6 +81,8 @@ class InlineCardInput2 @JvmOverloads constructor(
 
     @JvmSynthetic
     internal val holderNameEditText = viewBinding.holderNameEditText
+
+ //  val mainLL = viewBinding.mainLL
 
     private var cardInputListener: CardInputListener? = null
     private var cardValidCallback: CardValidCallback? = null
@@ -355,21 +358,25 @@ class InlineCardInput2 @JvmOverloads constructor(
         nfcButton =findViewById(R.id.nfc_button)
         scannerButton =findViewById(R.id.card_scanner_button)
         backArrow =findViewById(R.id.backView)
-        backViewAr =findViewById(R.id.backView_Ar)
+        //backViewAr =findViewById(R.id.backView_Ar)
         closeButton =findViewById(R.id.clear_text)
         //separatorcard2 =findViewById(R.id.separatorcard2)
         cardBrandView.iconView.setImageResource(cardBrandView.iconViewRes)
         closeButton.setImageResource(closeIcon)
         cvvIcon.setImageResource(cvvIconDrawable)
         if (LocalizationManager.getLocale(context).language == "ar") {
-           // backArrow.scaleX=-1.0f
+          //  backArrow.scaleX=-1.0f
             cvcNumberEditText.textAlignment =View.TEXT_ALIGNMENT_CENTER
            // backArrow.isClickable = true
+          //  backArrow.isEnabled = true
+          //  backArrow.isFocusable = true
+
+          containerLayout.bringToFront()
+            containerLayout.requestLayout()
         }
 
         backArrow.setImageResource(backIcon)
-        backViewAr.setImageResource(backIconAr)
-
+        //backViewAr.setImageResource(backIconAr)
 
         scannerButton.setImageResource(scannerIcon)
         nfcButton.setImageResource(nfcIcon)
@@ -516,18 +523,38 @@ class InlineCardInput2 @JvmOverloads constructor(
 
         expiryDateEditText.shouldShowError = false
         expiryDateEditText.isEnabled = false
-        if (LocalizationManager.getLocale(context).language == "ar") {
+      /*  if (LocalizationManager.getLocale(context).language == "ar") {
             // backArrow.scaleX=-1.0f
             // backArrow.isClickable = true
             backViewAr.visibility = View.VISIBLE
             backArrow.visibility = View.GONE
-        }
+            backViewAr.isClickable = true
+            backViewAr.isEnabled = true
+        }else{
+            backViewAr.visibility = View.GONE
+            backArrow.visibility = View.VISIBLE
+            backArrow.isClickable = true
+            backArrow.isEnabled = true
+        }*/
         cvvIcon.visibility= View.VISIBLE
+        if (LocalizationManager.getLocale(context).language == "ar") {
+           // backArrow.scaleX=-0.9f
+
+            backArrow.isClickable = true
+            backArrow.isEnabled = true
+            backArrow.isFocusable = true
+
+        }
+        backArrow.visibility = View.VISIBLE
+       // frameLayout.visibility = View.VISIBLE
+
+       // frameLayout.isEnabled = true
         setVisibilityOfHolderField(false)
         nfcButton.visibility= View.GONE
         scannerButton.visibility= View.GONE
         closeButton.visibility= View.GONE
     }
+
 
     fun setOnclickLister(imageView: ImageView){
         imageView.setOnClickListener {
@@ -884,6 +911,7 @@ class InlineCardInput2 @JvmOverloads constructor(
         //   currentFields.forEach { it.setErrorColor(errorColorInt) }
 
         cardNumberEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
+            println("hasffc"+hasFocus)
             if (hasFocus && cardNumberEditText.originalStr!=null) {
                 cardInputListener?.onFocusChange(FOCUS_CARD)
                 scrollStart()
@@ -891,6 +919,9 @@ class InlineCardInput2 @JvmOverloads constructor(
                 expiryDateEditText.visibility = View.GONE
                 cvcNumberEditText.visibility = View.INVISIBLE
                 setCardNumber(cardNumberEditText.originalStr,hasFocus)
+                holderNameTextInputLayout.visibility = View.GONE
+                holderNameEditText.visibility = View.GONE
+                separator_1.visibility = View.GONE
             }else if (hasFocus || !cardNumberEditText.isCardNumberValid) {
                     cardInputListener?.onFocusChange(FOCUS_CARD)
                     scrollStart()
@@ -899,17 +930,27 @@ class InlineCardInput2 @JvmOverloads constructor(
                     cvcNumberEditText.visibility = View.INVISIBLE
                 cardNumberEditText.text?.clear() //Added to stop write null in text
                 cardBrandView.showBrandIcon(brand, true)
-                } else {
+                holderNameTextInputLayout.visibility = View.GONE
+                holderNameEditText.visibility = View.GONE
+                separator_1.visibility = View.GONE
+                }
+            else {
                 cardNumberEditText.showFields = true
                 expiryDateEditText.visibility = View.VISIBLE
                 cvcNumberEditText.visibility = View.VISIBLE
                 scrollEnd()
                setCardNumber(cardNumberEditText.maskCardNumber(cardNumberEditText.textcard.toString()),hasFocus)
+
+                if(holderNameEnabled && expiryDateEditText.isDateValid && !cvcNumberEditText.shouldShowError){
+                    holderNameTextInputLayout.visibility = View.VISIBLE
+                    holderNameEditText.visibility = View.VISIBLE
+                    separator_1.visibility = View.VISIBLE
+                }
+                }
+
             }
-            holderNameTextInputLayout.visibility = View.GONE
-            holderNameEditText.visibility = View.GONE
-            separator_1.visibility = View.GONE
-        }
+
+
 
         expiryDateEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
@@ -1104,7 +1145,6 @@ class InlineCardInput2 @JvmOverloads constructor(
 
         //Added close icon for holdername
         setDrawableForHolderName()
-
 
         setThemeForHints()
 
@@ -1906,6 +1946,12 @@ class InlineCardInput2 @JvmOverloads constructor(
                 TapFont.RobotoLight
             )
         )
+    }
+
+    fun setclick(){
+        backArrow.setOnClickListener {
+            Toast.makeText(context, "baccll", Toast.LENGTH_SHORT).show()
+        }
     }
 
 }

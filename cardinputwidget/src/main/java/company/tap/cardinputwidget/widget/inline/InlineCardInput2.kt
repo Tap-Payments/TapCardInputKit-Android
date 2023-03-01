@@ -538,7 +538,7 @@ class InlineCardInput2 @JvmOverloads constructor(
         }*/
         cvvIcon.visibility= View.VISIBLE
         if (LocalizationManager.getLocale(context).language == "ar") {
-           // backArrow.scaleX=-0.9f
+            backArrow.scaleX=-0.9f
 
             backArrow.isClickable = true
             backArrow.isEnabled = true

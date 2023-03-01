@@ -288,12 +288,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun initLangugae() {
         LocalizationManager.loadTapLocale(this.resources, R.raw.lang)
-        LocalizationManager.setLocale(this, Locale("ar"))
+        LocalizationManager.setLocale(this, Locale("en"))
         if (LocalizationManager.getLocale(this).toString().contains("ar"))
             LocalizationManager.setLocale(this, Locale("ar"))
         else if (LocalizationManager.getLocale(this).toString().contains("en"))
             LocalizationManager.setLocale(this, Locale("en"))
-        else LocalizationManager.setLocale(this, Locale("ar"))
+        else LocalizationManager.setLocale(this, Locale("en"))
 
 
 

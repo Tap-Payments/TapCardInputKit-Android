@@ -1066,10 +1066,14 @@ class InlineCardInput2 @JvmOverloads constructor(
             object : TapTextInput.AfterTextChangedListener {
                 override fun onTextChanged(text: String) {
                     setDrawableForHolderName()
+                    holderNameEditText.isEnabled = true
+                    holderNameEditText.isActivated = true
 
                 }
             }
         )
+
+
         var holderNameEditable: Boolean by Delegates.observable(
             BaseCardInput.DEFAULT_HOLDER_NAME_ENABLED
         ) { _, _, isEnabled ->
@@ -1864,7 +1868,8 @@ class InlineCardInput2 @JvmOverloads constructor(
             val DRAWABLE_TOP = 1
             val DRAWABLE_RIGHT = 2
             val DRAWABLE_BOTTOM = 3
-            if (event.action === MotionEvent.ACTION_UP) {
+            println("event>>>"+event.action)
+            if (event.action == MotionEvent.ACTION_DOWN) {
                 if (context?.let { LocalizationManager.getLocale(it).language } == "en") {
                     if( holderNameEditText.compoundDrawables[DRAWABLE_RIGHT]!=null )
                         if (event.rawX >= holderNameEditText.right - holderNameEditText.compoundDrawables[DRAWABLE_RIGHT].bounds.width()

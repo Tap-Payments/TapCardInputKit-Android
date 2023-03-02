@@ -39,6 +39,7 @@ import company.tap.cardinputwidget.widget.CardInputListener
 import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_CARD
 import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_CVC
 import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_EXPIRY
+import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_HOLDERNAME
 import company.tap.cardinputwidget.widget.CardValidCallback
 import company.tap.taplocalizationkit.LocalizationManager
 import company.tap.tapuilibrary.fontskit.enums.TapFont
@@ -779,8 +780,8 @@ class InlineCardInput2 @JvmOverloads constructor(
                         null
                     touchX < placementParameters.cvcEndTouchBufferLimit -> // We need to act like this was a touch on the cvc editor.
                         cvcNumberEditText
-                    touchX < placementParameters.holderNameStartPosition -> // We need to act like this was a touch on the postal code editor.
-                        holderNameEditText
+                   // touchX < placementParameters.holderNameStartPosition -> // We need to act like this was a touch on the postal code editor.
+                   //     holderNameEditText
                     else -> null
                 }
             }
@@ -911,17 +912,18 @@ class InlineCardInput2 @JvmOverloads constructor(
         //   currentFields.forEach { it.setErrorColor(errorColorInt) }
 
         cardNumberEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
-            println("hasffc"+hasFocus)
-            if (hasFocus && cardNumberEditText.originalStr!=null) {
+            println("hasffc"+holderNameEditText.hasFocus())
+        if (hasFocus && cardNumberEditText.originalStr!=null) {
                 cardInputListener?.onFocusChange(FOCUS_CARD)
                 scrollStart()
                 cardNumberEditText.showFields = false
                 expiryDateEditText.visibility = View.GONE
                 cvcNumberEditText.visibility = View.INVISIBLE
                 setCardNumber(cardNumberEditText.originalStr,hasFocus)
-                holderNameTextInputLayout.visibility = View.GONE
-                holderNameEditText.visibility = View.GONE
-                separator_1.visibility = View.GONE
+            //removed thos confition lets check
+               // holderNameTextInputLayout.visibility = View.GONE
+               // holderNameEditText.visibility = View.GONE
+                //separator_1.visibility = View.GONE
             }else if (hasFocus || !cardNumberEditText.isCardNumberValid) {
                     cardInputListener?.onFocusChange(FOCUS_CARD)
                     scrollStart()
@@ -1027,7 +1029,7 @@ class InlineCardInput2 @JvmOverloads constructor(
                     cvcNumberEditText.imeOptions = EditorInfo.IME_ACTION_NEXT
                     //holderNameEnabled = true
                 } else {
-                    holderNameEditText.isEnabled = false
+                    holderNameEditText.isEnabled = true
                     holderNameTextInputLayout.visibility = View.GONE
                     holderNameEditText.visibility = View.GONE
                     separator_1.visibility = View.GONE
@@ -1042,11 +1044,13 @@ class InlineCardInput2 @JvmOverloads constructor(
         }
 
         holderNameEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
+            println("holderNameEditText must call"+holderNameEditText.hasFocus())
             if (hasFocus) {
 
-                cardInputListener?.onFocusChange(CardInputListener.FocusField.FOCUS_HOLDERNAME)
-
+               holderNameEditText.requestFocus()
+                cardInputListener?.onFocusChange(FOCUS_HOLDERNAME)
             }
+
         }
         cvcNumberEditText.setAfterTextChangedListener(
             object : TapTextInput.AfterTextChangedListener {
@@ -1243,7 +1247,7 @@ class InlineCardInput2 @JvmOverloads constructor(
             )
 
         val holderNameDestination = holderNameStartPosition + (cvcDestination - cvcStartPosition)
-        /* val slideHolderNameStartAnimation = if (holderNameEnabled) {
+         val slideHolderNameStartAnimation = if (holderNameEnabled) {
              HolderNameSlideStartAnimation(
                  view = holderNameTextInputLayout,
                  startPosition = holderNameStartPosition,
@@ -1253,12 +1257,12 @@ class InlineCardInput2 @JvmOverloads constructor(
          } else {
              null
          }
- */
+
         startSlideAnimation(listOfNotNull(
             slideCardStartAnimation,
             slideDateStartAnimation,
-            slideCvcStartAnimation
-            //  slideHolderNameStartAnimation
+            slideCvcStartAnimation,
+             // slideHolderNameStartAnimation
         ))
 
         cardNumberIsViewed = true
@@ -1304,7 +1308,7 @@ class InlineCardInput2 @JvmOverloads constructor(
                 placementParameters.getHolderNameStartMargin(isFullCard = false)
             val holderNameStartMargin = holderNameDestination
 
-            /*  val slideHolderNameEndAnimation = if (holderNameEnabled) {
+            val slideHolderNameEndAnimation = if (holderNameEnabled) {
               HolderNameSlideEndAnimation(
                   view = holderNameTextInputLayout,
                   startMargin = holderNameStartMargin,
@@ -1314,14 +1318,14 @@ class InlineCardInput2 @JvmOverloads constructor(
           } else {
               null
           }
-  */
+
 
             startSlideAnimation(
                 listOfNotNull(
                     slideCardEndAnimation,
                     slideDateEndAnimation,
-                    slideCvcEndAnimation
-                    // slideHolderNameEndAnimation
+                    slideCvcEndAnimation,
+                   //  slideHolderNameEndAnimation
                 )
             )
 
@@ -1651,9 +1655,8 @@ class InlineCardInput2 @JvmOverloads constructor(
     ) : CardFieldAnimation() {
         override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
             super.applyTransformation(interpolatedTime, t)
-            view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams).apply {
-                this.marginStart =
-                    (interpolatedTime * destination + (1 - interpolatedTime) * startPosition).toInt()
+            view.layoutParams = (view.layoutParams as LinearLayout.LayoutParams).apply {
+                this.marginStart = (interpolatedTime * destination + (1 - interpolatedTime) * startPosition).toInt()
                 this.marginEnd = 0
                 this.width = newWidth
             }
@@ -1833,7 +1836,7 @@ class InlineCardInput2 @JvmOverloads constructor(
             holderNameEditText.visibility = View.VISIBLE
             cvcNumberEditText.imeOptions = EditorInfo.IME_ACTION_NEXT
         }else {
-            holderNameEditText.isEnabled = false
+            holderNameEditText.isEnabled = true
             holderNameTextInputLayout.visibility = View.GONE
             holderNameEditText.visibility = View.GONE
             cvcNumberEditText.imeOptions = EditorInfo.IME_ACTION_DONE
@@ -1863,12 +1866,15 @@ class InlineCardInput2 @JvmOverloads constructor(
 
         }
 
-        holderNameEditText.setOnTouchListener(OnTouchListener { v, event ->
+
+
+        holderNameTextInputLayout.setOnTouchListener(OnTouchListener { v, event ->
             val DRAWABLE_LEFT = 0
             val DRAWABLE_TOP = 1
             val DRAWABLE_RIGHT = 2
             val DRAWABLE_BOTTOM = 3
             println("event>>>"+event.action)
+            holderNameEditText.requestFocus()
             if (event.action == MotionEvent.ACTION_DOWN) {
                 if (context?.let { LocalizationManager.getLocale(it).language } == "en") {
                     if( holderNameEditText.compoundDrawables[DRAWABLE_RIGHT]!=null )

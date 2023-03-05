@@ -1868,7 +1868,7 @@ class InlineCardInput2 @JvmOverloads constructor(
 
 
 
-        holderNameTextInputLayout.setOnTouchListener(OnTouchListener { v, event ->
+        holderNameEditText.setOnTouchListener(OnTouchListener { v, event ->
             val DRAWABLE_LEFT = 0
             val DRAWABLE_TOP = 1
             val DRAWABLE_RIGHT = 2

@@ -264,7 +264,7 @@ class MainActivity : AppCompatActivity() {
 
                 cardInlineForm2.setVisibilityOfHolderField(true)
                 separator1?.visibility =View.VISIBLE
-                cardInlineForm2.setCardHolderName("TAPP")
+              //  cardInlineForm2.setCardHolderName("TAPP")
                 switchLL?.switchSaveCard?.visibility =View.VISIBLE
                 switchLL?.saveForOtherCheckBox?.visibility =View.VISIBLE
                 switchLL?.toolsTipImageView?.visibility =View.VISIBLE

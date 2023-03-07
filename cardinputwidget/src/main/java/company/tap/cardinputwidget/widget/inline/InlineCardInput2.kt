@@ -1020,7 +1020,8 @@ class InlineCardInput2 @JvmOverloads constructor(
                 scrollEnd()
                 cardInputListener?.onFocusChange(FOCUS_CVC)
                 //holderNameEditText.requestFocus()
-                if (holderNameEnabled) {
+                //Temp coment
+               /* if (holderNameEnabled) {
                    // holderNameEditText.isEnabled = holderNameEditable
 
                     holderNameTextInputLayout.visibility = View.VISIBLE
@@ -1034,7 +1035,7 @@ class InlineCardInput2 @JvmOverloads constructor(
                     holderNameEditText.visibility = View.GONE
                     separator_1.visibility = View.GONE
                     cvcNumberEditText.imeOptions = EditorInfo.IME_ACTION_DONE
-                }
+                }*/
 
 
              //   cardBrandView.showBrandIcon(brand,true,null)

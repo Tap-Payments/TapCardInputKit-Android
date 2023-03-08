@@ -17,7 +17,7 @@
 
         >
 
-        <company.tap.tapuilibrary.uikit.atoms.TapImageView
+        <ImageView
             android:id="@+id/backView"
             android:layout_width="10dp"
             android:layout_height="14dp"
@@ -26,21 +26,9 @@
             android:src="@drawable/back_arrow_light"
             android:layout_gravity="center"
             android:clickable="true"
-            android:focusable="true"
             android:layoutDirection="locale"
-            />
-        <company.tap.tapuilibrary.uikit.atoms.TapImageView
-            android:id="@+id/backView_Ar"
-            android:layout_width="10dp"
-            android:layout_height="14dp"
-            android:visibility="gone"
-            android:layout_marginStart="16dp"
-            android:src="@drawable/back_arrow_light_ar"
-            android:layout_gravity="center"
-            android:clickable="true"
-            android:focusable="true"
-            android:layoutDirection="locale"
-            />
+            android:focusable="true" />
+
         <company.tap.cardinputwidget.views.CardBrandView
             android:id="@+id/card_brand_view"
             android:layout_width="wrap_content"
@@ -194,6 +182,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="start|end"
                 android:layout_marginStart="8dp"
+                android:layout_marginEnd="@dimen/margin_basic_8dp"
                 android:background="@android:color/transparent"
 
                 android:contentDescription="@string/acc_label_cvc_node"
@@ -207,7 +196,6 @@
                 android:textSize="@dimen/font_size_14sp"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
-                app:endIconDrawable="@drawable/cvv_icon"
                 app:layout_constraintEnd_toStartOf="@+id/linear_paylayout"
                 app:layout_constraintStart_toEndOf="@+id/expiry_date_text_input_layout"
                 tools:layout_editor_absoluteY="0dp" />

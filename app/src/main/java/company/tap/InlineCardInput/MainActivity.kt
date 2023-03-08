@@ -6,7 +6,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
-import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -96,13 +95,13 @@ class MainActivity : AppCompatActivity() {
       // paymentInputContainer.addView(cardInlineForm)
         paymentInputContainer.addView(cardInlineForm2)
 
-      backArrow?.setOnClickListener {
+     /* backArrow?.setOnClickListener {
             println("called")
             tabLayout.resetBehaviour()
             cardInlineForm2.clear()
             clearView?.visibility = View.GONE
             controlScannerOptions()
-        }
+        }*/
       /*  backArrowAr?.setOnTouchListener(object : View.OnTouchListener {
             override fun onTouch(v: View?, event: MotionEvent?): Boolean { tabLayout.resetBehaviour()
                 cardInlineForm2.clear()
@@ -284,6 +283,8 @@ class MainActivity : AppCompatActivity() {
 
             }
         })
+
+        cardInlineForm2.addListenerToBackArrow()
     }
 
     private fun initLangugae() {

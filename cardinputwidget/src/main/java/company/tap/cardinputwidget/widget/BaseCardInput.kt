@@ -1,6 +1,7 @@
 package company.tap.cardinputwidget.widget
 
 import android.text.TextWatcher
+import android.view.View
 import android.widget.CompoundButton
 import android.widget.RadioGroup
 import androidx.annotation.IntRange
@@ -77,6 +78,8 @@ internal interface BaseCardInput {
      * Interface method to collect data from parent to show pre-filled UI
      */
     fun setSavedCardDetails(cardDetails:Any?,cardInputUIStatus: CardInputUIStatus)
+
+    fun addListenerToBackArrow()
 
     companion object {
         internal const val DEFAULT_HOLDER_NAME_ENABLED = false

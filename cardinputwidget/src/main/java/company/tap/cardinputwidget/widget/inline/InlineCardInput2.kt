@@ -1,6 +1,5 @@
 package company.tap.cardinputwidget.widget.inline
 
-import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
@@ -24,7 +23,6 @@ import android.view.inputmethod.EditorInfo
 import android.widget.*
 import androidx.annotation.*
 import androidx.annotation.IntRange
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.AccessibilityDelegateCompat
 import androidx.core.view.ViewCompat
@@ -53,7 +51,7 @@ class InlineCardInput2 @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr), BaseCardInput {
+) : LinearLayout(context, attrs, defStyleAttr), BaseCardInput, OnClickListener {
     private val viewBinding = CardInputWidget2Binding.inflate(
         LayoutInflater.from(context),
         this
@@ -241,10 +239,12 @@ class InlineCardInput2 @JvmOverloads constructor(
             val cardNumber = cardNumberEditText.cardNumber
             val cardDate = expiryDateEditText.validDateFields
             val cvcValue = this.cvcValue
+            val holdernameval = holderNameEditText.text
 
             cardNumberEditText.shouldShowError = cardNumber == null
             expiryDateEditText.shouldShowError = cardDate == null
             cvcNumberEditText.shouldShowError = cvcValue == null
+            holderNameEditText.shouldShowError = holdernameval == null
             //  cvcNumberEditText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
             holderNameEditText.shouldShowError =
                     // holderNameRequired &&
@@ -270,6 +270,10 @@ class InlineCardInput2 @JvmOverloads constructor(
                 cvcValue == null -> {
                     cvcNumberEditText.requestFocus()
                     //  cvcNumberEditText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+
+                }
+                holdernameval==null-> {
+                    holderNameEditText.requestFocus()
 
                 }
                 holderNameEditText.shouldShowError -> {
@@ -372,8 +376,8 @@ class InlineCardInput2 @JvmOverloads constructor(
           //  backArrow.isEnabled = true
           //  backArrow.isFocusable = true
 
-          containerLayout.bringToFront()
-            containerLayout.requestLayout()
+         // containerLayout.bringToFront()
+         //   containerLayout.requestLayout()
         }
 
         backArrow.setImageResource(backIcon)
@@ -381,6 +385,7 @@ class InlineCardInput2 @JvmOverloads constructor(
 
         scannerButton.setImageResource(scannerIcon)
         nfcButton.setImageResource(nfcIcon)
+        backArrow.setOnClickListener(this)
     }
 
     override fun onFinishInflate() {
@@ -539,7 +544,7 @@ class InlineCardInput2 @JvmOverloads constructor(
         }*/
         cvvIcon.visibility= View.VISIBLE
         if (LocalizationManager.getLocale(context).language == "ar") {
-            backArrow.scaleX=-0.9f
+          //  backArrow.scaleX=-0.7f
 
             backArrow.isClickable = true
             backArrow.isEnabled = true
@@ -554,6 +559,12 @@ class InlineCardInput2 @JvmOverloads constructor(
         nfcButton.visibility= View.GONE
         scannerButton.visibility= View.GONE
         closeButton.visibility= View.GONE
+    }
+
+    override fun addListenerToBackArrow() {
+        println("addListenerToBackArrow")
+        clear()
+
     }
 
 
@@ -668,13 +679,13 @@ class InlineCardInput2 @JvmOverloads constructor(
         return Bundle().apply {
             putParcelable(STATE_SUPER_STATE, super.onSaveInstanceState())
             putBoolean(STATE_CARD_VIEWED, cardNumberIsViewed)
-            putBoolean(STATE_POSTAL_CODE_ENABLED, holderNameEnabled)
+           // putBoolean(STATE_POSTAL_CODE_ENABLED, holderNameEnabled)
         }
     }
 
     override fun onRestoreInstanceState(state: Parcelable) {
         if (state is Bundle) {
-            holderNameEnabled = state.getBoolean(STATE_POSTAL_CODE_ENABLED, true)
+         //   holderNameEnabled = state.getBoolean(STATE_POSTAL_CODE_ENABLED, true)
             cardNumberIsViewed = state.getBoolean(STATE_CARD_VIEWED, true)
             updateSpaceSizes(cardNumberIsViewed)
             placementParameters.totalLengthInPixels = frameWidth
@@ -760,7 +771,7 @@ class InlineCardInput2 @JvmOverloads constructor(
                         null
                 }
             }
-            holderNameEnabled -> {
+     /*       holderNameEnabled -> {
                 // Our view is
                 // |PEEK||space||DATE||space||CVC||space||POSTAL|
                 when {
@@ -782,9 +793,10 @@ class InlineCardInput2 @JvmOverloads constructor(
                         cvcNumberEditText
                    // touchX < placementParameters.holderNameStartPosition -> // We need to act like this was a touch on the postal code editor.
                    //     holderNameEditText
+
                     else -> null
                 }
-            }
+            }*/
             else -> {
                 // Our view is
                 // |PEEK||space||DATE||space||CVC|
@@ -913,6 +925,8 @@ class InlineCardInput2 @JvmOverloads constructor(
 
         cardNumberEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
             println("hasffc"+holderNameEditText.hasFocus())
+            println("hasFocus"+hasFocus)
+            println("cardNumberEditText.isCardNumberValid"+cardNumberEditText.isCardNumberValid)
         if (hasFocus && cardNumberEditText.originalStr!=null) {
                 cardInputListener?.onFocusChange(FOCUS_CARD)
                 scrollStart()
@@ -921,9 +935,9 @@ class InlineCardInput2 @JvmOverloads constructor(
                 cvcNumberEditText.visibility = View.INVISIBLE
                 setCardNumber(cardNumberEditText.originalStr,hasFocus)
             //removed thos confition lets check
-               // holderNameTextInputLayout.visibility = View.GONE
-               // holderNameEditText.visibility = View.GONE
-                //separator_1.visibility = View.GONE
+                holderNameTextInputLayout.visibility = View.GONE
+                holderNameEditText.visibility = View.GONE
+                separator_1.visibility = View.GONE
             }else if (hasFocus || !cardNumberEditText.isCardNumberValid) {
                     cardInputListener?.onFocusChange(FOCUS_CARD)
                     scrollStart()
@@ -964,7 +978,13 @@ class InlineCardInput2 @JvmOverloads constructor(
                     updateIconCvc(false,"")
                 }else
                 scrollEnd()
-                 cardInputListener?.onFocusChange(FOCUS_EXPIRY)
+
+                if(holderNameEnabled && expiryDateEditText.isDateValid && !cvcNumberEditText.shouldShowError){
+                    holderNameTextInputLayout.visibility = View.VISIBLE
+                    holderNameEditText.visibility = View.VISIBLE
+                    separator_1.visibility = View.VISIBLE
+
+                }else cardInputListener?.onFocusChange(FOCUS_EXPIRY)
             }
 
         }
@@ -1052,6 +1072,7 @@ class InlineCardInput2 @JvmOverloads constructor(
                 cardInputListener?.onFocusChange(FOCUS_HOLDERNAME)
             }
 
+
         }
         cvcNumberEditText.setAfterTextChangedListener(
             object : TapTextInput.AfterTextChangedListener {
@@ -1077,6 +1098,7 @@ class InlineCardInput2 @JvmOverloads constructor(
                 }
             }
         )
+
 
 
         var holderNameEditable: Boolean by Delegates.observable(
@@ -1246,12 +1268,11 @@ class InlineCardInput2 @JvmOverloads constructor(
                 destination = cvcDestination,
                 newWidth = placementParameters.cvcWidth
             )
-
         val holderNameDestination = holderNameStartPosition + (cvcDestination - cvcStartPosition)
          val slideHolderNameStartAnimation = if (holderNameEnabled) {
              HolderNameSlideStartAnimation(
                  view = holderNameTextInputLayout,
-                 startPosition = holderNameStartPosition,
+                 startPosition = frameStart,
                  destination = holderNameDestination,
                  newWidth = placementParameters.holderNameWidth
              )
@@ -1263,7 +1284,7 @@ class InlineCardInput2 @JvmOverloads constructor(
             slideCardStartAnimation,
             slideDateStartAnimation,
             slideCvcStartAnimation,
-             // slideHolderNameStartAnimation
+             slideHolderNameStartAnimation
         ))
 
         cardNumberIsViewed = true
@@ -1326,7 +1347,7 @@ class InlineCardInput2 @JvmOverloads constructor(
                     slideCardEndAnimation,
                     slideDateEndAnimation,
                     slideCvcEndAnimation,
-                   //  slideHolderNameEndAnimation
+                     slideHolderNameEndAnimation
                 )
             )
 
@@ -1654,12 +1675,23 @@ class InlineCardInput2 @JvmOverloads constructor(
         private val destination: Int,
         private val newWidth: Int
     ) : CardFieldAnimation() {
+        init {
+            setAnimationListener(object : AnimationEndListener() {
+                override fun onAnimationEnd(animation: Animation) {
+                    view.requestFocus()
+                }
+            })
+        }
         override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
             super.applyTransformation(interpolatedTime, t)
-            view.layoutParams = (view.layoutParams as LinearLayout.LayoutParams).apply {
+           /* view.layoutParams = (view.layoutParams as LinearLayout.LayoutParams).apply {
                 this.marginStart = (interpolatedTime * destination + (1 - interpolatedTime) * startPosition).toInt()
                 this.marginEnd = 0
                 this.width = newWidth
+            }*/
+
+            view.layoutParams = (view.layoutParams as LinearLayout.LayoutParams).apply {
+                marginStart = (marginStart * (1 - interpolatedTime)).toInt()
             }
         }
     }
@@ -1723,14 +1755,25 @@ class InlineCardInput2 @JvmOverloads constructor(
         private val destination: Int,
         private val newWidth: Int
     ) : CardFieldAnimation() {
+        init {
+            setAnimationListener(object : AnimationEndListener() {
+                override fun onAnimationEnd(animation: Animation) {
+                    view.requestFocus()
+                }
+            })
+        }
 
         override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
             super.applyTransformation(interpolatedTime, t)
-            view.layoutParams = (view.layoutParams as LinearLayout.LayoutParams).apply {
+           /* view.layoutParams = (view.layoutParams as LinearLayout.LayoutParams).apply {
                 this.marginStart =
                     (interpolatedTime * destination + (1 - interpolatedTime) * startMargin).toInt()
                 this.marginEnd = 0
                 this.width = newWidth
+            }*/
+            view.layoutParams = (view.layoutParams as LinearLayout.LayoutParams).apply {
+                //  marginStart = (-1f * hiddenCardWidth.toFloat() * interpolatedTime).toInt()
+                marginStart = (0f * destination.toFloat() * interpolatedTime).toInt() //Added as masked value was not showing
             }
         }
     }
@@ -1875,6 +1918,7 @@ class InlineCardInput2 @JvmOverloads constructor(
             val DRAWABLE_RIGHT = 2
             val DRAWABLE_BOTTOM = 3
             println("event>>>"+event.action)
+            println("v is>>>"+v)
             holderNameEditText.requestFocus()
             if (event.action == MotionEvent.ACTION_DOWN) {
                 if (context?.let { LocalizationManager.getLocale(it).language } == "en") {
@@ -1964,6 +2008,11 @@ class InlineCardInput2 @JvmOverloads constructor(
         backArrow.setOnClickListener {
             Toast.makeText(context, "baccll", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onClick(p0: View?) {
+        addListenerToBackArrow ()
+        Toast.makeText(context, "baccll", Toast.LENGTH_SHORT).show()
     }
 
 }

@@ -380,12 +380,17 @@ class InlineCardInput2 @JvmOverloads constructor(
          //   containerLayout.requestLayout()
         }
 
-        backArrow.setImageResource(backIcon)
+        if (LocalizationManager.getLocale(context).language == "ar") {
+            backArrow.setImageResource(backIconAr)
+        }else backArrow.setImageResource(backIcon)
+
         //backViewAr.setImageResource(backIconAr)
 
         scannerButton.setImageResource(scannerIcon)
         nfcButton.setImageResource(nfcIcon)
         backArrow.setOnClickListener(this)
+        backArrow.isFocusable= true
+        backArrow.isClickable = true
     }
 
     override fun onFinishInflate() {

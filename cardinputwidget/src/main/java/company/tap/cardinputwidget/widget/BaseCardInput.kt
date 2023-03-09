@@ -79,7 +79,7 @@ internal interface BaseCardInput {
      */
     fun setSavedCardDetails(cardDetails:Any?,cardInputUIStatus: CardInputUIStatus)
 
-    fun addListenerToBackArrow()
+
 
     companion object {
         internal const val DEFAULT_HOLDER_NAME_ENABLED = false

@@ -51,7 +51,7 @@ class InlineCardInput2 @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr), BaseCardInput, OnClickListener {
+) : LinearLayout(context, attrs, defStyleAttr), BaseCardInput {
     private val viewBinding = CardInputWidget2Binding.inflate(
         LayoutInflater.from(context),
         this
@@ -388,7 +388,7 @@ class InlineCardInput2 @JvmOverloads constructor(
 
         scannerButton.setImageResource(scannerIcon)
         nfcButton.setImageResource(nfcIcon)
-        backArrow.setOnClickListener(this)
+        
         backArrow.isFocusable= true
         backArrow.isClickable = true
     }
@@ -566,11 +566,7 @@ class InlineCardInput2 @JvmOverloads constructor(
         closeButton.visibility= View.GONE
     }
 
-    override fun addListenerToBackArrow() {
-        println("addListenerToBackArrow")
-        clear()
 
-    }
 
 
     fun setOnclickLister(imageView: ImageView){
@@ -2009,15 +2005,6 @@ class InlineCardInput2 @JvmOverloads constructor(
         )
     }
 
-    fun setclick(){
-        backArrow.setOnClickListener {
-            Toast.makeText(context, "baccll", Toast.LENGTH_SHORT).show()
-        }
-    }
 
-    override fun onClick(p0: View?) {
-        addListenerToBackArrow ()
-        Toast.makeText(context, "baccll", Toast.LENGTH_SHORT).show()
-    }
 
 }

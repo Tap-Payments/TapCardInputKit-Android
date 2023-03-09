@@ -680,9 +680,6 @@ class InlineCardInput @JvmOverloads constructor(
 
     }
 
-    override fun addListenerToBackArrow() {
-
-    }
 
     @JvmSynthetic
     internal fun setHolderName(holderName: String?) {

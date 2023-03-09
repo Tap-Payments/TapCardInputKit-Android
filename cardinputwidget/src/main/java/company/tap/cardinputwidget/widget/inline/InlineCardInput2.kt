@@ -388,7 +388,7 @@ class InlineCardInput2 @JvmOverloads constructor(
 
         scannerButton.setImageResource(scannerIcon)
         nfcButton.setImageResource(nfcIcon)
-        
+
         backArrow.isFocusable= true
         backArrow.isClickable = true
     }

@@ -284,7 +284,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        cardInlineForm2.addListenerToBackArrow()
+
     }
 
     private fun initLangugae() {

@@ -194,11 +194,11 @@
                 android:textAlignment="viewStart"
                 android:textDirection="locale"
                 android:textSize="@dimen/font_size_14sp"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
+
+
                 app:layout_constraintEnd_toStartOf="@+id/linear_paylayout"
                 app:layout_constraintStart_toEndOf="@+id/expiry_date_text_input_layout"
-                tools:layout_editor_absoluteY="0dp" />
+                 />
 
             <LinearLayout
                 android:id="@+id/linear_paylayout"
@@ -301,8 +301,6 @@
             android:visibility="gone"
             app:hintEnabled="false"
             tools:ignore="UnusedAttribute"
-            android:nextFocusLeft="@id/cvc_text_input_layout"
-            android:nextFocusUp="@id/cvc_text_input_layout"
             android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ "
             android:inputType="text"
             android:textSize="@dimen/font_size_14sp"

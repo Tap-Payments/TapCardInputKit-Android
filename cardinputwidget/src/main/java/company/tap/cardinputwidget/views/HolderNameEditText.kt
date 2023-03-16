@@ -73,7 +73,7 @@ class HolderNameEditText @JvmOverloads constructor(
        val filtersL = InputFilter.LengthFilter(MAX_LENGTH)
 
 
-        keyListener = TextKeyListener.getInstance()
+       // keyListener = TextKeyListener.getInstance()
         inputType = InputType.TYPE_CLASS_TEXT
        /* val letterFilter =
             InputFilter { source, start, end, dest, dstart, dend ->
@@ -87,7 +87,11 @@ class HolderNameEditText @JvmOverloads constructor(
                 filtered.toString().toUpperCase()
             }
         filters = arrayOf(letterFilter)*/
-       
+        addTextChangedListener(object : TapTextWatcher() {
+            override fun afterTextChanged(s: Editable?) {
+                shouldShowError = false
+            }
+        })
         val letterFilter =
             InputFilter { source, start, end, dest, dstart, dend ->
                 var filtered: String? = ""

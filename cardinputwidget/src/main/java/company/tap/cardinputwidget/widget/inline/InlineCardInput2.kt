@@ -81,6 +81,8 @@ class InlineCardInput2 @JvmOverloads constructor(
     @JvmSynthetic
     internal val holderNameEditText = viewBinding.holderNameEditText
 
+
+
  //  val mainLL = viewBinding.mainLL
 
     private var cardInputListener: CardInputListener? = null
@@ -262,7 +264,7 @@ class InlineCardInput2 @JvmOverloads constructor(
             when {
                 cardNumber == null -> {
                     cardNumberEditText.shouldShowError
-                    cardNumberEditText.requestFocus()
+                   // cardNumberEditText.requestFocus()
                 }
                 cardDate == null -> {
                     expiryDateEditText.requestFocus()
@@ -444,6 +446,7 @@ class InlineCardInput2 @JvmOverloads constructor(
     override fun setCardNumber(cardNumber: String?, hasFocus: Boolean) {
         cardNumberEditText.setText(cardNumber)
         this.cardNumberIsViewed = !cardNumberEditText.isCardNumberValid
+
     }
 
     override fun setCardNumberMasked(cardNumber: String?) {
@@ -511,10 +514,6 @@ class InlineCardInput2 @JvmOverloads constructor(
         cardInputListener?.onCardComplete()
         // cvcNumberEditText.requestFocus()
         cvcNumberEditText.setBackgroundResource(R.drawable.underline_editext)
-        //  cvcNumberEditText.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.icon_cvcdraw, 0, 0)
-        //  val cvvHint : String = LocalizationManager.getValue("saveCardCVV","SavedCardTitle")
-        //  cvcNumberEditText.hint = cvvHint
-        // cvcNumberEditText.getBackground().setColorFilter(getResources().getColor(R.color.red_error), PorterDuff.Mode.SRC_ATOP)
         cvcNumberEditText.isEnabled = true
 
 
@@ -665,7 +664,7 @@ class InlineCardInput2 @JvmOverloads constructor(
         return requiredFields.all { it.isEnabled }
     }
 
-    override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
+ /*   override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
         if (ev.action != MotionEvent.ACTION_DOWN) {
             return super.onInterceptTouchEvent(ev)
         }
@@ -674,7 +673,7 @@ class InlineCardInput2 @JvmOverloads constructor(
             it.requestFocus()
             true
         } ?: super.onInterceptTouchEvent(ev)
-    }
+    }*/
 
     override fun onSaveInstanceState(): Parcelable {
         return Bundle().apply {
@@ -923,14 +922,28 @@ class InlineCardInput2 @JvmOverloads constructor(
         }
 
         //   currentFields.forEach { it.setErrorColor(errorColorInt) }
+        holderNameEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
+            println("holderNameEditText must call"+holderNameEditText.hasFocus())
+            if (hasFocus) {
 
-        cardNumberEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
+                holderNameEditText.requestFocus()
+                cardInputListener?.onFocusChange(FOCUS_HOLDERNAME)
+            }
+
+
+        }
+        cardNumberEditText.onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
             println("hasffc"+holderNameEditText.hasFocus())
             println("hasFocus"+hasFocus)
+          //  println("view>>"+findFocus().hasFocus())
+
             println("cardNumberEditText.isCardNumberValid"+cardNumberEditText.isCardNumberValid)
-        if (hasFocus && cardNumberEditText.originalStr!=null) {
-                cardInputListener?.onFocusChange(FOCUS_CARD)
-                scrollStart()
+
+        if (hasFocus && cardNumberEditText.originalStr!=null ) {
+            println("focus 1"+cardNumberEditText.originalStr)
+
+            cardInputListener?.onFocusChange(FOCUS_CARD)
+               // scrollStart()
                 cardNumberEditText.showFields = false
                 expiryDateEditText.visibility = View.GONE
                 cvcNumberEditText.visibility = View.INVISIBLE
@@ -940,8 +953,9 @@ class InlineCardInput2 @JvmOverloads constructor(
                 holderNameEditText.visibility = View.GONE
                 separator_1.visibility = View.GONE
             }else if (hasFocus || !cardNumberEditText.isCardNumberValid) {
+            println("focus 2"+cardNumberEditText.originalStr)
                     cardInputListener?.onFocusChange(FOCUS_CARD)
-                    scrollStart()
+                   scrollStart()
                     cardNumberEditText.showFields = false
                     expiryDateEditText.visibility = View.GONE
                     cvcNumberEditText.visibility = View.INVISIBLE
@@ -952,10 +966,11 @@ class InlineCardInput2 @JvmOverloads constructor(
                 separator_1.visibility = View.GONE
                 }
             else {
+            println("focus 33"+cardNumberEditText.originalStr)
                 cardNumberEditText.showFields = true
                 expiryDateEditText.visibility = View.VISIBLE
                 cvcNumberEditText.visibility = View.VISIBLE
-                scrollEnd()
+              //  scrollEnd()
                setCardNumber(cardNumberEditText.maskCardNumber(cardNumberEditText.textcard.toString()),hasFocus)
 
                 if(holderNameEnabled && expiryDateEditText.isDateValid && !cvcNumberEditText.shouldShowError){
@@ -984,6 +999,7 @@ class InlineCardInput2 @JvmOverloads constructor(
                     holderNameTextInputLayout.visibility = View.VISIBLE
                     holderNameEditText.visibility = View.VISIBLE
                     separator_1.visibility = View.VISIBLE
+
 
                 }else cardInputListener?.onFocusChange(FOCUS_EXPIRY)
             }
@@ -1065,16 +1081,7 @@ class InlineCardInput2 @JvmOverloads constructor(
 
         }
 
-        holderNameEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
-            println("holderNameEditText must call"+holderNameEditText.hasFocus())
-            if (hasFocus) {
 
-               holderNameEditText.requestFocus()
-                cardInputListener?.onFocusChange(FOCUS_HOLDERNAME)
-            }
-
-
-        }
         cvcNumberEditText.setAfterTextChangedListener(
             object : TapTextInput.AfterTextChangedListener {
                 override fun onTextChanged(text: String) {
@@ -1162,6 +1169,12 @@ class InlineCardInput2 @JvmOverloads constructor(
             }
         }
 
+           /* holderNameTextInputLayout.onFocusChangeListener=OnFocusChangeListener { _, hasFocus ->
+                holderNameEditText.requestFocus()
+            }
+
+*/
+
 //        allFields.forEach { it.addTextChangedListener(inputChangeTextWatcher) }
 
       //  cardNumberEditText.requestFocus()
@@ -1177,7 +1190,9 @@ class InlineCardInput2 @JvmOverloads constructor(
 
         //Added close icon for holdername
         setDrawableForHolderName()
-
+        holderNameTextInputLayout.setOnLongClickListener {
+            holderNameEditText.requestFocus()
+        }
         setThemeForHints()
 
     }
@@ -1913,7 +1928,8 @@ class InlineCardInput2 @JvmOverloads constructor(
 
 
 
-        holderNameEditText.setOnTouchListener(OnTouchListener { v, event ->
+
+        holderNameTextInputLayout.setOnTouchListener(OnTouchListener { v, event ->
             val DRAWABLE_LEFT = 0
             val DRAWABLE_TOP = 1
             val DRAWABLE_RIGHT = 2
@@ -1922,6 +1938,7 @@ class InlineCardInput2 @JvmOverloads constructor(
             println("v is>>>"+v)
             holderNameEditText.requestFocus()
             if (event.action == MotionEvent.ACTION_DOWN) {
+                holderNameEditText.requestFocus()
                 if (context?.let { LocalizationManager.getLocale(it).language } == "en") {
                     if( holderNameEditText.compoundDrawables[DRAWABLE_RIGHT]!=null )
                         if (event.rawX >= holderNameEditText.right - holderNameEditText.compoundDrawables[DRAWABLE_RIGHT].bounds.width()
@@ -1943,6 +1960,10 @@ class InlineCardInput2 @JvmOverloads constructor(
                             return@OnTouchListener true
                         }
                 }
+            }else if (event.action == MotionEvent.ACTION_UP){
+                if(!cardNumberEditText.hasFocus())
+                holderNameEditText.requestFocus()
+                return@OnTouchListener true
             }
             false
         })

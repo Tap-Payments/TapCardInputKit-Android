@@ -166,9 +166,10 @@ class MainActivity : AppCompatActivity() {
         cardInlineForm2.setCardNumberTextWatcher(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
 //                cardNumAfterTextChangeListener(s, this)
-                println("cardInlineForm.card.number" + cardInlineForm?.card?.number)
+                println("cardInlineForm.card.number" + cardInlineForm2?.card?.number)
                 println("isDeleting" + cardInlineForm.isDeleting)
-                // cardInlineForm2.removeCardNumberTextWatcher(this)
+                 cardInlineForm2.removeCardNumberTextWatcher(this)
+                 cardInlineForm2.setCardNumberTextWatcher(this)
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }

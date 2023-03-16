@@ -374,17 +374,14 @@ class InlineCardInput2 @JvmOverloads constructor(
         if (LocalizationManager.getLocale(context).language == "ar") {
           //  backArrow.scaleX=-1.0f
             cvcNumberEditText.textAlignment =View.TEXT_ALIGNMENT_CENTER
-           // backArrow.isClickable = true
-          //  backArrow.isEnabled = true
-          //  backArrow.isFocusable = true
+            backArrow.setImageResource(backIconAr)
+            backArrow.requestFocus()
 
-         // containerLayout.bringToFront()
-         //   containerLayout.requestLayout()
+        }else {
+            backArrow.setImageResource(backIcon)
         }
 
-        if (LocalizationManager.getLocale(context).language == "ar") {
-            backArrow.setImageResource(backIconAr)
-        }else backArrow.setImageResource(backIcon)
+
 
         //backViewAr.setImageResource(backIconAr)
 
@@ -553,6 +550,7 @@ class InlineCardInput2 @JvmOverloads constructor(
             backArrow.isClickable = true
             backArrow.isEnabled = true
             backArrow.isFocusable = true
+            backArrow.requestLayout()
 
         }
         backArrow.visibility = View.VISIBLE

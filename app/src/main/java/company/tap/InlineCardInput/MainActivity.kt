@@ -1,11 +1,13 @@
 package company.tap.InlineCardInput
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
+import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -13,6 +15,8 @@ import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.cardview.widget.CardView
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityCompat.recreate
 import company.tap.cardinputwidget.Card
 import company.tap.cardinputwidget.CardBrand
 import company.tap.cardinputwidget.CardBrandSingle
@@ -80,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         tabLinear = findViewById(R.id.tabLinear)
         tapAlertView = findViewById(R.id.alertView)
         clearView = cardInlineForm2.findViewById(R.id.clear_text)
-        backArrow = cardInlineForm2.findViewById(R.id.backView)
+      //  backArrow = cardInlineForm2.findViewById(R.id.backView)
        // backArrowAr = cardInlineForm2.findViewById(R.id.backView_Ar)
         tabLayout = findViewById(R.id.sections_tablayout)
         cardScannerBtn = cardInlineForm.findViewById(R.id.card_scanner_button)
@@ -119,7 +123,15 @@ class MainActivity : AppCompatActivity() {
             controlScannerOptions()
         }*/
 
+        cardInlineForm2.backArrow?.setOnTouchListener(object : View.OnTouchListener {
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean { tabLayout.resetBehaviour()
+                cardInlineForm2.clear()
+                clearView?.visibility = View.GONE
+                controlScannerOptions()
 
+                return false
+            }
+        })
 
         switchSaveCard = switchLL?.findViewById(R.id.switchSaveCard)
         //   switchLL?.setSwitchDataSource(TapSwitchDataSource("Sasa","Save For later","sa","asa","asa"))
@@ -290,15 +302,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initLangugae() {
         LocalizationManager.loadTapLocale(this.resources, R.raw.lang)
-        LocalizationManager.setLocale(this, Locale("en"))
-        if (LocalizationManager.getLocale(this).toString().contains("ar"))
-            LocalizationManager.setLocale(this, Locale("ar"))
-        else if (LocalizationManager.getLocale(this).toString().contains("en"))
-            LocalizationManager.setLocale(this, Locale("en"))
-        else LocalizationManager.setLocale(this, Locale("en"))
-
-
-
+       // LocalizationManager.setLocale(this, Locale("ar"))
 
     }
 
@@ -362,24 +366,17 @@ class MainActivity : AppCompatActivity() {
             true
         }
         R.id.action_arabic -> {
-            if (ThemeManager.currentTheme.isNotEmpty() && LocalizationManager.currentLocalized.toString()
-                    .isNotEmpty()) {
-
-                LocalizationManager.setLocale(this, Locale("ar"))
-
-            }
-            recreate()
+            LocalizationManager.setLocale(this, Locale("ar"))
+               ActivityCompat.recreate(this)
+            //finishAndRemoveTask()
+            //startActivity(Intent(this.intent))
             true
         }
         R.id.action_english -> {
-            if (ThemeManager.currentTheme.isNotEmpty() && LocalizationManager.currentLocalized.toString()
-                    .isNotEmpty()
-            ) {
+            LocalizationManager.setLocale(this, Locale("en"))
+            ActivityCompat.recreate(this)
 
-                LocalizationManager.setLocale(this, Locale("en"))
-
-            }
-            recreate()
+           // this.recreate()
             true
         }
 

@@ -967,7 +967,7 @@ class InlineCardInput2 @JvmOverloads constructor(
                 cardNumberEditText.showFields = true
                 expiryDateEditText.visibility = View.VISIBLE
                 cvcNumberEditText.visibility = View.VISIBLE
-              //  scrollEnd()
+              // scrollEnd()
                setCardNumber(cardNumberEditText.maskCardNumber(cardNumberEditText.textcard.toString()),hasFocus)
 
                 if(holderNameEnabled && expiryDateEditText.isDateValid && !cvcNumberEditText.shouldShowError){
@@ -1881,6 +1881,7 @@ class InlineCardInput2 @JvmOverloads constructor(
     private fun onTouchHandling(){
         expiryDateEditText.visibility = View.VISIBLE
         cvcNumberEditText.visibility = View.VISIBLE
+        initFlag = true
         scrollEnd()
         cardInputListener?.onCardComplete()
     }

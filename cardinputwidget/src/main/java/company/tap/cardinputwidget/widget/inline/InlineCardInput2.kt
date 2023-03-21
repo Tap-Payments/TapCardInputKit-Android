@@ -938,7 +938,6 @@ class InlineCardInput2 @JvmOverloads constructor(
             println("cardNumberEditText.isCardNumberValid"+cardNumberEditText.isCardNumberValid)
 
         if (hasFocus && cardNumberEditText.originalStr!=null ) {
-            println("focus 1"+cardNumberEditText.originalStr)
 
             cardInputListener?.onFocusChange(FOCUS_CARD)
                // scrollStart()
@@ -951,7 +950,7 @@ class InlineCardInput2 @JvmOverloads constructor(
                 holderNameEditText.visibility = View.GONE
                 separator_1.visibility = View.GONE
             }else if (hasFocus || !cardNumberEditText.isCardNumberValid) {
-            println("focus 2"+cardNumberEditText.originalStr)
+
                     cardInputListener?.onFocusChange(FOCUS_CARD)
                    scrollStart()
                     cardNumberEditText.showFields = false
@@ -964,7 +963,7 @@ class InlineCardInput2 @JvmOverloads constructor(
                 separator_1.visibility = View.GONE
                 }
             else {
-            println("focus 33"+cardNumberEditText.originalStr)
+
                 cardNumberEditText.showFields = true
                 expiryDateEditText.visibility = View.VISIBLE
                 cvcNumberEditText.visibility = View.VISIBLE

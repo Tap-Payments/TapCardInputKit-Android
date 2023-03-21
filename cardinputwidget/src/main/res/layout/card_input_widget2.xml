@@ -19,13 +19,15 @@
 
         <ImageView
             android:id="@+id/backView"
-            android:layout_width="10dp"
-            android:layout_height="14dp"
-            android:visibility="gone"
+            android:layout_width="20dp"
+            android:layout_height="18dp"
+            android:visibility="visible"
+            android:layout_marginTop="2dp"
             android:layout_marginStart="16dp"
             android:src="@drawable/back_arrow_light"
             android:layout_gravity="center"
             android:clickable="true"
+            android:adjustViewBounds="true"
             android:layoutDirection="locale"
             android:focusable="true" />
 

@@ -614,14 +614,14 @@ class InlineCardInput2 @JvmOverloads constructor(
             backArrow.requestLayout()
 
         }
-        backArrow.visibility = View.VISIBLE
+        backArrow.visibility = View.GONE
         // frameLayout.visibility = View.VISIBLE
 
         // frameLayout.isEnabled = true
 
         nfcButton.visibility= View.GONE
         scannerButton.visibility= View.GONE
-        closeButton.visibility= View.GONE
+        closeButton.visibility= View.VISIBLE
     }
 
 

@@ -79,7 +79,10 @@ internal interface BaseCardInput {
      */
     fun setSavedCardDetails(cardDetails:Any?,cardInputUIStatus: CardInputUIStatus)
 
-
+    /**
+     * Interface method to collect data from parent to show pre-filled if any
+     */
+    fun setNormalCardDetails(cardDetails:Any?,cardInputUIStatus: CardInputUIStatus)
 
     companion object {
         internal const val DEFAULT_HOLDER_NAME_ENABLED = false

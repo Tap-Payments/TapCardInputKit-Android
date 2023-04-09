@@ -638,7 +638,66 @@ class InlineCardInput @JvmOverloads constructor(
       //  cvcNumberEditText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
         cvcNumberEditText.setText(cvcCode)
     }
+    override fun setNormalCardDetails(cardDetails: Any?, _cardInputUIStatus: CardInputUIStatus) {
+        this.cardInputUIStatus = _cardInputUIStatus
+        cardDetails as Card
+        initFlag = true
+        cardNumberIsViewed = false
+        expiryDateEditText.visibility = View.VISIBLE
+        cvcNumberEditText.visibility = View.VISIBLE
+        cardInputListener?.onCardComplete()
+        // cvcNumberEditText.requestFocus()
+        if(cardDetails.cvc!=null)  setCvcCode(cardDetails.cvc)
+        if(cardDetails.name!=null)  setCardHolderName(cardDetails.name)
 
+        cardNumberEditText.setText("•••• "+cardDetails.last4)
+        cardNumberEditText.isEnabled = false
+        if(cardDetails.expMonth.toString().length == 1){
+            if( cardDetails.expMonth!! < 10 ){
+                expiryDateEditText.setText("0"+cardDetails.expMonth.toString()+"/"+cardDetails?.expYear.toString())
+
+            }
+
+        }else expiryDateEditText.setText(cardDetails.expMonth.toString()+"/"+cardDetails?.expYear.toString())
+
+
+        cvcNumberEditText.updateBrand(cardDetails.brand)
+        cardBrandView.showBrandIcon(cardDetails.brand,false)
+
+        expiryDateEditText.shouldShowError = false
+        expiryDateEditText.isEnabled = false
+        /*  if (LocalizationManager.getLocale(context).language == "ar") {
+              // backArrow.scaleX=-1.0f
+              // backArrow.isClickable = true
+              backViewAr.visibility = View.VISIBLE
+              backArrow.visibility = View.GONE
+              backViewAr.isClickable = true
+              backViewAr.isEnabled = true
+          }else{
+              backViewAr.visibility = View.GONE
+              backArrow.visibility = View.VISIBLE
+              backArrow.isClickable = true
+              backArrow.isEnabled = true
+          }*/
+        cvvIcon.visibility= View.VISIBLE
+        if (LocalizationManager.getLocale(context).language == "ar") {
+            //  backArrow.scaleX=-0.7f
+
+            backArrow.isClickable = true
+            backArrow.isEnabled = true
+            backArrow.isFocusable = true
+            backArrow.requestLayout()
+
+        }
+        backArrow.visibility = View.VISIBLE
+        // frameLayout.visibility = View.VISIBLE
+
+        // frameLayout.isEnabled = true
+
+        nfcButton.visibility= View.GONE
+        scannerButton.visibility= View.GONE
+        closeButton.visibility= View.GONE
+    }
     @SuppressLint("SetTextI18n")
     override fun setSavedCardDetails(cardDetails: Any?, _cardInputUIStatus: CardInputUIStatus) {
         this.cardInputUIStatus = _cardInputUIStatus

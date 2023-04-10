@@ -589,6 +589,7 @@ class InlineCardInput2 @JvmOverloads constructor(
         cvcNumberEditText.updateBrand(cardDetails.brand)
         cardBrandView.showBrandIcon(cardDetails.brand,false)
 
+
         expiryDateEditText.shouldShowError = false
         expiryDateEditText.isEnabled = false
         /*  if (LocalizationManager.getLocale(context).language == "ar") {
@@ -1951,11 +1952,13 @@ class InlineCardInput2 @JvmOverloads constructor(
             holderNameEditText.isEnabled = true
             holderNameTextInputLayout.visibility = View.VISIBLE
             holderNameEditText.visibility = View.VISIBLE
+            separator_1.visibility = View.VISIBLE
             cvcNumberEditText.imeOptions = EditorInfo.IME_ACTION_NEXT
         }else {
             holderNameEditText.isEnabled = true
             holderNameTextInputLayout.visibility = View.GONE
             holderNameEditText.visibility = View.GONE
+            separator_1.visibility = View.GONE
             cvcNumberEditText.imeOptions = EditorInfo.IME_ACTION_DONE
         }
 

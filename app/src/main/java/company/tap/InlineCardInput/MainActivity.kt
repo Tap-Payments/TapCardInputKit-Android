@@ -409,6 +409,23 @@ class MainActivity : AppCompatActivity() {
         }
 
         }
+
+    fun addPrevData(view: View) {
+        cardInlineForm2.setNormalCardDetails(Card("5111 1111 1111 1118","222",5,33,
+            "aklam",null,null,null,
+            null,null,null,null,null,
+            "1118",CardBrand.fromCardNumber("511111"),"dadda",null,null,null,null,null),CardInputUIStatus.NormalCard)
+
+        cardInlineForm2.setSingleCardInput(
+            CardBrandSingle.fromCode(
+                company.tap.cardinputwidget.CardBrand.fromCardNumber("51111")
+                    .toString()
+            ), "https://back-end.b-cdn.net/payment_methods/master.svg"
+        )
+
+        separator1?.visibility= View.GONE
+
     }
+}
 
 

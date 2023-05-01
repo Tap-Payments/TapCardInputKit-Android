@@ -182,7 +182,7 @@ class ExpiryDateEditText @JvmOverloads constructor(
                 // incomplete entries.
 
                 // This covers the case where the user has entered a month of 15, for instance.
-                var shouldShowError = month.length == 2 &&
+                var _shouldShowError = month.length == 2 &&
                     !DateUtils.isValidMonth(month)
 
                 // Note that we have to check the parts array because afterTextChanged has odd
@@ -194,7 +194,7 @@ class ExpiryDateEditText @JvmOverloads constructor(
                     updateInputValues(month, year)
                     // Here, we have a complete date, so if we've made an invalid one, we want
                     // to show an error.
-                    shouldShowError = !isDateValid
+                    _shouldShowError = !isDateValid
                     if (!wasComplete && isDateValid) {
                         completionCallback()
                     }
@@ -202,7 +202,7 @@ class ExpiryDateEditText @JvmOverloads constructor(
                     isDateValid = false
                 }
 
-                this@ExpiryDateEditText.shouldShowError = shouldShowError
+                this@ExpiryDateEditText.shouldShowError = _shouldShowError
 
                 formattedDate = null
                 newCursorPosition = null

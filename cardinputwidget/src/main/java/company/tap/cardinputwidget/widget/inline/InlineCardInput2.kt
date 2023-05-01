@@ -97,6 +97,8 @@ class InlineCardInput2 @JvmOverloads constructor(
 
      var brandIconUrl:String?=null
 
+    @JvmField
+
     var isExpDateValid:Boolean = false
 
 
@@ -1030,6 +1032,7 @@ class InlineCardInput2 @JvmOverloads constructor(
 
         expiryDateEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
+                isExpDateValid = expiryDateEditText.isDateValid
                 if(cardNumberEditText.text.isNullOrBlank() || cardNumberEditText.text.isNullOrEmpty() || !cardNumberEditText.isCardNumberValid) {
                     cardInputListener?.onFocusChange(
                         FOCUS_CARD
@@ -1054,6 +1057,7 @@ class InlineCardInput2 @JvmOverloads constructor(
             BackUpFieldDeleteListener(
                 cardNumberEditText
             )
+
         )
         cvcNumberEditText.setDeleteEmptyListener(
             BackUpFieldDeleteListener(
@@ -1150,6 +1154,14 @@ class InlineCardInput2 @JvmOverloads constructor(
                 }
             }
         )
+ expiryDateEditText.setAfterTextChangedListener(
+            object : TapTextInput.AfterTextChangedListener {
+                override fun onTextChanged(text: String) {
+                    isExpDateValid = expiryDateEditText.isDateValid
+
+                }
+            }
+        )
 
 
 
@@ -1204,6 +1216,7 @@ class InlineCardInput2 @JvmOverloads constructor(
             cvcNumberEditText.requestFocus()
             cardInputListener?.onExpirationComplete()
             isExpDateValid = expiryDateEditText.isDateValid
+
         }
 
         cvcNumberEditText.completionCallback = {

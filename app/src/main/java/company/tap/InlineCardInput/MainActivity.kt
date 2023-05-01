@@ -226,13 +226,14 @@ class MainActivity : AppCompatActivity() {
             cardScannerBtn?.visibility = View.VISIBLE
             controlScannerOptions()
         }
-        cardInlineForm.setExpiryDateTextWatcher(object : TextWatcher {
+        cardInlineForm2.setExpiryDateTextWatcher(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
             }
 
             override fun afterTextChanged(s: Editable?) {
+                println("cardInlineForm >>"+cardInlineForm2.isExpDateValid)
                // cardInlineForm.setCardNumberText(cardNumber?.let { mask(it) })
             }
         })

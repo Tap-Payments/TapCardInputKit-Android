@@ -1129,6 +1129,7 @@ class InlineCardInput2 @JvmOverloads constructor(
 
         }
 
+
         cvcNumberEditText.setAfterTextChangedListener(
             object : TapTextInput.AfterTextChangedListener {
                 override fun onTextChanged(text: String) {
@@ -1971,11 +1972,11 @@ class InlineCardInput2 @JvmOverloads constructor(
         val displayMetrics = getDeviceDisplayMetrics(context as Activity)
         println("displayMetrics"+displayMetrics)
         if (displayMetrics == DisplayMetrics.DENSITY_260 || displayMetrics == DisplayMetrics.DENSITY_280 || displayMetrics == DisplayMetrics.DENSITY_300 || displayMetrics == DisplayMetrics.DENSITY_XHIGH || displayMetrics == DisplayMetrics.DENSITY_340 || displayMetrics == DisplayMetrics.DENSITY_360) {
-            closeIconDrawable?.setBounds(0, 0, 25, 25) // set size
+            closeIconDrawable?.setBounds(0, 0, 23, 23) // set size
         }else  if (displayMetrics == DisplayMetrics.DENSITY_360|| displayMetrics == DisplayMetrics.DENSITY_400|| displayMetrics == DisplayMetrics.DENSITY_420|| displayMetrics == DisplayMetrics.DENSITY_440 ){
             closeIconDrawable?.setBounds(0, 0, 32, 31) // set size}
         }else {
-            closeIconDrawable?.setBounds(0, 0, 35, 35) // set size}
+            closeIconDrawable?.setBounds(0, 0, 34, 34) // set size}
         }
         if (context?.let { LocalizationManager.getLocale(it).language } == "en"){
             holderNameEditText.setCompoundDrawables(null,null,closeIconDrawable,null) // set position of drawable

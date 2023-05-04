@@ -35,7 +35,7 @@ class ExpiryDateEditText @JvmOverloads constructor(
 
     // invoked when a valid date has been entered
     @JvmSynthetic
-    internal var completionCallback: () -> Unit = {}
+    internal var completionCallback: () -> Unit = { }
 
     /**
      * Gets whether or not the date currently entered is valid and not yet passed.

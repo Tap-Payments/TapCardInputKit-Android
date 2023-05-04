@@ -11,7 +11,7 @@ import company.tap.tapuilibrary.uikit.atoms.TapTextInput
  * its [onDeleteEmpty] call, and given a reference to the N field, upon which
  * it will be acting.
  */
-internal class BackUpFieldDeleteListener(
+internal class BackUpFieldDeleteListener (
     private val backUpTarget: TapTextInput
 ) : TapTextInput.DeleteEmptyListener {
 

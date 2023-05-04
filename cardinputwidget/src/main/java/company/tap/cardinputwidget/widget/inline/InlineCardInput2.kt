@@ -1129,7 +1129,6 @@ class InlineCardInput2 @JvmOverloads constructor(
 
         }
 
-
         cvcNumberEditText.setAfterTextChangedListener(
             object : TapTextInput.AfterTextChangedListener {
                 override fun onTextChanged(text: String) {
@@ -1154,6 +1153,7 @@ class InlineCardInput2 @JvmOverloads constructor(
                 }
             }
         )
+
  expiryDateEditText.setAfterTextChangedListener(
             object : TapTextInput.AfterTextChangedListener {
                 override fun onTextChanged(text: String) {

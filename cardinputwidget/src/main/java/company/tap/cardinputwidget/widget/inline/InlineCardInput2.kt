@@ -578,7 +578,7 @@ class InlineCardInput2 @JvmOverloads constructor(
         if(cardDetails.name!=null)  setCardHolderName(cardDetails.name)
 
         cardNumberEditText.setText("•••• "+cardDetails.last4)
-        cardNumberEditText.isEnabled = false
+       // cardNumberEditText.isEnabled = false
         if(cardDetails.expMonth.toString().length == 1){
             if( cardDetails.expMonth!! < 10 ){
                 expiryDateEditText.setText("0"+cardDetails.expMonth.toString()+"/"+cardDetails?.expYear.toString())
@@ -592,7 +592,7 @@ class InlineCardInput2 @JvmOverloads constructor(
         cardBrandView.showBrandIcon(cardDetails.brand,false)
 
         expiryDateEditText.shouldShowError = false
-        expiryDateEditText.isEnabled = false
+      // expiryDateEditText.isEnabled = false
 
         if(holderNameEnabled) separator_1.visibility = View.VISIBLE else separator_1.visibility = View.GONE
         if (LocalizationManager.getLocale(context).language == "ar") {

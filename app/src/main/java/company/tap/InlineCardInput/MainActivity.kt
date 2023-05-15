@@ -412,7 +412,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     fun addPrevData(view: View) {
-        cardInlineForm2.setNormalCardDetails(Card("5111 1111 1111 1118","222",5,33,
+        cardInlineForm2.setScanNFCCardDetails(Card("5111 1111 1111 1118","222",5,33,
             "aklam",null,null,null,
             null,null,null,null,null,
             "1118",CardBrand.fromCardNumber("511111"),"dadda",null,null,null,null,null),CardInputUIStatus.NormalCard)

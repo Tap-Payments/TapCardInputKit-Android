@@ -84,6 +84,11 @@ internal interface BaseCardInput {
      */
     fun setNormalCardDetails(cardDetails:Any?,cardInputUIStatus: CardInputUIStatus)
 
+    /**
+     * Interface method to collect data from scan-nfc if any
+     */
+    fun setScanNFCCardDetails(cardDetails:Any?,cardInputUIStatus: CardInputUIStatus)
+
     companion object {
         internal const val DEFAULT_HOLDER_NAME_ENABLED = false
         internal const val DEFAULT_SWITCH = false

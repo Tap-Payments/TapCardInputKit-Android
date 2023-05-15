@@ -698,6 +698,56 @@ class InlineCardInput @JvmOverloads constructor(
         scannerButton.visibility= View.GONE
         closeButton.visibility= View.GONE
     }
+
+    override fun setScanNFCCardDetails(cardDetails: Any?, _cardInputUIStatus: CardInputUIStatus) {
+        this.cardInputUIStatus = _cardInputUIStatus
+        cardDetails as Card
+        initFlag = true
+        cardNumberIsViewed = false
+        expiryDateEditText.visibility = View.VISIBLE
+        cvcNumberEditText.visibility = View.VISIBLE
+        cardInputListener?.onCardComplete()
+        // cvcNumberEditText.requestFocus()
+        if(cardDetails.cvc!=null)  setCvcCode(cardDetails.cvc)
+        if(cardDetails.name!=null)  setCardHolderName(cardDetails.name)
+
+        setCardNumber(cardDetails.number,false)
+
+        if(cardDetails.expMonth.toString().length == 1){
+            if( cardDetails.expMonth!! < 10 ){
+                expiryDateEditText.setText("0"+cardDetails.expMonth.toString()+"/"+cardDetails?.expYear.toString())
+
+            }
+
+        }else expiryDateEditText.setText(cardDetails.expMonth.toString()+"/"+cardDetails?.expYear.toString())
+
+
+        cvcNumberEditText.updateBrand(cardDetails.brand)
+        cardBrandView.showBrandIcon(cardDetails.brand,false)
+
+        expiryDateEditText.shouldShowError = false
+
+
+        if(holderNameEnabled) separator_1.visibility = View.VISIBLE else separator_1.visibility = View.GONE
+        if (LocalizationManager.getLocale(context).language == "ar") {
+            //  backArrow.scaleX=-0.7f
+
+            backArrow.isClickable = true
+            backArrow.isEnabled = true
+            backArrow.isFocusable = true
+            backArrow.requestLayout()
+
+        }
+        backArrow.visibility = View.GONE
+        // frameLayout.visibility = View.VISIBLE
+
+        // frameLayout.isEnabled = true
+
+        nfcButton.visibility= View.GONE
+        scannerButton.visibility= View.GONE
+        closeButton.visibility= View.VISIBLE
+    }
+
     @SuppressLint("SetTextI18n")
     override fun setSavedCardDetails(cardDetails: Any?, _cardInputUIStatus: CardInputUIStatus) {
         this.cardInputUIStatus = _cardInputUIStatus

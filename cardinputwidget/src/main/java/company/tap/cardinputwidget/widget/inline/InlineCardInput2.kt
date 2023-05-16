@@ -622,27 +622,34 @@ class InlineCardInput2 @JvmOverloads constructor(
        // expiryDateEditText.visibility = View.VISIBLE
       //  cvcNumberEditText.visibility = View.VISIBLE
         cardInputListener?.onCardComplete()
+        
         println("cardDetails>>"+cardDetails.number)
-        // cvcNumberEditText.requestFocus()
+        setCardNumber(cardDetails.number,false)
         if(cardDetails.cvc!=null)  setCvcCode(cardDetails.cvc)
         if(cardDetails.name!=null)  setCardHolderName(cardDetails.name)
 
-        setCardNumber(cardDetails.number,false)
+
 
         if(cardDetails.expMonth.toString().length == 1){
             if( cardDetails.expMonth!! < 10 ){
-                expiryDateEditText.setText("0"+cardDetails.expMonth.toString()+"/"+cardDetails?.expYear.toString())
+               // expiryDateEditText.setText("0"+cardDetails.expMonth.toString()+"/"+cardDetails?.expYear.toString())
+                cardDetails?.expYear?.let { setExpiryDate(0+cardDetails.expMonth, it) }
 
             }
 
-        }else expiryDateEditText.setText(cardDetails.expMonth.toString()+"/"+cardDetails?.expYear.toString())
+      //  }else expiryDateEditText.setText(cardDetails.expMonth.toString()+"/"+cardDetails?.expYear.toString())
+        }else cardDetails?.expMonth?.let { cardDetails?.expYear?.let { it1 ->
+            setExpiryDate(it,
+                it1
+            )
+        } }
 
+        if(cardNumberEditText.text?.contains("•") == true) cvcNumberEditText.requestFocus()
 
         cvcNumberEditText.updateBrand(cardDetails.brand)
         cardBrandView.showBrandIcon(cardDetails.brand,false)
 
         expiryDateEditText.shouldShowError = false
-
 
         if(holderNameEnabled) separator_1.visibility = View.VISIBLE else separator_1.visibility = View.GONE
         if (LocalizationManager.getLocale(context).language == "ar") {

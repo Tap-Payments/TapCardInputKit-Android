@@ -619,9 +619,10 @@ class InlineCardInput2 @JvmOverloads constructor(
         cardDetails as Card
         initFlag = true
         cardNumberIsViewed = false
-        expiryDateEditText.visibility = View.VISIBLE
-        cvcNumberEditText.visibility = View.VISIBLE
+       // expiryDateEditText.visibility = View.VISIBLE
+      //  cvcNumberEditText.visibility = View.VISIBLE
         cardInputListener?.onCardComplete()
+        println("cardDetails>>"+cardDetails.number)
         // cvcNumberEditText.requestFocus()
         if(cardDetails.cvc!=null)  setCvcCode(cardDetails.cvc)
         if(cardDetails.name!=null)  setCardHolderName(cardDetails.name)

@@ -6,7 +6,6 @@ import android.text.Editable
 import android.text.InputFilter
 import android.text.InputType.TYPE_CLASS_NUMBER
 import android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD
-import android.text.method.DigitsKeyListener
 import android.util.AttributeSet
 import android.view.View
 import com.google.android.material.textfield.TextInputLayout
@@ -41,7 +40,7 @@ class CvcEditText @JvmOverloads constructor(
     private var cardBrand: CardBrand =
         CardBrand.Unknown
 
-    private val isValid: Boolean
+     val isValid: Boolean
         get() {
             return cardBrand.isValidCvc(rawCvcValue)
         }

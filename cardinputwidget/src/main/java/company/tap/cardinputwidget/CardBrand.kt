@@ -2,6 +2,7 @@ package company.tap.cardinputwidget
 
 import androidx.annotation.DrawableRes
 import company.tap.cardinputwidget.utils.TapTextUtils
+import company.tap.cardinputwidget.R
 import company.tap.tapuilibrary.themekit.ThemeManager
 import java.util.regex.Pattern
 
@@ -12,7 +13,7 @@ enum class CardBrand(
     val code: String,
     val displayName: String,
     @DrawableRes val icon: Int,
-    @DrawableRes val cvcIconDark: Int =R.drawable.dark_cvv,
+    @DrawableRes val cvcIconDark: Int = R.drawable.dark_cvv,
     @DrawableRes val cvcIconLight: Int =R.drawable.light_cvv,
     @DrawableRes val errorIconDark: Int = R.drawable.card_icon_dark,
     @DrawableRes val errorIconLight: Int = R.drawable.card_icon_light,

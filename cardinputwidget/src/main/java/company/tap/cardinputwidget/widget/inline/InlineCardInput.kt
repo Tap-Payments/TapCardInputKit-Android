@@ -27,6 +27,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.AccessibilityDelegateCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
+import company.tap.cardinputwidget.CardInputUIStatus
 import company.tap.cardinputwidget.*
 import company.tap.cardinputwidget.databinding.CardInputWidgetBinding
 import company.tap.cardinputwidget.utils.DateUtils
@@ -107,12 +108,12 @@ class InlineCardInput @JvmOverloads constructor(
     private var cardInputListener: CardInputListener? = null
     private var cardValidCallback: CardValidCallback? = null
     private var cardInputUIStatus: CardInputUIStatus = CardInputUIStatus.NormalCard
-    lateinit var alertView1 :TapAlertView
+    lateinit var alertView1 : TapAlertView
     lateinit var nfcButton :ImageView
     lateinit var scannerButton :ImageView
     lateinit var closeButton :ImageView
     lateinit var linearIconsLayout :LinearLayout
-    lateinit var separatorcard2 :TapSeparatorView
+    lateinit var separatorcard2 : TapSeparatorView
     lateinit var cardBrandView:CardBrandView
      var iconUrl: String?=null
      var fullCardNumber :String? =null
@@ -825,6 +826,8 @@ class InlineCardInput @JvmOverloads constructor(
         //cvcNumberEditText.hint = LocalizationManager.getValue("cardCVVPlaceHolder", "TapCardInputKit")
     }
 
+
+
     /**
      * Enable or disable text fields
      *
@@ -1271,7 +1274,7 @@ class InlineCardInput @JvmOverloads constructor(
         cvcNumberEditText.setOnKeyListener(OnKeyListener { view, keyCode, keyEvent ->
             if (keyCode == KeyEvent.KEYCODE_DEL) {
                 println("cardInputUIStatus"+cardInputUIStatus)
-                if(cardInputUIStatus==CardInputUIStatus.SavedCard && cvcNumberEditText.text?.isEmpty() == true){
+                if(cardInputUIStatus== CardInputUIStatus.SavedCard && cvcNumberEditText.text?.isEmpty() == true){
                     cvcNumberEditText.setBackgroundResource(R.drawable.underline_editext)
                     cvvIcon.visibility = View.VISIBLE
                 }else

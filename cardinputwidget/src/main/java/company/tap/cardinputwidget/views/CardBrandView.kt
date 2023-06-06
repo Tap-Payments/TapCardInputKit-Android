@@ -1,7 +1,6 @@
 package company.tap.cardinputwidget.views
 
 import android.animation.Animator
-import android.app.Activity
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -10,18 +9,16 @@ import android.widget.ImageView
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.core.graphics.drawable.DrawableCompat
-import androidx.core.net.toUri
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import company.tap.cardinputwidget.CardBrand
 import company.tap.cardinputwidget.CardBrandSingle
 import company.tap.cardinputwidget.R
 import company.tap.cardinputwidget.databinding.CardBrandViewBinding
 import company.tap.tapuilibrary.themekit.ThemeManager
-import java.net.URL
 
- class CardBrandView @JvmOverloads constructor(
+
+class CardBrandView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0

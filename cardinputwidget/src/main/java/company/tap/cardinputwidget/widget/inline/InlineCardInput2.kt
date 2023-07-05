@@ -27,8 +27,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.AccessibilityDelegateCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
-import company.tap.cardinputwidget.CardInputUIStatus
 import company.tap.cardinputwidget.*
+import company.tap.cardinputwidget.databinding.CardInputWidget2Binding
 import company.tap.cardinputwidget.utils.DateUtils
 import company.tap.cardinputwidget.utils.TextValidator
 import company.tap.cardinputwidget.views.CardNumberEditText
@@ -39,6 +39,7 @@ import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion
 import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_EXPIRY
 import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_HOLDERNAME
 import company.tap.cardinputwidget.widget.CardValidCallback
+import company.tap.cardinputwidget.Card
 import company.tap.taplocalizationkit.LocalizationManager
 import company.tap.tapuilibrary.fontskit.enums.TapFont
 import company.tap.tapuilibrary.themekit.ThemeManager
@@ -53,7 +54,7 @@ class InlineCardInput2 @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr), BaseCardInput {
-    private val viewBinding = company.tap.cardinputwidget.databinding.CardInputWidget2Binding.inflate(
+    private val viewBinding = CardInputWidget2Binding.inflate(
         LayoutInflater.from(context),
         this
     )
@@ -435,7 +436,6 @@ class InlineCardInput2 @JvmOverloads constructor(
         if (iconUrl != null) {
             cardBrandView.showBrandIconSingle(cardBrand, iconUrl, shouldShowErrorIcon)
         } else cardBrandView.showBrandIconSingle(cardBrand, shouldShowErrorIcon)
-        // cardBrandView.showBrandIconSingle(cardBrand, shouldShowErrorIcon)
     }
 
 
@@ -1237,7 +1237,7 @@ class InlineCardInput2 @JvmOverloads constructor(
             object : TapTextInput.AfterTextChangedListener {
                 override fun onTextChanged(text: String) {
                     if (brand.isMaxCvc(text)) {
-                        cardInputListener?.onCvcComplete()
+                     //   cardInputListener?.onCvcComplete()
                         cardInputListener?.isCVCValid(cvcNumberEditText.isValid)
                         updateIconCvc(cvcNumberEditText.hasFocus(), text)
 
@@ -2117,6 +2117,9 @@ class InlineCardInput2 @JvmOverloads constructor(
             val DRAWABLE_BOTTOM = 3
             println("event>>>" + event.action)
             println("v is>>>" + v)
+            println("locale is>>>" + context?.let { LocalizationManager.getLocale(it).language})
+         //   println("drawable is>>>" + (holderNameEditText.compoundDrawables[DRAWABLE_LEFT].bounds.width()).minus(holderNameEditText.left))
+            println("drawable is>>>" + event.rawX)
             holderNameEditText.requestFocus()
             if (event.action == MotionEvent.ACTION_DOWN) {
                 holderNameEditText.requestFocus()
@@ -2133,8 +2136,10 @@ class InlineCardInput2 @JvmOverloads constructor(
 
                 } else {
                     if (holderNameEditText.compoundDrawables[DRAWABLE_LEFT] != null)
-                        if (event.rawX >= holderNameEditText.left - holderNameEditText.compoundDrawables[DRAWABLE_LEFT].bounds.width()
-                        ) {
+                        /**
+                         * Workaround to listen touch changes 
+                        **/
+                        if (event.rawX <= 120) {
                             holderNameEditText.setText("")
                             holderNameEditText.setCompoundDrawables(null, null, null, null)
                             // your action here

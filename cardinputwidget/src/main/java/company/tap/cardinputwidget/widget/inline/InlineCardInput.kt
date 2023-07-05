@@ -27,7 +27,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.AccessibilityDelegateCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
-import company.tap.cardinputwidget.CardInputUIStatus
 import company.tap.cardinputwidget.*
 import company.tap.cardinputwidget.databinding.CardInputWidgetBinding
 import company.tap.cardinputwidget.utils.DateUtils
@@ -41,6 +40,7 @@ import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion
 import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_EXPIRY
 import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_HOLDERNAME
 import company.tap.cardinputwidget.widget.CardValidCallback
+import company.tap.cardinputwidget.Card
 import company.tap.taplocalizationkit.LocalizationManager
 import company.tap.tapuilibrary.fontskit.enums.TapFont
 import company.tap.tapuilibrary.themekit.ThemeManager
@@ -1274,7 +1274,7 @@ class InlineCardInput @JvmOverloads constructor(
         cvcNumberEditText.setOnKeyListener(OnKeyListener { view, keyCode, keyEvent ->
             if (keyCode == KeyEvent.KEYCODE_DEL) {
                 println("cardInputUIStatus"+cardInputUIStatus)
-                if(cardInputUIStatus== CardInputUIStatus.SavedCard && cvcNumberEditText.text?.isEmpty() == true){
+                if(cardInputUIStatus==CardInputUIStatus.SavedCard && cvcNumberEditText.text?.isEmpty() == true){
                     cvcNumberEditText.setBackgroundResource(R.drawable.underline_editext)
                     cvvIcon.visibility = View.VISIBLE
                 }else

@@ -1,7 +1,6 @@
 package company.tap.InlineCardInput
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -16,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityCompat.recreate
 import company.tap.cardinputwidget.Card
 import company.tap.cardinputwidget.CardBrand
 import company.tap.cardinputwidget.CardBrandSingle
@@ -331,7 +329,8 @@ class MainActivity : AppCompatActivity() {
 
     fun addME(view: View) {
         println("clickckc")
-        cardInlineForm2.setSavedCardDetails(Card("5123 4500 0000 0008",null,7,23,
+        cardInlineForm2.setSavedCardDetails(
+            Card("5123 4500 0000 0008",null,7,23,
             "dsd",null,null,null,
             null,null,null,null,null,
             "0008",CardBrand.fromCardNumber("512345"),"sdsds",null,null,null,null,null),CardInputUIStatus.SavedCard)
@@ -412,7 +411,8 @@ class MainActivity : AppCompatActivity() {
         }
 
     fun addPrevData(view: View) {
-        cardInlineForm2.setScanNFCCardDetails(Card("5111 1111 1111 1111",null,12,33,
+        cardInlineForm2.setScanNFCCardDetails(
+            Card("5111 1111 1111 1111",null,12,33,
             "aklam",null,null,null,
             null,null,null,null,null,
             "1118",CardBrand.fromCardNumber("511111"),"dadda",null,null,null,null,null),CardInputUIStatus.NormalCard)

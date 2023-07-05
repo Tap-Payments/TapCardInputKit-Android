@@ -3,11 +3,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 30
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 32
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
@@ -38,7 +38,7 @@ android {
     dependencies {
         implementation fileTree(dir: 'libs', include: ['*.jar'])
         implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-        implementation 'androidx.appcompat:appcompat:1.4.0'
+        implementation 'androidx.appcompat:appcompat:1.1.0'
         implementation 'androidx.core:core-ktx:1.2.0'
         api 'com.google.android.material:material:1.1.0'
         implementation 'com.github.Tap-Payments:CommonDataModelsKit-Android:0.1.5'
@@ -50,7 +50,6 @@ android {
         implementation 'com.github.2coffees1team:GlideToVectorYou:v2.0.0'
         implementation 'com.tomergoldst.android:tooltips:1.0.10'
         implementation 'com.github.Tap-Payments:TapUIKit-Android:1.1.1.358.370'
-
 
     }
 }

@@ -201,7 +201,7 @@
 
                 app:layout_constraintEnd_toStartOf="@+id/linear_paylayout"
                 app:layout_constraintStart_toEndOf="@+id/expiry_date_text_input_layout"
-                />
+                 />
 
             <LinearLayout
                 android:id="@+id/linear_paylayout"
@@ -352,7 +352,6 @@
         android:background="@color/black_color"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
         android:focusable="true" />
 
 

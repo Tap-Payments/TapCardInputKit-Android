@@ -49,7 +49,7 @@ android {
         implementation 'com.github.Tap-Payments:TapCardValidator-Android:2.1.14'
         implementation 'com.github.2coffees1team:GlideToVectorYou:v2.0.0'
         implementation 'com.tomergoldst.android:tooltips:1.0.10'
-        implementation 'com.github.Tap-Payments:TapUIKit-Android:1.1.1.358.370'
+        implementation 'com.github.Tap-Payments:TapUIKit-Android:1.1.1.358.371'
 
     }
 }

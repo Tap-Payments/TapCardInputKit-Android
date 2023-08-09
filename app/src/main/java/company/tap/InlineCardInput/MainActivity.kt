@@ -171,6 +171,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+
         nfcButton?.visibility = View.GONE
         cardScannerBtn?.visibility = View.GONE
         cardInlineForm2.setCardNumberTextWatcher(object : TextWatcher {

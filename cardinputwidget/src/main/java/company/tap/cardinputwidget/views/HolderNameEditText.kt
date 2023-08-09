@@ -5,7 +5,6 @@ import android.os.Build
 import android.text.Editable
 import android.text.InputFilter
 import android.text.InputType
-import android.text.method.TextKeyListener
 import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.StringRes

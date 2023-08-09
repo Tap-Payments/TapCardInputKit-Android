@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
 import company.tap.cardinputwidget.databinding.CardInlineFormBinding
 import company.tap.cardinputwidget.widget.BaseCardInput

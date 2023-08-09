@@ -1,12 +1,9 @@
 package company.tap.cardinputwidget.widget
 
 import android.text.TextWatcher
-import android.view.View
 import android.widget.CompoundButton
-import android.widget.RadioGroup
 import androidx.annotation.IntRange
 import company.tap.cardinputwidget.Card
-import company.tap.cardinputwidget.CardBrand
 import company.tap.cardinputwidget.CardBrandSingle
 import company.tap.cardinputwidget.CardInputUIStatus
 import company.tap.cardinputwidget.utils.TextValidator
@@ -61,6 +58,8 @@ internal interface BaseCardInput {
     fun setExpiryHint(expiryHint: String)
 
     fun clear()
+
+
 
     fun setCardNumber(cardNumber: String?, hasFocus: Boolean)
     fun setCardNumberMasked(cardNumber: String?)

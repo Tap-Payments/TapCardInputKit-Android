@@ -40,6 +40,7 @@ import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion
 import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_EXPIRY
 import company.tap.cardinputwidget.widget.CardInputListener.FocusField.Companion.FOCUS_HOLDERNAME
 import company.tap.cardinputwidget.widget.CardValidCallback
+import company.tap.cardinputwidget.Card
 import company.tap.taplocalizationkit.LocalizationManager
 import company.tap.tapuilibrary.fontskit.enums.TapFont
 import company.tap.tapuilibrary.themekit.ThemeManager
@@ -107,12 +108,12 @@ class InlineCardInput @JvmOverloads constructor(
     private var cardInputListener: CardInputListener? = null
     private var cardValidCallback: CardValidCallback? = null
     private var cardInputUIStatus: CardInputUIStatus = CardInputUIStatus.NormalCard
-    lateinit var alertView1 :TapAlertView
+    lateinit var alertView1 : TapAlertView
     lateinit var nfcButton :ImageView
     lateinit var scannerButton :ImageView
     lateinit var closeButton :ImageView
     lateinit var linearIconsLayout :LinearLayout
-    lateinit var separatorcard2 :TapSeparatorView
+    lateinit var separatorcard2 : TapSeparatorView
     lateinit var cardBrandView:CardBrandView
      var iconUrl: String?=null
      var fullCardNumber :String? =null
@@ -824,6 +825,8 @@ class InlineCardInput @JvmOverloads constructor(
         cardInputUIStatus = CardInputUIStatus.NormalCard
         //cvcNumberEditText.hint = LocalizationManager.getValue("cardCVVPlaceHolder", "TapCardInputKit")
     }
+
+
 
     /**
      * Enable or disable text fields
